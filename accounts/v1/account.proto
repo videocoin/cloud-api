@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package cloud.api.account.v1;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option go_package = "v1";
+option (gogoproto.unmarshaler_all) = false;
+option (gogoproto.marshaler_all) = false;
+option (gogoproto.sizer_all) = false;
+
+message AccountProfile {
+    string id = 1 [(gogoproto.customname) = "ID"];
+    bool is_active = 2;
+    string address = 3;
+    double balance = 4;
+}

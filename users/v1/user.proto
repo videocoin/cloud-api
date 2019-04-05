@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package cloud.api.users.v1;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+import "github.com/VideoCoin/cloud-api/accounts/v1/account.proto";
+
+option go_package = "v1";
+option (gogoproto.unmarshaler_all) = false;
+option (gogoproto.marshaler_all) = false;
+option (gogoproto.sizer_all) = false;
+
+message User {
+    string id = 1 [(gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
+    string email = 2 [(gogoproto.moretags) = "gorm:\"unique_index\""];
+    string password = 3 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
+    google.protobuf.Timestamp created_at = 4 [(gogoproto.stdtime) = true];
+    string token = 5 [(gogoproto.moretags) = "gorm:\"type:varchar(255);index\""];
+}
+
+message UserProfile {
+    string id = 1;
+    string email = 2;
+    cloud.api.account.v1.AccountProfile account = 3;
+}

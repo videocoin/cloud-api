@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package cloud.api.users.v1;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "github.com/VideoCoin/cloud-api/rpc/health.proto";
+import "users/v1/user.proto";
+
+option go_package = "v1";
+option (gogoproto.unmarshaler_all) = false;
+option (gogoproto.marshaler_all) = false;
+option (gogoproto.sizer_all) = false;
+
+service UserService {
+    rpc Health(google.protobuf.Empty) returns (cloud.api.rpc.HealthStatus) {
+        option (google.api.http) = {
+            get: "/healthz"
+        };
+    }
+
+    rpc Create(CreateUserRequest) returns (LoginUserResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/users",
+            body: "*"
+        };
+    }
+
+    rpc Login(LoginUserRequest) returns (LoginUserResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/auth",
+            body: "*"
+        };
+    }
+
+    rpc Logout(google.protobuf.Empty) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/auth"
+        };
+    }
+
+    rpc GetUserProfile(google.protobuf.Empty) returns (UserProfile) {
+        option (google.api.http) = {
+            get: "/api/v1/user"
+        };
+    }
+
+    rpc GetUserById(UserRequest) returns (UserProfile) {}
+
+    rpc GetList(ListRequest) returns (ListResponse) {}
+}
+
+message CreateUserRequest {
+    string email = 1 [(gogoproto.moretags) = "validate:\"required,email\""];
+    string password = 2;
+    string confirm_password = 3 [(gogoproto.moretags) = "validate:\"confirm-password=Password\"", (gogoproto.jsontag) = "confirmPassword"];
+}
+
+message LoginUserRequest {
+    string email = 1 [(gogoproto.moretags) = "validate:\"required,email\""];
+    string password = 2 [(gogoproto.moretags) = "validate:\"required\""];
+}
+
+message LoginUserResponse {
+    string token = 1;
+}
+
+message ListRequest {}
+message ListResponse {
+    repeated User items = 1;
+}
+
+message UserRequest {
+    string id = 1;
+}
