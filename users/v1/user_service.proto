@@ -54,7 +54,8 @@ service UserService {
 message CreateUserRequest {
     string email = 1 [(gogoproto.moretags) = "validate:\"required,email\""];
     string password = 2;
-    string confirm_password = 3 [(gogoproto.moretags) = "validate:\"confirm-password=Password\"", (gogoproto.jsontag) = "confirmPassword"];
+    string name = 3;
+    string confirm_password = 4 [(gogoproto.moretags) = "validate:\"confirm-password=Password\"", (gogoproto.jsontag) = "confirmPassword"];
 }
 
 message LoginUserRequest {
