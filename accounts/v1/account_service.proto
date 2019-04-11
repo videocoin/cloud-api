@@ -4,7 +4,6 @@ package cloud.api.account.v1;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/empty.proto";
-import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
 import "github.com/VideoCoin/cloud-api/rpc/health.proto";
 import "accounts/v1/account.proto";
@@ -21,12 +20,22 @@ service AccountService {
         };
     }
 
-    rpc Create(AccountRequest) returns (AccountProfile) {}
-    rpc Get(AccountRequest) returns (AccountProfile) {}
-    rpc Refresh(AccountRequest) returns (AccountProfile) {}
+    rpc Create(CreateAccountRequest) returns (AccountProfile) {}
+    rpc Get(AccountsRequest) returns (AccountsResponse) {}
+    rpc Refresh(AccountsRequest) returns (AccountsResponse) {}
 }
 
-message AccountRequest {
+message CreateAccountRequest {
+    string owner_id = 1 [(gogoproto.customname) = "OwnerID"];
+    AccountType type = 2;
+}
+
+message AccountsRequest {
     string owner_id = 1 [(gogoproto.customname) = "OwnerID"];
 }
+
+message AccountsResponse {
+    repeated AccountProfile accounts = 1;
+}
+
 

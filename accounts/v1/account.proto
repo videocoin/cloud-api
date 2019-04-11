@@ -9,21 +9,24 @@ option (gogoproto.unmarshaler_all) = false;
 option (gogoproto.marshaler_all) = false;
 option (gogoproto.sizer_all) = false;
 
+enum AccountType {
+    option (gogoproto.goproto_enum_prefix) = false;
+
+    VC = 0 [(gogoproto.enumvalue_customname) = "AccountTypeEth"];
+    ETH = 1 [(gogoproto.enumvalue_customname) = "AccountTypeVc"];
+}
+
 message Account {
     string id = 1 [(gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
     string user_id = 2;
-    string eth_address = 3 [(gogoproto.moretags) = "gorm:\"type:varchar(128)\""];
-    string eth_key = 4 [(gogoproto.moretags) = "gorm:\"type:varchar(512)\""];
-    string vc_address = 5 [(gogoproto.moretags) = "gorm:\"type:varchar(128)\""];
-    string vc_key = 6 [(gogoproto.moretags) = "gorm:\"type:varchar(512)\""];
-    double eth_balance = 7;
-    double vc_balance = 8;
+    string address = 3 [(gogoproto.moretags) = "gorm:\"type:varchar(128)\""];
+    string key = 4 [(gogoproto.moretags) = "gorm:\"type:varchar(512)\""];
+    double balance = 5;
+    AccountType type = 6;
 }
 
 message AccountProfile {
     string id = 1 [(gogoproto.customname) = "ID"];
-    string eth_address = 2;
-    string vc_address = 3;
-    double eth_balance = 4;
-    double vc_balance = 5;
+    string address = 2;
+    double balance = 3;
 }
