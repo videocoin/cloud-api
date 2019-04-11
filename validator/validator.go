@@ -31,6 +31,11 @@ func init() {
 		RegisterEmailTranslation,
 		EmailTranslation)
 	validate.RegisterTranslation(
+		"name",
+		*translator,
+		RegisterNameTranslation,
+		NameTranslation)
+	validate.RegisterTranslation(
 		"secure-password",
 		*translator,
 		RegisterSecurePasswordTranslation,
