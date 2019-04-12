@@ -3,7 +3,8 @@ default: protoc
 
 protoc: protoc-rpc \
 	protoc-v1-users \
-	protoc-v1-accounts
+	protoc-v1-accounts \
+	protoc-v1-notifications
 
 protoc-rpc:
 	protoc \

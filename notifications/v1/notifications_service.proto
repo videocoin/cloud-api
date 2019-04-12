@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package cloud.api.notifications.v1;
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/VideoCoin/cloud-api/rpc/health.proto";
+
+option go_package = "v1";
+
+service NotificationService {
+    rpc Health(google.protobuf.Empty) returns (cloud.api.rpc.HealthStatus) {
+        option (google.api.http) = {
+            get: "/healthz"
+        };
+    }
+}
