@@ -58,7 +58,7 @@ service UserService {
 
     rpc StartRecovery(StartRecoveryUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-            post: "/api/v1/start-recovery"
+            post: "/api/v1/recovery/start"
         };
     }
 
@@ -71,8 +71,8 @@ service UserService {
 
 message CreateUserRequest {
     string email = 1 [(gogoproto.moretags) = "validate:\"required,email\""];
-    string password = 2;
-    string name = 3;
+    string password = 2 [(gogoproto.moretags) = "validate:\"required,password\""];
+    string name = 3 [(gogoproto.moretags) = "validate:\"required,name\""];
     string confirm_password = 4 [(gogoproto.moretags) = "validate:\"confirm-password=Password\"", (gogoproto.jsontag) = "confirmPassword"];
 }
 
@@ -91,11 +91,11 @@ message ListResponse {
 }
 
 message UserRequest {
-    string id = 1;
+    string id = 1 [(gogoproto.moretags) = "validate:\"required,id\""];
 }
 
 message ResetPasswordUserRequest {
-    string password = 1;
+    string password = 1 [(gogoproto.moretags) = "validate:\"required,password\""];
     string confirm_password = 2 [(gogoproto.moretags) = "validate:\"confirm-password=Password\"", (gogoproto.jsontag) = "confirmPassword"];
 }
 
@@ -105,6 +105,6 @@ message StartRecoveryUserRequest {
 
 message RecoverUserRequest {
     string token = 1 [(gogoproto.moretags) = "validate:\"required,token\""];
-    string password = 2;
+    string password = 2 [(gogoproto.moretags) = "validate:\"required,password\""];
     string confirm_password = 3 [(gogoproto.moretags) = "validate:\"confirm-password=Password\"", (gogoproto.jsontag) = "confirmPassword"];
 }
