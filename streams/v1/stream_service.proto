@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package cloud.api.streams.v1;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "github.com/VideoCoin/cloud-api/rpc/health.proto";
+import "streams/v1/stream.proto";
+
+option go_package = "v1";
+option (gogoproto.unmarshaler_all) = false;
+option (gogoproto.marshaler_all) = false;
+option (gogoproto.sizer_all) = false;
+
+service StreamService {
+    rpc Health(google.protobuf.Empty) returns (cloud.api.rpc.HealthStatus) {
+        option (google.api.http) = {
+            get: "/healthz"
+        };
+    }
+
+    rpc Create(CreateStreamRequest) returns (StreamProfile) {
+        option (google.api.http) = {
+            post: "/api/v1/streams",
+            body: "*"
+        };
+    }
+
+    rpc Get(GetStreamRequest) returns (StreamProfile) {
+        option (google.api.http) = {
+            get: "/api/v1/streams/{id}"
+        };
+    }
+
+    rpc List(google.protobuf.Empty) returns (ListResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/streams"
+        };
+    }
+}
+
+message CreateStreamRequest {
+    string name = 1 [(gogoproto.moretags) = "validate:\"required,name\""];
+}
+
+message GetStreamRequest {
+    string id = 1;
+}
+
+message ListResponse {
+    repeated StreamProfile items = 1;
+}
+
+message UpdateStreamStatus {
+    string stream_id = 1;
+    StreamStatus status = 2;
+}

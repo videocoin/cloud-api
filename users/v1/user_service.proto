@@ -46,13 +46,11 @@ service UserService {
         };
     }
 
-    rpc GetUserProfile(google.protobuf.Empty) returns (UserProfile) {
+    rpc Get(google.protobuf.Empty) returns (UserProfile) {
         option (google.api.http) = {
             get: "/api/v1/user"
         };
     }
-
-    rpc GetUserById(UserRequest) returns (UserProfile) {}
 
     rpc GetList(ListRequest) returns (ListResponse) {}
 

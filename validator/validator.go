@@ -1,6 +1,10 @@
 package validator
 
 import (
+	"reflect"
+	"strings"
+
+	"github.com/VideoCoin/cloud-api/rpc"
 	"github.com/go-playground/locales"
 	enLocale "github.com/go-playground/locales/en"
 	ut "github.com/go-playground/universal-translator"
@@ -28,26 +32,32 @@ func init() {
 	validate.RegisterTranslation(
 		"email",
 		*translator,
-		RegisterEmailTranslation,
-		EmailTranslation)
+		RegisterUserEmailTranslation,
+		UserEmailTranslation)
 	validate.RegisterTranslation(
 		"name",
 		*translator,
-		RegisterNameTranslation,
-		NameTranslation)
+		RegisterUserNameTranslation,
+		UserNameTranslation)
 	validate.RegisterTranslation(
 		"secure-password",
 		*translator,
-		RegisterSecurePasswordTranslation,
-		SecurePasswordTranslation)
+		RegisterSecureUserPasswordTranslation,
+		SecureUserPasswordTranslation)
 	validate.RegisterTranslation(
 		"confirm-password",
 		*translator,
-		RegisterConfirmPasswordTranslation,
-		ConfirmPasswordTranslation)
+		RegisterConfirmUserPasswordTranslation,
+		ConfirmUserPasswordTranslation)
 
-	validate.RegisterValidation("confirm-password", ValidateConfirmPassword)
-	validate.RegisterValidation("secure-password", ValidateSecurePassword)
+	validate.RegisterValidation("confirm-password", ValidateConfirmUserPassword)
+	validate.RegisterValidation("secure-password", ValidateSecureUserPassword)
+
+	validate.RegisterTranslation(
+		"name",
+		*translator,
+		RegisterStreamNameTranslation,
+		StreamNameTranslation)
 
 	translateOverride(uniEn)
 }
@@ -59,4 +69,34 @@ func translateOverride(trans ut.Translator) {
 		t, _ := ut.T("required", fe.Field())
 		return t
 	})
+}
+
+func extractValueFromTag(tag string) string {
+	values := strings.Split(tag, ",")
+	return values[0]
+}
+
+func ValidateRequest(r interface{}) *rpc.MultiValidationError {
+	trans := *translator
+
+	verrs := &rpc.MultiValidationError{}
+
+	serr := validate.Struct(r)
+	if serr != nil {
+		verrs.Errors = []*rpc.ValidationError{}
+
+		for _, err := range serr.(validator.ValidationErrors) {
+			field, _ := reflect.TypeOf(r).Elem().FieldByName(err.Field())
+			jsonField := extractValueFromTag(field.Tag.Get("json"))
+			verr := &rpc.ValidationError{
+				Field:   jsonField,
+				Message: err.Translate(trans),
+			}
+			verrs.Errors = append(verrs.Errors, verr)
+		}
+
+		return verrs
+	}
+
+	return nil
 }

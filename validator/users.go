@@ -8,43 +8,43 @@ import (
 	validator "gopkg.in/go-playground/validator.v9"
 )
 
-func RegisterEmailTranslation(ut ut.Translator) error {
+func RegisterUserEmailTranslation(ut ut.Translator) error {
 	return ut.Add("email", "Enter a valid email address", true)
 }
 
-func EmailTranslation(ut ut.Translator, fe validator.FieldError) string {
+func UserEmailTranslation(ut ut.Translator, fe validator.FieldError) string {
 	t, _ := ut.T("email", fe.Field())
 	return t
 }
 
-func RegisterNameTranslation(ut ut.Translator) error {
+func RegisterUserNameTranslation(ut ut.Translator) error {
 	return ut.Add("name", "Enter a name", true)
 }
 
-func NameTranslation(ut ut.Translator, fe validator.FieldError) string {
+func UserNameTranslation(ut ut.Translator, fe validator.FieldError) string {
 	t, _ := ut.T("name", fe.Field())
 	return t
 }
 
-func RegisterSecurePasswordTranslation(ut ut.Translator) error {
+func RegisterSecureUserPasswordTranslation(ut ut.Translator) error {
 	return ut.Add("secure-password", "Password is too simple", true)
 }
 
-func SecurePasswordTranslation(ut ut.Translator, fe validator.FieldError) string {
+func SecureUserPasswordTranslation(ut ut.Translator, fe validator.FieldError) string {
 	t, _ := ut.T("secure-password", fe.Field())
 	return t
 }
 
-func RegisterConfirmPasswordTranslation(ut ut.Translator) error {
+func RegisterConfirmUserPasswordTranslation(ut ut.Translator) error {
 	return ut.Add("confirm-password", "Password does not match", true)
 }
 
-func ConfirmPasswordTranslation(ut ut.Translator, fe validator.FieldError) string {
+func ConfirmUserPasswordTranslation(ut ut.Translator, fe validator.FieldError) string {
 	t, _ := ut.T("confirm-password", fe.Field())
 	return t
 }
 
-func ValidateConfirmPassword(fl validator.FieldLevel) bool {
+func ValidateConfirmUserPassword(fl validator.FieldLevel) bool {
 	field := fl.Field()
 	kind := field.Kind()
 
@@ -56,7 +56,7 @@ func ValidateConfirmPassword(fl validator.FieldLevel) bool {
 	return field.String() == currentField.String()
 }
 
-func ValidateSecurePassword(fl validator.FieldLevel) bool {
+func ValidateSecureUserPassword(fl validator.FieldLevel) bool {
 	field := fl.Field()
 
 	if field.String() == "" {
