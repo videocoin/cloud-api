@@ -40,6 +40,11 @@ func init() {
 		RegisterUserNameTranslation,
 		UserNameTranslation)
 	validate.RegisterTranslation(
+		"password",
+		*translator,
+		RegisterUserPasswordTranslation,
+		UserPasswordTranslation)
+	validate.RegisterTranslation(
 		"secure-password",
 		*translator,
 		RegisterSecureUserPasswordTranslation,

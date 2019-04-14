@@ -24,5 +24,5 @@ message UserProfile {
     string id = 1;
     string email = 2;
     string name = 3;
-    repeated cloud.api.account.v1.AccountProfile accounts = 4;
+    cloud.api.account.v1.AccountProfile account = 4;
 }

@@ -26,6 +26,15 @@ func UserNameTranslation(ut ut.Translator, fe validator.FieldError) string {
 	return t
 }
 
+func RegisterUserPasswordTranslation(ut ut.Translator) error {
+	return ut.Add("password", "Password is required", true)
+}
+
+func UserPasswordTranslation(ut ut.Translator, fe validator.FieldError) string {
+	t, _ := ut.T("password", fe.Field())
+	return t
+}
+
 func RegisterSecureUserPasswordTranslation(ut ut.Translator) error {
 	return ut.Add("secure-password", "Password is too simple", true)
 }

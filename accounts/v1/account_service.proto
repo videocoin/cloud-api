@@ -21,17 +21,12 @@ service AccountService {
     }
 
     rpc Create(CreateAccountRequest) returns (AccountProfile) {}
-    rpc Get(google.protobuf.Empty) returns (AccountsResponse) {}
-    rpc Refresh(google.protobuf.Empty) returns (AccountsResponse) {}
+    rpc Get(google.protobuf.Empty) returns (AccountProfile) {}
+    rpc Refresh(google.protobuf.Empty) returns (AccountProfile) {}
 }
 
 message CreateAccountRequest {
     string owner_id = 1 [(gogoproto.customname) = "OwnerID"];
-    AccountType type = 2;
-}
-
-message AccountsResponse {
-    repeated AccountProfile items = 1;
 }
 
 

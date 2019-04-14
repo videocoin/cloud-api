@@ -52,7 +52,7 @@ service UserService {
         };
     }
 
-    rpc GetList(ListRequest) returns (ListResponse) {}
+    rpc List(ListRequest) returns (ListResponse) {}
 
     rpc StartRecovery(StartRecoveryUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
