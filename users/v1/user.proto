@@ -3,8 +3,9 @@ syntax = "proto3";
 package cloud.api.users.v1;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "google/protobuf/timestamp.proto";
+import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "github.com/VideoCoin/cloud-api/accounts/v1/account.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "v1";
 option (gogoproto.unmarshaler_all) = false;
@@ -13,10 +14,10 @@ option (gogoproto.sizer_all) = false;
 
 message User {
     string id = 1 [(gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
-    string email = 2 [(gogoproto.moretags) = "gorm:\"unique_index\""];
-    string password = 3 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
-    string name = 4 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
-    google.protobuf.Timestamp created_at = 5 [(gogoproto.stdtime) = true];
+    string email = 2 [(validate.rules).string.email = true, (gogoproto.moretags) = "gorm:\"unique_index\""];
+    string password = 3 [(validate.rules).string.min_len = 5, (gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
+    string name = 4 [(validate.rules).string.min_len = 3, (gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
+    google.protobuf.Timestamp created_at = 5 [(validate.rules).timestamp.required = true, (gogoproto.stdtime) = true];
     string token = 6 [(gogoproto.moretags) = "gorm:\"type:varchar(255);index\""];
 }
 

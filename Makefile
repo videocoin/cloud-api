@@ -25,6 +25,7 @@ protoc-v1-%:
 		-I. \
 		--gofast_out=plugins=grpc:. \
 		--grpc-gateway_out=logtostderr=true:. \
+		--validate_out="lang=gogo:." \
 		./$*/v1/*.proto
 
 

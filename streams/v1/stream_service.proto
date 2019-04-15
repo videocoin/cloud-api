@@ -41,7 +41,7 @@ service StreamService {
 }
 
 message CreateStreamRequest {
-    string name = 1 [(gogoproto.moretags) = "validate:\"required,name\""];
+    string name = 1;
 }
 
 message GetStreamRequest {
