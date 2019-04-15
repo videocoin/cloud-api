@@ -22,12 +22,14 @@ service AccountService {
         };
     }
 
-    rpc Create(CreateAccountRequest) returns (AccountProfile) {}
+    rpc Create(AccountRequest) returns (AccountProfile) {}
     rpc Get(google.protobuf.Empty) returns (AccountProfile) {}
     rpc Refresh(google.protobuf.Empty) returns (AccountProfile) {}
+
+    rpc Key(AccountRequest) returns (AccountKey) {}
 }
 
-message CreateAccountRequest {
+message AccountRequest {
     string owner_id = 1 [(gogoproto.customname) = "OwnerID"];
 }
 
