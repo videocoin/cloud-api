@@ -7,6 +7,8 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import rpc "github.com/VideoCoin/cloud-api/rpc"
+import proto1 "github.com/VideoCoin/common/proto"
+import _ "github.com/envoyproxy/protoc-gen-validate/validate"
 import _ "github.com/gogo/protobuf/gogoproto"
 import empty "github.com/golang/protobuf/ptypes/empty"
 import _ "google.golang.org/genproto/googleapis/api/annotations"
@@ -38,7 +40,7 @@ func (m *CreateStreamRequest) Reset()         { *m = CreateStreamRequest{} }
 func (m *CreateStreamRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateStreamRequest) ProtoMessage()    {}
 func (*CreateStreamRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stream_service_ecb4c3c5d604e98f, []int{0}
+	return fileDescriptor_stream_service_37769884d46aa806, []int{0}
 }
 func (m *CreateStreamRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateStreamRequest.Unmarshal(m, b)
@@ -65,73 +67,43 @@ func (m *CreateStreamRequest) GetName() string {
 	return ""
 }
 
-type GetStreamRequest struct {
+type StreamRequest struct {
 	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *GetStreamRequest) Reset()         { *m = GetStreamRequest{} }
-func (m *GetStreamRequest) String() string { return proto.CompactTextString(m) }
-func (*GetStreamRequest) ProtoMessage()    {}
-func (*GetStreamRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stream_service_ecb4c3c5d604e98f, []int{1}
+func (m *StreamRequest) Reset()         { *m = StreamRequest{} }
+func (m *StreamRequest) String() string { return proto.CompactTextString(m) }
+func (*StreamRequest) ProtoMessage()    {}
+func (*StreamRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stream_service_37769884d46aa806, []int{1}
 }
-func (m *GetStreamRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetStreamRequest.Unmarshal(m, b)
+func (m *StreamRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_StreamRequest.Unmarshal(m, b)
 }
-func (m *GetStreamRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetStreamRequest.Marshal(b, m, deterministic)
+func (m *StreamRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_StreamRequest.Marshal(b, m, deterministic)
 }
-func (dst *GetStreamRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetStreamRequest.Merge(dst, src)
+func (dst *StreamRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StreamRequest.Merge(dst, src)
 }
-func (m *GetStreamRequest) XXX_Size() int {
-	return xxx_messageInfo_GetStreamRequest.Size(m)
+func (m *StreamRequest) XXX_Size() int {
+	return xxx_messageInfo_StreamRequest.Size(m)
 }
-func (m *GetStreamRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetStreamRequest.DiscardUnknown(m)
+func (m *StreamRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_StreamRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetStreamRequest proto.InternalMessageInfo
+var xxx_messageInfo_StreamRequest proto.InternalMessageInfo
 
-func (m *GetStreamRequest) GetId() string {
+func (m *StreamRequest) GetId() string {
 	if m != nil {
 		return m.Id
 	}
 	return ""
 }
-
-type ListRequest struct {
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *ListRequest) Reset()         { *m = ListRequest{} }
-func (m *ListRequest) String() string { return proto.CompactTextString(m) }
-func (*ListRequest) ProtoMessage()    {}
-func (*ListRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stream_service_ecb4c3c5d604e98f, []int{2}
-}
-func (m *ListRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListRequest.Unmarshal(m, b)
-}
-func (m *ListRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListRequest.Marshal(b, m, deterministic)
-}
-func (dst *ListRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListRequest.Merge(dst, src)
-}
-func (m *ListRequest) XXX_Size() int {
-	return xxx_messageInfo_ListRequest.Size(m)
-}
-func (m *ListRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListRequest proto.InternalMessageInfo
 
 type ListResponse struct {
 	Items                []*StreamProfile `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
@@ -144,7 +116,7 @@ func (m *ListResponse) Reset()         { *m = ListResponse{} }
 func (m *ListResponse) String() string { return proto.CompactTextString(m) }
 func (*ListResponse) ProtoMessage()    {}
 func (*ListResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_stream_service_ecb4c3c5d604e98f, []int{3}
+	return fileDescriptor_stream_service_37769884d46aa806, []int{2}
 }
 func (m *ListResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListResponse.Unmarshal(m, b)
@@ -171,11 +143,73 @@ func (m *ListResponse) GetItems() []*StreamProfile {
 	return nil
 }
 
+type UpdateStreamRequest struct {
+	Id                   string           `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string           `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Status               StreamStatus     `protobuf:"varint,3,opt,name=status,proto3,enum=cloud.api.streams.v1.StreamStatus" json:"status,omitempty"`
+	ProfileId            proto1.ProfileId `protobuf:"varint,4,opt,name=profile_id,json=profileId,proto3,enum=proto.ProfileId" json:"profile_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
+}
+
+func (m *UpdateStreamRequest) Reset()         { *m = UpdateStreamRequest{} }
+func (m *UpdateStreamRequest) String() string { return proto.CompactTextString(m) }
+func (*UpdateStreamRequest) ProtoMessage()    {}
+func (*UpdateStreamRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_stream_service_37769884d46aa806, []int{3}
+}
+func (m *UpdateStreamRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateStreamRequest.Unmarshal(m, b)
+}
+func (m *UpdateStreamRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateStreamRequest.Marshal(b, m, deterministic)
+}
+func (dst *UpdateStreamRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateStreamRequest.Merge(dst, src)
+}
+func (m *UpdateStreamRequest) XXX_Size() int {
+	return xxx_messageInfo_UpdateStreamRequest.Size(m)
+}
+func (m *UpdateStreamRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateStreamRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateStreamRequest proto.InternalMessageInfo
+
+func (m *UpdateStreamRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *UpdateStreamRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *UpdateStreamRequest) GetStatus() StreamStatus {
+	if m != nil {
+		return m.Status
+	}
+	return StreamStatusIdle
+}
+
+func (m *UpdateStreamRequest) GetProfileId() proto1.ProfileId {
+	if m != nil {
+		return m.ProfileId
+	}
+	return proto1.ProfileIdNone
+}
+
 func init() {
 	proto.RegisterType((*CreateStreamRequest)(nil), "cloud.api.streams.v1.CreateStreamRequest")
-	proto.RegisterType((*GetStreamRequest)(nil), "cloud.api.streams.v1.GetStreamRequest")
-	proto.RegisterType((*ListRequest)(nil), "cloud.api.streams.v1.ListRequest")
+	proto.RegisterType((*StreamRequest)(nil), "cloud.api.streams.v1.StreamRequest")
 	proto.RegisterType((*ListResponse)(nil), "cloud.api.streams.v1.ListResponse")
+	proto.RegisterType((*UpdateStreamRequest)(nil), "cloud.api.streams.v1.UpdateStreamRequest")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -192,8 +226,11 @@ const _ = grpc.SupportPackageIsVersion4
 type StreamServiceClient interface {
 	Health(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error)
 	Create(ctx context.Context, in *CreateStreamRequest, opts ...grpc.CallOption) (*StreamProfile, error)
-	Get(ctx context.Context, in *GetStreamRequest, opts ...grpc.CallOption) (*StreamProfile, error)
-	GetList(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
+	Get(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*StreamProfile, error)
+	List(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*ListResponse, error)
+	Update(ctx context.Context, in *UpdateStreamRequest, opts ...grpc.CallOption) (*StreamProfile, error)
+	Start(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*StreamProfile, error)
+	Stop(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*StreamProfile, error)
 }
 
 type streamServiceClient struct {
@@ -222,7 +259,7 @@ func (c *streamServiceClient) Create(ctx context.Context, in *CreateStreamReques
 	return out, nil
 }
 
-func (c *streamServiceClient) Get(ctx context.Context, in *GetStreamRequest, opts ...grpc.CallOption) (*StreamProfile, error) {
+func (c *streamServiceClient) Get(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*StreamProfile, error) {
 	out := new(StreamProfile)
 	err := c.cc.Invoke(ctx, "/cloud.api.streams.v1.StreamService/Get", in, out, opts...)
 	if err != nil {
@@ -231,9 +268,36 @@ func (c *streamServiceClient) Get(ctx context.Context, in *GetStreamRequest, opt
 	return out, nil
 }
 
-func (c *streamServiceClient) GetList(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error) {
+func (c *streamServiceClient) List(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*ListResponse, error) {
 	out := new(ListResponse)
-	err := c.cc.Invoke(ctx, "/cloud.api.streams.v1.StreamService/GetList", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/cloud.api.streams.v1.StreamService/List", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *streamServiceClient) Update(ctx context.Context, in *UpdateStreamRequest, opts ...grpc.CallOption) (*StreamProfile, error) {
+	out := new(StreamProfile)
+	err := c.cc.Invoke(ctx, "/cloud.api.streams.v1.StreamService/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *streamServiceClient) Start(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*StreamProfile, error) {
+	out := new(StreamProfile)
+	err := c.cc.Invoke(ctx, "/cloud.api.streams.v1.StreamService/Start", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *streamServiceClient) Stop(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*StreamProfile, error) {
+	out := new(StreamProfile)
+	err := c.cc.Invoke(ctx, "/cloud.api.streams.v1.StreamService/Stop", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -244,8 +308,11 @@ func (c *streamServiceClient) GetList(ctx context.Context, in *ListRequest, opts
 type StreamServiceServer interface {
 	Health(context.Context, *empty.Empty) (*rpc.HealthStatus, error)
 	Create(context.Context, *CreateStreamRequest) (*StreamProfile, error)
-	Get(context.Context, *GetStreamRequest) (*StreamProfile, error)
-	GetList(context.Context, *ListRequest) (*ListResponse, error)
+	Get(context.Context, *StreamRequest) (*StreamProfile, error)
+	List(context.Context, *empty.Empty) (*ListResponse, error)
+	Update(context.Context, *UpdateStreamRequest) (*StreamProfile, error)
+	Start(context.Context, *StreamRequest) (*StreamProfile, error)
+	Stop(context.Context, *StreamRequest) (*StreamProfile, error)
 }
 
 func RegisterStreamServiceServer(s *grpc.Server, srv StreamServiceServer) {
@@ -289,7 +356,7 @@ func _StreamService_Create_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _StreamService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetStreamRequest)
+	in := new(StreamRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -301,25 +368,79 @@ func _StreamService_Get_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: "/cloud.api.streams.v1.StreamService/Get",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StreamServiceServer).Get(ctx, req.(*GetStreamRequest))
+		return srv.(StreamServiceServer).Get(ctx, req.(*StreamRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _StreamService_GetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListRequest)
+func _StreamService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StreamServiceServer).GetList(ctx, in)
+		return srv.(StreamServiceServer).List(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cloud.api.streams.v1.StreamService/GetList",
+		FullMethod: "/cloud.api.streams.v1.StreamService/List",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StreamServiceServer).GetList(ctx, req.(*ListRequest))
+		return srv.(StreamServiceServer).List(ctx, req.(*empty.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StreamService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateStreamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StreamServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cloud.api.streams.v1.StreamService/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StreamServiceServer).Update(ctx, req.(*UpdateStreamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StreamService_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StreamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StreamServiceServer).Start(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cloud.api.streams.v1.StreamService/Start",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StreamServiceServer).Start(ctx, req.(*StreamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StreamService_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StreamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StreamServiceServer).Stop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cloud.api.streams.v1.StreamService/Stop",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StreamServiceServer).Stop(ctx, req.(*StreamRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -341,8 +462,20 @@ var _StreamService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _StreamService_Get_Handler,
 		},
 		{
-			MethodName: "GetList",
-			Handler:    _StreamService_GetList_Handler,
+			MethodName: "List",
+			Handler:    _StreamService_List_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _StreamService_Update_Handler,
+		},
+		{
+			MethodName: "Start",
+			Handler:    _StreamService_Start_Handler,
+		},
+		{
+			MethodName: "Stop",
+			Handler:    _StreamService_Stop_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -350,38 +483,47 @@ var _StreamService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("streams/v1/stream_service.proto", fileDescriptor_stream_service_ecb4c3c5d604e98f)
+	proto.RegisterFile("streams/v1/stream_service.proto", fileDescriptor_stream_service_37769884d46aa806)
 }
 
-var fileDescriptor_stream_service_ecb4c3c5d604e98f = []byte{
-	// 449 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x51, 0xdd, 0x6a, 0x13, 0x41,
-	0x14, 0xce, 0x8f, 0x46, 0x9d, 0x5a, 0xad, 0x63, 0x68, 0xcb, 0xb6, 0xc4, 0x3a, 0x82, 0xb4, 0x42,
-	0x67, 0x48, 0xbd, 0xd2, 0x4b, 0x8b, 0x44, 0x41, 0x50, 0x12, 0xf0, 0xc2, 0x1b, 0x99, 0xec, 0x9e,
-	0x6e, 0x06, 0x76, 0x77, 0xc6, 0x9d, 0xb3, 0x0b, 0x2a, 0xde, 0xf8, 0x0a, 0xde, 0xf8, 0x1e, 0xbe,
-	0x84, 0x97, 0x82, 0x2f, 0x20, 0xd1, 0x07, 0x91, 0xcc, 0x8c, 0x1a, 0xe3, 0x22, 0xb9, 0x3b, 0x67,
-	0xbe, 0xef, 0x9c, 0x6f, 0xce, 0xf7, 0x91, 0x1b, 0x16, 0x4b, 0x90, 0xb9, 0x15, 0xf5, 0x50, 0xf8,
-	0xf2, 0xa5, 0x85, 0xb2, 0x56, 0x31, 0x70, 0x53, 0x6a, 0xd4, 0xb4, 0x1f, 0x67, 0xba, 0x4a, 0xb8,
-	0x34, 0x8a, 0x07, 0x2a, 0xaf, 0x87, 0xd1, 0x71, 0xaa, 0x70, 0x56, 0x4d, 0x79, 0xac, 0x73, 0x91,
-	0xea, 0x54, 0x0b, 0x47, 0x9e, 0x56, 0x67, 0xae, 0x73, 0x8d, 0xab, 0xfc, 0x92, 0x68, 0x2f, 0xd5,
-	0x3a, 0xcd, 0xe0, 0x0f, 0x0b, 0x72, 0x83, 0xaf, 0x03, 0xb8, 0x1f, 0x40, 0x69, 0x94, 0x90, 0x45,
-	0xa1, 0x51, 0xa2, 0xd2, 0x85, 0x0d, 0xa8, 0x58, 0x52, 0x7a, 0xae, 0x12, 0xd0, 0xa7, 0x5a, 0x15,
-	0xc2, 0x7d, 0xea, 0x78, 0x31, 0x51, 0x9a, 0x58, 0xcc, 0x40, 0x66, 0x38, 0x0b, 0x03, 0x3b, 0xff,
-	0x5c, 0xe4, 0x01, 0x76, 0x44, 0xae, 0x9f, 0x96, 0x20, 0x11, 0x26, 0xee, 0x75, 0x0c, 0xaf, 0x2a,
-	0xb0, 0x48, 0x29, 0x39, 0x57, 0xc8, 0x1c, 0x76, 0xdb, 0x07, 0xed, 0xc3, 0x4b, 0x63, 0x57, 0x33,
-	0x46, 0xb6, 0x46, 0x80, 0x7f, 0xf3, 0xae, 0x90, 0x8e, 0x4a, 0x02, 0xab, 0xa3, 0x12, 0xb6, 0x49,
-	0x36, 0x9e, 0x28, 0x8b, 0x01, 0x66, 0x8f, 0xc9, 0x65, 0xdf, 0x5a, 0xa3, 0x0b, 0x0b, 0xf4, 0x1e,
-	0x39, 0xaf, 0x10, 0x72, 0xbb, 0xdb, 0x3e, 0xe8, 0x1e, 0x6e, 0x9c, 0xdc, 0xe2, 0x4d, 0x3e, 0x72,
-	0x2f, 0xf1, 0xac, 0xd4, 0x67, 0x2a, 0x83, 0xb1, 0x9f, 0x38, 0xf9, 0xd4, 0x25, 0x9b, 0x1e, 0x98,
-	0xf8, 0x28, 0xe8, 0x53, 0xd2, 0x7b, 0xe4, 0x6e, 0xa4, 0xdb, 0xdc, 0xbb, 0xc5, 0x7f, 0x59, 0xc9,
-	0x1f, 0x2e, 0xac, 0x8c, 0xf6, 0x96, 0xf6, 0x97, 0x26, 0xe6, 0x9e, 0x3e, 0x41, 0x89, 0x95, 0x65,
-	0x5b, 0xef, 0xbf, 0xfe, 0xf8, 0xd0, 0x21, 0xf4, 0x62, 0x70, 0xea, 0x0d, 0x45, 0xd2, 0xf3, 0x5e,
-	0xd0, 0xa3, 0xe6, 0x8f, 0x35, 0x38, 0x15, 0xad, 0x73, 0x03, 0x8b, 0x9c, 0x56, 0x9f, 0x5d, 0x75,
-	0x79, 0xfe, 0xce, 0xc0, 0xde, 0x6f, 0xdf, 0xa1, 0x86, 0x74, 0x47, 0x80, 0xf4, 0x76, 0xf3, 0x9e,
-	0x55, 0xc7, 0xd7, 0xd3, 0xdb, 0x77, 0x7a, 0xdb, 0xb4, 0xbf, 0xa2, 0x27, 0xde, 0xaa, 0xe4, 0x1d,
-	0x55, 0xe4, 0xc2, 0x08, 0x70, 0x11, 0x0c, 0xbd, 0xd9, 0xbc, 0x6d, 0x29, 0xc3, 0x88, 0xfd, 0x8f,
-	0xe2, 0x73, 0x65, 0x3b, 0x4e, 0xef, 0x1a, 0x5d, 0xbd, 0xef, 0x41, 0xff, 0xf3, 0x7c, 0xd0, 0xfa,
-	0x32, 0x1f, 0xb4, 0xbe, 0xcd, 0x07, 0xad, 0x8f, 0xdf, 0x07, 0xad, 0x17, 0x9d, 0x7a, 0x38, 0xed,
-	0xb9, 0x9c, 0xee, 0xfe, 0x0c, 0x00, 0x00, 0xff, 0xff, 0xee, 0xc0, 0x83, 0xef, 0x68, 0x03, 0x00,
-	0x00,
+var fileDescriptor_stream_service_37769884d46aa806 = []byte{
+	// 604 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x93, 0xcf, 0x6e, 0xd3, 0x30,
+	0x1c, 0xc7, 0x9b, 0xb4, 0x8b, 0x98, 0x81, 0x31, 0xbc, 0x6a, 0x2b, 0xd9, 0xe8, 0x86, 0xb9, 0x0c,
+	0xa4, 0xda, 0xda, 0xe0, 0xc2, 0x6e, 0x6c, 0x42, 0x30, 0x09, 0x09, 0x94, 0x0a, 0x0e, 0x70, 0x98,
+	0xbc, 0xc4, 0xcb, 0x2c, 0x35, 0xb1, 0x89, 0x9d, 0x88, 0x81, 0xb8, 0x70, 0xe0, 0x05, 0xb8, 0xf0,
+	0x04, 0x3c, 0x04, 0x27, 0x8e, 0x1c, 0x91, 0x78, 0x01, 0x54, 0xb8, 0xf0, 0x16, 0xa8, 0x76, 0x0a,
+	0xa5, 0x4d, 0x2b, 0x26, 0xed, 0x52, 0xfd, 0x62, 0x7f, 0x7f, 0xfe, 0xfc, 0xfe, 0x7c, 0x0b, 0xd6,
+	0x95, 0xce, 0x18, 0x4d, 0x14, 0x29, 0xb6, 0x88, 0x0d, 0x0f, 0x14, 0xcb, 0x0a, 0x1e, 0x32, 0x2c,
+	0x33, 0xa1, 0x05, 0x6c, 0x86, 0x3d, 0x91, 0x47, 0x98, 0x4a, 0x8e, 0x4b, 0x29, 0x2e, 0xb6, 0xfc,
+	0xd5, 0x58, 0x88, 0xb8, 0xc7, 0x88, 0xd1, 0x1c, 0xe6, 0x47, 0x84, 0x25, 0x52, 0x9f, 0xd8, 0x14,
+	0x7f, 0xad, 0xbc, 0xa4, 0x92, 0x13, 0x9a, 0xa6, 0x42, 0x53, 0xcd, 0x45, 0xaa, 0xca, 0xdb, 0x4e,
+	0xcc, 0xf5, 0x71, 0x7e, 0x88, 0x43, 0x91, 0x90, 0x58, 0xc4, 0xe2, 0xef, 0x1b, 0x83, 0x2f, 0xf3,
+	0x61, 0xa2, 0x52, 0x4e, 0x46, 0xe4, 0x4f, 0x79, 0xc4, 0xc4, 0x9e, 0xe0, 0x29, 0x31, 0x45, 0x75,
+	0x06, 0x80, 0x4c, 0x86, 0xe4, 0x98, 0xd1, 0x9e, 0x3e, 0x9e, 0x9d, 0x20, 0x92, 0x44, 0xa4, 0x96,
+	0x35, 0xf8, 0x3d, 0xe2, 0xbd, 0xb2, 0x43, 0xff, 0xee, 0x48, 0x02, 0x4b, 0x0b, 0x71, 0x22, 0x33,
+	0xf1, 0xf2, 0xc4, 0x4a, 0xc3, 0x4e, 0xcc, 0xd2, 0x4e, 0x41, 0x7b, 0x3c, 0xa2, 0x9a, 0x91, 0x89,
+	0xa0, 0x7c, 0x62, 0x65, 0x62, 0x8a, 0xf6, 0x02, 0xdd, 0x06, 0x4b, 0x7b, 0x19, 0xa3, 0x9a, 0x75,
+	0xcd, 0x69, 0xc0, 0x5e, 0xe4, 0x4c, 0x69, 0x78, 0x15, 0x34, 0x52, 0x9a, 0xb0, 0x96, 0xb3, 0xe1,
+	0x6c, 0xce, 0xef, 0xce, 0x7f, 0xfa, 0xf5, 0xb9, 0xde, 0xc8, 0xdc, 0x45, 0x27, 0x30, 0xc7, 0x68,
+	0x1d, 0x5c, 0xfc, 0x57, 0xbf, 0x00, 0x5c, 0x1e, 0x59, 0x75, 0xe0, 0xf2, 0x08, 0xed, 0x83, 0x0b,
+	0x0f, 0xb9, 0xd2, 0x01, 0x53, 0x52, 0xa4, 0x8a, 0xc1, 0x3b, 0x60, 0x8e, 0x6b, 0x96, 0xa8, 0x96,
+	0xb3, 0x51, 0xdf, 0x3c, 0xbf, 0x7d, 0x1d, 0x57, 0x2d, 0x0d, 0xdb, 0x37, 0x1f, 0xdb, 0xe6, 0x03,
+	0x9b, 0x81, 0x3e, 0x3a, 0x60, 0xe9, 0x89, 0x8c, 0x26, 0x4a, 0x1c, 0x43, 0x42, 0x58, 0x96, 0xec,
+	0x9a, 0x13, 0x13, 0xc3, 0x1d, 0xe0, 0x29, 0x4d, 0x75, 0xae, 0x5a, 0xf5, 0x0d, 0x67, 0x73, 0x61,
+	0x1b, 0xcd, 0xe2, 0x76, 0x8d, 0x32, 0x28, 0x33, 0x20, 0x01, 0xa0, 0x5c, 0xc3, 0x01, 0x8f, 0x5a,
+	0x0d, 0x93, 0xbf, 0x68, 0xa7, 0x86, 0xcb, 0x12, 0xf7, 0xa3, 0x60, 0x5e, 0x0e, 0xc3, 0xed, 0x77,
+	0xde, 0x70, 0x2a, 0x5d, 0x6b, 0x50, 0xf8, 0x08, 0x78, 0x0f, 0xcc, 0xe6, 0xe1, 0x32, 0xb6, 0x96,
+	0xc3, 0x43, 0x2f, 0xe1, 0x7b, 0x03, 0x3f, 0xfa, 0xab, 0x23, 0x05, 0x65, 0x32, 0xc4, 0x56, 0x6e,
+	0x2b, 0x41, 0x8b, 0x6f, 0xbf, 0xfd, 0x7c, 0xef, 0x02, 0x78, 0xae, 0xf4, 0xcf, 0x2b, 0xa8, 0x81,
+	0x67, 0xb7, 0x05, 0x6f, 0x54, 0x77, 0x52, 0xb1, 0x4b, 0xff, 0x7f, 0x86, 0x8d, 0x7c, 0xc3, 0x6a,
+	0xa2, 0x4b, 0xe6, 0x4f, 0xf1, 0xc7, 0x25, 0x6a, 0xc7, 0xb9, 0x09, 0x13, 0x50, 0xbf, 0xcf, 0x34,
+	0x9c, 0xf9, 0xce, 0xa9, 0x60, 0x6b, 0x06, 0xb6, 0x0c, 0x9b, 0x63, 0x30, 0xf2, 0x9a, 0x47, 0x6f,
+	0xe0, 0x73, 0xd0, 0x18, 0x78, 0x67, 0xea, 0xcc, 0xa6, 0x2c, 0x71, 0xd4, 0x6f, 0x68, 0xc5, 0x10,
+	0x2e, 0xc3, 0xf1, 0x76, 0x60, 0x01, 0x3c, 0x6b, 0xa6, 0x69, 0x13, 0xac, 0xb0, 0xda, 0xa9, 0x9a,
+	0xf2, 0xab, 0x9b, 0xca, 0xc1, 0x5c, 0x57, 0xd3, 0xec, 0x2c, 0xa7, 0x88, 0x0c, 0x70, 0x0d, 0xf9,
+	0x55, 0x40, 0xa2, 0x0c, 0x4d, 0x81, 0x46, 0x57, 0x0b, 0x79, 0x86, 0xd4, 0x6b, 0x86, 0xba, 0x8a,
+	0xae, 0x4c, 0xa1, 0x0a, 0xb9, 0xdb, 0xfc, 0xd2, 0x6f, 0xd7, 0xbe, 0xf6, 0xdb, 0xb5, 0xef, 0xfd,
+	0x76, 0xed, 0xc3, 0x8f, 0x76, 0xed, 0x99, 0x5b, 0x6c, 0x1d, 0x7a, 0x66, 0x8d, 0xb7, 0x7e, 0x07,
+	0x00, 0x00, 0xff, 0xff, 0xc6, 0xf4, 0xb8, 0xb0, 0xd1, 0x05, 0x00, 0x00,
 }

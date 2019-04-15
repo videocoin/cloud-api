@@ -2,10 +2,14 @@ syntax = "proto3";
 
 package cloud.api.streams.v1;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "github.com/VideoCoin/cloud-api/rpc/health.proto";
+import "github.com/VideoCoin/common/proto/profile.proto";
+import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
+
 import "streams/v1/stream.proto";
 
 option go_package = "v1";
@@ -27,7 +31,7 @@ service StreamService {
         };
     }
 
-    rpc Get(GetStreamRequest) returns (StreamProfile) {
+    rpc Get(StreamRequest) returns (StreamProfile) {
         option (google.api.http) = {
             get: "/api/v1/streams/{id}"
         };
@@ -38,13 +42,31 @@ service StreamService {
             get: "/api/v1/streams"
         };
     }
+
+    rpc Update(UpdateStreamRequest) returns (StreamProfile) {
+        option (google.api.http) = {
+            put: "/api/v1/streams/{id}"
+        };
+    }
+
+    rpc Start(StreamRequest) returns (StreamProfile) {
+        option (google.api.http) = {
+            post: "/api/v1/streams/{id}/start"
+        };
+    }
+
+    rpc Stop(StreamRequest) returns (StreamProfile) {
+        option (google.api.http) = {
+            post: "/api/v1/streams/{id}/stop"
+        };
+    }
 }
 
 message CreateStreamRequest {
-    string name = 1;
+    string name = 1 [(validate.rules).string.min_len = 1];
 }
 
-message GetStreamRequest {
+message StreamRequest {
     string id = 1;
 }
 
@@ -52,7 +74,9 @@ message ListResponse {
     repeated StreamProfile items = 1;
 }
 
-message UpdateStreamStatus {
-    string stream_id = 1;
-    StreamStatus status = 2;
+message UpdateStreamRequest {
+    string id = 1;
+    string name = 2;
+    StreamStatus status = 3;
+    proto.ProfileId profile_id = 4;
 }
