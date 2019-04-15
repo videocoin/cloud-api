@@ -54,13 +54,13 @@ message RequestStreamRequest {
 }
 
 message RequestStreamResponse {
-    string stream_id = 1;
+    uint64 stream_id = 1;
     string address = 2;
 }
 
 message CreateStreamRequest {
     string account_id = 1 [(validate.rules).string.len = 36];
-    string stream_id = 2;
+    uint64 stream_id = 2;
 }
 
 message CreateStreamResponse {

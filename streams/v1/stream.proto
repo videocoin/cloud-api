@@ -34,7 +34,7 @@ message Stream {
     google.protobuf.Timestamp created_at = 5 [(gogoproto.stdtime) = true];
 
     proto.ProfileId profile_id = 10;
-    string stream_id = 11 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
+    uint64 stream_id = 11;
     string stream_address = 12 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
 }
 
