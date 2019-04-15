@@ -118,6 +118,8 @@ func (m *RequestStreamResponse) Validate() error {
 
 	// no validation rules for StreamId
 
+	// no validation rules for Address
+
 	return nil
 }
 

@@ -55,6 +55,7 @@ message RequestStreamRequest {
 
 message RequestStreamResponse {
     string stream_id = 1;
+    string address = 2;
 }
 
 message CreateStreamRequest {
