@@ -13,7 +13,7 @@ option (gogoproto.marshaler_all) = false;
 option (gogoproto.sizer_all) = false;
 
 message User {
-    string id = 1 [(gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
+    string id = 1 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
     string email = 2 [(validate.rules).string.email = true, (gogoproto.moretags) = "gorm:\"unique_index\""];
     string password = 3 [(validate.rules).string.min_len = 5, (gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
     string name = 4 [(validate.rules).string.min_len = 3, (gogoproto.moretags) = "gorm:\"type:varchar(100)\""];

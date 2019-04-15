@@ -40,7 +40,13 @@ func (m *User) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Id
+	if utf8.RuneCountInString(m.GetId()) != 36 {
+		return UserValidationError{
+			field:  "Id",
+			reason: "value length must be 36 runes",
+		}
+
+	}
 
 	if err := m._validateEmail(m.GetEmail()); err != nil {
 		return UserValidationError{

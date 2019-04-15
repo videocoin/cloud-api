@@ -46,7 +46,13 @@ func (m *Stream) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Id
+	if utf8.RuneCountInString(m.GetId()) != 36 {
+		return StreamValidationError{
+			field:  "Id",
+			reason: "value length must be 36 runes",
+		}
+
+	}
 
 	// no validation rules for UserId
 

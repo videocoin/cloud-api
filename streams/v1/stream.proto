@@ -3,6 +3,7 @@ syntax = "proto3";
 package cloud.api.streams.v1;
 
 import "github.com/VideoCoin/common/proto/profile.proto";
+import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -24,7 +25,7 @@ enum StreamStatus {
 }
 
 message Stream {
-    string id = 1 [(gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
+    string id = 1 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
     string user_id = 2 [(gogoproto.moretags) = "gorm:\"unique_index\""];
     string name = 3 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
     

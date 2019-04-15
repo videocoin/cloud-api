@@ -5,7 +5,8 @@ protoc: protoc-rpc \
 	protoc-v1-users \
 	protoc-v1-accounts \
 	protoc-v1-notifications \
-	protoc-v1-streams
+	protoc-v1-streams \
+	protoc-v1-emitter
 
 protoc-rpc:
 	protoc \

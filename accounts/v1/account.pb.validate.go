@@ -40,15 +40,32 @@ func (m *Account) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Id
+	if utf8.RuneCountInString(m.GetId()) != 36 {
+		return AccountValidationError{
+			field:  "Id",
+			reason: "value length must be 36 runes",
+		}
 
-	// no validation rules for UserId
+	}
+
+	if utf8.RuneCountInString(m.GetUserId()) != 36 {
+		return AccountValidationError{
+			field:  "UserId",
+			reason: "value length must be 36 runes",
+		}
+
+	}
 
 	// no validation rules for Address
 
 	// no validation rules for Key
 
-	// no validation rules for Balance
+	if m.GetBalance() < 0 {
+		return AccountValidationError{
+			field:  "Balance",
+			reason: "value must be greater than or equal to 0",
+		}
+	}
 
 	return nil
 }

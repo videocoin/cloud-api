@@ -3,6 +3,7 @@ syntax = "proto3";
 package cloud.api.account.v1;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 
 option go_package = "v1";
 option (gogoproto.unmarshaler_all) = false;
@@ -10,11 +11,11 @@ option (gogoproto.marshaler_all) = false;
 option (gogoproto.sizer_all) = false;
 
 message Account {
-    string id = 1 [(gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
-    string user_id = 2;
+    string id = 1 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
+    string user_id = 2 [(validate.rules).string.len = 36];
     string address = 3 [(gogoproto.moretags) = "gorm:\"type:varchar(128)\""];
     string key = 4 [(gogoproto.moretags) = "gorm:\"type:varchar(512)\""];
-    double balance = 5;
+    double balance = 5 [(validate.rules).double.gte = 0];
 }
 
 message AccountProfile {
