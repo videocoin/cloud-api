@@ -76,9 +76,10 @@ message ListResponse {
 
 message UpdateStreamRequest {
     string id = 1;
-    string name = 2;
-    uint64 stream_id = 3;
-    string stream_address = 4;
-    StreamStatus status = 5;
-    proto.ProfileId profile_id = 6;
+    string user_id = 2;
+    string name = 4;
+    uint64 stream_id = 5;
+    string stream_address = 6;
+    StreamStatus status = 7;
+    proto.ProfileId profile_id = 8;
 }
