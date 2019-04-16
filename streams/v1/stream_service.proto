@@ -75,7 +75,7 @@ message ListResponse {
 }
 
 message UpdateStreamRequest {
-    string id = 1;
+    string id = 1 [(validate.rules).string.len = 36];
     string user_id = 2;
     string name = 4;
     uint64 stream_id = 5;
