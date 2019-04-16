@@ -20,23 +20,23 @@ service EmitterService {
         };
     }
 
-    rpc RequestStream(google.protobuf.Empty) returns (RequestStreamResponse) {}
+    rpc RequestStreamId(google.protobuf.Empty) returns (RequestStreamIdResponse) {}
 
-    rpc CreateStream(CreateStreamRequest) returns (google.protobuf.Empty) {}
+    rpc CreateStreamAddress(CreateStreamAddressRequest) returns (google.protobuf.Empty) {}
 
     // rpc ApproveStream(ApproveStreamRequest) returns (google.protobuf.Empty) {}
     // rpc AddInputChunk(AddInputChunkRequest) returns (google.protobuf.Empty) {}
 }
 
-message RequestStreamResponse {
+message RequestStreamIdResponse {
     uint64 stream_id = 1;
     string address = 2;
 }
 
-message CreateStreamRequest {
+message CreateStreamAddressRequest {
     uint64 stream_id = 1;
 }
 
-message CreateStreamResponse {
+message StreamAddress {
     string stream_address = 1;
 }

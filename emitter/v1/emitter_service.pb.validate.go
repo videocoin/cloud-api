@@ -33,10 +33,10 @@ var (
 	_ = types.DynamicAny{}
 )
 
-// Validate checks the field values on RequestStreamResponse with the rules
+// Validate checks the field values on RequestStreamIdResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *RequestStreamResponse) Validate() error {
+func (m *RequestStreamIdResponse) Validate() error {
 	if m == nil {
 		return nil
 	}
@@ -48,9 +48,9 @@ func (m *RequestStreamResponse) Validate() error {
 	return nil
 }
 
-// RequestStreamResponseValidationError is the validation error returned by
-// RequestStreamResponse.Validate if the designated constraints aren't met.
-type RequestStreamResponseValidationError struct {
+// RequestStreamIdResponseValidationError is the validation error returned by
+// RequestStreamIdResponse.Validate if the designated constraints aren't met.
+type RequestStreamIdResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -58,24 +58,24 @@ type RequestStreamResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e RequestStreamResponseValidationError) Field() string { return e.field }
+func (e RequestStreamIdResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e RequestStreamResponseValidationError) Reason() string { return e.reason }
+func (e RequestStreamIdResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e RequestStreamResponseValidationError) Cause() error { return e.cause }
+func (e RequestStreamIdResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e RequestStreamResponseValidationError) Key() bool { return e.key }
+func (e RequestStreamIdResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e RequestStreamResponseValidationError) ErrorName() string {
-	return "RequestStreamResponseValidationError"
+func (e RequestStreamIdResponseValidationError) ErrorName() string {
+	return "RequestStreamIdResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e RequestStreamResponseValidationError) Error() string {
+func (e RequestStreamIdResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -87,14 +87,14 @@ func (e RequestStreamResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sRequestStreamResponse.%s: %s%s",
+		"invalid %sRequestStreamIdResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = RequestStreamResponseValidationError{}
+var _ error = RequestStreamIdResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -102,12 +102,12 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = RequestStreamResponseValidationError{}
+} = RequestStreamIdResponseValidationError{}
 
-// Validate checks the field values on CreateStreamRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on CreateStreamAddressRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *CreateStreamRequest) Validate() error {
+func (m *CreateStreamAddressRequest) Validate() error {
 	if m == nil {
 		return nil
 	}
@@ -117,9 +117,9 @@ func (m *CreateStreamRequest) Validate() error {
 	return nil
 }
 
-// CreateStreamRequestValidationError is the validation error returned by
-// CreateStreamRequest.Validate if the designated constraints aren't met.
-type CreateStreamRequestValidationError struct {
+// CreateStreamAddressRequestValidationError is the validation error returned
+// by CreateStreamAddressRequest.Validate if the designated constraints aren't met.
+type CreateStreamAddressRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -127,24 +127,24 @@ type CreateStreamRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateStreamRequestValidationError) Field() string { return e.field }
+func (e CreateStreamAddressRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateStreamRequestValidationError) Reason() string { return e.reason }
+func (e CreateStreamAddressRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateStreamRequestValidationError) Cause() error { return e.cause }
+func (e CreateStreamAddressRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateStreamRequestValidationError) Key() bool { return e.key }
+func (e CreateStreamAddressRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateStreamRequestValidationError) ErrorName() string {
-	return "CreateStreamRequestValidationError"
+func (e CreateStreamAddressRequestValidationError) ErrorName() string {
+	return "CreateStreamAddressRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e CreateStreamRequestValidationError) Error() string {
+func (e CreateStreamAddressRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -156,14 +156,14 @@ func (e CreateStreamRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateStreamRequest.%s: %s%s",
+		"invalid %sCreateStreamAddressRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateStreamRequestValidationError{}
+var _ error = CreateStreamAddressRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -171,12 +171,12 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateStreamRequestValidationError{}
+} = CreateStreamAddressRequestValidationError{}
 
-// Validate checks the field values on CreateStreamResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, an error is returned.
-func (m *CreateStreamResponse) Validate() error {
+// Validate checks the field values on StreamAddress with the rules defined in
+// the proto definition for this message. If any rules are violated, an error
+// is returned.
+func (m *StreamAddress) Validate() error {
 	if m == nil {
 		return nil
 	}
@@ -186,9 +186,9 @@ func (m *CreateStreamResponse) Validate() error {
 	return nil
 }
 
-// CreateStreamResponseValidationError is the validation error returned by
-// CreateStreamResponse.Validate if the designated constraints aren't met.
-type CreateStreamResponseValidationError struct {
+// StreamAddressValidationError is the validation error returned by
+// StreamAddress.Validate if the designated constraints aren't met.
+type StreamAddressValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -196,24 +196,22 @@ type CreateStreamResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateStreamResponseValidationError) Field() string { return e.field }
+func (e StreamAddressValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateStreamResponseValidationError) Reason() string { return e.reason }
+func (e StreamAddressValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateStreamResponseValidationError) Cause() error { return e.cause }
+func (e StreamAddressValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateStreamResponseValidationError) Key() bool { return e.key }
+func (e StreamAddressValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateStreamResponseValidationError) ErrorName() string {
-	return "CreateStreamResponseValidationError"
-}
+func (e StreamAddressValidationError) ErrorName() string { return "StreamAddressValidationError" }
 
 // Error satisfies the builtin error interface
-func (e CreateStreamResponseValidationError) Error() string {
+func (e StreamAddressValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -225,14 +223,14 @@ func (e CreateStreamResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateStreamResponse.%s: %s%s",
+		"invalid %sStreamAddress.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateStreamResponseValidationError{}
+var _ error = StreamAddressValidationError{}
 
 var _ interface {
 	Field() string
@@ -240,4 +238,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateStreamResponseValidationError{}
+} = StreamAddressValidationError{}
