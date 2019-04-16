@@ -49,13 +49,13 @@ service StreamService {
         };
     }
 
-    rpc Start(StreamRequest) returns (StreamProfile) {
+    rpc Run(StreamRequest) returns (StreamProfile) {
         option (google.api.http) = {
             post: "/api/v1/streams/{id}/start"
         };
     }
 
-    rpc Stop(StreamRequest) returns (StreamProfile) {
+    rpc Complete(StreamRequest) returns (StreamProfile) {
         option (google.api.http) = {
             post: "/api/v1/streams/{id}/stop"
         };
@@ -77,6 +77,8 @@ message ListResponse {
 message UpdateStreamRequest {
     string id = 1;
     string name = 2;
-    StreamStatus status = 3;
-    proto.ProfileId profile_id = 4;
+    uint64 stream_id = 3;
+    string stream_address = 4;
+    StreamStatus status = 5;
+    proto.ProfileId profile_id = 6;
 }

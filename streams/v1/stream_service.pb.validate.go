@@ -275,6 +275,10 @@ func (m *UpdateStreamRequest) Validate() error {
 
 	// no validation rules for Name
 
+	// no validation rules for StreamId
+
+	// no validation rules for StreamAddress
+
 	// no validation rules for Status
 
 	// no validation rules for ProfileId

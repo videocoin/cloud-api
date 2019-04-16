@@ -20,37 +20,12 @@ service EmitterService {
         };
     }
 
-    rpc RequestStream(RequestStreamRequest) returns (RequestStreamResponse) {
-        option (google.api.http) = {
-            post: "/api/v1/emitter/request",
-            body: "*"
-        };
-    }
+    rpc RequestStream(google.protobuf.Empty) returns (RequestStreamResponse) {}
 
-    rpc CreateStream(CreateStreamRequest) returns (google.protobuf.Empty) {
-        option (google.api.http) = {
-            post: "/api/v1/emitter/create",
-            body: "*"
-        };
-    }
+    rpc CreateStream(CreateStreamRequest) returns (google.protobuf.Empty) {}
 
-    // rpc ApproveStream(ApproveStreamRequest) returns (google.protobuf.Empty) {
-    //     option (google.api.http) = {
-    //         post: "/api/v1/emitter/approve",
-    //         body: "*"
-    //     };
-    // }
-
-    // rpc AddInputChunk(AddInputChunkRequest) returns (google.protobuf.Empty) {
-    //     option (google.api.http) = {
-    //         post: "/api/v1/emitter/addinputchunk",
-    //         body: "*"
-    //     };
-    // }
-}
-
-message RequestStreamRequest {
-    string account_id = 1 [(validate.rules).string.len = 36];
+    // rpc ApproveStream(ApproveStreamRequest) returns (google.protobuf.Empty) {}
+    // rpc AddInputChunk(AddInputChunkRequest) returns (google.protobuf.Empty) {}
 }
 
 message RequestStreamResponse {
@@ -59,8 +34,7 @@ message RequestStreamResponse {
 }
 
 message CreateStreamRequest {
-    string account_id = 1 [(validate.rules).string.len = 36];
-    uint64 stream_id = 2;
+    uint64 stream_id = 1;
 }
 
 message CreateStreamResponse {

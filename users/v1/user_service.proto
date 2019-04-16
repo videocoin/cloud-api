@@ -56,7 +56,7 @@ service UserService {
         };
     }
 
-    rpc List(ListRequest) returns (ListResponse) {}
+    rpc List(google.protobuf.Empty) returns (ListResponse) {}
 
     rpc StartRecovery(StartRecoveryUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
@@ -87,7 +87,6 @@ message LoginUserResponse {
     string token = 1;
 }
 
-message ListRequest {}
 message ListResponse {
     repeated User items = 1;
 }
