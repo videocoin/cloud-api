@@ -23,8 +23,8 @@ service AccountService {
     }
 
     rpc Create(AccountRequest) returns (AccountProfile) {}
-    rpc Get(google.protobuf.Empty) returns (AccountProfile) {}
-    rpc Refresh(google.protobuf.Empty) returns (AccountProfile) {}
+    rpc Get(AccountRequest) returns (AccountProfile) {}
+    rpc Refresh(AccountRequest) returns (AccountProfile) {}
 
     rpc Key(AccountRequest) returns (AccountKey) {}
 }

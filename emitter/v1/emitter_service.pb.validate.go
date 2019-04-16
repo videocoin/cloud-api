@@ -33,6 +33,75 @@ var (
 	_ = types.DynamicAny{}
 )
 
+// Validate checks the field values on RequestStreamIdRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *RequestStreamIdRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for UserId
+
+	return nil
+}
+
+// RequestStreamIdRequestValidationError is the validation error returned by
+// RequestStreamIdRequest.Validate if the designated constraints aren't met.
+type RequestStreamIdRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RequestStreamIdRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RequestStreamIdRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RequestStreamIdRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RequestStreamIdRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RequestStreamIdRequestValidationError) ErrorName() string {
+	return "RequestStreamIdRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RequestStreamIdRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRequestStreamIdRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RequestStreamIdRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RequestStreamIdRequestValidationError{}
+
 // Validate checks the field values on RequestStreamIdResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
@@ -111,6 +180,10 @@ func (m *CreateStreamAddressRequest) Validate() error {
 	if m == nil {
 		return nil
 	}
+
+	// no validation rules for Id
+
+	// no validation rules for UserId
 
 	// no validation rules for StreamId
 
