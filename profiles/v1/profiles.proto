@@ -16,10 +16,10 @@ message Profiles {
 
 message Profile {
   int32 id = 1;
-  string name = 2 [(validate.rules).string.min_len = 2];
+  string name = 2;
   uint32 bitrate = 3;
   uint32 width = 4;
-  float  fps = 6;
+  float  fps = 5;
 }
 
 enum ProfileId {
