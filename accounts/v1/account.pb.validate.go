@@ -56,7 +56,12 @@ func (m *Account) Validate() error {
 
 	}
 
-	// no validation rules for Address
+	if l := utf8.RuneCountInString(m.GetAddress()); l < 40 || l > 42 {
+		return AccountValidationError{
+			field:  "Address",
+			reason: "value length must be between 40 and 42 runes, inclusive",
+		}
+	}
 
 	// no validation rules for Key
 

@@ -56,8 +56,6 @@ service UserService {
         };
     }
 
-    rpc List(google.protobuf.Empty) returns (ListResponse) {}
-
     rpc StartRecovery(StartRecoveryUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/api/v1/recovery/start"
@@ -67,6 +65,18 @@ service UserService {
     rpc Recover(RecoverUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/api/v1/recover"
+        };
+    }
+
+    rpc Whitelist(google.protobuf.Empty) returns (WhitelistResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/whitelist"
+        };
+    }
+
+    rpc LookupByAddress(LookupByAddressRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/api/v1/address/{address}"
         };
     }
 }
@@ -87,10 +97,6 @@ message LoginUserResponse {
     string token = 1;
 }
 
-message ListResponse {
-    repeated User items = 1;
-}
-
 message UserRequest {
     string id = 1;
 }
@@ -108,4 +114,12 @@ message RecoverUserRequest {
     string token = 1;
     string password = 2 [(validate.rules).string.min_len = 3];
     string confirm_password = 3 [(validate.rules).string.min_len = 5];
+}
+
+message WhitelistResponse {
+    repeated string address = 1;
+}
+
+message LookupByAddressRequest {
+    string address = 1 [(validate.rules).string = {min_len: 40, max_len: 42}];
 }
