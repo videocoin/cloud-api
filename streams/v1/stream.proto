@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package cloud.api.streams.v1;
 
-import "github.com/VideoCoin/common/proto/profile.proto";
+import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
@@ -33,7 +33,7 @@ message Stream {
     
     google.protobuf.Timestamp created_at = 5 [(gogoproto.stdtime) = true];
 
-    proto.ProfileId profile_id = 10;
+    cloud.api.profiles.v1.ProfileId profile_id = 10;
     uint64 stream_id = 11;
     string stream_address = 12 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
 }
@@ -42,7 +42,7 @@ message StreamProfile {
     string id = 1;
     string name = 2;
     StreamStatus status = 3;
-    proto.ProfileId profile_id = 4;
+    cloud.api.profiles.v1.ProfileId profile_id = 4;
 
     google.protobuf.Timestamp created_at = 5 [(gogoproto.stdtime) = true];
 }

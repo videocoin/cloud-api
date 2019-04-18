@@ -126,19 +126,7 @@ func (m *Profile) Validate() error {
 
 	// no validation rules for Id
 
-	if len(m.GetName()) > 32 {
-		return ProfileValidationError{
-			field:  "Name",
-			reason: "value length must be at most 32 bytes",
-		}
-	}
-
-	if !_Profile_Name_Pattern.MatchString(m.GetName()) {
-		return ProfileValidationError{
-			field:  "Name",
-			reason: "value does not match regex pattern \"[A-Za-z]\"",
-		}
-	}
+	// no validation rules for Name
 
 	// no validation rules for Bitrate
 
@@ -202,5 +190,3 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ProfileValidationError{}
-
-var _Profile_Name_Pattern = regexp.MustCompile("[A-Za-z]")

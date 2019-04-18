@@ -41,26 +41,18 @@ func (m *AddProfileRequest) Validate() error {
 		return nil
 	}
 
-	if m.GetStreamId() == nil {
+	if m.GetStreamId() < 0 {
 		return AddProfileRequestValidationError{
 			field:  "StreamId",
-			reason: "value is required",
+			reason: "value must be greater than or equal to 0",
 		}
 	}
 
-	if a := m.GetStreamId(); a != nil {
-
-	}
-
-	if m.GetProfileId() == nil {
+	if _, ok := v1.ProfileId_name[int32(m.GetProfileId())]; !ok {
 		return AddProfileRequestValidationError{
 			field:  "ProfileId",
-			reason: "value is required",
+			reason: "value must be one of the defined enum values",
 		}
-	}
-
-	if a := m.GetProfileId(); a != nil {
-
 	}
 
 	return nil

@@ -7,7 +7,7 @@ import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "github.com/VideoCoin/cloud-api/rpc/health.proto";
-import "github.com/VideoCoin/common/proto/profile.proto";
+import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 
 import "streams/v1/stream.proto";
@@ -81,5 +81,5 @@ message UpdateStreamRequest {
     uint64 stream_id = 5;
     string stream_address = 6;
     StreamStatus status = 7;
-    proto.ProfileId profile_id = 8;
+    cloud.api.profiles.v1.ProfileId profile_id = 8;
 }

@@ -13,7 +13,7 @@ import (
 	"net/http"
 
 	"github.com/VideoCoin/cloud-api/profiles/v1"
-	v1_1 "github.com/VideoCoin/cloud-api/transcode/v1"
+	v1_1 "github.com/VideoCoin/cloud-api/transcoder/v1"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"

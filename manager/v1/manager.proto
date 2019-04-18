@@ -9,8 +9,8 @@ import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
-import "github.com/VideoCoin/cloud-api/work_order/v1/work_order.proto";
-import "github.com/VideoCoin/cloud-api/transcode/v1/transcoders.proto";
+import "github.com/VideoCoin/cloud-api/workorder/v1/workorder.proto";
+import "github.com/VideoCoin/cloud-api/transcoder/v1/transcoder.proto";
 
 option go_package = "v1";
 option (gogoproto.marshaler_all) = false;
@@ -38,7 +38,7 @@ service ManagerService {
     };
   }
 
-  rpc GetStream(GetStreamRequest) returns (cloud.api.work_order.v1.WorkOrder) {
+  rpc GetStream(GetStreamRequest) returns (cloud.api.workorder.v1.WorkOrder) {
     option (google.api.http) = {
       get: "/api/v1/stream/{stream_id}"
     };
@@ -113,8 +113,8 @@ service ManagerService {
 }
 
 message AddProfileRequest {
-  int64 stream_id = 1 [(validate.rules).any.required = true];
-  cloud.api.profiles.v1.ProfileId profile_id = 2 [(validate.rules).any.required = true];
+  int64 stream_id = 1 [(validate.rules).int64.gte = 0];
+  cloud.api.profiles.v1.ProfileId profile_id = 2 [(validate.rules).enum.defined_only = true];
 }
 
 message Heartbeat {
@@ -169,7 +169,7 @@ message UpdateStreamStatusRequest {
   int64 stream_id = 2;
   string status = 3;
   bool refunded = 4;
-  cloud.api.work_order.v1.IngestStatus ingest_status = 5;
+  cloud.api.workorder.v1.IngestStatus ingest_status = 5;
 }
 
 message AddJobResponse {
