@@ -179,7 +179,7 @@ func (m *ListResponse) Validate() error {
 		return nil
 	}
 
-	for idx, item := range m.GetAccount() {
+	for idx, item := range m.GetItems() {
 		_, _ = idx, item
 
 		{
@@ -189,7 +189,7 @@ func (m *ListResponse) Validate() error {
 
 				if err := v.Validate(); err != nil {
 					return ListResponseValidationError{
-						field:  fmt.Sprintf("Account[%v]", idx),
+						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					}

@@ -117,7 +117,7 @@ message RecoverUserRequest {
 }
 
 message WhitelistResponse {
-    repeated string address = 1;
+    repeated string items = 1;
 }
 
 message LookupByAddressRequest {

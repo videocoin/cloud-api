@@ -42,7 +42,7 @@ message Address {
 }
 
 message ListResponse {
-    repeated AccountProfile account = 1;
+    repeated AccountProfile items = 1;
 }
 
 
