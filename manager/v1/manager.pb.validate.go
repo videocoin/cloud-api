@@ -41,9 +41,27 @@ func (m *AddProfileRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for StreamId
+	if m.GetStreamId() == nil {
+		return AddProfileRequestValidationError{
+			field:  "StreamId",
+			reason: "value is required",
+		}
+	}
 
-	// no validation rules for ProfileId
+	if a := m.GetStreamId(); a != nil {
+
+	}
+
+	if m.GetProfileId() == nil {
+		return AddProfileRequestValidationError{
+			field:  "ProfileId",
+			reason: "value is required",
+		}
+	}
+
+	if a := m.GetProfileId(); a != nil {
+
+	}
 
 	return nil
 }
@@ -178,7 +196,16 @@ func (m *GetProfileRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for ProfileId
+	if m.GetProfileId() == nil {
+		return GetProfileRequestValidationError{
+			field:  "ProfileId",
+			reason: "value is required",
+		}
+	}
+
+	if a := m.GetProfileId(); a != nil {
+
+	}
 
 	return nil
 }
@@ -247,7 +274,16 @@ func (m *CheckBalanceRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for ContractAddress
+	if m.GetContractAddress() == nil {
+		return CheckBalanceRequestValidationError{
+			field:  "ContractAddress",
+			reason: "value is required",
+		}
+	}
+
+	if a := m.GetContractAddress(); a != nil {
+
+	}
 
 	return nil
 }
@@ -385,7 +421,16 @@ func (m *ContractAddrRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for StreamId
+	if m.GetStreamId() == nil {
+		return ContractAddrRequestValidationError{
+			field:  "StreamId",
+			reason: "value is required",
+		}
+	}
+
+	if a := m.GetStreamId(); a != nil {
+
+	}
 
 	// no validation rules for ContractAddress
 
@@ -456,11 +501,26 @@ func (m *VerifyChunkRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for StreamId
+	if m.GetStreamId() <= 0 {
+		return VerifyChunkRequestValidationError{
+			field:  "StreamId",
+			reason: "value must be greater than 0",
+		}
+	}
 
-	// no validation rules for SourceChunkId
+	if m.GetSourceChunkId() < 0 {
+		return VerifyChunkRequestValidationError{
+			field:  "SourceChunkId",
+			reason: "value must be greater than or equal to 0",
+		}
+	}
 
-	// no validation rules for ResultChunkId
+	if m.GetResultChunkId() < 0 {
+		return VerifyChunkRequestValidationError{
+			field:  "ResultChunkId",
+			reason: "value must be greater than or equal to 0",
+		}
+	}
 
 	// no validation rules for HashDistance
 
@@ -533,7 +593,12 @@ func (m *ChunkCreatedRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for StreamId
+	if m.GetStreamId() <= 0 {
+		return ChunkCreatedRequestValidationError{
+			field:  "StreamId",
+			reason: "value must be greater than 0",
+		}
+	}
 
 	// no validation rules for SourceChunkId
 
@@ -608,7 +673,12 @@ func (m *StopStreamRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for StreamId
+	if m.GetStreamId() <= 0 {
+		return StopStreamRequestValidationError{
+			field:  "StreamId",
+			reason: "value must be greater than 0",
+		}
+	}
 
 	// no validation rules for ContractAddress
 
