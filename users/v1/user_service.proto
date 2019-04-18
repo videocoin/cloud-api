@@ -70,13 +70,13 @@ service UserService {
 
     rpc Whitelist(google.protobuf.Empty) returns (WhitelistResponse) {
         option (google.api.http) = {
-            post: "/api/v1/whitelist"
+            get: "/api/v1/whitelist"
         };
     }
 
     rpc LookupByAddress(LookupByAddressRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-            post: "/api/v1/address/{address}"
+            get: "/api/v1/address/{address}"
         };
     }
 }
