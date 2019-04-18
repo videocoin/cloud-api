@@ -122,11 +122,11 @@ message Heartbeat {
 }
 
 message GetProfileRequest {
-  cloud.api.profiles.v1.ProfileId profile_id = 1 [(validate.rules).any.required = true];
+  cloud.api.profiles.v1.ProfileId profile_id = 2 [(validate.rules).enum.defined_only = true];
 }
 
 message CheckBalanceRequest {
-  string contract_address = 1 [(validate.rules).any.required = true];
+  string contract_address = 1 ;
 }
 
 message CheckBalanceResponse {
@@ -134,7 +134,7 @@ message CheckBalanceResponse {
 }
 
 message ContractAddrRequest {
-  int64 stream_id = 1 [(validate.rules).any.required = true];
+  int64 stream_id = 1;
   string contract_address = 2;
 }
 

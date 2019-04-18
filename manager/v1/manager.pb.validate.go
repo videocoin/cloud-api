@@ -188,15 +188,11 @@ func (m *GetProfileRequest) Validate() error {
 		return nil
 	}
 
-	if m.GetProfileId() == nil {
+	if _, ok := v1.ProfileId_name[int32(m.GetProfileId())]; !ok {
 		return GetProfileRequestValidationError{
 			field:  "ProfileId",
-			reason: "value is required",
+			reason: "value must be one of the defined enum values",
 		}
-	}
-
-	if a := m.GetProfileId(); a != nil {
-
 	}
 
 	return nil
@@ -266,16 +262,7 @@ func (m *CheckBalanceRequest) Validate() error {
 		return nil
 	}
 
-	if m.GetContractAddress() == nil {
-		return CheckBalanceRequestValidationError{
-			field:  "ContractAddress",
-			reason: "value is required",
-		}
-	}
-
-	if a := m.GetContractAddress(); a != nil {
-
-	}
+	// no validation rules for ContractAddress
 
 	return nil
 }
@@ -413,16 +400,7 @@ func (m *ContractAddrRequest) Validate() error {
 		return nil
 	}
 
-	if m.GetStreamId() == nil {
-		return ContractAddrRequestValidationError{
-			field:  "StreamId",
-			reason: "value is required",
-		}
-	}
-
-	if a := m.GetStreamId(); a != nil {
-
-	}
+	// no validation rules for StreamId
 
 	// no validation rules for ContractAddress
 
