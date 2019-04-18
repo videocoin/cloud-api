@@ -38,7 +38,7 @@ message RequestStreamIdResponse {
 }
 
 message CreateStreamAddressRequest {
-    string id = 1;
+    string pipeline_id = 1;
     string user_id = 2;
     uint64 stream_id = 3;
 }
