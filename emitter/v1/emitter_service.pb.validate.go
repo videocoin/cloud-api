@@ -181,7 +181,7 @@ func (m *CreateStreamAddressRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for Id
+	// no validation rules for PipelineId
 
 	// no validation rules for UserId
 

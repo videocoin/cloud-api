@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cloud.api.streams.v1;
+package cloud.api.pipelines.v1;
 
 import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
@@ -13,23 +13,23 @@ option (gogoproto.unmarshaler_all) = false;
 option (gogoproto.marshaler_all) = false;
 option (gogoproto.sizer_all) = false;
 
-enum StreamStatus {
+enum PipelineStatus {
     option (gogoproto.goproto_enum_prefix) = false;
-    option (gogoproto.enum_customname) = "StreamStatus";
+    option (gogoproto.enum_customname) = "PipelineStatus";
 
-    IDLE = 0 [(gogoproto.enumvalue_customname) = "StreamStatusIdle"];
-    PENDING = 1 [(gogoproto.enumvalue_customname) = "StreamStatusPending"];
-    READY = 2 [(gogoproto.enumvalue_customname) = "StreamStatusReady"];
-    FAILED = 3 [(gogoproto.enumvalue_customname) = "StreamStatusFailed"];
-    COMPLETED = 4 [(gogoproto.enumvalue_customname) = "StreamStatusCompleted"];
+    IDLE = 0 [(gogoproto.enumvalue_customname) = "PipelineStatusIdle"];
+    PENDING = 1 [(gogoproto.enumvalue_customname) = "PipelineStatusPending"];
+    RUNNING = 2 [(gogoproto.enumvalue_customname) = "PipelineStatusRunning"];
+    FAILED = 3 [(gogoproto.enumvalue_customname) = "PipelineStatusFailed"];
+    COMPLETED = 4 [(gogoproto.enumvalue_customname) = "PipelineStatusCompleted"];
 }
 
-message Stream {
+message Pipeline {
     string id = 1 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
     string user_id = 2 [(gogoproto.moretags) = "gorm:\"unique_index\""];
     string name = 3 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
     
-    StreamStatus status = 4 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
+    PipelineStatus status = 4 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
     
     google.protobuf.Timestamp created_at = 5 [(gogoproto.stdtime) = true];
 
@@ -38,10 +38,10 @@ message Stream {
     string stream_address = 12 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
 }
 
-message StreamProfile {
+message PipelineProfile {
     string id = 1;
     string name = 2;
-    StreamStatus status = 3;
+    PipelineStatus status = 3;
     cloud.api.profiles.v1.ProfileId profile_id = 4;
 
     google.protobuf.Timestamp created_at = 5 [(gogoproto.stdtime) = true];

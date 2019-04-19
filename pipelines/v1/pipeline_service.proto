@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cloud.api.streams.v1;
+package cloud.api.pipelines.v1;
 
 
 import "google/protobuf/empty.proto";
@@ -10,76 +10,76 @@ import "github.com/VideoCoin/cloud-api/rpc/health.proto";
 import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 
-import "streams/v1/stream.proto";
+import "pipelines/v1/pipeline.proto";
 
 option go_package = "v1";
 option (gogoproto.unmarshaler_all) = false;
 option (gogoproto.marshaler_all) = false;
 option (gogoproto.sizer_all) = false;
 
-service StreamService {
+service PipelineService {
     rpc Health(google.protobuf.Empty) returns (cloud.api.rpc.HealthStatus) {
         option (google.api.http) = {
             get: "/healthz"
         };
     }
 
-    rpc Create(CreateStreamRequest) returns (StreamProfile) {
+    rpc Create(CreatePipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            post: "/api/v1/streams",
+            post: "/api/v1/pipelines",
             body: "*"
         };
     }
 
-    rpc Get(StreamRequest) returns (StreamProfile) {
+    rpc Get(PipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            get: "/api/v1/streams/{id}"
+            get: "/api/v1/pipelines/{id}"
         };
     }
 
     rpc List(google.protobuf.Empty) returns (ListResponse) {
         option (google.api.http) = {
-            get: "/api/v1/streams"
+            get: "/api/v1/pipelines"
         };
     }
 
-    rpc Update(UpdateStreamRequest) returns (StreamProfile) {
+    rpc Update(UpdatePipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            put: "/api/v1/streams/{id}"
+            put: "/api/v1/pipelines/{id}"
         };
     }
 
-    rpc Run(StreamRequest) returns (StreamProfile) {
+    rpc Run(PipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            post: "/api/v1/streams/{id}/start"
+            post: "/api/v1/pipelines/{id}/start"
         };
     }
 
-    rpc Complete(StreamRequest) returns (StreamProfile) {
+    rpc Complete(PipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            post: "/api/v1/streams/{id}/stop"
+            post: "/api/v1/pipelines/{id}/stop"
         };
     }
 }
 
-message CreateStreamRequest {
+message CreatePipelineRequest {
     string name = 1 [(validate.rules).string.min_len = 1];
 }
 
-message StreamRequest {
+message PipelineRequest {
     string id = 1;
 }
 
 message ListResponse {
-    repeated StreamProfile items = 1;
+    repeated PipelineProfile items = 1;
 }
 
-message UpdateStreamRequest {
+message UpdatePipelineRequest {
     string id = 1 [(validate.rules).string.len = 36];
     string user_id = 2;
     string name = 4;
     uint64 stream_id = 5;
     string stream_address = 6;
-    StreamStatus status = 7;
+    PipelineStatus status = 7;
     cloud.api.profiles.v1.ProfileId profile_id = 8;
 }

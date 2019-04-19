@@ -378,91 +378,6 @@ var _ interface {
 	ErrorName() string
 } = LoginUserResponseValidationError{}
 
-// Validate checks the field values on ListResponse with the rules defined in
-// the proto definition for this message. If any rules are violated, an error
-// is returned.
-func (m *ListResponse) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	for idx, item := range m.GetItems() {
-		_, _ = idx, item
-
-		{
-			tmp := item
-
-			if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
-
-				if err := v.Validate(); err != nil {
-					return ListResponseValidationError{
-						field:  fmt.Sprintf("Items[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					}
-				}
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// ListResponseValidationError is the validation error returned by
-// ListResponse.Validate if the designated constraints aren't met.
-type ListResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ListResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ListResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ListResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ListResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ListResponseValidationError) ErrorName() string { return "ListResponseValidationError" }
-
-// Error satisfies the builtin error interface
-func (e ListResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sListResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ListResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ListResponseValidationError{}
-
 // Validate checks the field values on UserRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
 // is returned.
@@ -818,3 +733,144 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RecoverUserRequestValidationError{}
+
+// Validate checks the field values on WhitelistResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *WhitelistResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+// WhitelistResponseValidationError is the validation error returned by
+// WhitelistResponse.Validate if the designated constraints aren't met.
+type WhitelistResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WhitelistResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WhitelistResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WhitelistResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WhitelistResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WhitelistResponseValidationError) ErrorName() string {
+	return "WhitelistResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e WhitelistResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWhitelistResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WhitelistResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WhitelistResponseValidationError{}
+
+// Validate checks the field values on LookupByAddressRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *LookupByAddressRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if l := utf8.RuneCountInString(m.GetAddress()); l < 40 || l > 42 {
+		return LookupByAddressRequestValidationError{
+			field:  "Address",
+			reason: "value length must be between 40 and 42 runes, inclusive",
+		}
+	}
+
+	return nil
+}
+
+// LookupByAddressRequestValidationError is the validation error returned by
+// LookupByAddressRequest.Validate if the designated constraints aren't met.
+type LookupByAddressRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LookupByAddressRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LookupByAddressRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LookupByAddressRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LookupByAddressRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LookupByAddressRequestValidationError) ErrorName() string {
+	return "LookupByAddressRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LookupByAddressRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLookupByAddressRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LookupByAddressRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LookupByAddressRequestValidationError{}

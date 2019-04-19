@@ -24,6 +24,10 @@ service AccountService {
 
     rpc Create(AccountRequest) returns (AccountProfile) {}
     rpc Get(AccountRequest) returns (AccountProfile) {}
+
+    rpc GetByAddress(Address) returns (AccountProfile) {}
+    rpc List(google.protobuf.Empty) returns (ListResponse) {}
+
     rpc Refresh(AccountRequest) returns (AccountProfile) {}
 
     rpc Key(AccountRequest) returns (AccountKey) {}
@@ -31,6 +35,14 @@ service AccountService {
 
 message AccountRequest {
     string owner_id = 1 [(gogoproto.customname) = "OwnerID"];
+}
+
+message Address {
+    string address = 1 [(validate.rules).string = {min_len: 40, max_len: 42}];
+}
+
+message ListResponse {
+    repeated AccountProfile items = 1;
 }
 
 
