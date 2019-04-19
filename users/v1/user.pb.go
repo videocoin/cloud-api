@@ -3,15 +3,16 @@
 
 package v1
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import v1 "github.com/VideoCoin/cloud-api/accounts/v1"
-import _ "github.com/envoyproxy/protoc-gen-validate/validate"
-import _ "github.com/gogo/protobuf/gogoproto"
-import _ "github.com/golang/protobuf/ptypes/timestamp"
-
-import time "time"
+import (
+	fmt "fmt"
+	v1 "github.com/VideoCoin/cloud-api/accounts/v1"
+	_ "github.com/envoyproxy/protoc-gen-validate/validate"
+	_ "github.com/gogo/protobuf/gogoproto"
+	proto "github.com/golang/protobuf/proto"
+	_ "github.com/golang/protobuf/ptypes/timestamp"
+	math "math"
+	time "time"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -41,7 +42,7 @@ func (m *User) Reset()         { *m = User{} }
 func (m *User) String() string { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()    {}
 func (*User) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_58d52cfa329568ab, []int{0}
+	return fileDescriptor_622714e2df60ae10, []int{0}
 }
 func (m *User) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_User.Unmarshal(m, b)
@@ -49,8 +50,8 @@ func (m *User) XXX_Unmarshal(b []byte) error {
 func (m *User) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_User.Marshal(b, m, deterministic)
 }
-func (dst *User) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_User.Merge(dst, src)
+func (m *User) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_User.Merge(m, src)
 }
 func (m *User) XXX_Size() int {
 	return xxx_messageInfo_User.Size(m)
@@ -117,7 +118,7 @@ func (m *UserProfile) Reset()         { *m = UserProfile{} }
 func (m *UserProfile) String() string { return proto.CompactTextString(m) }
 func (*UserProfile) ProtoMessage()    {}
 func (*UserProfile) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_58d52cfa329568ab, []int{1}
+	return fileDescriptor_622714e2df60ae10, []int{1}
 }
 func (m *UserProfile) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UserProfile.Unmarshal(m, b)
@@ -125,8 +126,8 @@ func (m *UserProfile) XXX_Unmarshal(b []byte) error {
 func (m *UserProfile) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_UserProfile.Marshal(b, m, deterministic)
 }
-func (dst *UserProfile) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UserProfile.Merge(dst, src)
+func (m *UserProfile) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UserProfile.Merge(m, src)
 }
 func (m *UserProfile) XXX_Size() int {
 	return xxx_messageInfo_UserProfile.Size(m)
@@ -170,9 +171,9 @@ func init() {
 	proto.RegisterType((*UserProfile)(nil), "cloud.api.users.v1.UserProfile")
 }
 
-func init() { proto.RegisterFile("users/v1/user.proto", fileDescriptor_user_58d52cfa329568ab) }
+func init() { proto.RegisterFile("users/v1/user.proto", fileDescriptor_622714e2df60ae10) }
 
-var fileDescriptor_user_58d52cfa329568ab = []byte{
+var fileDescriptor_622714e2df60ae10 = []byte{
 	// 500 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x92, 0x31, 0x6f, 0xd3, 0x40,
 	0x14, 0xc7, 0x63, 0x3b, 0x2e, 0xed, 0x45, 0xaa, 0xd0, 0xb5, 0x83, 0x95, 0xc1, 0x8e, 0x4c, 0x91,

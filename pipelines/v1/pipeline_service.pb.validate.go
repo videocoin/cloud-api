@@ -16,8 +16,6 @@ import (
 	"unicode/utf8"
 
 	"github.com/gogo/protobuf/types"
-
-	proto "github.com/VideoCoin/common/proto"
 )
 
 // ensure the imports are used
@@ -33,8 +31,6 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = types.DynamicAny{}
-
-	_ = proto.ProfileId(0)
 )
 
 // Validate checks the field values on CreatePipelineRequest with the rules
