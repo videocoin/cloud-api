@@ -16,8 +16,6 @@ import (
 	"unicode/utf8"
 
 	"github.com/gogo/protobuf/types"
-
-	proto "github.com/VideoCoin/common/proto"
 )
 
 // ensure the imports are used
@@ -33,8 +31,6 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = types.DynamicAny{}
-
-	_ = proto.ProfileId(0)
 )
 
 // Validate checks the field values on CreatePipelineRequest with the rules
@@ -51,6 +47,8 @@ func (m *CreatePipelineRequest) Validate() error {
 			reason: "value length must be at least 1 runes",
 		}
 	}
+
+	// no validation rules for ProfileId
 
 	return nil
 }
@@ -279,7 +277,13 @@ func (m *UpdatePipelineRequest) Validate() error {
 
 	}
 
-	// no validation rules for UserId
+	if utf8.RuneCountInString(m.GetUserId()) != 36 {
+		return UpdatePipelineRequestValidationError{
+			field:  "UserId",
+			reason: "value length must be 36 runes",
+		}
+
+	}
 
 	// no validation rules for Name
 

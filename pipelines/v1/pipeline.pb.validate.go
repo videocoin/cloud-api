@@ -16,8 +16,6 @@ import (
 	"unicode/utf8"
 
 	"github.com/gogo/protobuf/types"
-
-	proto "github.com/VideoCoin/common/proto"
 )
 
 // ensure the imports are used
@@ -33,8 +31,6 @@ var (
 	_ = (*url.URL)(nil)
 	_ = (*mail.Address)(nil)
 	_ = types.DynamicAny{}
-
-	_ = proto.ProfileId(0)
 )
 
 // Validate checks the field values on Pipeline with the rules defined in the
@@ -62,8 +58,6 @@ func (m *Pipeline) Validate() error {
 
 	}
 
-	// no validation rules for JobId
-
 	// no validation rules for Status
 
 	{
@@ -82,13 +76,13 @@ func (m *Pipeline) Validate() error {
 	}
 
 	{
-		tmp := m.GetStartedAt()
+		tmp := m.GetPendingAt()
 
 		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
 
 			if err := v.Validate(); err != nil {
 				return PipelineValidationError{
-					field:  "StartedAt",
+					field:  "PendingAt",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -197,20 +191,7 @@ func (m *PipelineProfile) Validate() error {
 
 	// no validation rules for Status
 
-	{
-		tmp := m.GetJob()
-
-		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
-
-			if err := v.Validate(); err != nil {
-				return PipelineProfileValidationError{
-					field:  "Job",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-	}
+	// no validation rules for ProfileId
 
 	{
 		tmp := m.GetCreatedAt()
@@ -228,13 +209,13 @@ func (m *PipelineProfile) Validate() error {
 	}
 
 	{
-		tmp := m.GetStartedAt()
+		tmp := m.GetPendingAt()
 
 		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
 
 			if err := v.Validate(); err != nil {
 				return PipelineProfileValidationError{
-					field:  "StartedAt",
+					field:  "PendingAt",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -328,83 +309,3 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = PipelineProfileValidationError{}
-
-// Validate checks the field values on JobProfile with the rules defined in the
-// proto definition for this message. If any rules are violated, an error is returned.
-func (m *JobProfile) Validate() error {
-	if m == nil {
-		return nil
-	}
-
-	// no validation rules for Id
-
-	// no validation rules for ContractAddress
-
-	// no validation rules for WalletAddress
-
-	// no validation rules for StreamId
-
-	// no validation rules for InputUrl
-
-	// no validation rules for OutputUrl
-
-	// no validation rules for Status
-
-	// no validation rules for Profile
-
-	return nil
-}
-
-// JobProfileValidationError is the validation error returned by
-// JobProfile.Validate if the designated constraints aren't met.
-type JobProfileValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e JobProfileValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e JobProfileValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e JobProfileValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e JobProfileValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e JobProfileValidationError) ErrorName() string { return "JobProfileValidationError" }
-
-// Error satisfies the builtin error interface
-func (e JobProfileValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sJobProfile.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = JobProfileValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = JobProfileValidationError{}

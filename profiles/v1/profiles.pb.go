@@ -3,13 +3,11 @@
 
 package v1
 
-import (
-	fmt "fmt"
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
+import _ "github.com/envoyproxy/protoc-gen-validate/validate"
+import _ "github.com/gogo/protobuf/gogoproto"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -37,7 +35,6 @@ var ProfileId_name = map[int32]string{
 	2: "profile_id_hd",
 	3: "profile_id_fhd",
 }
-
 var ProfileId_value = map[string]int32{
 	"profile_id_none": 0,
 	"profile_id_sd":   1,
@@ -48,9 +45,8 @@ var ProfileId_value = map[string]int32{
 func (x ProfileId) String() string {
 	return proto.EnumName(ProfileId_name, int32(x))
 }
-
 func (ProfileId) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_8c54dfdf4e6ce3e9, []int{0}
+	return fileDescriptor_profiles_0d6282fb13a9fe95, []int{0}
 }
 
 type Profiles struct {
@@ -64,7 +60,7 @@ func (m *Profiles) Reset()         { *m = Profiles{} }
 func (m *Profiles) String() string { return proto.CompactTextString(m) }
 func (*Profiles) ProtoMessage()    {}
 func (*Profiles) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8c54dfdf4e6ce3e9, []int{0}
+	return fileDescriptor_profiles_0d6282fb13a9fe95, []int{0}
 }
 func (m *Profiles) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Profiles.Unmarshal(m, b)
@@ -72,8 +68,8 @@ func (m *Profiles) XXX_Unmarshal(b []byte) error {
 func (m *Profiles) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Profiles.Marshal(b, m, deterministic)
 }
-func (m *Profiles) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Profiles.Merge(m, src)
+func (dst *Profiles) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Profiles.Merge(dst, src)
 }
 func (m *Profiles) XXX_Size() int {
 	return xxx_messageInfo_Profiles.Size(m)
@@ -106,7 +102,7 @@ func (m *Profile) Reset()         { *m = Profile{} }
 func (m *Profile) String() string { return proto.CompactTextString(m) }
 func (*Profile) ProtoMessage()    {}
 func (*Profile) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8c54dfdf4e6ce3e9, []int{1}
+	return fileDescriptor_profiles_0d6282fb13a9fe95, []int{1}
 }
 func (m *Profile) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Profile.Unmarshal(m, b)
@@ -114,8 +110,8 @@ func (m *Profile) XXX_Unmarshal(b []byte) error {
 func (m *Profile) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Profile.Marshal(b, m, deterministic)
 }
-func (m *Profile) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Profile.Merge(m, src)
+func (dst *Profile) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Profile.Merge(dst, src)
 }
 func (m *Profile) XXX_Size() int {
 	return xxx_messageInfo_Profile.Size(m)
@@ -162,14 +158,16 @@ func (m *Profile) GetFps() float32 {
 }
 
 func init() {
-	proto.RegisterEnum("cloud.api.profiles.v1.ProfileId", ProfileId_name, ProfileId_value)
 	proto.RegisterType((*Profiles)(nil), "cloud.api.profiles.v1.Profiles")
 	proto.RegisterType((*Profile)(nil), "cloud.api.profiles.v1.Profile")
+	proto.RegisterEnum("cloud.api.profiles.v1.ProfileId", ProfileId_name, ProfileId_value)
 }
 
-func init() { proto.RegisterFile("profiles/v1/profiles.proto", fileDescriptor_8c54dfdf4e6ce3e9) }
+func init() {
+	proto.RegisterFile("profiles/v1/profiles.proto", fileDescriptor_profiles_0d6282fb13a9fe95)
+}
 
-var fileDescriptor_8c54dfdf4e6ce3e9 = []byte{
+var fileDescriptor_profiles_0d6282fb13a9fe95 = []byte{
 	// 372 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x91, 0x41, 0x4e, 0xf2, 0x40,
 	0x18, 0x86, 0x3b, 0x2d, 0xfc, 0xc0, 0xf0, 0x03, 0x65, 0x82, 0x49, 0xd3, 0x45, 0x33, 0x21, 0xc6,

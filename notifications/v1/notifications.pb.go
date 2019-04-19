@@ -3,12 +3,10 @@
 
 package v1
 
-import (
-	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
+import _ "github.com/gogo/protobuf/gogoproto"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -34,7 +32,6 @@ var NotificationTarget_name = map[int32]string{
 	1: "EMAIL",
 	2: "WEB",
 }
-
 var NotificationTarget_value = map[string]int32{
 	"NULL":  0,
 	"EMAIL": 1,
@@ -44,9 +41,8 @@ var NotificationTarget_value = map[string]int32{
 func (x NotificationTarget) String() string {
 	return proto.EnumName(NotificationTarget_name, int32(x))
 }
-
 func (NotificationTarget) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_bd21247c5a3de394, []int{0}
+	return fileDescriptor_notifications_a0f671314a58c301, []int{0}
 }
 
 type Notification struct {
@@ -62,7 +58,7 @@ func (m *Notification) Reset()         { *m = Notification{} }
 func (m *Notification) String() string { return proto.CompactTextString(m) }
 func (*Notification) ProtoMessage()    {}
 func (*Notification) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bd21247c5a3de394, []int{0}
+	return fileDescriptor_notifications_a0f671314a58c301, []int{0}
 }
 func (m *Notification) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Notification.Unmarshal(m, b)
@@ -70,8 +66,8 @@ func (m *Notification) XXX_Unmarshal(b []byte) error {
 func (m *Notification) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Notification.Marshal(b, m, deterministic)
 }
-func (m *Notification) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Notification.Merge(m, src)
+func (dst *Notification) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Notification.Merge(dst, src)
 }
 func (m *Notification) XXX_Size() int {
 	return xxx_messageInfo_Notification.Size(m)
@@ -104,16 +100,16 @@ func (m *Notification) GetParams() map[string]string {
 }
 
 func init() {
-	proto.RegisterEnum("cloud.api.notifications.v1.NotificationTarget", NotificationTarget_name, NotificationTarget_value)
 	proto.RegisterType((*Notification)(nil), "cloud.api.notifications.v1.Notification")
 	proto.RegisterMapType((map[string]string)(nil), "cloud.api.notifications.v1.Notification.ParamsEntry")
+	proto.RegisterEnum("cloud.api.notifications.v1.NotificationTarget", NotificationTarget_name, NotificationTarget_value)
 }
 
 func init() {
-	proto.RegisterFile("notifications/v1/notifications.proto", fileDescriptor_bd21247c5a3de394)
+	proto.RegisterFile("notifications/v1/notifications.proto", fileDescriptor_notifications_a0f671314a58c301)
 }
 
-var fileDescriptor_bd21247c5a3de394 = []byte{
+var fileDescriptor_notifications_a0f671314a58c301 = []byte{
 	// 289 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0xc9, 0xcb, 0x2f, 0xc9,
 	0x4c, 0xcb, 0x4c, 0x4e, 0x2c, 0xc9, 0xcc, 0xcf, 0x2b, 0xd6, 0x2f, 0x33, 0xd4, 0x47, 0x11, 0xd0,

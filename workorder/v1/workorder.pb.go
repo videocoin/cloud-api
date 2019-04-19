@@ -3,13 +3,11 @@
 
 package v1
 
-import (
-	fmt "fmt"
-	v1 "github.com/VideoCoin/cloud-api/profiles/v1"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
+import v1 "github.com/VideoCoin/cloud-api/profiles/v1"
+import _ "github.com/gogo/protobuf/gogoproto"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -49,7 +47,6 @@ var WorkOrderStatus_name = map[int32]string{
 	8: "completed",
 	9: "ready",
 }
-
 var WorkOrderStatus_value = map[string]int32{
 	"none":             0,
 	"new":              1,
@@ -66,9 +63,8 @@ var WorkOrderStatus_value = map[string]int32{
 func (x WorkOrderStatus) String() string {
 	return proto.EnumName(WorkOrderStatus_name, int32(x))
 }
-
 func (WorkOrderStatus) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_7ef37cf3188837f0, []int{0}
+	return fileDescriptor_workorder_4c64e7cfbb6f0304, []int{0}
 }
 
 type IngestStatus int32
@@ -86,7 +82,6 @@ var IngestStatus_name = map[int32]string{
 	2: "ingest_status_inactive",
 	3: "ingest_status_error",
 }
-
 var IngestStatus_value = map[string]int32{
 	"ingest_status_none":     0,
 	"ingest_status_active":   1,
@@ -97,9 +92,8 @@ var IngestStatus_value = map[string]int32{
 func (x IngestStatus) String() string {
 	return proto.EnumName(IngestStatus_name, int32(x))
 }
-
 func (IngestStatus) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_7ef37cf3188837f0, []int{1}
+	return fileDescriptor_workorder_4c64e7cfbb6f0304, []int{1}
 }
 
 type WorkOrder struct {
@@ -130,7 +124,7 @@ func (m *WorkOrder) Reset()         { *m = WorkOrder{} }
 func (m *WorkOrder) String() string { return proto.CompactTextString(m) }
 func (*WorkOrder) ProtoMessage()    {}
 func (*WorkOrder) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7ef37cf3188837f0, []int{0}
+	return fileDescriptor_workorder_4c64e7cfbb6f0304, []int{0}
 }
 func (m *WorkOrder) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_WorkOrder.Unmarshal(m, b)
@@ -138,8 +132,8 @@ func (m *WorkOrder) XXX_Unmarshal(b []byte) error {
 func (m *WorkOrder) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_WorkOrder.Marshal(b, m, deterministic)
 }
-func (m *WorkOrder) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_WorkOrder.Merge(m, src)
+func (dst *WorkOrder) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_WorkOrder.Merge(dst, src)
 }
 func (m *WorkOrder) XXX_Size() int {
 	return xxx_messageInfo_WorkOrder.Size(m)
@@ -277,14 +271,16 @@ func (m *WorkOrder) GetIngestStatus() IngestStatus {
 }
 
 func init() {
+	proto.RegisterType((*WorkOrder)(nil), "cloud.api.workorder.v1.WorkOrder")
 	proto.RegisterEnum("cloud.api.workorder.v1.WorkOrderStatus", WorkOrderStatus_name, WorkOrderStatus_value)
 	proto.RegisterEnum("cloud.api.workorder.v1.IngestStatus", IngestStatus_name, IngestStatus_value)
-	proto.RegisterType((*WorkOrder)(nil), "cloud.api.workorder.v1.WorkOrder")
 }
 
-func init() { proto.RegisterFile("workorder/v1/workorder.proto", fileDescriptor_7ef37cf3188837f0) }
+func init() {
+	proto.RegisterFile("workorder/v1/workorder.proto", fileDescriptor_workorder_4c64e7cfbb6f0304)
+}
 
-var fileDescriptor_7ef37cf3188837f0 = []byte{
+var fileDescriptor_workorder_4c64e7cfbb6f0304 = []byte{
 	// 883 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x94, 0x4f, 0x6f, 0xdb, 0x36,
 	0x18, 0xc6, 0x2d, 0x3b, 0x71, 0x6c, 0xc6, 0x4e, 0x54, 0xc6, 0x49, 0x54, 0xb5, 0x73, 0x34, 0x77,

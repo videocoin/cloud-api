@@ -2,15 +2,14 @@ syntax = "proto3";
 
 package cloud.api.pipelines.v1;
 
+import "pipelines/v1/pipeline.proto";
+import "github.com/VideoCoin/cloud-api/rpc/health.proto";
+import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/VideoCoin/cloud-api/rpc/health.proto";
-import "github.com/VideoCoin/common/proto/profile.proto";
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
-
-import "pipelines/v1/pipeline.proto";
 
 option go_package = "v1";
 option (gogoproto.unmarshaler_all) = false;
@@ -64,7 +63,7 @@ service PipelineService {
 
 message CreatePipelineRequest {
     string name = 1 [(validate.rules).string.min_len = 1];
-    proto.ProfileId profile_id = 2;
+    cloud.api.profiles.v1.ProfileId profile_id = 2;
 }
 
 message PipelineRequest {
@@ -82,5 +81,5 @@ message UpdatePipelineRequest {
     uint64 stream_id = 5;
     string stream_address = 6;
     PipelineStatus status = 7;
-    proto.ProfileId profile_id = 8;
+    cloud.api.profiles.v1.ProfileId profile_id = 8;
 }

@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package cloud.api.pipelines.v1;
 
-import "github.com/VideoCoin/common/proto/profile.proto";
+import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
+
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
-
 
 option go_package = "v1";
 option (gogoproto.unmarshaler_all) = false;
@@ -42,8 +42,8 @@ message PipelineProfile {
     string name = 2;
     PipelineStatus status = 3;
     
-    proto.ProfileId profile_id = 4;
-    proto.JobProfile job_profile = 5;
+    cloud.api.profiles.v1.ProfileId profile_id = 4;
+    //cloud.api.workorder.v1.JobProfile job_profile = 5;
 
     google.protobuf.Timestamp created_at = 10 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp pending_at = 11 [(gogoproto.stdtime) = true];
