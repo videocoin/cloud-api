@@ -54,9 +54,11 @@ func (m *WorkOrder) Validate() error {
 
 	// no validation rules for StreamId
 
-	// no validation rules for InputUrl
+	// no validation rules for TranscodeInputUrl
 
-	// no validation rules for OutputUrl
+	// no validation rules for IngestInputUrl
+
+	// no validation rules for TranscodeOutputUrl
 
 	// no validation rules for Status
 
@@ -142,9 +144,9 @@ func (m *JobProfile) Validate() error {
 
 	// no validation rules for ProfileId
 
-	// no validation rules for InputUrl
+	// no validation rules for IngestInputUrl
 
-	// no validation rules for OutputUrl
+	// no validation rules for TranscodeOutputUrl
 
 	// no validation rules for Address
 

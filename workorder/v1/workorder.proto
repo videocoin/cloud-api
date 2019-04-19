@@ -44,8 +44,9 @@ message WorkOrder {
     string wallet_address = 5;
     string stream_address = 6;
     int64 stream_id = 7;
-    string input_url = 9;
-    string output_url =10;
+    string transcode_input_url = 8;
+    string ingest_input_url = 9;
+    string transcode_output_url =10;
     string status = 11;
     bytes chunks = 12 [ (gogoproto.moretags) = "gorm:\"chunks;type:json\"sql:\"type:json\"" ];
     int64 created_at = 13;
@@ -59,8 +60,8 @@ message JobProfile {
 	uint32 id = 1;
 	string pipeline_id = 2;
     cloud.api.profiles.v1.ProfileId profile_id = 3;
-	string input_url = 4;
-	string output_url = 5;
+	string ingest_input_url = 4;
+	string transcode_output_url = 5;
 	string address = 6;
 	int64 stream_id = 7;
 	string stream_address = 8;

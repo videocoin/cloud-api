@@ -31,8 +31,8 @@ var _ status.Status
 var _ = runtime.String
 var _ = utilities.NewDoubleArray
 
-func request_ManagerService_AddJob_0(ctx context.Context, marshaler runtime.Marshaler, client ManagerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq AddJobRequest
+func request_ManagerService_Create_0(ctx context.Context, marshaler runtime.Marshaler, client ManagerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq JobRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -43,13 +43,13 @@ func request_ManagerService_AddJob_0(ctx context.Context, marshaler runtime.Mars
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.AddJob(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.Create(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
 func request_ManagerService_StopStream_0(ctx context.Context, marshaler runtime.Marshaler, client ManagerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq StopStreamRequest
+	var protoReq StreamRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -93,7 +93,7 @@ func request_ManagerService_Health_0(ctx context.Context, marshaler runtime.Mars
 }
 
 func request_ManagerService_GetStream_0(ctx context.Context, marshaler runtime.Marshaler, client ManagerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetStreamRequest
+	var protoReq StreamRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -120,7 +120,7 @@ func request_ManagerService_GetStream_0(ctx context.Context, marshaler runtime.M
 }
 
 func request_ManagerService_UpdateStreamStatus_0(ctx context.Context, marshaler runtime.Marshaler, client ManagerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UpdateStreamStatusRequest
+	var protoReq StreamStatusRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -229,7 +229,7 @@ func request_ManagerService_UpdateContractAddr_0(ctx context.Context, marshaler 
 }
 
 func request_ManagerService_AddProfile_0(ctx context.Context, marshaler runtime.Marshaler, client ManagerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq AddProfileRequest
+	var protoReq UpdateProfileRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -331,7 +331,7 @@ func request_ManagerService_GetProfiles_0(ctx context.Context, marshaler runtime
 }
 
 func request_ManagerService_GetProfile_0(ctx context.Context, marshaler runtime.Marshaler, client ManagerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetProfileRequest
+	var protoReq ProfileRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -378,7 +378,7 @@ func request_ManagerService_RegisterTranscoder_0(ctx context.Context, marshaler 
 }
 
 func request_ManagerService_UpdateTranscoderStatus_0(ctx context.Context, marshaler runtime.Marshaler, client ManagerServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UpdateTranscoderStatusRequest
+	var protoReq TranscoderStatusRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -461,7 +461,7 @@ func RegisterManagerServiceHandler(ctx context.Context, mux *runtime.ServeMux, c
 // "ManagerServiceClient" to call the correct interceptors.
 func RegisterManagerServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client ManagerServiceClient) error {
 
-	mux.Handle("POST", pattern_ManagerService_AddJob_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_ManagerService_Create_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -470,14 +470,14 @@ func RegisterManagerServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ManagerService_AddJob_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ManagerService_Create_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_ManagerService_AddJob_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_ManagerService_Create_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -745,7 +745,7 @@ func RegisterManagerServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 }
 
 var (
-	pattern_ManagerService_AddJob_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "job"}, ""))
+	pattern_ManagerService_Create_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "job"}, ""))
 
 	pattern_ManagerService_StopStream_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v1", "stream", "stop", "stream_id"}, ""))
 
@@ -775,7 +775,7 @@ var (
 )
 
 var (
-	forward_ManagerService_AddJob_0 = runtime.ForwardResponseMessage
+	forward_ManagerService_Create_0 = runtime.ForwardResponseMessage
 
 	forward_ManagerService_StopStream_0 = runtime.ForwardResponseMessage
 
