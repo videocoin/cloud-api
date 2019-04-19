@@ -42,11 +42,15 @@ func (m *WorkOrder) Validate() error {
 
 	// no validation rules for Id
 
+	// no validation rules for PipelineId
+
 	// no validation rules for TranscoderId
 
-	// no validation rules for ContractAddress
+	// no validation rules for ProfileId
 
 	// no validation rules for WalletAddress
+
+	// no validation rules for StreamAddress
 
 	// no validation rules for StreamId
 
@@ -63,14 +67,6 @@ func (m *WorkOrder) Validate() error {
 	// no validation rules for UpdatedAt
 
 	// no validation rules for Worker
-
-	// no validation rules for MaxWork
-
-	// no validation rules for MinWork
-
-	// no validation rules for ActualWork
-
-	// no validation rules for ProfileId
 
 	// no validation rules for Refunded
 
@@ -132,3 +128,87 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = WorkOrderValidationError{}
+
+// Validate checks the field values on JobProfile with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *JobProfile) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Id
+
+	// no validation rules for PipelineId
+
+	// no validation rules for ProfileId
+
+	// no validation rules for InputUrl
+
+	// no validation rules for OutputUrl
+
+	// no validation rules for Address
+
+	// no validation rules for StreamId
+
+	// no validation rules for StreamAddress
+
+	// no validation rules for Status
+
+	// no validation rules for IngestStatus
+
+	return nil
+}
+
+// JobProfileValidationError is the validation error returned by
+// JobProfile.Validate if the designated constraints aren't met.
+type JobProfileValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e JobProfileValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e JobProfileValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e JobProfileValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e JobProfileValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e JobProfileValidationError) ErrorName() string { return "JobProfileValidationError" }
+
+// Error satisfies the builtin error interface
+func (e JobProfileValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sJobProfile.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = JobProfileValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = JobProfileValidationError{}

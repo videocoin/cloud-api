@@ -38,9 +38,11 @@ enum IngestStatus {
 
 message WorkOrder {
     uint32 id = 1;
-    string transcoder_id = 2;
-    string contract_address = 3;
-    string wallet_address = 4;
+    string pipeline_id = 2;
+    string transcoder_id = 3;
+    cloud.api.profiles.v1.ProfileId profile_id = 4;
+    string wallet_address = 5;
+    string stream_address = 6;
     int64 stream_id = 7;
     string input_url = 9;
     string output_url =10;
@@ -49,9 +51,19 @@ message WorkOrder {
     int64 created_at = 13;
     int64 updated_at = 14;
     bytes worker = 15 [ (gogoproto.moretags) = "gorm:\"worker;type:binary(32);DEFAULT:NULL\"sql:\"type:binary(32);DEFAULT:null\"" ];
-    cloud.api.profiles.v1.ProfileId profile_id = 19;
     bool refunded = 20;
     IngestStatus ingest_status = 21;
 }
 
-
+message JobProfile {
+	uint32 id = 1;
+	string pipeline_id = 2;
+    cloud.api.profiles.v1.ProfileId profile_id = 3;
+	string input_url = 4;
+	string output_url = 5;
+	string address = 6;
+	int64 stream_id = 7;
+	string stream_address = 8;
+	string status = 9;
+	IngestStatus ingest_status = 10;
+}
