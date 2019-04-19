@@ -7,7 +7,7 @@ import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "github.com/VideoCoin/cloud-api/rpc/health.proto";
-import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
+import "github.com/VideoCoin/common/proto/profile.proto";
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 
 import "pipelines/v1/pipeline.proto";
@@ -64,6 +64,7 @@ service PipelineService {
 
 message CreatePipelineRequest {
     string name = 1 [(validate.rules).string.min_len = 1];
+    proto.ProfileId profile_id = 2;
 }
 
 message PipelineRequest {
@@ -76,10 +77,10 @@ message ListResponse {
 
 message UpdatePipelineRequest {
     string id = 1 [(validate.rules).string.len = 36];
-    string user_id = 2;
+    string user_id = 2 [(validate.rules).string.len = 36];
     string name = 4;
     uint64 stream_id = 5;
     string stream_address = 6;
     PipelineStatus status = 7;
-    cloud.api.profiles.v1.ProfileId profile_id = 8;
+    proto.ProfileId profile_id = 8;
 }

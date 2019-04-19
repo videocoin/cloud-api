@@ -11,7 +11,7 @@ protoc: protoc-rpc \
 	protoc-v1-verifier \
 	protoc-v1-workorder \
 	protoc-v1-transcoder \
-	protoc-v1-tmanager
+	protoc-v1-manager
 
 
 protoc-rpc:

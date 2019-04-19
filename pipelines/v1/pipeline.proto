@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package cloud.api.pipelines.v1;
 
-import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
+import "github.com/VideoCoin/common/proto/profile.proto";
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
@@ -26,23 +26,28 @@ enum PipelineStatus {
 
 message Pipeline {
     string id = 1 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
-    string user_id = 2 [(gogoproto.moretags) = "gorm:\"unique_index\""];
-    string name = 3 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
-    
-    PipelineStatus status = 4 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
-    
-    google.protobuf.Timestamp created_at = 5 [(gogoproto.stdtime) = true];
+    string name = 2 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
+    string user_id = 3 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36)\""];
 
-    cloud.api.profiles.v1.ProfileId profile_id = 10;
-    uint64 stream_id = 11;
-    string stream_address = 12 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
+    PipelineStatus status = 5 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
+    
+    google.protobuf.Timestamp created_at = 10 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp pending_at = 11 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp running_at = 12 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp stopped_at = 13 [(gogoproto.stdtime) = true];
 }
 
 message PipelineProfile {
     string id = 1;
     string name = 2;
     PipelineStatus status = 3;
-    cloud.api.profiles.v1.ProfileId profile_id = 4;
+    
+    proto.ProfileId profile_id = 4;
+    proto.JobProfile job_profile = 5;
 
-    google.protobuf.Timestamp created_at = 5 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 10 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp pending_at = 11 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp running_at = 12 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp stopped_at = 13 [(gogoproto.stdtime) = true];
 }
+
