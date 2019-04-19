@@ -36,9 +36,6 @@ enum IngestStatus {
     ingest_status_error = 3 [ (gogoproto.enumvalue_customname) = "IngestStatusError" ];
 }
 
-
-
-
 message WorkOrder {
     uint32 id = 1;
     string transcoder_id = 2;
@@ -52,11 +49,9 @@ message WorkOrder {
     int64 created_at = 13;
     int64 updated_at = 14;
     bytes worker = 15 [ (gogoproto.moretags) = "gorm:\"worker;type:binary(32);DEFAULT:NULL\"sql:\"type:binary(32);DEFAULT:null\"" ];
-    float max_work = 16;
-    float min_work = 17;
-    float actual_work = 18;
     cloud.api.profiles.v1.ProfileId profile_id = 19;
     bool refunded = 20;
     IngestStatus ingest_status = 21;
 }
+
 
