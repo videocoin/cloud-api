@@ -42,7 +42,7 @@ func (x NotificationTarget) String() string {
 	return proto.EnumName(NotificationTarget_name, int32(x))
 }
 func (NotificationTarget) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_notifications_a0f671314a58c301, []int{0}
+	return fileDescriptor_notifications_975e5fc6811581cd, []int{0}
 }
 
 type Notification struct {
@@ -58,7 +58,7 @@ func (m *Notification) Reset()         { *m = Notification{} }
 func (m *Notification) String() string { return proto.CompactTextString(m) }
 func (*Notification) ProtoMessage()    {}
 func (*Notification) Descriptor() ([]byte, []int) {
-	return fileDescriptor_notifications_a0f671314a58c301, []int{0}
+	return fileDescriptor_notifications_975e5fc6811581cd, []int{0}
 }
 func (m *Notification) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Notification.Unmarshal(m, b)
@@ -106,10 +106,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("notifications/v1/notifications.proto", fileDescriptor_notifications_a0f671314a58c301)
+	proto.RegisterFile("notifications/v1/notifications.proto", fileDescriptor_notifications_975e5fc6811581cd)
 }
 
-var fileDescriptor_notifications_a0f671314a58c301 = []byte{
+var fileDescriptor_notifications_975e5fc6811581cd = []byte{
 	// 289 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0xc9, 0xcb, 0x2f, 0xc9,
 	0x4c, 0xcb, 0x4c, 0x4e, 0x2c, 0xc9, 0xcc, 0xcf, 0x2b, 0xd6, 0x2f, 0x33, 0xd4, 0x47, 0x11, 0xd0,

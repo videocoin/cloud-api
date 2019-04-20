@@ -18,10 +18,13 @@ enum PipelineStatus {
     option (gogoproto.enum_customname) = "PipelineStatus";
 
     IDLE = 0 [(gogoproto.enumvalue_customname) = "PipelineStatusIdle"];
-    PENDING = 1 [(gogoproto.enumvalue_customname) = "PipelineStatusPending"];
-    RUNNING = 2 [(gogoproto.enumvalue_customname) = "PipelineStatusRunning"];
-    FAILED = 3 [(gogoproto.enumvalue_customname) = "PipelineStatusFailed"];
-    COMPLETED = 4 [(gogoproto.enumvalue_customname) = "PipelineStatusCompleted"];
+    PENDING_REQUEST = 1 [(gogoproto.enumvalue_customname) = "PipelineStatusRequestPending"];
+    PENDING_APPROVE = 2 [(gogoproto.enumvalue_customname) = "PipelineStatusApprovePending"];
+    PENDING_CREATE = 3 [(gogoproto.enumvalue_customname) = "PipelineStatusCreatePending"];
+    PENDING_JOB = 4 [(gogoproto.enumvalue_customname) = "PipelineStatusJobPending"];
+    RUNNING = 5 [(gogoproto.enumvalue_customname) = "PipelineStatusRunning"];
+    FAILED = 6 [(gogoproto.enumvalue_customname) = "PipelineStatusFailed"];
+    COMPLETED = 7 [(gogoproto.enumvalue_customname) = "PipelineStatusCompleted"];
 }
 
 message Pipeline {
@@ -29,6 +32,7 @@ message Pipeline {
     string name = 2 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
     string user_id = 3 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36)\""];
 
+    cloud.api.profiles.v1.ProfileId profile_id = 4;
     PipelineStatus status = 5 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
     
     google.protobuf.Timestamp created_at = 10 [(gogoproto.stdtime) = true];

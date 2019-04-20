@@ -48,7 +48,7 @@ func (x TranscoderStatus) String() string {
 	return proto.EnumName(TranscoderStatus_name, int32(x))
 }
 func (TranscoderStatus) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_transcoder_403bea862d72b8de, []int{0}
+	return fileDescriptor_transcoder_cbdfb1b182704799, []int{0}
 }
 
 type Transcoder struct {
@@ -67,7 +67,7 @@ func (m *Transcoder) Reset()         { *m = Transcoder{} }
 func (m *Transcoder) String() string { return proto.CompactTextString(m) }
 func (*Transcoder) ProtoMessage()    {}
 func (*Transcoder) Descriptor() ([]byte, []int) {
-	return fileDescriptor_transcoder_403bea862d72b8de, []int{0}
+	return fileDescriptor_transcoder_cbdfb1b182704799, []int{0}
 }
 func (m *Transcoder) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Transcoder.Unmarshal(m, b)
@@ -141,7 +141,7 @@ func (m *Assignment) Reset()         { *m = Assignment{} }
 func (m *Assignment) String() string { return proto.CompactTextString(m) }
 func (*Assignment) ProtoMessage()    {}
 func (*Assignment) Descriptor() ([]byte, []int) {
-	return fileDescriptor_transcoder_403bea862d72b8de, []int{1}
+	return fileDescriptor_transcoder_cbdfb1b182704799, []int{1}
 }
 func (m *Assignment) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Assignment.Unmarshal(m, b)
@@ -182,10 +182,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("transcoder/v1/transcoder.proto", fileDescriptor_transcoder_403bea862d72b8de)
+	proto.RegisterFile("transcoder/v1/transcoder.proto", fileDescriptor_transcoder_cbdfb1b182704799)
 }
 
-var fileDescriptor_transcoder_403bea862d72b8de = []byte{
+var fileDescriptor_transcoder_cbdfb1b182704799 = []byte{
 	// 518 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x52, 0xcb, 0x6e, 0xd3, 0x40,
 	0x14, 0xf5, 0xb8, 0x79, 0x90, 0x49, 0x85, 0xac, 0x51, 0x21, 0xae, 0x2b, 0x2c, 0x37, 0x62, 0x61,

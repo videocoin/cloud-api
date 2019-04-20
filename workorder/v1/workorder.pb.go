@@ -64,7 +64,7 @@ func (x WorkOrderStatus) String() string {
 	return proto.EnumName(WorkOrderStatus_name, int32(x))
 }
 func (WorkOrderStatus) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_workorder_4c64e7cfbb6f0304, []int{0}
+	return fileDescriptor_workorder_8914c9e1c8e06ed9, []int{0}
 }
 
 type IngestStatus int32
@@ -93,7 +93,7 @@ func (x IngestStatus) String() string {
 	return proto.EnumName(IngestStatus_name, int32(x))
 }
 func (IngestStatus) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_workorder_4c64e7cfbb6f0304, []int{1}
+	return fileDescriptor_workorder_8914c9e1c8e06ed9, []int{1}
 }
 
 type WorkOrder struct {
@@ -124,7 +124,7 @@ func (m *WorkOrder) Reset()         { *m = WorkOrder{} }
 func (m *WorkOrder) String() string { return proto.CompactTextString(m) }
 func (*WorkOrder) ProtoMessage()    {}
 func (*WorkOrder) Descriptor() ([]byte, []int) {
-	return fileDescriptor_workorder_4c64e7cfbb6f0304, []int{0}
+	return fileDescriptor_workorder_8914c9e1c8e06ed9, []int{0}
 }
 func (m *WorkOrder) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_WorkOrder.Unmarshal(m, b)
@@ -277,10 +277,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("workorder/v1/workorder.proto", fileDescriptor_workorder_4c64e7cfbb6f0304)
+	proto.RegisterFile("workorder/v1/workorder.proto", fileDescriptor_workorder_8914c9e1c8e06ed9)
 }
 
-var fileDescriptor_workorder_4c64e7cfbb6f0304 = []byte{
+var fileDescriptor_workorder_8914c9e1c8e06ed9 = []byte{
 	// 883 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x94, 0x4f, 0x6f, 0xdb, 0x36,
 	0x18, 0xc6, 0x2d, 0x3b, 0x71, 0x6c, 0xc6, 0x4e, 0x54, 0xc6, 0x49, 0x54, 0xb5, 0x73, 0x34, 0x77,

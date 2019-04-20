@@ -32,7 +32,7 @@ func (m *ValidationError) Reset()         { *m = ValidationError{} }
 func (m *ValidationError) String() string { return proto.CompactTextString(m) }
 func (*ValidationError) ProtoMessage()    {}
 func (*ValidationError) Descriptor() ([]byte, []int) {
-	return fileDescriptor_error_6c4e8b7a70301c3b, []int{0}
+	return fileDescriptor_error_1cac7807b0bc3269, []int{0}
 }
 func (m *ValidationError) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -86,7 +86,7 @@ func (m *MultiValidationError) Reset()         { *m = MultiValidationError{} }
 func (m *MultiValidationError) String() string { return proto.CompactTextString(m) }
 func (*MultiValidationError) ProtoMessage()    {}
 func (*MultiValidationError) Descriptor() ([]byte, []int) {
-	return fileDescriptor_error_6c4e8b7a70301c3b, []int{1}
+	return fileDescriptor_error_1cac7807b0bc3269, []int{1}
 }
 func (m *MultiValidationError) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -548,9 +548,9 @@ var (
 	ErrIntOverflowError   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("rpc/error.proto", fileDescriptor_error_6c4e8b7a70301c3b) }
+func init() { proto.RegisterFile("rpc/error.proto", fileDescriptor_error_1cac7807b0bc3269) }
 
-var fileDescriptor_error_6c4e8b7a70301c3b = []byte{
+var fileDescriptor_error_1cac7807b0bc3269 = []byte{
 	// 171 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x2f, 0x2a, 0x48, 0xd6,
 	0x4f, 0x2d, 0x2a, 0xca, 0x2f, 0xd2, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4d, 0xce, 0xc9,

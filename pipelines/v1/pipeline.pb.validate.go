@@ -58,6 +58,8 @@ func (m *Pipeline) Validate() error {
 
 	}
 
+	// no validation rules for ProfileId
+
 	// no validation rules for Status
 
 	{

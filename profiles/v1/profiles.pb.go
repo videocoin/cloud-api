@@ -46,7 +46,7 @@ func (x ProfileId) String() string {
 	return proto.EnumName(ProfileId_name, int32(x))
 }
 func (ProfileId) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_profiles_0d6282fb13a9fe95, []int{0}
+	return fileDescriptor_profiles_688637b26c70a42d, []int{0}
 }
 
 type Profiles struct {
@@ -60,7 +60,7 @@ func (m *Profiles) Reset()         { *m = Profiles{} }
 func (m *Profiles) String() string { return proto.CompactTextString(m) }
 func (*Profiles) ProtoMessage()    {}
 func (*Profiles) Descriptor() ([]byte, []int) {
-	return fileDescriptor_profiles_0d6282fb13a9fe95, []int{0}
+	return fileDescriptor_profiles_688637b26c70a42d, []int{0}
 }
 func (m *Profiles) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Profiles.Unmarshal(m, b)
@@ -102,7 +102,7 @@ func (m *Profile) Reset()         { *m = Profile{} }
 func (m *Profile) String() string { return proto.CompactTextString(m) }
 func (*Profile) ProtoMessage()    {}
 func (*Profile) Descriptor() ([]byte, []int) {
-	return fileDescriptor_profiles_0d6282fb13a9fe95, []int{1}
+	return fileDescriptor_profiles_688637b26c70a42d, []int{1}
 }
 func (m *Profile) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Profile.Unmarshal(m, b)
@@ -164,10 +164,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("profiles/v1/profiles.proto", fileDescriptor_profiles_0d6282fb13a9fe95)
+	proto.RegisterFile("profiles/v1/profiles.proto", fileDescriptor_profiles_688637b26c70a42d)
 }
 
-var fileDescriptor_profiles_0d6282fb13a9fe95 = []byte{
+var fileDescriptor_profiles_688637b26c70a42d = []byte{
 	// 372 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x91, 0x41, 0x4e, 0xf2, 0x40,
 	0x18, 0x86, 0x3b, 0x2d, 0xfc, 0xc0, 0xf0, 0x03, 0x65, 0x82, 0x49, 0xd3, 0x45, 0x33, 0x21, 0xc6,

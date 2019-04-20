@@ -39,7 +39,7 @@ func (m *RequestStreamIdRequest) Reset()         { *m = RequestStreamIdRequest{}
 func (m *RequestStreamIdRequest) String() string { return proto.CompactTextString(m) }
 func (*RequestStreamIdRequest) ProtoMessage()    {}
 func (*RequestStreamIdRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_emitter_service_402c8b228e29c013, []int{0}
+	return fileDescriptor_emitter_service_a8abaf95098abe12, []int{0}
 }
 func (m *RequestStreamIdRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RequestStreamIdRequest.Unmarshal(m, b)
@@ -78,7 +78,7 @@ func (m *RequestStreamIdResponse) Reset()         { *m = RequestStreamIdResponse
 func (m *RequestStreamIdResponse) String() string { return proto.CompactTextString(m) }
 func (*RequestStreamIdResponse) ProtoMessage()    {}
 func (*RequestStreamIdResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_emitter_service_402c8b228e29c013, []int{1}
+	return fileDescriptor_emitter_service_a8abaf95098abe12, []int{1}
 }
 func (m *RequestStreamIdResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RequestStreamIdResponse.Unmarshal(m, b)
@@ -125,7 +125,7 @@ func (m *CreateStreamAddressRequest) Reset()         { *m = CreateStreamAddressR
 func (m *CreateStreamAddressRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateStreamAddressRequest) ProtoMessage()    {}
 func (*CreateStreamAddressRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_emitter_service_402c8b228e29c013, []int{2}
+	return fileDescriptor_emitter_service_a8abaf95098abe12, []int{2}
 }
 func (m *CreateStreamAddressRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateStreamAddressRequest.Unmarshal(m, b)
@@ -177,7 +177,7 @@ func (m *StreamAddress) Reset()         { *m = StreamAddress{} }
 func (m *StreamAddress) String() string { return proto.CompactTextString(m) }
 func (*StreamAddress) ProtoMessage()    {}
 func (*StreamAddress) Descriptor() ([]byte, []int) {
-	return fileDescriptor_emitter_service_402c8b228e29c013, []int{3}
+	return fileDescriptor_emitter_service_a8abaf95098abe12, []int{3}
 }
 func (m *StreamAddress) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StreamAddress.Unmarshal(m, b)
@@ -350,10 +350,10 @@ var _EmitterService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("emitter/v1/emitter_service.proto", fileDescriptor_emitter_service_402c8b228e29c013)
+	proto.RegisterFile("emitter/v1/emitter_service.proto", fileDescriptor_emitter_service_a8abaf95098abe12)
 }
 
-var fileDescriptor_emitter_service_402c8b228e29c013 = []byte{
+var fileDescriptor_emitter_service_a8abaf95098abe12 = []byte{
 	// 468 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x52, 0xd1, 0x8a, 0xd3, 0x40,
 	0x14, 0xcd, 0x46, 0xe9, 0xee, 0x8e, 0xec, 0x2a, 0xe3, 0xb2, 0x5b, 0x52, 0xa9, 0x4b, 0x40, 0xf0,

@@ -39,7 +39,7 @@ func (m *AccountRequest) Reset()         { *m = AccountRequest{} }
 func (m *AccountRequest) String() string { return proto.CompactTextString(m) }
 func (*AccountRequest) ProtoMessage()    {}
 func (*AccountRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_account_service_220c8ec827d8df4c, []int{0}
+	return fileDescriptor_account_service_aa8e1b0b69b5bdae, []int{0}
 }
 func (m *AccountRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AccountRequest.Unmarshal(m, b)
@@ -77,7 +77,7 @@ func (m *Address) Reset()         { *m = Address{} }
 func (m *Address) String() string { return proto.CompactTextString(m) }
 func (*Address) ProtoMessage()    {}
 func (*Address) Descriptor() ([]byte, []int) {
-	return fileDescriptor_account_service_220c8ec827d8df4c, []int{1}
+	return fileDescriptor_account_service_aa8e1b0b69b5bdae, []int{1}
 }
 func (m *Address) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Address.Unmarshal(m, b)
@@ -115,7 +115,7 @@ func (m *ListResponse) Reset()         { *m = ListResponse{} }
 func (m *ListResponse) String() string { return proto.CompactTextString(m) }
 func (*ListResponse) ProtoMessage()    {}
 func (*ListResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_account_service_220c8ec827d8df4c, []int{2}
+	return fileDescriptor_account_service_aa8e1b0b69b5bdae, []int{2}
 }
 func (m *ListResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListResponse.Unmarshal(m, b)
@@ -419,10 +419,10 @@ var _AccountService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("accounts/v1/account_service.proto", fileDescriptor_account_service_220c8ec827d8df4c)
+	proto.RegisterFile("accounts/v1/account_service.proto", fileDescriptor_account_service_aa8e1b0b69b5bdae)
 }
 
-var fileDescriptor_account_service_220c8ec827d8df4c = []byte{
+var fileDescriptor_account_service_aa8e1b0b69b5bdae = []byte{
 	// 501 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x51, 0x41, 0x6b, 0x13, 0x41,
 	0x14, 0xde, 0x36, 0x31, 0x5b, 0xa7, 0x45, 0xca, 0x50, 0xa4, 0xa6, 0x1a, 0xeb, 0xa2, 0x12, 0x84,

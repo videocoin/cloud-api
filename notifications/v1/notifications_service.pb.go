@@ -100,10 +100,10 @@ var _NotificationService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("notifications/v1/notifications_service.proto", fileDescriptor_notifications_service_af3af69f9f565372)
+	proto.RegisterFile("notifications/v1/notifications_service.proto", fileDescriptor_notifications_service_54c97df75e7cfdc1)
 }
 
-var fileDescriptor_notifications_service_af3af69f9f565372 = []byte{
+var fileDescriptor_notifications_service_54c97df75e7cfdc1 = []byte{
 	// 260 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xd2, 0xc9, 0xcb, 0x2f, 0xc9,
 	0x4c, 0xcb, 0x4c, 0x4e, 0x2c, 0xc9, 0xcc, 0xcf, 0x2b, 0xd6, 0x2f, 0x33, 0xd4, 0x47, 0x11, 0x88,

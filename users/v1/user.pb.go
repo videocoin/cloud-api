@@ -41,7 +41,7 @@ func (m *User) Reset()         { *m = User{} }
 func (m *User) String() string { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()    {}
 func (*User) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_58d52cfa329568ab, []int{0}
+	return fileDescriptor_user_f3953cc30eecf0ec, []int{0}
 }
 func (m *User) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_User.Unmarshal(m, b)
@@ -117,7 +117,7 @@ func (m *UserProfile) Reset()         { *m = UserProfile{} }
 func (m *UserProfile) String() string { return proto.CompactTextString(m) }
 func (*UserProfile) ProtoMessage()    {}
 func (*UserProfile) Descriptor() ([]byte, []int) {
-	return fileDescriptor_user_58d52cfa329568ab, []int{1}
+	return fileDescriptor_user_f3953cc30eecf0ec, []int{1}
 }
 func (m *UserProfile) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UserProfile.Unmarshal(m, b)
@@ -170,9 +170,9 @@ func init() {
 	proto.RegisterType((*UserProfile)(nil), "cloud.api.users.v1.UserProfile")
 }
 
-func init() { proto.RegisterFile("users/v1/user.proto", fileDescriptor_user_58d52cfa329568ab) }
+func init() { proto.RegisterFile("users/v1/user.proto", fileDescriptor_user_f3953cc30eecf0ec) }
 
-var fileDescriptor_user_58d52cfa329568ab = []byte{
+var fileDescriptor_user_f3953cc30eecf0ec = []byte{
 	// 500 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x92, 0x31, 0x6f, 0xd3, 0x40,
 	0x14, 0xc7, 0x63, 0x3b, 0x2e, 0xed, 0x45, 0xaa, 0xd0, 0xb5, 0x83, 0x95, 0xc1, 0x8e, 0x4c, 0x91,

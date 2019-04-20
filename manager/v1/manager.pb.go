@@ -43,7 +43,7 @@ func (m *AddProfileRequest) Reset()         { *m = AddProfileRequest{} }
 func (m *AddProfileRequest) String() string { return proto.CompactTextString(m) }
 func (*AddProfileRequest) ProtoMessage()    {}
 func (*AddProfileRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{0}
+	return fileDescriptor_manager_1c23533cb980e591, []int{0}
 }
 func (m *AddProfileRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AddProfileRequest.Unmarshal(m, b)
@@ -88,7 +88,7 @@ func (m *Heartbeat) Reset()         { *m = Heartbeat{} }
 func (m *Heartbeat) String() string { return proto.CompactTextString(m) }
 func (*Heartbeat) ProtoMessage()    {}
 func (*Heartbeat) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{1}
+	return fileDescriptor_manager_1c23533cb980e591, []int{1}
 }
 func (m *Heartbeat) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Heartbeat.Unmarshal(m, b)
@@ -126,7 +126,7 @@ func (m *GetProfileRequest) Reset()         { *m = GetProfileRequest{} }
 func (m *GetProfileRequest) String() string { return proto.CompactTextString(m) }
 func (*GetProfileRequest) ProtoMessage()    {}
 func (*GetProfileRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{2}
+	return fileDescriptor_manager_1c23533cb980e591, []int{2}
 }
 func (m *GetProfileRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetProfileRequest.Unmarshal(m, b)
@@ -164,7 +164,7 @@ func (m *CheckBalanceRequest) Reset()         { *m = CheckBalanceRequest{} }
 func (m *CheckBalanceRequest) String() string { return proto.CompactTextString(m) }
 func (*CheckBalanceRequest) ProtoMessage()    {}
 func (*CheckBalanceRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{3}
+	return fileDescriptor_manager_1c23533cb980e591, []int{3}
 }
 func (m *CheckBalanceRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CheckBalanceRequest.Unmarshal(m, b)
@@ -202,7 +202,7 @@ func (m *CheckBalanceResponse) Reset()         { *m = CheckBalanceResponse{} }
 func (m *CheckBalanceResponse) String() string { return proto.CompactTextString(m) }
 func (*CheckBalanceResponse) ProtoMessage()    {}
 func (*CheckBalanceResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{4}
+	return fileDescriptor_manager_1c23533cb980e591, []int{4}
 }
 func (m *CheckBalanceResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CheckBalanceResponse.Unmarshal(m, b)
@@ -241,7 +241,7 @@ func (m *ContractAddrRequest) Reset()         { *m = ContractAddrRequest{} }
 func (m *ContractAddrRequest) String() string { return proto.CompactTextString(m) }
 func (*ContractAddrRequest) ProtoMessage()    {}
 func (*ContractAddrRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{5}
+	return fileDescriptor_manager_1c23533cb980e591, []int{5}
 }
 func (m *ContractAddrRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ContractAddrRequest.Unmarshal(m, b)
@@ -290,7 +290,7 @@ func (m *VerifyChunkRequest) Reset()         { *m = VerifyChunkRequest{} }
 func (m *VerifyChunkRequest) String() string { return proto.CompactTextString(m) }
 func (*VerifyChunkRequest) ProtoMessage()    {}
 func (*VerifyChunkRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{6}
+	return fileDescriptor_manager_1c23533cb980e591, []int{6}
 }
 func (m *VerifyChunkRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_VerifyChunkRequest.Unmarshal(m, b)
@@ -359,7 +359,7 @@ func (m *ChunkCreatedRequest) Reset()         { *m = ChunkCreatedRequest{} }
 func (m *ChunkCreatedRequest) String() string { return proto.CompactTextString(m) }
 func (*ChunkCreatedRequest) ProtoMessage()    {}
 func (*ChunkCreatedRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{7}
+	return fileDescriptor_manager_1c23533cb980e591, []int{7}
 }
 func (m *ChunkCreatedRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ChunkCreatedRequest.Unmarshal(m, b)
@@ -420,7 +420,7 @@ func (m *StopStreamRequest) Reset()         { *m = StopStreamRequest{} }
 func (m *StopStreamRequest) String() string { return proto.CompactTextString(m) }
 func (*StopStreamRequest) ProtoMessage()    {}
 func (*StopStreamRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{8}
+	return fileDescriptor_manager_1c23533cb980e591, []int{8}
 }
 func (m *StopStreamRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StopStreamRequest.Unmarshal(m, b)
@@ -473,7 +473,7 @@ func (m *UpdateTranscoderStatusRequest) Reset()         { *m = UpdateTranscoderS
 func (m *UpdateTranscoderStatusRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateTranscoderStatusRequest) ProtoMessage()    {}
 func (*UpdateTranscoderStatusRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{9}
+	return fileDescriptor_manager_1c23533cb980e591, []int{9}
 }
 func (m *UpdateTranscoderStatusRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateTranscoderStatusRequest.Unmarshal(m, b)
@@ -522,7 +522,7 @@ func (m *UpdateStreamStatusRequest) Reset()         { *m = UpdateStreamStatusReq
 func (m *UpdateStreamStatusRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateStreamStatusRequest) ProtoMessage()    {}
 func (*UpdateStreamStatusRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{10}
+	return fileDescriptor_manager_1c23533cb980e591, []int{10}
 }
 func (m *UpdateStreamStatusRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdateStreamStatusRequest.Unmarshal(m, b)
@@ -588,7 +588,7 @@ func (m *AddJobResponse) Reset()         { *m = AddJobResponse{} }
 func (m *AddJobResponse) String() string { return proto.CompactTextString(m) }
 func (*AddJobResponse) ProtoMessage()    {}
 func (*AddJobResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{11}
+	return fileDescriptor_manager_1c23533cb980e591, []int{11}
 }
 func (m *AddJobResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AddJobResponse.Unmarshal(m, b)
@@ -628,7 +628,7 @@ func (m *AddJobRequest) Reset()         { *m = AddJobRequest{} }
 func (m *AddJobRequest) String() string { return proto.CompactTextString(m) }
 func (*AddJobRequest) ProtoMessage()    {}
 func (*AddJobRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{12}
+	return fileDescriptor_manager_1c23533cb980e591, []int{12}
 }
 func (m *AddJobRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AddJobRequest.Unmarshal(m, b)
@@ -679,7 +679,7 @@ func (m *GetJobRequest) Reset()         { *m = GetJobRequest{} }
 func (m *GetJobRequest) String() string { return proto.CompactTextString(m) }
 func (*GetJobRequest) ProtoMessage()    {}
 func (*GetJobRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{13}
+	return fileDescriptor_manager_1c23533cb980e591, []int{13}
 }
 func (m *GetJobRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetJobRequest.Unmarshal(m, b)
@@ -710,7 +710,7 @@ func (m *GetStreamRequest) Reset()         { *m = GetStreamRequest{} }
 func (m *GetStreamRequest) String() string { return proto.CompactTextString(m) }
 func (*GetStreamRequest) ProtoMessage()    {}
 func (*GetStreamRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_ce03e50a8e405f52, []int{14}
+	return fileDescriptor_manager_1c23533cb980e591, []int{14}
 }
 func (m *GetStreamRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetStreamRequest.Unmarshal(m, b)
@@ -1256,9 +1256,9 @@ var _ManagerService_serviceDesc = grpc.ServiceDesc{
 	Metadata: "manager/v1/manager.proto",
 }
 
-func init() { proto.RegisterFile("manager/v1/manager.proto", fileDescriptor_manager_ce03e50a8e405f52) }
+func init() { proto.RegisterFile("manager/v1/manager.proto", fileDescriptor_manager_1c23533cb980e591) }
 
-var fileDescriptor_manager_ce03e50a8e405f52 = []byte{
+var fileDescriptor_manager_1c23533cb980e591 = []byte{
 	// 1284 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x57, 0xcf, 0x6f, 0x1b, 0xc5,
 	0x17, 0xcf, 0xda, 0x49, 0xbe, 0xf1, 0x6b, 0xec, 0xba, 0x93, 0x7e, 0x23, 0xd7, 0x29, 0xae, 0x99,

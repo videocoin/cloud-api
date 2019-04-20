@@ -45,7 +45,7 @@ func (m *VerifyRequest) Reset()         { *m = VerifyRequest{} }
 func (m *VerifyRequest) String() string { return proto.CompactTextString(m) }
 func (*VerifyRequest) ProtoMessage()    {}
 func (*VerifyRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_verifier_0fdc44a365938234, []int{0}
+	return fileDescriptor_verifier_7caa49ba8de7bc22, []int{0}
 }
 func (m *VerifyRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_VerifyRequest.Unmarshal(m, b)
@@ -224,10 +224,10 @@ var _VerifierService_serviceDesc = grpc.ServiceDesc{
 }
 
 func init() {
-	proto.RegisterFile("verifier/v1/verifier.proto", fileDescriptor_verifier_0fdc44a365938234)
+	proto.RegisterFile("verifier/v1/verifier.proto", fileDescriptor_verifier_7caa49ba8de7bc22)
 }
 
-var fileDescriptor_verifier_0fdc44a365938234 = []byte{
+var fileDescriptor_verifier_7caa49ba8de7bc22 = []byte{
 	// 467 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x52, 0xcd, 0x6e, 0xd3, 0x4e,
 	0x10, 0x8f, 0xd3, 0xfe, 0x9d, 0x74, 0xa5, 0xf6, 0x5f, 0x2d, 0x5f, 0xae, 0x83, 0xa2, 0x28, 0xe2,
