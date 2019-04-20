@@ -287,6 +287,8 @@ func (m *UpdatePipelineRequest) Validate() error {
 
 	// no validation rules for Name
 
+	// no validation rules for ClientAddress
+
 	// no validation rules for StreamId
 
 	// no validation rules for StreamAddress

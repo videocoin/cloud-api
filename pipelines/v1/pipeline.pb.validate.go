@@ -62,6 +62,12 @@ func (m *Pipeline) Validate() error {
 
 	// no validation rules for Status
 
+	// no validation rules for ClientAddress
+
+	// no validation rules for StreamId
+
+	// no validation rules for StreamAddress
+
 	{
 		tmp := m.GetCreatedAt()
 

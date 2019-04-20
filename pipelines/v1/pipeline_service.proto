@@ -78,8 +78,9 @@ message UpdatePipelineRequest {
     string id = 1 [(validate.rules).string.len = 36];
     string user_id = 2 [(validate.rules).string.len = 36];
     string name = 4;
-    uint64 stream_id = 5;
-    string stream_address = 6;
-    PipelineStatus status = 7;
-    cloud.api.profiles.v1.ProfileId profile_id = 8;
+    string client_address = 5;
+    uint64 stream_id = 6;
+    string stream_address = 7;
+    PipelineStatus status = 8;
+    cloud.api.profiles.v1.ProfileId profile_id = 9;
 }
