@@ -44,19 +44,22 @@ service PipelineService {
 
     rpc Update(UpdatePipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            put: "/api/v1/pipelines/{id}"
+            put: "/api/v1/pipelines/{id}",
+            body: "*"
         };
     }
 
     rpc Run(PipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            post: "/api/v1/pipelines/{id}/start"
+            post: "/api/v1/pipelines/{id}/start",
+            body: "*"
         };
     }
 
     rpc Complete(PipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            post: "/api/v1/pipelines/{id}/stop"
+            post: "/api/v1/pipelines/{id}/stop",
+            body: "*"
         };
     }
 }

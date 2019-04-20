@@ -46,7 +46,8 @@ service UserService {
 
     rpc ResetPassword(ResetPasswordUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-            post: "/api/v1/auth/reset"
+            post: "/api/v1/auth/reset",
+            body: "*"
         };
     }
 
@@ -58,13 +59,15 @@ service UserService {
 
     rpc StartRecovery(StartRecoveryUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-            post: "/api/v1/recovery/start"
+            post: "/api/v1/recovery/start",
+            body: "*"
         };
     }
 
     rpc Recover(RecoverUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-            post: "/api/v1/recover"
+            post: "/api/v1/recover",
+            body: "*"
         };
     }
 
@@ -112,7 +115,7 @@ message StartRecoveryUserRequest {
 
 message RecoverUserRequest {
     string token = 1;
-    string password = 2 [(validate.rules).string.min_len = 3];
+    string password = 2 [(validate.rules).string.min_len = 5];
     string confirm_password = 3 [(validate.rules).string.min_len = 5];
 }
 

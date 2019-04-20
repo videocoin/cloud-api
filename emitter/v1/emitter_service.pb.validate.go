@@ -47,6 +47,8 @@ func (m *StreamRequest) Validate() error {
 
 	// no validation rules for StreamId
 
+	// no validation rules for ClientAddress
+
 	return nil
 }
 

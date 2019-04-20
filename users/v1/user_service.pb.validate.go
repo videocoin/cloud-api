@@ -661,10 +661,10 @@ func (m *RecoverUserRequest) Validate() error {
 
 	// no validation rules for Token
 
-	if utf8.RuneCountInString(m.GetPassword()) < 3 {
+	if utf8.RuneCountInString(m.GetPassword()) < 5 {
 		return RecoverUserRequestValidationError{
 			field:  "Password",
-			reason: "value length must be at least 3 runes",
+			reason: "value length must be at least 5 runes",
 		}
 	}
 
