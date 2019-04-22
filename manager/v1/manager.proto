@@ -179,6 +179,7 @@ message JobResponse {
 message JobRequest {
   string pipeline_id = 1;
   string client_address = 2;
+  cloud.api.profiles.v1.ProfileId profile_id = 3 [(validate.rules).enum.defined_only = true];
 }
 
 

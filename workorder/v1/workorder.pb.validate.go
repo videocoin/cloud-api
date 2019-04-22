@@ -48,7 +48,7 @@ func (m *WorkOrder) Validate() error {
 
 	// no validation rules for ProfileId
 
-	// no validation rules for WalletAddress
+	// no validation rules for ClientAddress
 
 	// no validation rules for StreamAddress
 
@@ -148,7 +148,7 @@ func (m *JobProfile) Validate() error {
 
 	// no validation rules for TranscodeOutputUrl
 
-	// no validation rules for Address
+	// no validation rules for ClientAddress
 
 	// no validation rules for StreamId
 

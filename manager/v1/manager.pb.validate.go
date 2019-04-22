@@ -938,6 +938,13 @@ func (m *JobRequest) Validate() error {
 
 	// no validation rules for ClientAddress
 
+	if _, ok := v1.ProfileId_name[int32(m.GetProfileId())]; !ok {
+		return JobRequestValidationError{
+			field:  "ProfileId",
+			reason: "value must be one of the defined enum values",
+		}
+	}
+
 	return nil
 }
 
