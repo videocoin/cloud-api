@@ -41,7 +41,7 @@ message WorkOrder {
     string pipeline_id = 2;
     string transcoder_id = 3;
     cloud.api.profiles.v1.ProfileId profile_id = 4;
-    string wallet_address = 5;
+    string client_address = 5;
     string stream_address = 6;
     int64 stream_id = 7;
     string transcode_input_url = 8;
@@ -62,7 +62,7 @@ message JobProfile {
     cloud.api.profiles.v1.ProfileId profile_id = 3;
 	string ingest_input_url = 4;
 	string transcode_output_url = 5;
-	string address = 6;
+	string client_address = 6;
 	int64 stream_id = 7;
 	string stream_address = 8;
 	string status = 9;
