@@ -15,7 +15,6 @@ import (
 	"time"
 	"unicode/utf8"
 
-	v1 "github.com/VideoCoin/cloud-api/profiles/v1"
 	"github.com/gogo/protobuf/types"
 )
 
@@ -923,6 +922,81 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = JobRequestValidationError{}
+
+// Validate checks the field values on UpdateJobRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *UpdateJobRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for PipelineId
+
+	// no validation rules for ProfileId
+
+	// no validation rules for Address
+
+	// no validation rules for StreamId
+
+	// no validation rules for StreamAddress
+
+	return nil
+}
+
+// UpdateJobRequestValidationError is the validation error returned by
+// UpdateJobRequest.Validate if the designated constraints aren't met.
+type UpdateJobRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateJobRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateJobRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateJobRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateJobRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateJobRequestValidationError) ErrorName() string { return "UpdateJobRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e UpdateJobRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateJobRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateJobRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateJobRequestValidationError{}
 
 // Validate checks the field values on StreamRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, an error
