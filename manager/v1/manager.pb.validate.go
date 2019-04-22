@@ -15,6 +15,7 @@ import (
 	"time"
 	"unicode/utf8"
 
+	v1 "github.com/VideoCoin/cloud-api/profiles/v1"
 	"github.com/gogo/protobuf/types"
 )
 
