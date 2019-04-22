@@ -269,21 +269,9 @@ func (m *UpdatePipelineRequest) Validate() error {
 		return nil
 	}
 
-	if utf8.RuneCountInString(m.GetId()) != 36 {
-		return UpdatePipelineRequestValidationError{
-			field:  "Id",
-			reason: "value length must be 36 runes",
-		}
+	// no validation rules for Id
 
-	}
-
-	if utf8.RuneCountInString(m.GetUserId()) != 36 {
-		return UpdatePipelineRequestValidationError{
-			field:  "UserId",
-			reason: "value length must be 36 runes",
-		}
-
-	}
+	// no validation rules for UserId
 
 	// no validation rules for Name
 

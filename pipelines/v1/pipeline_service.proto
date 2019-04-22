@@ -78,8 +78,8 @@ message ListResponse {
 }
 
 message UpdatePipelineRequest {
-    string id = 1 [(validate.rules).string.len = 36];
-    string user_id = 2 [(validate.rules).string.len = 36];
+    string id = 1;
+    string user_id = 2;
     string name = 4;
     string client_address = 5;
     uint64 stream_id = 6;
