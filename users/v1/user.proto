@@ -17,7 +17,7 @@ message User {
     string email = 2 [(validate.rules).string.email = true, (gogoproto.moretags) = "gorm:\"unique_index\""];
     string password = 3 [(validate.rules).string.min_len = 5, (gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
     string name = 4 [(validate.rules).string.min_len = 3, (gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
-    google.protobuf.Timestamp created_at = 5 [(validate.rules).timestamp.required = true, (gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 5 [(validate.rules).timestamp.required = true];
     string token = 6 [(gogoproto.moretags) = "gorm:\"type:varchar(255);index\""];
 }
 

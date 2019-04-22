@@ -39,10 +39,10 @@ message Pipeline {
     uint64 stream_id = 7;
     string stream_address = 8;
     
-    google.protobuf.Timestamp created_at = 10 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp pending_at = 11 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp running_at = 12 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp stopped_at = 13 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 10;
+    google.protobuf.Timestamp pending_at = 11;
+    google.protobuf.Timestamp running_at = 12;
+    google.protobuf.Timestamp stopped_at = 13;
 }
 
 message PipelineProfile {
@@ -53,9 +53,9 @@ message PipelineProfile {
     cloud.api.profiles.v1.ProfileId profile_id = 4;
     //cloud.api.workorder.v1.JobProfile job_profile = 5;
 
-    google.protobuf.Timestamp created_at = 10 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp pending_at = 11 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp running_at = 12 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp stopped_at = 13 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 10;
+    google.protobuf.Timestamp pending_at = 11;
+    google.protobuf.Timestamp running_at = 12;
+    google.protobuf.Timestamp stopped_at = 13;
 }
 
