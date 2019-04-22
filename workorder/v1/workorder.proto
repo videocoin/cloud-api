@@ -16,14 +16,12 @@ enum WorkOrderStatus {
 
     none = 0 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusNone" ];
     new = 1 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusNew" ];
-    pending_approval = 2 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusPendingApproval" ];
-    approved = 3 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusApproved" ];
-    work_started = 4 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusWorkStarted" ];
-    transcoding = 5 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusTranscoding" ];
+    pending = 2 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusPending" ];
+    processing = 3 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusProcessing" ];
+    ready = 4 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusReady" ];
+    complete = 5 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusComplete" ];
     canceld = 6 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusCanceled" ];
     failed = 7 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusFailed" ];
-    completed = 8 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusCompleted" ];
-    ready = 9 [ (gogoproto.enumvalue_customname) = "WorkOrderStatusReady" ];
 }
 
 enum IngestStatus {
