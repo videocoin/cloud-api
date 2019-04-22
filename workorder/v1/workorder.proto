@@ -68,3 +68,7 @@ message JobProfile {
 	string status = 9;
 	IngestStatus ingest_status = 10;
 }
+
+message JobProfiles {
+    repeated JobProfile job_profiles = 1;
+}
