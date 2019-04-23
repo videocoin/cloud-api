@@ -43,8 +43,6 @@ func (m *CreatePipelineRequest) Validate() error {
 
 	// no validation rules for Name
 
-	// no validation rules for ClientAddress
-
 	// no validation rules for ProfileId
 
 	return nil

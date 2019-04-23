@@ -73,8 +73,7 @@ service PipelineService {
 
 message CreatePipelineRequest {
     string name = 1;
-    string client_address = 2;
-    cloud.api.profiles.v1.ProfileId profile_id = 3;
+    cloud.api.profiles.v1.ProfileId profile_id = 2;
 }
 
 message PipelineRequest {
