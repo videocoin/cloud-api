@@ -15,7 +15,6 @@ import (
 	"time"
 	"unicode/utf8"
 
-	v1 "github.com/VideoCoin/cloud-api/profiles/v1"
 	"github.com/gogo/protobuf/types"
 )
 
@@ -42,19 +41,9 @@ func (m *UpdateProfileRequest) Validate() error {
 		return nil
 	}
 
-	if m.GetStreamId() < 0 {
-		return UpdateProfileRequestValidationError{
-			field:  "StreamId",
-			reason: "value must be greater than or equal to 0",
-		}
-	}
+	// no validation rules for StreamId
 
-	if _, ok := v1.ProfileId_name[int32(m.GetProfileId())]; !ok {
-		return UpdateProfileRequestValidationError{
-			field:  "ProfileId",
-			reason: "value must be one of the defined enum values",
-		}
-	}
+	// no validation rules for ProfileId
 
 	return nil
 }
@@ -189,12 +178,7 @@ func (m *ProfileRequest) Validate() error {
 		return nil
 	}
 
-	if _, ok := v1.ProfileId_name[int32(m.GetProfileId())]; !ok {
-		return ProfileRequestValidationError{
-			field:  "ProfileId",
-			reason: "value must be one of the defined enum values",
-		}
-	}
+	// no validation rules for ProfileId
 
 	return nil
 }
@@ -470,26 +454,11 @@ func (m *VerifyChunkRequest) Validate() error {
 		return nil
 	}
 
-	if m.GetStreamId() <= 0 {
-		return VerifyChunkRequestValidationError{
-			field:  "StreamId",
-			reason: "value must be greater than 0",
-		}
-	}
+	// no validation rules for StreamId
 
-	if m.GetSourceChunkId() < 0 {
-		return VerifyChunkRequestValidationError{
-			field:  "SourceChunkId",
-			reason: "value must be greater than or equal to 0",
-		}
-	}
+	// no validation rules for SourceChunkId
 
-	if m.GetResultChunkId() < 0 {
-		return VerifyChunkRequestValidationError{
-			field:  "ResultChunkId",
-			reason: "value must be greater than or equal to 0",
-		}
-	}
+	// no validation rules for ResultChunkId
 
 	// no validation rules for HashDistance
 
@@ -562,12 +531,7 @@ func (m *ChunkCreatedRequest) Validate() error {
 		return nil
 	}
 
-	if m.GetStreamId() <= 0 {
-		return ChunkCreatedRequestValidationError{
-			field:  "StreamId",
-			reason: "value must be greater than 0",
-		}
-	}
+	// no validation rules for StreamId
 
 	// no validation rules for SourceChunkId
 
@@ -858,12 +822,7 @@ func (m *JobRequest) Validate() error {
 
 	// no validation rules for PipelineId
 
-	if _, ok := v1.ProfileId_name[int32(m.GetProfileId())]; !ok {
-		return JobRequestValidationError{
-			field:  "ProfileId",
-			reason: "value must be one of the defined enum values",
-		}
-	}
+	// no validation rules for ProfileId
 
 	return nil
 }
@@ -934,7 +893,7 @@ func (m *UpdateJobRequest) Validate() error {
 
 	// no validation rules for ProfileId
 
-	// no validation rules for Address
+	// no validation rules for ClientAddress
 
 	// no validation rules for StreamId
 
