@@ -41,19 +41,9 @@ func (m *AddProfileRequest) Validate() error {
 		return nil
 	}
 
-	if m.GetStreamId() < 0 {
-		return AddProfileRequestValidationError{
-			field:  "StreamId",
-			reason: "value must be greater than or equal to 0",
-		}
-	}
+	// no validation rules for StreamId
 
-	if _, ok := v1.ProfileId_name[int32(m.GetProfileId())]; !ok {
-		return AddProfileRequestValidationError{
-			field:  "ProfileId",
-			reason: "value must be one of the defined enum values",
-		}
-	}
+	// no validation rules for ProfileId
 
 	return nil
 }
@@ -188,12 +178,7 @@ func (m *GetProfileRequest) Validate() error {
 		return nil
 	}
 
-	if _, ok := v1.ProfileId_name[int32(m.GetProfileId())]; !ok {
-		return GetProfileRequestValidationError{
-			field:  "ProfileId",
-			reason: "value must be one of the defined enum values",
-		}
-	}
+	// no validation rules for ProfileId
 
 	return nil
 }
@@ -471,26 +456,11 @@ func (m *VerifyChunkRequest) Validate() error {
 		return nil
 	}
 
-	if m.GetStreamId() <= 0 {
-		return VerifyChunkRequestValidationError{
-			field:  "StreamId",
-			reason: "value must be greater than 0",
-		}
-	}
+	// no validation rules for StreamId
 
-	if m.GetSourceChunkId() < 0 {
-		return VerifyChunkRequestValidationError{
-			field:  "SourceChunkId",
-			reason: "value must be greater than or equal to 0",
-		}
-	}
+	// no validation rules for SourceChunkId
 
-	if m.GetResultChunkId() < 0 {
-		return VerifyChunkRequestValidationError{
-			field:  "ResultChunkId",
-			reason: "value must be greater than or equal to 0",
-		}
-	}
+	// no validation rules for ResultChunkId
 
 	// no validation rules for HashDistance
 
@@ -563,12 +533,7 @@ func (m *ChunkCreatedRequest) Validate() error {
 		return nil
 	}
 
-	if m.GetStreamId() <= 0 {
-		return ChunkCreatedRequestValidationError{
-			field:  "StreamId",
-			reason: "value must be greater than 0",
-		}
-	}
+	// no validation rules for StreamId
 
 	// no validation rules for SourceChunkId
 
@@ -643,12 +608,7 @@ func (m *StopStreamRequest) Validate() error {
 		return nil
 	}
 
-	if m.GetStreamId() <= 0 {
-		return StopStreamRequestValidationError{
-			field:  "StreamId",
-			reason: "value must be greater than 0",
-		}
-	}
+	// no validation rules for StreamId
 
 	// no validation rules for ContractAddress
 
