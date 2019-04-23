@@ -51,14 +51,21 @@ service PipelineService {
 
     rpc Run(PipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            post: "/api/v1/pipelines/{id}/start",
+            post: "/api/v1/pipelines/{id}/run",
             body: "*"
         };
     }
 
     rpc Complete(PipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            post: "/api/v1/pipelines/{id}/stop",
+            post: "/api/v1/pipelines/{id}/complete",
+            body: "*"
+        };
+    }
+
+    rpc Cancel(PipelineRequest) returns (PipelineProfile) {
+        option (google.api.http) = {
+            post: "/api/v1/pipelines/{id}/cancel",
             body: "*"
         };
     }
@@ -66,7 +73,8 @@ service PipelineService {
 
 message CreatePipelineRequest {
     string name = 1 [(validate.rules).string.min_len = 1];
-    cloud.api.profiles.v1.ProfileId profile_id = 2;
+    string client_address = 2 [(validate.rules).string.min_len = 1];
+    cloud.api.profiles.v1.ProfileId profile_id = 3;
 }
 
 message PipelineRequest {
