@@ -72,8 +72,8 @@ service PipelineService {
 }
 
 message CreatePipelineRequest {
-    string name = 1 [(validate.rules).string.min_len = 1];
-    string client_address = 2 [(validate.rules).string.min_len = 1];
+    string name = 1;
+    string client_address = 2;
     cloud.api.profiles.v1.ProfileId profile_id = 3;
 }
 

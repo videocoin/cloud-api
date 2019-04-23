@@ -41,19 +41,9 @@ func (m *CreatePipelineRequest) Validate() error {
 		return nil
 	}
 
-	if utf8.RuneCountInString(m.GetName()) < 1 {
-		return CreatePipelineRequestValidationError{
-			field:  "Name",
-			reason: "value length must be at least 1 runes",
-		}
-	}
+	// no validation rules for Name
 
-	if utf8.RuneCountInString(m.GetClientAddress()) < 1 {
-		return CreatePipelineRequestValidationError{
-			field:  "ClientAddress",
-			reason: "value length must be at least 1 runes",
-		}
-	}
+	// no validation rules for ClientAddress
 
 	// no validation rules for ProfileId
 
