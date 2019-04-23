@@ -20,8 +20,14 @@ option (gogoproto.sizer_all) = false;
 service ManagerService {
   rpc Create(JobRequest) returns (cloud.api.workorder.v1.JobProfile) {
     option (google.api.http) = {
-      post: "/api/v1/job"
+      post: "/api/v1/job/new"
       body: "*"
+    };
+  };
+
+  rpc Run(JobRequest) returns (cloud.api.workorder.v1.JobProfile) {
+    option (google.api.http) = {
+      post: "/api/v1/job/{pipeline_id}/run"
     };
   };
 
@@ -33,7 +39,7 @@ service ManagerService {
 
   rpc Update(UpdateJobRequest) returns (cloud.api.workorder.v1.JobProfile) {
     option (google.api.http) = {
-      get: "/api/v1/job/{pipeline_id}"
+      put: "/api/v1/job/{pipeline_id}"
     };
   };
 
