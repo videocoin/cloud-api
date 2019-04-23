@@ -7,7 +7,6 @@ import "github.com/VideoCoin/cloud-api/rpc/health.proto";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
 import "github.com/VideoCoin/cloud-api/workorder/v1/workorder.proto";
 import "github.com/VideoCoin/cloud-api/transcoder/v1/transcoder.proto";
@@ -113,8 +112,8 @@ service ManagerService {
 }
 
 message AddProfileRequest {
-  int64 stream_id = 1 [(validate.rules).int64.gte = 0];
-  cloud.api.profiles.v1.ProfileId profile_id = 2 [(validate.rules).enum.defined_only = true];
+  int64 stream_id = 1;
+  cloud.api.profiles.v1.ProfileId profile_id = 2;
 }
 
 message Heartbeat {
@@ -122,7 +121,7 @@ message Heartbeat {
 }
 
 message GetProfileRequest {
-  cloud.api.profiles.v1.ProfileId profile_id = 2 [(validate.rules).enum.defined_only = true];
+  cloud.api.profiles.v1.ProfileId profile_id = 2;
 }
 
 message CheckBalanceRequest {
@@ -139,22 +138,22 @@ message ContractAddrRequest {
 }
 
 message VerifyChunkRequest {
-  int64 stream_id = 1 [(validate.rules).int64.gt = 0];
-  uint64 source_chunk_id = 2 [(validate.rules).uint64.gte = 0];
-  uint64 result_chunk_id = 3 [(validate.rules).uint64.gte = 0];
+  int64 stream_id = 1;
+  uint64 source_chunk_id = 2;
+  uint64 result_chunk_id = 3;
   int32 hash_distance = 4;
   uint32 bitrate = 5;
 }
 
 message ChunkCreatedRequest {
-  int64 stream_id = 1 [(validate.rules).int64.gt = 0];
+  int64 stream_id = 1;
   int64 source_chunk_id = 2;
   int64 result_chunk_id = 3;
   uint32 bitrate = 4;
 }
 
 message StopStreamRequest {
-  int64 stream_id = 1 [(validate.rules).int64.gt = 0];
+  int64 stream_id = 1;
   string contract_address = 4;
   string wallet_address = 5;
 } 
