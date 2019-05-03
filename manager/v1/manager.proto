@@ -75,19 +75,6 @@ service ManagerService {
     };
   };
 
-  rpc UpdateContractAddr(ContractAddrRequest) returns (google.protobuf.Empty) {
-    option (google.api.http) = {
-      post: "/api/v1/contract_address/{stream_id}/{contract_address}"
-      body: "*"
-    };
-  };
-
-  rpc AddProfile(UpdateProfileRequest) returns (google.protobuf.Empty) {
-    option (google.api.http) = {
-      post: "/api/v1/profile/{stream_id}/{profile_id}"
-      body: "*"
-    };
-  };
 
   rpc ChunkCreated(ChunkCreatedRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
@@ -151,7 +138,7 @@ message CheckBalanceResponse {
 }
 
 message ContractAddrRequest {
-  int64 stream_id = 1;
+  string pipeline_id = 1;
   string contract_address = 2;
 }
 
