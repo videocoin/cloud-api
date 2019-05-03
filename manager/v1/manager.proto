@@ -39,6 +39,7 @@ service ManagerService {
   rpc Update(UpdateJobRequest) returns (cloud.api.workorder.v1.JobProfile) {
     option (google.api.http) = {
       put: "/api/v1/job/{pipeline_id}"
+      body: "*"
     };
   };
 
