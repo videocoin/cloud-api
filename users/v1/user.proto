@@ -12,18 +12,34 @@ option (gogoproto.unmarshaler_all) = false;
 option (gogoproto.marshaler_all) = false;
 option (gogoproto.sizer_all) = false;
 
+enum UserRole {
+    option (gogoproto.goproto_enum_prefix) = false;
+    option (gogoproto.enum_customname) = "UserRole";
+
+    REGULAR = 0 [(gogoproto.enumvalue_customname) = "UserRoleRegular"];
+    MANAGER = 1 [(gogoproto.enumvalue_customname) = "UserRoleManager"];
+    QA      = 2 [(gogoproto.enumvalue_customname) = "UserRoleQa"];
+    SUPER   = 3 [(gogoproto.enumvalue_customname) = "UserRoleSuper"];
+}
+
 message User {
     string id = 1 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
     string email = 2 [(validate.rules).string.email = true, (gogoproto.moretags) = "gorm:\"unique_index\""];
     string password = 3 [(validate.rules).string.min_len = 5, (gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
     string name = 4 [(validate.rules).string.min_len = 3, (gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
-    google.protobuf.Timestamp created_at = 5 [(validate.rules).timestamp.required = true];
-    string token = 6 [(gogoproto.moretags) = "gorm:\"type:varchar(255);index\""];
+    UserRole role = 5;
+    
+    bool activated = 6;
+    google.protobuf.Timestamp activated_at = 7 [(validate.rules).timestamp.required = true];
+    google.protobuf.Timestamp created_at = 8 [(validate.rules).timestamp.required = true];
+
+    string token = 9 [(gogoproto.moretags) = "gorm:\"type:varchar(255);index\""];
 }
 
 message UserProfile {
     string id = 1;
     string email = 2;
     string name = 3;
-    cloud.api.account.v1.AccountProfile account = 4;
+    bool activated = 4;
+    cloud.api.account.v1.AccountProfile account = 5;
 }

@@ -70,6 +70,17 @@ func (m *User) Validate() error {
 		}
 	}
 
+	// no validation rules for Role
+
+	// no validation rules for Activated
+
+	if m.GetActivatedAt() == nil {
+		return UserValidationError{
+			field:  "ActivatedAt",
+			reason: "value is required",
+		}
+	}
+
 	if m.GetCreatedAt() == nil {
 		return UserValidationError{
 			field:  "CreatedAt",
@@ -199,6 +210,8 @@ func (m *UserProfile) Validate() error {
 	// no validation rules for Email
 
 	// no validation rules for Name
+
+	// no validation rules for Activated
 
 	{
 		tmp := m.GetAccount()

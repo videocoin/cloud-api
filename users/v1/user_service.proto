@@ -57,6 +57,13 @@ service UserService {
         };
     }
 
+    rpc Activate(UserRequest) returns (UserProfile) {
+        option (google.api.http) = {
+            post: "/api/v1/user/{id}/activate",
+            body: "*"
+        };
+    }
+
     rpc StartRecovery(StartRecoveryUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/api/v1/recovery/start",
