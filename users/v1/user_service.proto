@@ -3,7 +3,6 @@ syntax = "proto3";
 package cloud.api.users.v1;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "github.com/VideoCoin/cloud-api/rpc/health.proto";
 
 import "google/protobuf/empty.proto";
@@ -92,15 +91,15 @@ service UserService {
 }
 
 message CreateUserRequest {
-    string email = 1 [(validate.rules).string.email = true];
-    string password = 2 [(validate.rules).string.min_len = 5];
-    string name = 3 [(validate.rules).string.min_len = 3];
-    string confirm_password = 4 [(validate.rules).string.min_len = 5];
+    string email = 1;
+    string password = 2;
+    string name = 3;
+    string confirm_password = 4;
 }
 
 message LoginUserRequest {
-    string email = 1 [(validate.rules).string.email = true];
-    string password = 2 [(validate.rules).string.min_len = 5];
+    string email = 1;
+    string password = 2;
 }
 
 message LoginUserResponse {
@@ -112,18 +111,18 @@ message UserRequest {
 }
 
 message ResetPasswordUserRequest {
-    string password = 1 [(validate.rules).string.min_len = 5];
-    string confirm_password = 2 [(validate.rules).string.min_len = 5];
+    string password = 1;
+    string confirm_password = 2;
 }
 
 message StartRecoveryUserRequest {
-    string email = 1 [(validate.rules).string.email = true];
+    string email = 1;
 }
 
 message RecoverUserRequest {
     string token = 1;
-    string password = 2 [(validate.rules).string.min_len = 5];
-    string confirm_password = 3 [(validate.rules).string.min_len = 5];
+    string password = 2;
+    string confirm_password = 3;
 }
 
 message WhitelistResponse {
@@ -131,5 +130,5 @@ message WhitelistResponse {
 }
 
 message LookupByAddressRequest {
-    string address = 1 [(validate.rules).string = {min_len: 40, max_len: 42}];
+    string address = 1;
 }

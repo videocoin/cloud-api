@@ -41,86 +41,15 @@ func (m *CreateUserRequest) Validate() error {
 		return nil
 	}
 
-	if err := m._validateEmail(m.GetEmail()); err != nil {
-		return CreateUserRequestValidationError{
-			field:  "Email",
-			reason: "value must be a valid email address",
-			cause:  err,
-		}
-	}
+	// no validation rules for Email
 
-	if utf8.RuneCountInString(m.GetPassword()) < 5 {
-		return CreateUserRequestValidationError{
-			field:  "Password",
-			reason: "value length must be at least 5 runes",
-		}
-	}
+	// no validation rules for Password
 
-	if utf8.RuneCountInString(m.GetName()) < 3 {
-		return CreateUserRequestValidationError{
-			field:  "Name",
-			reason: "value length must be at least 3 runes",
-		}
-	}
+	// no validation rules for Name
 
-	if utf8.RuneCountInString(m.GetConfirmPassword()) < 5 {
-		return CreateUserRequestValidationError{
-			field:  "ConfirmPassword",
-			reason: "value length must be at least 5 runes",
-		}
-	}
+	// no validation rules for ConfirmPassword
 
 	return nil
-}
-
-func (m *CreateUserRequest) _validateHostname(host string) error {
-	s := strings.ToLower(strings.TrimSuffix(host, "."))
-
-	if len(host) > 253 {
-		return errors.New("hostname cannot exceed 253 characters")
-	}
-
-	for _, part := range strings.Split(s, ".") {
-		if l := len(part); l == 0 || l > 63 {
-			return errors.New("hostname part must be non-empty and cannot exceed 63 characters")
-		}
-
-		if part[0] == '-' {
-			return errors.New("hostname parts cannot begin with hyphens")
-		}
-
-		if part[len(part)-1] == '-' {
-			return errors.New("hostname parts cannot end with hyphens")
-		}
-
-		for _, r := range part {
-			if (r < 'a' || r > 'z') && (r < '0' || r > '9') && r != '-' {
-				return fmt.Errorf("hostname parts can only contain alphanumeric characters or hyphens, got %q", string(r))
-			}
-		}
-	}
-
-	return nil
-}
-
-func (m *CreateUserRequest) _validateEmail(addr string) error {
-	a, err := mail.ParseAddress(addr)
-	if err != nil {
-		return err
-	}
-	addr = a.Address
-
-	if len(addr) > 254 {
-		return errors.New("email addresses cannot exceed 254 characters")
-	}
-
-	parts := strings.SplitN(addr, "@", 2)
-
-	if len(parts[0]) > 64 {
-		return errors.New("email address local phrase cannot exceed 64 characters")
-	}
-
-	return m._validateHostname(parts[1])
 }
 
 // CreateUserRequestValidationError is the validation error returned by
@@ -187,72 +116,11 @@ func (m *LoginUserRequest) Validate() error {
 		return nil
 	}
 
-	if err := m._validateEmail(m.GetEmail()); err != nil {
-		return LoginUserRequestValidationError{
-			field:  "Email",
-			reason: "value must be a valid email address",
-			cause:  err,
-		}
-	}
+	// no validation rules for Email
 
-	if utf8.RuneCountInString(m.GetPassword()) < 5 {
-		return LoginUserRequestValidationError{
-			field:  "Password",
-			reason: "value length must be at least 5 runes",
-		}
-	}
+	// no validation rules for Password
 
 	return nil
-}
-
-func (m *LoginUserRequest) _validateHostname(host string) error {
-	s := strings.ToLower(strings.TrimSuffix(host, "."))
-
-	if len(host) > 253 {
-		return errors.New("hostname cannot exceed 253 characters")
-	}
-
-	for _, part := range strings.Split(s, ".") {
-		if l := len(part); l == 0 || l > 63 {
-			return errors.New("hostname part must be non-empty and cannot exceed 63 characters")
-		}
-
-		if part[0] == '-' {
-			return errors.New("hostname parts cannot begin with hyphens")
-		}
-
-		if part[len(part)-1] == '-' {
-			return errors.New("hostname parts cannot end with hyphens")
-		}
-
-		for _, r := range part {
-			if (r < 'a' || r > 'z') && (r < '0' || r > '9') && r != '-' {
-				return fmt.Errorf("hostname parts can only contain alphanumeric characters or hyphens, got %q", string(r))
-			}
-		}
-	}
-
-	return nil
-}
-
-func (m *LoginUserRequest) _validateEmail(addr string) error {
-	a, err := mail.ParseAddress(addr)
-	if err != nil {
-		return err
-	}
-	addr = a.Address
-
-	if len(addr) > 254 {
-		return errors.New("email addresses cannot exceed 254 characters")
-	}
-
-	parts := strings.SplitN(addr, "@", 2)
-
-	if len(parts[0]) > 64 {
-		return errors.New("email address local phrase cannot exceed 64 characters")
-	}
-
-	return m._validateHostname(parts[1])
 }
 
 // LoginUserRequestValidationError is the validation error returned by
@@ -453,19 +321,9 @@ func (m *ResetPasswordUserRequest) Validate() error {
 		return nil
 	}
 
-	if utf8.RuneCountInString(m.GetPassword()) < 5 {
-		return ResetPasswordUserRequestValidationError{
-			field:  "Password",
-			reason: "value length must be at least 5 runes",
-		}
-	}
+	// no validation rules for Password
 
-	if utf8.RuneCountInString(m.GetConfirmPassword()) < 5 {
-		return ResetPasswordUserRequestValidationError{
-			field:  "ConfirmPassword",
-			reason: "value length must be at least 5 runes",
-		}
-	}
+	// no validation rules for ConfirmPassword
 
 	return nil
 }
@@ -534,65 +392,9 @@ func (m *StartRecoveryUserRequest) Validate() error {
 		return nil
 	}
 
-	if err := m._validateEmail(m.GetEmail()); err != nil {
-		return StartRecoveryUserRequestValidationError{
-			field:  "Email",
-			reason: "value must be a valid email address",
-			cause:  err,
-		}
-	}
+	// no validation rules for Email
 
 	return nil
-}
-
-func (m *StartRecoveryUserRequest) _validateHostname(host string) error {
-	s := strings.ToLower(strings.TrimSuffix(host, "."))
-
-	if len(host) > 253 {
-		return errors.New("hostname cannot exceed 253 characters")
-	}
-
-	for _, part := range strings.Split(s, ".") {
-		if l := len(part); l == 0 || l > 63 {
-			return errors.New("hostname part must be non-empty and cannot exceed 63 characters")
-		}
-
-		if part[0] == '-' {
-			return errors.New("hostname parts cannot begin with hyphens")
-		}
-
-		if part[len(part)-1] == '-' {
-			return errors.New("hostname parts cannot end with hyphens")
-		}
-
-		for _, r := range part {
-			if (r < 'a' || r > 'z') && (r < '0' || r > '9') && r != '-' {
-				return fmt.Errorf("hostname parts can only contain alphanumeric characters or hyphens, got %q", string(r))
-			}
-		}
-	}
-
-	return nil
-}
-
-func (m *StartRecoveryUserRequest) _validateEmail(addr string) error {
-	a, err := mail.ParseAddress(addr)
-	if err != nil {
-		return err
-	}
-	addr = a.Address
-
-	if len(addr) > 254 {
-		return errors.New("email addresses cannot exceed 254 characters")
-	}
-
-	parts := strings.SplitN(addr, "@", 2)
-
-	if len(parts[0]) > 64 {
-		return errors.New("email address local phrase cannot exceed 64 characters")
-	}
-
-	return m._validateHostname(parts[1])
 }
 
 // StartRecoveryUserRequestValidationError is the validation error returned by
@@ -661,19 +463,9 @@ func (m *RecoverUserRequest) Validate() error {
 
 	// no validation rules for Token
 
-	if utf8.RuneCountInString(m.GetPassword()) < 5 {
-		return RecoverUserRequestValidationError{
-			field:  "Password",
-			reason: "value length must be at least 5 runes",
-		}
-	}
+	// no validation rules for Password
 
-	if utf8.RuneCountInString(m.GetConfirmPassword()) < 5 {
-		return RecoverUserRequestValidationError{
-			field:  "ConfirmPassword",
-			reason: "value length must be at least 5 runes",
-		}
-	}
+	// no validation rules for ConfirmPassword
 
 	return nil
 }
@@ -809,12 +601,7 @@ func (m *LookupByAddressRequest) Validate() error {
 		return nil
 	}
 
-	if l := utf8.RuneCountInString(m.GetAddress()); l < 40 || l > 42 {
-		return LookupByAddressRequestValidationError{
-			field:  "Address",
-			reason: "value length must be between 40 and 42 runes, inclusive",
-		}
-	}
+	// no validation rules for Address
 
 	return nil
 }
