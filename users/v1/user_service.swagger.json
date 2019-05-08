@@ -321,6 +321,9 @@
       "properties": {
         "token": {
           "type": "string"
+        },
+        "cent_token": {
+          "type": "string"
         }
       }
     },

@@ -15,6 +15,6 @@ var (
 )
 
 func NewRpcValidationError(verr proto.Message) error {
-	s, _ := status.New(codes.InvalidArgument, "").WithDetails(verr)
+	s, _ := status.New(codes.InvalidArgument, "invalid argument").WithDetails(verr)
 	return s.Err()
 }
