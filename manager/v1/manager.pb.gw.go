@@ -401,6 +401,7 @@ func request_ManagerService_UpdateTranscoderStatus_0(ctx context.Context, marsha
 
 	var (
 		val string
+		e   int32
 		ok  bool
 		err error
 		_   = err
@@ -422,11 +423,13 @@ func request_ManagerService_UpdateTranscoderStatus_0(ctx context.Context, marsha
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "status")
 	}
 
-	protoReq.Status, err = runtime.String(val)
+	e, err = runtime.Enum(val, v1_1.TranscoderStatus_value)
 
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "status", err)
 	}
+
+	protoReq.Status = v1_1.TranscoderStatus(e)
 
 	msg, err := client.UpdateTranscoderStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
