@@ -98,7 +98,7 @@ message CreateUserRequest {
 }
 
 message LoginUserRequest {
-    string email = 1 [(gogoproto.moretags) = "validate:\"required,email\""];;
+    string email = 1 [(gogoproto.moretags) = "validate:\"required,email\""];
     string password = 2 [(gogoproto.moretags) = "validate:\"required\""];
 }
 

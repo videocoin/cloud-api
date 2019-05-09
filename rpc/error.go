@@ -12,6 +12,7 @@ var (
 	ErrRpcUnauthenticated  = grpc.Errorf(codes.Unauthenticated, "Unauthenticated")
 	ErrRpcPermissionDenied = grpc.Errorf(codes.PermissionDenied, "Permission Denied")
 	ErrRpcNotFound         = grpc.Errorf(codes.NotFound, "Not Found")
+	ErrRpcBadRequest       = grpc.Errorf(codes.InvalidArgument, "Bad request")
 )
 
 func NewRpcValidationError(verr proto.Message) error {
