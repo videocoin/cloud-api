@@ -11,7 +11,8 @@ protoc: protoc-rpc \
 	protoc-v1-verifier \
 	protoc-v1-workorder \
 	protoc-v1-transcoder \
-	protoc-v1-manager
+	protoc-v1-manager \
+	protoc-v1-transactions
 
 
 protoc-rpc:
@@ -49,4 +50,5 @@ protoc-gateway-v1-%:
 
 
 
-
+transactions:
+	protoc -I. --gofast_out=plugins=grpc:. ./transactions/v1/*.proto

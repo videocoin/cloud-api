@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package cloud.api.transactions.v1;
+
+service TransactionService {
+
+}

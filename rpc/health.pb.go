@@ -14,51 +14,14 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the proto package it is being compiled against.
-// A compilation error at this line likely means your copy of the
-// proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
-
 type HealthStatus struct {
-	Status               string   `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 }
 
-func (m *HealthStatus) Reset()         { *m = HealthStatus{} }
-func (m *HealthStatus) String() string { return proto.CompactTextString(m) }
-func (*HealthStatus) ProtoMessage()    {}
-func (*HealthStatus) Descriptor() ([]byte, []int) {
-	return fileDescriptor_health_29ee0550dae08dc2, []int{0}
-}
-func (m *HealthStatus) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *HealthStatus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_HealthStatus.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalTo(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (dst *HealthStatus) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_HealthStatus.Merge(dst, src)
-}
-func (m *HealthStatus) XXX_Size() int {
-	return m.Size()
-}
-func (m *HealthStatus) XXX_DiscardUnknown() {
-	xxx_messageInfo_HealthStatus.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_HealthStatus proto.InternalMessageInfo
+func (m *HealthStatus) Reset()                    { *m = HealthStatus{} }
+func (m *HealthStatus) String() string            { return proto.CompactTextString(m) }
+func (*HealthStatus) ProtoMessage()               {}
+func (*HealthStatus) Descriptor() ([]byte, []int) { return fileDescriptorHealth, []int{0} }
 
 func (m *HealthStatus) GetStatus() string {
 	if m != nil {
@@ -91,9 +54,6 @@ func (m *HealthStatus) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintHealth(dAtA, i, uint64(len(m.Status)))
 		i += copy(dAtA[i:], m.Status)
 	}
-	if m.XXX_unrecognized != nil {
-		i += copy(dAtA[i:], m.XXX_unrecognized)
-	}
 	return i, nil
 }
 
@@ -107,17 +67,11 @@ func encodeVarintHealth(dAtA []byte, offset int, v uint64) int {
 	return offset + 1
 }
 func (m *HealthStatus) Size() (n int) {
-	if m == nil {
-		return 0
-	}
 	var l int
 	_ = l
 	l = len(m.Status)
 	if l > 0 {
 		n += 1 + l + sovHealth(uint64(l))
-	}
-	if m.XXX_unrecognized != nil {
-		n += len(m.XXX_unrecognized)
 	}
 	return n
 }
@@ -205,7 +159,6 @@ func (m *HealthStatus) Unmarshal(dAtA []byte) error {
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
 	}
@@ -320,9 +273,9 @@ var (
 	ErrIntOverflowHealth   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("rpc/health.proto", fileDescriptor_health_29ee0550dae08dc2) }
+func init() { proto.RegisterFile("rpc/health.proto", fileDescriptorHealth) }
 
-var fileDescriptor_health_29ee0550dae08dc2 = []byte{
+var fileDescriptorHealth = []byte{
 	// 115 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x28, 0x2a, 0x48, 0xd6,
 	0xcf, 0x48, 0x4d, 0xcc, 0x29, 0xc9, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4d, 0xce,

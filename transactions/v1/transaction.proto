@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package cloud.api.transactions.v1;
+
+message Transaction {
+    string from = 1;
+    string to = 2;
+    string hash = 3;
+}
