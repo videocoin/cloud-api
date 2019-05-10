@@ -48,7 +48,6 @@ protoc-gateway-v1-%:
 		--swagger_out=logtostderr=true:. \
 		./$*/v1/*.proto
 
-
-
+.PHONY: transactions
 transactions:
 	protoc -I. --gofast_out=plugins=grpc:. ./transactions/v1/*.proto
