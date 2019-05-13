@@ -4,6 +4,16 @@ package cloud.api.transactions.v1;
 
 option go_package = "v1";
 
-service TransactionService {
+import "transactions/v1/transaction.proto";
 
+service TransactionService {
+    rpc GetTransactions(GetTransactionsRequest) returns (GetTransactionsResponse);
+}
+
+message GetTransactionsRequest {
+    string address = 1;
+}
+
+message GetTransactionsResponse {
+    repeated Transaction transactions = 1;
 }
