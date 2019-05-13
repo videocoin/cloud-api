@@ -51,9 +51,10 @@ protoc-gateway-v1-%:
 .PHONY: transactions
 transactions:
 	protoc \
-		-I. --go_out=plugins=grpc:. \
 		-I/usr/local/include \
 		-I${GOPATH}/src \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 		-I${GOPATH}/src/github.com \
+		-I. \
+		--gofast_out=plugins=grpc:. \
 		./transactions/v1/*.proto
