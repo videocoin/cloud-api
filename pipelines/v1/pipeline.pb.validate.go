@@ -48,11 +48,25 @@ func (m *Pipeline) Validate() error {
 
 	}
 
-	// no validation rules for UserId
-
 	// no validation rules for Name
 
+	if utf8.RuneCountInString(m.GetUserId()) != 36 {
+		return PipelineValidationError{
+			field:  "UserId",
+			reason: "value length must be 36 runes",
+		}
+
+	}
+
+	// no validation rules for ProfileId
+
 	// no validation rules for Status
+
+	// no validation rules for ClientAddress
+
+	// no validation rules for StreamId
+
+	// no validation rules for StreamAddress
 
 	{
 		tmp := m.GetCreatedAt()
@@ -69,11 +83,50 @@ func (m *Pipeline) Validate() error {
 		}
 	}
 
-	// no validation rules for ProfileId
+	{
+		tmp := m.GetPendingAt()
 
-	// no validation rules for StreamId
+		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
 
-	// no validation rules for StreamAddress
+			if err := v.Validate(); err != nil {
+				return PipelineValidationError{
+					field:  "PendingAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+	}
+
+	{
+		tmp := m.GetRunningAt()
+
+		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
+
+			if err := v.Validate(); err != nil {
+				return PipelineValidationError{
+					field:  "RunningAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+	}
+
+	{
+		tmp := m.GetStoppedAt()
+
+		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
+
+			if err := v.Validate(); err != nil {
+				return PipelineValidationError{
+					field:  "StoppedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+	}
 
 	return nil
 }
@@ -156,6 +209,51 @@ func (m *PipelineProfile) Validate() error {
 			if err := v.Validate(); err != nil {
 				return PipelineProfileValidationError{
 					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+	}
+
+	{
+		tmp := m.GetPendingAt()
+
+		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
+
+			if err := v.Validate(); err != nil {
+				return PipelineProfileValidationError{
+					field:  "PendingAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+	}
+
+	{
+		tmp := m.GetRunningAt()
+
+		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
+
+			if err := v.Validate(); err != nil {
+				return PipelineProfileValidationError{
+					field:  "RunningAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+	}
+
+	{
+		tmp := m.GetStoppedAt()
+
+		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
+
+			if err := v.Validate(); err != nil {
+				return PipelineProfileValidationError{
+					field:  "StoppedAt",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

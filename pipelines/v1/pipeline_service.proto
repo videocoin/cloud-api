@@ -2,15 +2,14 @@ syntax = "proto3";
 
 package cloud.api.pipelines.v1;
 
+import "pipelines/v1/pipeline.proto";
+import "github.com/VideoCoin/cloud-api/rpc/health.proto";
+import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/VideoCoin/cloud-api/rpc/health.proto";
-import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
-
-import "pipelines/v1/pipeline.proto";
 
 option go_package = "v1";
 option (gogoproto.unmarshaler_all) = false;
@@ -45,25 +44,36 @@ service PipelineService {
 
     rpc Update(UpdatePipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            put: "/api/v1/pipelines/{id}"
+            put: "/api/v1/pipelines/{id}",
+            body: "*"
         };
     }
 
     rpc Run(PipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            post: "/api/v1/pipelines/{id}/start"
+            post: "/api/v1/pipelines/{id}/run",
+            body: "*"
         };
     }
 
     rpc Complete(PipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
-            post: "/api/v1/pipelines/{id}/stop"
+            post: "/api/v1/pipelines/{id}/complete",
+            body: "*"
+        };
+    }
+
+    rpc Cancel(PipelineRequest) returns (PipelineProfile) {
+        option (google.api.http) = {
+            post: "/api/v1/pipelines/{id}/cancel",
+            body: "*"
         };
     }
 }
 
 message CreatePipelineRequest {
-    string name = 1 [(validate.rules).string.min_len = 1];
+    string name = 1;
+    cloud.api.profiles.v1.ProfileId profile_id = 2;
 }
 
 message PipelineRequest {
@@ -75,11 +85,12 @@ message ListResponse {
 }
 
 message UpdatePipelineRequest {
-    string id = 1 [(validate.rules).string.len = 36];
+    string id = 1;
     string user_id = 2;
     string name = 4;
-    uint64 stream_id = 5;
-    string stream_address = 6;
-    PipelineStatus status = 7;
-    cloud.api.profiles.v1.ProfileId profile_id = 8;
+    string client_address = 5;
+    uint64 stream_id = 6;
+    string stream_address = 7;
+    PipelineStatus status = 8;
+    cloud.api.profiles.v1.ProfileId profile_id = 9;
 }

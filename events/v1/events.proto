@@ -14,5 +14,5 @@ message Event {
     string name = 1;
     bytes payload = 2 [(gogoproto.moretags) = "gorm:\"payload;type:json\"sql:\"type:json\"" ];
 
-    google.protobuf.Timestamp created_at = 3 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp created_at = 3;
 }

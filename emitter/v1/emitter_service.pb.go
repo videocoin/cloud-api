@@ -3,17 +3,18 @@
 
 package v1
 
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
+import rpc "github.com/VideoCoin/cloud-api/rpc"
+import _ "github.com/envoyproxy/protoc-gen-validate/validate"
+import _ "github.com/gogo/protobuf/gogoproto"
+import empty "github.com/golang/protobuf/ptypes/empty"
+import _ "google.golang.org/genproto/googleapis/api/annotations"
+
 import (
-	context "context"
-	fmt "fmt"
-	rpc "github.com/VideoCoin/cloud-api/rpc"
-	_ "github.com/envoyproxy/protoc-gen-validate/validate"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/golang/protobuf/proto"
-	empty "github.com/golang/protobuf/ptypes/empty"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
+	context "golang.org/x/net/context"
 	grpc "google.golang.org/grpc"
-	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -27,223 +28,70 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-type RequestStreamIdRequest struct {
-	UserId               string   `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *RequestStreamIdRequest) Reset()         { *m = RequestStreamIdRequest{} }
-func (m *RequestStreamIdRequest) String() string { return proto.CompactTextString(m) }
-func (*RequestStreamIdRequest) ProtoMessage()    {}
-func (*RequestStreamIdRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_595d714f170d55af, []int{0}
-}
-func (m *RequestStreamIdRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_RequestStreamIdRequest.Unmarshal(m, b)
-}
-func (m *RequestStreamIdRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_RequestStreamIdRequest.Marshal(b, m, deterministic)
-}
-func (m *RequestStreamIdRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RequestStreamIdRequest.Merge(m, src)
-}
-func (m *RequestStreamIdRequest) XXX_Size() int {
-	return xxx_messageInfo_RequestStreamIdRequest.Size(m)
-}
-func (m *RequestStreamIdRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_RequestStreamIdRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_RequestStreamIdRequest proto.InternalMessageInfo
-
-func (m *RequestStreamIdRequest) GetUserId() string {
-	if m != nil {
-		return m.UserId
-	}
-	return ""
-}
-
-type RequestStreamIdResponse struct {
-	StreamId             uint64   `protobuf:"varint,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
-	Address              string   `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *RequestStreamIdResponse) Reset()         { *m = RequestStreamIdResponse{} }
-func (m *RequestStreamIdResponse) String() string { return proto.CompactTextString(m) }
-func (*RequestStreamIdResponse) ProtoMessage()    {}
-func (*RequestStreamIdResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_595d714f170d55af, []int{1}
-}
-func (m *RequestStreamIdResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_RequestStreamIdResponse.Unmarshal(m, b)
-}
-func (m *RequestStreamIdResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_RequestStreamIdResponse.Marshal(b, m, deterministic)
-}
-func (m *RequestStreamIdResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_RequestStreamIdResponse.Merge(m, src)
-}
-func (m *RequestStreamIdResponse) XXX_Size() int {
-	return xxx_messageInfo_RequestStreamIdResponse.Size(m)
-}
-func (m *RequestStreamIdResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_RequestStreamIdResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_RequestStreamIdResponse proto.InternalMessageInfo
-
-func (m *RequestStreamIdResponse) GetStreamId() uint64 {
-	if m != nil {
-		return m.StreamId
-	}
-	return 0
-}
-
-func (m *RequestStreamIdResponse) GetAddress() string {
-	if m != nil {
-		return m.Address
-	}
-	return ""
-}
-
-type CreateStreamAddressRequest struct {
+type StreamRequest struct {
 	PipelineId           string   `protobuf:"bytes,1,opt,name=pipeline_id,json=pipelineId,proto3" json:"pipeline_id,omitempty"`
 	UserId               string   `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	StreamId             uint64   `protobuf:"varint,3,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
+	ClientAddress        string   `protobuf:"bytes,4,opt,name=client_address,json=clientAddress,proto3" json:"client_address,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CreateStreamAddressRequest) Reset()         { *m = CreateStreamAddressRequest{} }
-func (m *CreateStreamAddressRequest) String() string { return proto.CompactTextString(m) }
-func (*CreateStreamAddressRequest) ProtoMessage()    {}
-func (*CreateStreamAddressRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_595d714f170d55af, []int{2}
+func (m *StreamRequest) Reset()         { *m = StreamRequest{} }
+func (m *StreamRequest) String() string { return proto.CompactTextString(m) }
+func (*StreamRequest) ProtoMessage()    {}
+func (*StreamRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_emitter_service_83586dc572a06e0e, []int{0}
 }
-func (m *CreateStreamAddressRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CreateStreamAddressRequest.Unmarshal(m, b)
+func (m *StreamRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_StreamRequest.Unmarshal(m, b)
 }
-func (m *CreateStreamAddressRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_CreateStreamAddressRequest.Marshal(b, m, deterministic)
+func (m *StreamRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_StreamRequest.Marshal(b, m, deterministic)
 }
-func (m *CreateStreamAddressRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CreateStreamAddressRequest.Merge(m, src)
+func (dst *StreamRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StreamRequest.Merge(dst, src)
 }
-func (m *CreateStreamAddressRequest) XXX_Size() int {
-	return xxx_messageInfo_CreateStreamAddressRequest.Size(m)
+func (m *StreamRequest) XXX_Size() int {
+	return xxx_messageInfo_StreamRequest.Size(m)
 }
-func (m *CreateStreamAddressRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_CreateStreamAddressRequest.DiscardUnknown(m)
+func (m *StreamRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_StreamRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_CreateStreamAddressRequest proto.InternalMessageInfo
+var xxx_messageInfo_StreamRequest proto.InternalMessageInfo
 
-func (m *CreateStreamAddressRequest) GetPipelineId() string {
+func (m *StreamRequest) GetPipelineId() string {
 	if m != nil {
 		return m.PipelineId
 	}
 	return ""
 }
 
-func (m *CreateStreamAddressRequest) GetUserId() string {
+func (m *StreamRequest) GetUserId() string {
 	if m != nil {
 		return m.UserId
 	}
 	return ""
 }
 
-func (m *CreateStreamAddressRequest) GetStreamId() uint64 {
+func (m *StreamRequest) GetStreamId() uint64 {
 	if m != nil {
 		return m.StreamId
 	}
 	return 0
 }
 
-type StreamAddress struct {
-	StreamAddress        string   `protobuf:"bytes,1,opt,name=stream_address,json=streamAddress,proto3" json:"stream_address,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *StreamAddress) Reset()         { *m = StreamAddress{} }
-func (m *StreamAddress) String() string { return proto.CompactTextString(m) }
-func (*StreamAddress) ProtoMessage()    {}
-func (*StreamAddress) Descriptor() ([]byte, []int) {
-	return fileDescriptor_595d714f170d55af, []int{3}
-}
-func (m *StreamAddress) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_StreamAddress.Unmarshal(m, b)
-}
-func (m *StreamAddress) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_StreamAddress.Marshal(b, m, deterministic)
-}
-func (m *StreamAddress) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StreamAddress.Merge(m, src)
-}
-func (m *StreamAddress) XXX_Size() int {
-	return xxx_messageInfo_StreamAddress.Size(m)
-}
-func (m *StreamAddress) XXX_DiscardUnknown() {
-	xxx_messageInfo_StreamAddress.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_StreamAddress proto.InternalMessageInfo
-
-func (m *StreamAddress) GetStreamAddress() string {
+func (m *StreamRequest) GetClientAddress() string {
 	if m != nil {
-		return m.StreamAddress
+		return m.ClientAddress
 	}
 	return ""
 }
 
 func init() {
-	proto.RegisterType((*RequestStreamIdRequest)(nil), "cloud.api.streams.v1.RequestStreamIdRequest")
-	proto.RegisterType((*RequestStreamIdResponse)(nil), "cloud.api.streams.v1.RequestStreamIdResponse")
-	proto.RegisterType((*CreateStreamAddressRequest)(nil), "cloud.api.streams.v1.CreateStreamAddressRequest")
-	proto.RegisterType((*StreamAddress)(nil), "cloud.api.streams.v1.StreamAddress")
-}
-
-func init() { proto.RegisterFile("emitter/v1/emitter_service.proto", fileDescriptor_595d714f170d55af) }
-
-var fileDescriptor_595d714f170d55af = []byte{
-	// 468 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x52, 0xd1, 0x8a, 0xd3, 0x40,
-	0x14, 0xcd, 0x46, 0xe9, 0xee, 0x8e, 0xec, 0x2a, 0xe3, 0xb2, 0x5b, 0x52, 0xa9, 0x4b, 0x40, 0xf0,
-	0xc1, 0xcc, 0x58, 0x05, 0xdf, 0xd7, 0x65, 0xc1, 0x3e, 0x29, 0x2d, 0xf8, 0xe0, 0xcb, 0x32, 0xcd,
-	0x5c, 0xd3, 0x81, 0x34, 0x33, 0xce, 0x4c, 0x82, 0xf5, 0xd1, 0x5f, 0xf0, 0xc5, 0x2f, 0xf1, 0x1b,
-	0x7c, 0x14, 0xfc, 0x01, 0xa9, 0x7e, 0x88, 0x34, 0x33, 0xa1, 0xa9, 0x9b, 0x82, 0x6f, 0xf7, 0x66,
-	0xce, 0x3d, 0xf7, 0xe4, 0x9e, 0x83, 0xce, 0x61, 0x21, 0xac, 0x05, 0x4d, 0xab, 0x11, 0xf5, 0xe5,
-	0xb5, 0x01, 0x5d, 0x89, 0x14, 0x88, 0xd2, 0xd2, 0x4a, 0x7c, 0x92, 0xe6, 0xb2, 0xe4, 0x84, 0x29,
-	0x41, 0x8c, 0xd5, 0xc0, 0x16, 0x86, 0x54, 0xa3, 0x68, 0x90, 0x49, 0x99, 0xe5, 0x40, 0x6b, 0xcc,
-	0xac, 0x7c, 0x4f, 0x61, 0xa1, 0xec, 0xd2, 0x8d, 0x44, 0x0f, 0xfc, 0x23, 0x53, 0x82, 0xb2, 0xa2,
-	0x90, 0x96, 0x59, 0x21, 0x0b, 0xe3, 0x5f, 0x93, 0x4c, 0xd8, 0x79, 0x39, 0x23, 0xa9, 0x5c, 0xd0,
-	0x4c, 0x66, 0x72, 0xc3, 0xb1, 0xee, 0xea, 0xa6, 0xae, 0x3c, 0x9c, 0xb6, 0xe0, 0x6f, 0x05, 0x07,
-	0x79, 0x29, 0x45, 0x41, 0x6b, 0x51, 0xc9, 0x7a, 0x81, 0x56, 0x29, 0x9d, 0x03, 0xcb, 0xed, 0xdc,
-	0x0f, 0x5c, 0xb4, 0x06, 0xa0, 0xa8, 0xe4, 0x52, 0x69, 0xf9, 0x71, 0xe9, 0xb6, 0xa4, 0x49, 0x06,
-	0x45, 0x52, 0xb1, 0x5c, 0x70, 0x66, 0x81, 0xde, 0x28, 0x1c, 0x45, 0x3c, 0x42, 0xa7, 0x13, 0xf8,
-	0x50, 0x82, 0xb1, 0xd3, 0xfa, 0x97, 0xc7, 0xdc, 0xb7, 0xf8, 0x0c, 0xed, 0x97, 0x06, 0xf4, 0xb5,
-	0xe0, 0xfd, 0xbd, 0xf3, 0xbd, 0xc7, 0x87, 0x93, 0xde, 0xba, 0x1d, 0xf3, 0xf8, 0x0d, 0x3a, 0xbb,
-	0x31, 0x62, 0x94, 0x2c, 0x0c, 0xe0, 0x01, 0x3a, 0x74, 0x97, 0x6b, 0xa6, 0x6e, 0x4f, 0x0e, 0x8c,
-	0x07, 0xe1, 0x3e, 0xda, 0x67, 0x9c, 0x6b, 0x30, 0xa6, 0x1f, 0xd6, 0x84, 0x4d, 0x1b, 0x1b, 0x14,
-	0x5d, 0x6a, 0x60, 0x16, 0x1c, 0xe1, 0x85, 0xfb, 0xdc, 0x08, 0x79, 0x88, 0xee, 0x28, 0xa1, 0x20,
-	0x17, 0x05, 0x6c, 0xc4, 0xa0, 0xe6, 0xd3, 0x98, 0xb7, 0x95, 0x86, 0x6d, 0xa5, 0xdb, 0x72, 0x6e,
-	0x6d, 0xcb, 0x89, 0x5f, 0xa0, 0xa3, 0xad, 0x75, 0xf8, 0x11, 0x3a, 0xf6, 0xe8, 0x46, 0xa6, 0x5b,
-	0x75, 0x64, 0xda, 0xb0, 0x67, 0xdf, 0x42, 0x74, 0x7c, 0xe5, 0xf2, 0x33, 0x75, 0xf1, 0xc1, 0xaf,
-	0x51, 0xef, 0x55, 0xed, 0x0b, 0x3e, 0x25, 0x2e, 0x10, 0xa4, 0x71, 0x9a, 0x5c, 0xad, 0xd3, 0x12,
-	0x0d, 0xc8, 0x26, 0x5b, 0x5a, 0xa5, 0xc4, 0xc1, 0xa7, 0x96, 0xd9, 0xd2, 0xc4, 0xf7, 0x3e, 0xff,
-	0xfc, 0xf3, 0x25, 0x44, 0xf8, 0xc0, 0xbb, 0xfb, 0x09, 0x2b, 0x74, 0xf7, 0x9f, 0x13, 0xe3, 0x27,
-	0xa4, 0x2b, 0x9d, 0xa4, 0xdb, 0xbc, 0x28, 0xf9, 0x4f, 0xb4, 0xf3, 0x2d, 0x0e, 0x30, 0x43, 0xf7,
-	0x3b, 0x2c, 0xc0, 0x4f, 0xbb, 0x79, 0x76, 0xbb, 0x15, 0xed, 0xb8, 0x40, 0x1c, 0xbc, 0x3c, 0xf9,
-	0xbe, 0x1a, 0x06, 0x3f, 0x56, 0xc3, 0xe0, 0xd7, 0x6a, 0x18, 0x7c, 0xfd, 0x3d, 0x0c, 0xde, 0x85,
-	0xd5, 0x68, 0xd6, 0xab, 0x71, 0xcf, 0xff, 0x06, 0x00, 0x00, 0xff, 0xff, 0xd5, 0x77, 0x6a, 0xbb,
-	0x9f, 0x03, 0x00, 0x00,
+	proto.RegisterType((*StreamRequest)(nil), "cloud.api.streams.v1.StreamRequest")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -259,8 +107,9 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type EmitterServiceClient interface {
 	Health(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error)
-	RequestStreamId(ctx context.Context, in *RequestStreamIdRequest, opts ...grpc.CallOption) (*RequestStreamIdResponse, error)
-	CreateStreamAddress(ctx context.Context, in *CreateStreamAddressRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	RequestStream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	ApproveStream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	CreateStream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type emitterServiceClient struct {
@@ -280,18 +129,27 @@ func (c *emitterServiceClient) Health(ctx context.Context, in *empty.Empty, opts
 	return out, nil
 }
 
-func (c *emitterServiceClient) RequestStreamId(ctx context.Context, in *RequestStreamIdRequest, opts ...grpc.CallOption) (*RequestStreamIdResponse, error) {
-	out := new(RequestStreamIdResponse)
-	err := c.cc.Invoke(ctx, "/cloud.api.streams.v1.EmitterService/RequestStreamId", in, out, opts...)
+func (c *emitterServiceClient) RequestStream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/cloud.api.streams.v1.EmitterService/RequestStream", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *emitterServiceClient) CreateStreamAddress(ctx context.Context, in *CreateStreamAddressRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+func (c *emitterServiceClient) ApproveStream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
 	out := new(empty.Empty)
-	err := c.cc.Invoke(ctx, "/cloud.api.streams.v1.EmitterService/CreateStreamAddress", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/cloud.api.streams.v1.EmitterService/ApproveStream", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *emitterServiceClient) CreateStream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/cloud.api.streams.v1.EmitterService/CreateStream", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -301,8 +159,9 @@ func (c *emitterServiceClient) CreateStreamAddress(ctx context.Context, in *Crea
 // EmitterServiceServer is the server API for EmitterService service.
 type EmitterServiceServer interface {
 	Health(context.Context, *empty.Empty) (*rpc.HealthStatus, error)
-	RequestStreamId(context.Context, *RequestStreamIdRequest) (*RequestStreamIdResponse, error)
-	CreateStreamAddress(context.Context, *CreateStreamAddressRequest) (*empty.Empty, error)
+	RequestStream(context.Context, *StreamRequest) (*empty.Empty, error)
+	ApproveStream(context.Context, *StreamRequest) (*empty.Empty, error)
+	CreateStream(context.Context, *StreamRequest) (*empty.Empty, error)
 }
 
 func RegisterEmitterServiceServer(s *grpc.Server, srv EmitterServiceServer) {
@@ -327,38 +186,56 @@ func _EmitterService_Health_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmitterService_RequestStreamId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RequestStreamIdRequest)
+func _EmitterService_RequestStream_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StreamRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmitterServiceServer).RequestStreamId(ctx, in)
+		return srv.(EmitterServiceServer).RequestStream(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cloud.api.streams.v1.EmitterService/RequestStreamId",
+		FullMethod: "/cloud.api.streams.v1.EmitterService/RequestStream",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmitterServiceServer).RequestStreamId(ctx, req.(*RequestStreamIdRequest))
+		return srv.(EmitterServiceServer).RequestStream(ctx, req.(*StreamRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmitterService_CreateStreamAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateStreamAddressRequest)
+func _EmitterService_ApproveStream_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StreamRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmitterServiceServer).CreateStreamAddress(ctx, in)
+		return srv.(EmitterServiceServer).ApproveStream(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cloud.api.streams.v1.EmitterService/CreateStreamAddress",
+		FullMethod: "/cloud.api.streams.v1.EmitterService/ApproveStream",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmitterServiceServer).CreateStreamAddress(ctx, req.(*CreateStreamAddressRequest))
+		return srv.(EmitterServiceServer).ApproveStream(ctx, req.(*StreamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EmitterService_CreateStream_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StreamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmitterServiceServer).CreateStream(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cloud.api.streams.v1.EmitterService/CreateStream",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmitterServiceServer).CreateStream(ctx, req.(*StreamRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -372,14 +249,53 @@ var _EmitterService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _EmitterService_Health_Handler,
 		},
 		{
-			MethodName: "RequestStreamId",
-			Handler:    _EmitterService_RequestStreamId_Handler,
+			MethodName: "RequestStream",
+			Handler:    _EmitterService_RequestStream_Handler,
 		},
 		{
-			MethodName: "CreateStreamAddress",
-			Handler:    _EmitterService_CreateStreamAddress_Handler,
+			MethodName: "ApproveStream",
+			Handler:    _EmitterService_ApproveStream_Handler,
+		},
+		{
+			MethodName: "CreateStream",
+			Handler:    _EmitterService_CreateStream_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "emitter/v1/emitter_service.proto",
+}
+
+func init() {
+	proto.RegisterFile("emitter/v1/emitter_service.proto", fileDescriptor_emitter_service_83586dc572a06e0e)
+}
+
+var fileDescriptor_emitter_service_83586dc572a06e0e = []byte{
+	// 427 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x51, 0x41, 0x8b, 0x13, 0x31,
+	0x14, 0x9e, 0x19, 0x97, 0xba, 0x1b, 0xed, 0x22, 0x61, 0xd1, 0x65, 0x2a, 0x63, 0xa9, 0x08, 0x7b,
+	0x99, 0x84, 0xea, 0x2f, 0xa8, 0xcb, 0x82, 0x3d, 0xa8, 0xd0, 0x82, 0x07, 0x2f, 0x25, 0x9d, 0x3c,
+	0xa7, 0x81, 0x99, 0x24, 0x26, 0x99, 0xc1, 0x7a, 0xf4, 0xee, 0xc9, 0x8b, 0x3f, 0xc9, 0xe3, 0x82,
+	0x7f, 0x40, 0xaa, 0x3f, 0x44, 0x26, 0x99, 0x65, 0x57, 0xd4, 0x5b, 0x6f, 0x79, 0xef, 0xfb, 0xde,
+	0xf7, 0xf2, 0xbe, 0x0f, 0x8d, 0xa1, 0x16, 0xce, 0x81, 0xa1, 0xed, 0x94, 0xf6, 0xcf, 0x95, 0x05,
+	0xd3, 0x8a, 0x02, 0x88, 0x36, 0xca, 0x29, 0x7c, 0x52, 0x54, 0xaa, 0xe1, 0x84, 0x69, 0x41, 0xac,
+	0x33, 0xc0, 0x6a, 0x4b, 0xda, 0x69, 0x3a, 0x2a, 0x95, 0x2a, 0x2b, 0xa0, 0x9e, 0xb3, 0x6e, 0xde,
+	0x51, 0xa8, 0xb5, 0xdb, 0x86, 0x91, 0xf4, 0x61, 0x0f, 0x32, 0x2d, 0x28, 0x93, 0x52, 0x39, 0xe6,
+	0x84, 0x92, 0xb6, 0x47, 0xf3, 0x52, 0xb8, 0x4d, 0xb3, 0x26, 0x85, 0xaa, 0x69, 0xa9, 0x4a, 0x75,
+	0xad, 0xd1, 0x55, 0xbe, 0xf0, 0xaf, 0x9e, 0x4e, 0x6f, 0xd0, 0xdf, 0x08, 0x0e, 0xea, 0x5c, 0x09,
+	0x49, 0xfd, 0xa7, 0xf2, 0x6e, 0x81, 0xd1, 0x05, 0xdd, 0x00, 0xab, 0xdc, 0xa6, 0x1f, 0x98, 0xdd,
+	0x18, 0x00, 0xd9, 0xaa, 0xad, 0x36, 0xea, 0xc3, 0x36, 0x6c, 0x29, 0xf2, 0x12, 0x64, 0xde, 0xb2,
+	0x4a, 0x70, 0xe6, 0x80, 0xfe, 0xf5, 0x08, 0x12, 0x93, 0xcf, 0x31, 0x1a, 0x2e, 0xfd, 0xb1, 0x0b,
+	0x78, 0xdf, 0x80, 0x75, 0xf8, 0x11, 0xba, 0xa3, 0x85, 0x86, 0x4a, 0x48, 0x58, 0x09, 0x7e, 0x1a,
+	0x8f, 0xe3, 0xb3, 0xa3, 0x05, 0xba, 0x6a, 0xcd, 0x39, 0x7e, 0x80, 0x6e, 0x37, 0x16, 0x4c, 0x07,
+	0x26, 0x1e, 0x1c, 0x74, 0xe5, 0x9c, 0xe3, 0x11, 0x3a, 0x0a, 0xbe, 0x75, 0xd0, 0xad, 0x71, 0x7c,
+	0x76, 0xb0, 0x38, 0x0c, 0x8d, 0x39, 0xc7, 0x4f, 0xd0, 0x71, 0x51, 0x09, 0x90, 0x6e, 0xc5, 0x38,
+	0x37, 0x60, 0xed, 0xe9, 0x81, 0x1f, 0x1e, 0x86, 0xee, 0x2c, 0x34, 0x9f, 0x5e, 0x26, 0xe8, 0xf8,
+	0x22, 0xa4, 0xb3, 0x0c, 0xe1, 0xe0, 0xd7, 0x68, 0xf0, 0xc2, 0x5f, 0x8d, 0xef, 0x93, 0x60, 0x37,
+	0xb9, 0xf2, 0x91, 0x5c, 0x74, 0x59, 0xa4, 0x23, 0x72, 0x9d, 0x9c, 0xd1, 0x05, 0x09, 0xf4, 0xa5,
+	0x63, 0xae, 0xb1, 0x93, 0x7b, 0x9f, 0xbe, 0xff, 0xfa, 0x92, 0x20, 0x7c, 0xd8, 0x7b, 0xf7, 0x11,
+	0xbf, 0x42, 0xc3, 0xfe, 0xd8, 0x70, 0x39, 0x7e, 0x4c, 0xfe, 0x95, 0x3c, 0xf9, 0xc3, 0x97, 0xf4,
+	0x3f, 0xcb, 0x27, 0x51, 0xa7, 0x37, 0xd3, 0xda, 0xa8, 0x16, 0xf6, 0xa3, 0xf7, 0x12, 0xdd, 0x3d,
+	0x37, 0xc0, 0xdc, 0x7e, 0xe4, 0x9e, 0x9f, 0x7c, 0xdb, 0x65, 0xd1, 0xe5, 0x2e, 0x8b, 0x7e, 0xec,
+	0xb2, 0xe8, 0xeb, 0xcf, 0x2c, 0x7a, 0x9b, 0xb4, 0xd3, 0xf5, 0xc0, 0xf3, 0x9e, 0xfd, 0x0e, 0x00,
+	0x00, 0xff, 0xff, 0xd5, 0x0d, 0xcd, 0x8e, 0x17, 0x03, 0x00, 0x00,
 }
