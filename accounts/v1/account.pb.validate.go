@@ -72,6 +72,21 @@ func (m *Account) Validate() error {
 		}
 	}
 
+	{
+		tmp := m.GetUpdatedAt()
+
+		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
+
+			if err := v.Validate(); err != nil {
+				return AccountValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+	}
+
 	return nil
 }
 
@@ -142,6 +157,21 @@ func (m *AccountProfile) Validate() error {
 	// no validation rules for Address
 
 	// no validation rules for Balance
+
+	{
+		tmp := m.GetUpdatedAt()
+
+		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
+
+			if err := v.Validate(); err != nil {
+				return AccountProfileValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+	}
 
 	return nil
 }

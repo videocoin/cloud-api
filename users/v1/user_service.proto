@@ -10,7 +10,6 @@ import "google/api/annotations.proto";
 
 import "users/v1/user.proto";
 
-
 option go_package = "v1";
 option (gogoproto.unmarshaler_all) = false;
 option (gogoproto.marshaler_all) = false;
@@ -28,7 +27,7 @@ service UserService {
             post: "/api/v1/users",
             body: "*"
         };
-    }
+	}
 
     rpc Login(LoginUserRequest) returns (LoginUserResponse) {
         option (google.api.http) = {
@@ -93,7 +92,7 @@ service UserService {
 message CreateUserRequest {
     string email = 1 [(gogoproto.moretags) = "validate:\"required,email\""];
     string password = 2 [(gogoproto.moretags) = "validate:\"secure-password\""];
-    string name = 3 [(gogoproto.moretags) = "validate:\"min=2,max=40\""];
+    string name = 3 [(gogoproto.moretags) = "validate:\"min=2,max=100\""];
     string confirm_password = 4 [(gogoproto.moretags) = "validate:\"confirm-password=Password\""];
 }
 

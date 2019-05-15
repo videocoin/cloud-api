@@ -285,6 +285,10 @@
         "balance": {
           "type": "number",
           "format": "double"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },

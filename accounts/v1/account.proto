@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package cloud.api.account.v1;
 
+import "google/protobuf/timestamp.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 
@@ -16,12 +17,16 @@ message Account {
     string address = 3 [(validate.rules).string = {min_len: 40, max_len: 42}, (gogoproto.moretags) = "gorm:\"type:varchar(42)\""];
     string key = 4 [(gogoproto.moretags) = "gorm:\"type:varchar(512)\""];
     double balance = 5 [(validate.rules).double.gte = 0];
+
+    google.protobuf.Timestamp updated_at = 9 [(gogoproto.stdtime) = true];
 }
 
 message AccountProfile {
     string id = 1;
     string address = 2;
     double balance = 3;
+    
+    google.protobuf.Timestamp updated_at = 4 [(gogoproto.stdtime) = true];
 }
 
 message AccountKey {
