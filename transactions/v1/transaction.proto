@@ -16,7 +16,7 @@ message Transaction {
     string from = 3;
     string to = 4;
     google.protobuf.Timestamp created_at = 5;
-    uint64 value = 6;
+    int64 value = 6;
 }
 
 enum TransactionType {
