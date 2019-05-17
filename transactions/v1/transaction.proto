@@ -11,16 +11,22 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
 
 message Transaction {
-    TransactionType type = 1;
+    TransactionSource source = 1;
     string hash = 2;
     string from = 3;
     string to = 4;
     google.protobuf.Timestamp created_at = 5;
     int64 value = 6;
+    CurrencyType type = 7;
 }
 
-enum TransactionType {
-    DEPOSIT = 0;
-    PAYMENT = 1;
-    WITHDRAWAL = 2;
+enum TransactionSource {
+    ETH = 0;
+    VID = 1;
+}
+
+enum CurrencyType {
+    VID_NATIVE = 0;
+    VIDERC20 = 1;
+    TOKENIZED_FIAT = 2;
 }
