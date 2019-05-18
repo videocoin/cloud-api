@@ -29,8 +29,8 @@ message User {
     UserRole role = 5;
     
     bool activated = 6;
-    google.protobuf.Timestamp activated_at = 7 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp created_at = 8 [(gogoproto.stdtime) = true];
+    google.protobuf.Timestamp activated_at = 7;
+    google.protobuf.Timestamp created_at = 8;
 
     string token = 9 [(gogoproto.moretags) = "gorm:\"type:varchar(255);index\""];
 }
