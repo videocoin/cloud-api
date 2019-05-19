@@ -376,7 +376,7 @@
         "name": {
           "type": "string"
         },
-        "activated": {
+        "is_active": {
           "type": "boolean",
           "format": "boolean"
         },

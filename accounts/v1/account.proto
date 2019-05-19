@@ -7,9 +7,11 @@ import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 
 option go_package = "v1";
-option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = false;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.goproto_registration) = true;
+option (gogoproto.messagename_all) = true;
 
 message Account {
     string id = 1 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
@@ -22,11 +24,16 @@ message Account {
 }
 
 message AccountProfile {
-    string id = 1;
+    string id = 1 [
+        (gogoproto.customname) = "ID"
+    ];
+
     string address = 2;
     double balance = 3;
     
-    google.protobuf.Timestamp updated_at = 4;
+    google.protobuf.Timestamp updated_at = 4 [
+        (gogoproto.stdtime) = true
+    ];
 }
 
 message AccountKey {

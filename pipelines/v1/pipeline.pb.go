@@ -3,24 +3,32 @@
 
 package v1
 
-import proto "github.com/golang/protobuf/proto"
+import proto "github.com/gogo/protobuf/proto"
+import golang_proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import v1 "github.com/VideoCoin/cloud-api/profiles/v1"
-import _ "github.com/envoyproxy/protoc-gen-validate/validate"
 import _ "github.com/gogo/protobuf/gogoproto"
-import timestamp "github.com/golang/protobuf/ptypes/timestamp"
+import _ "github.com/golang/protobuf/ptypes/timestamp"
+
+import time "time"
+
+import github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
+
+import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
+var _ = golang_proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+var _ = time.Kitchen
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 type PipelineStatus int32
 
@@ -60,44 +68,53 @@ func (x PipelineStatus) String() string {
 	return proto.EnumName(PipelineStatus_name, int32(x))
 }
 func (PipelineStatus) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_pipeline_97022b46658dc0af, []int{0}
+	return fileDescriptor_pipeline_ffeb2eb4c83de168, []int{0}
 }
 
 type Pipeline struct {
-	Id                   string               `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" gorm:"type:varchar(36);primary_key"`
-	Name                 string               `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" gorm:"type:varchar(100)"`
-	UserId               string               `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty" gorm:"type:varchar(36)"`
-	ProfileId            v1.ProfileId         `protobuf:"varint,4,opt,name=profile_id,json=profileId,proto3,enum=cloud.api.profiles.v1.ProfileId" json:"profile_id,omitempty"`
-	Status               PipelineStatus       `protobuf:"varint,5,opt,name=status,proto3,enum=cloud.api.pipelines.v1.PipelineStatus" json:"status,omitempty" gorm:"type:varchar(100)"`
-	ClientAddress        string               `protobuf:"bytes,6,opt,name=client_address,json=clientAddress,proto3" json:"client_address,omitempty"`
-	StreamId             uint64               `protobuf:"varint,7,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
-	StreamAddress        string               `protobuf:"bytes,8,opt,name=stream_address,json=streamAddress,proto3" json:"stream_address,omitempty"`
-	CreatedAt            *timestamp.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	PendingAt            *timestamp.Timestamp `protobuf:"bytes,11,opt,name=pending_at,json=pendingAt,proto3" json:"pending_at,omitempty"`
-	RunningAt            *timestamp.Timestamp `protobuf:"bytes,12,opt,name=running_at,json=runningAt,proto3" json:"running_at,omitempty"`
-	StoppedAt            *timestamp.Timestamp `protobuf:"bytes,13,opt,name=stopped_at,json=stoppedAt,proto3" json:"stopped_at,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
-	XXX_unrecognized     []byte               `json:"-"`
-	XXX_sizecache        int32                `json:"-"`
+	ID                   string         `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" gorm:"type:varchar(36);primary_key"`
+	Name                 string         `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty" gorm:"type:varchar(100)"`
+	UserId               string         `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty" gorm:"type:varchar(36)"`
+	ProfileId            v1.ProfileId   `protobuf:"varint,4,opt,name=profile_id,json=profileId,proto3,enum=cloud.api.profiles.v1.ProfileId" json:"profile_id,omitempty"`
+	Status               PipelineStatus `protobuf:"varint,5,opt,name=status,proto3,enum=cloud.api.pipelines.v1.PipelineStatus" json:"status,omitempty" gorm:"type:varchar(100)"`
+	ClientAddress        string         `protobuf:"bytes,6,opt,name=client_address,json=clientAddress,proto3" json:"client_address,omitempty"`
+	StreamId             uint64         `protobuf:"varint,7,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
+	StreamAddress        string         `protobuf:"bytes,8,opt,name=stream_address,json=streamAddress,proto3" json:"stream_address,omitempty"`
+	CreatedAt            *time.Time     `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
+	PendingAt            *time.Time     `protobuf:"bytes,11,opt,name=pending_at,json=pendingAt,proto3,stdtime" json:"pending_at,omitempty"`
+	RunningAt            *time.Time     `protobuf:"bytes,12,opt,name=running_at,json=runningAt,proto3,stdtime" json:"running_at,omitempty"`
+	StoppedAt            *time.Time     `protobuf:"bytes,13,opt,name=stopped_at,json=stoppedAt,proto3,stdtime" json:"stopped_at,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *Pipeline) Reset()         { *m = Pipeline{} }
 func (m *Pipeline) String() string { return proto.CompactTextString(m) }
 func (*Pipeline) ProtoMessage()    {}
 func (*Pipeline) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pipeline_97022b46658dc0af, []int{0}
+	return fileDescriptor_pipeline_ffeb2eb4c83de168, []int{0}
 }
 func (m *Pipeline) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Pipeline.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Pipeline) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Pipeline.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_Pipeline.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *Pipeline) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Pipeline.Merge(dst, src)
 }
 func (m *Pipeline) XXX_Size() int {
-	return xxx_messageInfo_Pipeline.Size(m)
+	return m.Size()
 }
 func (m *Pipeline) XXX_DiscardUnknown() {
 	xxx_messageInfo_Pipeline.DiscardUnknown(m)
@@ -105,9 +122,9 @@ func (m *Pipeline) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Pipeline proto.InternalMessageInfo
 
-func (m *Pipeline) GetId() string {
+func (m *Pipeline) GetID() string {
 	if m != nil {
-		return m.Id
+		return m.ID
 	}
 	return ""
 }
@@ -161,65 +178,78 @@ func (m *Pipeline) GetStreamAddress() string {
 	return ""
 }
 
-func (m *Pipeline) GetCreatedAt() *timestamp.Timestamp {
+func (m *Pipeline) GetCreatedAt() *time.Time {
 	if m != nil {
 		return m.CreatedAt
 	}
 	return nil
 }
 
-func (m *Pipeline) GetPendingAt() *timestamp.Timestamp {
+func (m *Pipeline) GetPendingAt() *time.Time {
 	if m != nil {
 		return m.PendingAt
 	}
 	return nil
 }
 
-func (m *Pipeline) GetRunningAt() *timestamp.Timestamp {
+func (m *Pipeline) GetRunningAt() *time.Time {
 	if m != nil {
 		return m.RunningAt
 	}
 	return nil
 }
 
-func (m *Pipeline) GetStoppedAt() *timestamp.Timestamp {
+func (m *Pipeline) GetStoppedAt() *time.Time {
 	if m != nil {
 		return m.StoppedAt
 	}
 	return nil
 }
 
+func (*Pipeline) XXX_MessageName() string {
+	return "cloud.api.pipelines.v1.Pipeline"
+}
+
 type PipelineProfile struct {
-	Id                   string               `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name                 string               `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Status               PipelineStatus       `protobuf:"varint,3,opt,name=status,proto3,enum=cloud.api.pipelines.v1.PipelineStatus" json:"status,omitempty"`
-	ProfileId            v1.ProfileId         `protobuf:"varint,4,opt,name=profile_id,json=profileId,proto3,enum=cloud.api.profiles.v1.ProfileId" json:"profile_id,omitempty"`
-	CreatedAt            *timestamp.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	PendingAt            *timestamp.Timestamp `protobuf:"bytes,11,opt,name=pending_at,json=pendingAt,proto3" json:"pending_at,omitempty"`
-	RunningAt            *timestamp.Timestamp `protobuf:"bytes,12,opt,name=running_at,json=runningAt,proto3" json:"running_at,omitempty"`
-	StoppedAt            *timestamp.Timestamp `protobuf:"bytes,13,opt,name=stopped_at,json=stoppedAt,proto3" json:"stopped_at,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
-	XXX_unrecognized     []byte               `json:"-"`
-	XXX_sizecache        int32                `json:"-"`
+	Id                   string         `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string         `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Status               PipelineStatus `protobuf:"varint,3,opt,name=status,proto3,enum=cloud.api.pipelines.v1.PipelineStatus" json:"status,omitempty"`
+	ProfileId            v1.ProfileId   `protobuf:"varint,4,opt,name=profile_id,json=profileId,proto3,enum=cloud.api.profiles.v1.ProfileId" json:"profile_id,omitempty"`
+	CreatedAt            *time.Time     `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3,stdtime" json:"created_at,omitempty"`
+	PendingAt            *time.Time     `protobuf:"bytes,11,opt,name=pending_at,json=pendingAt,proto3,stdtime" json:"pending_at,omitempty"`
+	RunningAt            *time.Time     `protobuf:"bytes,12,opt,name=running_at,json=runningAt,proto3,stdtime" json:"running_at,omitempty"`
+	StoppedAt            *time.Time     `protobuf:"bytes,13,opt,name=stopped_at,json=stoppedAt,proto3,stdtime" json:"stopped_at,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
 }
 
 func (m *PipelineProfile) Reset()         { *m = PipelineProfile{} }
 func (m *PipelineProfile) String() string { return proto.CompactTextString(m) }
 func (*PipelineProfile) ProtoMessage()    {}
 func (*PipelineProfile) Descriptor() ([]byte, []int) {
-	return fileDescriptor_pipeline_97022b46658dc0af, []int{1}
+	return fileDescriptor_pipeline_ffeb2eb4c83de168, []int{1}
 }
 func (m *PipelineProfile) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_PipelineProfile.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *PipelineProfile) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_PipelineProfile.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_PipelineProfile.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *PipelineProfile) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_PipelineProfile.Merge(dst, src)
 }
 func (m *PipelineProfile) XXX_Size() int {
-	return xxx_messageInfo_PipelineProfile.Size(m)
+	return m.Size()
 }
 func (m *PipelineProfile) XXX_DiscardUnknown() {
 	xxx_messageInfo_PipelineProfile.DiscardUnknown(m)
@@ -255,93 +285,1179 @@ func (m *PipelineProfile) GetProfileId() v1.ProfileId {
 	return v1.ProfileIdNone
 }
 
-func (m *PipelineProfile) GetCreatedAt() *timestamp.Timestamp {
+func (m *PipelineProfile) GetCreatedAt() *time.Time {
 	if m != nil {
 		return m.CreatedAt
 	}
 	return nil
 }
 
-func (m *PipelineProfile) GetPendingAt() *timestamp.Timestamp {
+func (m *PipelineProfile) GetPendingAt() *time.Time {
 	if m != nil {
 		return m.PendingAt
 	}
 	return nil
 }
 
-func (m *PipelineProfile) GetRunningAt() *timestamp.Timestamp {
+func (m *PipelineProfile) GetRunningAt() *time.Time {
 	if m != nil {
 		return m.RunningAt
 	}
 	return nil
 }
 
-func (m *PipelineProfile) GetStoppedAt() *timestamp.Timestamp {
+func (m *PipelineProfile) GetStoppedAt() *time.Time {
 	if m != nil {
 		return m.StoppedAt
 	}
 	return nil
 }
 
+func (*PipelineProfile) XXX_MessageName() string {
+	return "cloud.api.pipelines.v1.PipelineProfile"
+}
 func init() {
 	proto.RegisterType((*Pipeline)(nil), "cloud.api.pipelines.v1.Pipeline")
+	golang_proto.RegisterType((*Pipeline)(nil), "cloud.api.pipelines.v1.Pipeline")
 	proto.RegisterType((*PipelineProfile)(nil), "cloud.api.pipelines.v1.PipelineProfile")
+	golang_proto.RegisterType((*PipelineProfile)(nil), "cloud.api.pipelines.v1.PipelineProfile")
 	proto.RegisterEnum("cloud.api.pipelines.v1.PipelineStatus", PipelineStatus_name, PipelineStatus_value)
+	golang_proto.RegisterEnum("cloud.api.pipelines.v1.PipelineStatus", PipelineStatus_name, PipelineStatus_value)
 }
+func (m *Pipeline) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Pipeline) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.ID) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(len(m.ID)))
+		i += copy(dAtA[i:], m.ID)
+	}
+	if len(m.Name) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(len(m.Name)))
+		i += copy(dAtA[i:], m.Name)
+	}
+	if len(m.UserId) > 0 {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(len(m.UserId)))
+		i += copy(dAtA[i:], m.UserId)
+	}
+	if m.ProfileId != 0 {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(m.ProfileId))
+	}
+	if m.Status != 0 {
+		dAtA[i] = 0x28
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(m.Status))
+	}
+	if len(m.ClientAddress) > 0 {
+		dAtA[i] = 0x32
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(len(m.ClientAddress)))
+		i += copy(dAtA[i:], m.ClientAddress)
+	}
+	if m.StreamId != 0 {
+		dAtA[i] = 0x38
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(m.StreamId))
+	}
+	if len(m.StreamAddress) > 0 {
+		dAtA[i] = 0x42
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(len(m.StreamAddress)))
+		i += copy(dAtA[i:], m.StreamAddress)
+	}
+	if m.CreatedAt != nil {
+		dAtA[i] = 0x52
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)))
+		n1, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n1
+	}
+	if m.PendingAt != nil {
+		dAtA[i] = 0x5a
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.PendingAt)))
+		n2, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.PendingAt, dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n2
+	}
+	if m.RunningAt != nil {
+		dAtA[i] = 0x62
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.RunningAt)))
+		n3, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.RunningAt, dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n3
+	}
+	if m.StoppedAt != nil {
+		dAtA[i] = 0x6a
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.StoppedAt)))
+		n4, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.StoppedAt, dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n4
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *PipelineProfile) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *PipelineProfile) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(len(m.Id)))
+		i += copy(dAtA[i:], m.Id)
+	}
+	if len(m.Name) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(len(m.Name)))
+		i += copy(dAtA[i:], m.Name)
+	}
+	if m.Status != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(m.Status))
+	}
+	if m.ProfileId != 0 {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(m.ProfileId))
+	}
+	if m.CreatedAt != nil {
+		dAtA[i] = 0x52
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)))
+		n5, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n5
+	}
+	if m.PendingAt != nil {
+		dAtA[i] = 0x5a
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.PendingAt)))
+		n6, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.PendingAt, dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n6
+	}
+	if m.RunningAt != nil {
+		dAtA[i] = 0x62
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.RunningAt)))
+		n7, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.RunningAt, dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n7
+	}
+	if m.StoppedAt != nil {
+		dAtA[i] = 0x6a
+		i++
+		i = encodeVarintPipeline(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.StoppedAt)))
+		n8, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.StoppedAt, dAtA[i:])
+		if err != nil {
+			return 0, err
+		}
+		i += n8
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func encodeVarintPipeline(dAtA []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		dAtA[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	dAtA[offset] = uint8(v)
+	return offset + 1
+}
+func (m *Pipeline) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.ID)
+	if l > 0 {
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	l = len(m.UserId)
+	if l > 0 {
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.ProfileId != 0 {
+		n += 1 + sovPipeline(uint64(m.ProfileId))
+	}
+	if m.Status != 0 {
+		n += 1 + sovPipeline(uint64(m.Status))
+	}
+	l = len(m.ClientAddress)
+	if l > 0 {
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.StreamId != 0 {
+		n += 1 + sovPipeline(uint64(m.StreamId))
+	}
+	l = len(m.StreamAddress)
+	if l > 0 {
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.CreatedAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.PendingAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.PendingAt)
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.RunningAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.RunningAt)
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.StoppedAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.StoppedAt)
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *PipelineProfile) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	l = len(m.Name)
+	if l > 0 {
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.Status != 0 {
+		n += 1 + sovPipeline(uint64(m.Status))
+	}
+	if m.ProfileId != 0 {
+		n += 1 + sovPipeline(uint64(m.ProfileId))
+	}
+	if m.CreatedAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.PendingAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.PendingAt)
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.RunningAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.RunningAt)
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.StoppedAt != nil {
+		l = github_com_gogo_protobuf_types.SizeOfStdTime(*m.StoppedAt)
+		n += 1 + l + sovPipeline(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func sovPipeline(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozPipeline(x uint64) (n int) {
+	return sovPipeline(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (m *Pipeline) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPipeline
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Pipeline: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Pipeline: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ID", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ID = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UserId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UserId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProfileId", wireType)
+			}
+			m.ProfileId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			m.Status = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Status |= (PipelineStatus(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamId", wireType)
+			}
+			m.StreamId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.StreamId |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.StreamAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.CreatedAt == nil {
+				m.CreatedAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 11:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PendingAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.PendingAt == nil {
+				m.PendingAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.PendingAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 12:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RunningAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.RunningAt == nil {
+				m.RunningAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.RunningAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 13:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StoppedAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.StoppedAt == nil {
+				m.StoppedAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.StoppedAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPipeline(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowPipeline
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: PipelineProfile: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: PipelineProfile: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			m.Status = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Status |= (PipelineStatus(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProfileId", wireType)
+			}
+			m.ProfileId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreatedAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.CreatedAt == nil {
+				m.CreatedAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.CreatedAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 11:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PendingAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.PendingAt == nil {
+				m.PendingAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.PendingAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 12:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RunningAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.RunningAt == nil {
+				m.RunningAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.RunningAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 13:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StoppedAt", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			postIndex := iNdEx + msglen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.StoppedAt == nil {
+				m.StoppedAt = new(time.Time)
+			}
+			if err := github_com_gogo_protobuf_types.StdTimeUnmarshal(m.StoppedAt, dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipPipeline(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func skipPipeline(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowPipeline
+			}
+			if iNdEx >= l {
+				return 0, io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		wireType := int(wire & 0x7)
+		switch wireType {
+		case 0:
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				iNdEx++
+				if dAtA[iNdEx-1] < 0x80 {
+					break
+				}
+			}
+			return iNdEx, nil
+		case 1:
+			iNdEx += 8
+			return iNdEx, nil
+		case 2:
+			var length int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowPipeline
+				}
+				if iNdEx >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				length |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthPipeline
+			}
+			return iNdEx, nil
+		case 3:
+			for {
+				var innerWire uint64
+				var start int = iNdEx
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowPipeline
+					}
+					if iNdEx >= l {
+						return 0, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					innerWire |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				innerWireType := int(innerWire & 0x7)
+				if innerWireType == 4 {
+					break
+				}
+				next, err := skipPipeline(dAtA[start:])
+				if err != nil {
+					return 0, err
+				}
+				iNdEx = start + next
+			}
+			return iNdEx, nil
+		case 4:
+			return iNdEx, nil
+		case 5:
+			iNdEx += 4
+			return iNdEx, nil
+		default:
+			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
+		}
+	}
+	panic("unreachable")
+}
+
+var (
+	ErrInvalidLengthPipeline = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowPipeline   = fmt.Errorf("proto: integer overflow")
+)
 
 func init() {
-	proto.RegisterFile("pipelines/v1/pipeline.proto", fileDescriptor_pipeline_97022b46658dc0af)
+	proto.RegisterFile("pipelines/v1/pipeline.proto", fileDescriptor_pipeline_ffeb2eb4c83de168)
+}
+func init() {
+	golang_proto.RegisterFile("pipelines/v1/pipeline.proto", fileDescriptor_pipeline_ffeb2eb4c83de168)
 }
 
-var fileDescriptor_pipeline_97022b46658dc0af = []byte{
-	// 784 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe4, 0x92, 0x4f, 0x6f, 0xe3, 0x44,
-	0x18, 0xc6, 0xf3, 0x3f, 0xcd, 0x94, 0xcd, 0x5a, 0xd6, 0xd2, 0x35, 0x4e, 0x95, 0x58, 0x61, 0x77,
-	0x95, 0x5d, 0x29, 0x4e, 0xd3, 0x0a, 0xa4, 0x16, 0x09, 0xe4, 0x26, 0x6e, 0xe5, 0xaa, 0xa4, 0xc1,
-	0x4d, 0x7b, 0x40, 0x48, 0x91, 0x93, 0x99, 0xba, 0x23, 0x6c, 0xcf, 0x60, 0x4f, 0x2c, 0xf2, 0x0d,
-	0x50, 0x3e, 0x00, 0xea, 0x25, 0x17, 0xe0, 0x2b, 0x70, 0xe9, 0x89, 0x23, 0x47, 0x3e, 0x41, 0x85,
-	0xca, 0x89, 0x6b, 0x3f, 0x01, 0x8a, 0xff, 0xb4, 0x49, 0x88, 0x14, 0x21, 0x8e, 0x7b, 0x7b, 0x67,
-	0xe6, 0xf9, 0x3d, 0xf6, 0xfb, 0x3e, 0x2f, 0x28, 0x51, 0x4c, 0x91, 0x85, 0x1d, 0xe4, 0x35, 0xfc,
-	0x66, 0x23, 0x3e, 0xc8, 0xd4, 0x25, 0x8c, 0xf0, 0x5b, 0x43, 0x8b, 0x8c, 0xa0, 0x6c, 0x50, 0x2c,
-	0x3f, 0xca, 0x64, 0xbf, 0x29, 0xee, 0x9b, 0x98, 0x5d, 0x8f, 0x06, 0xf2, 0x90, 0xd8, 0x8d, 0x4b,
-	0x0c, 0x11, 0x69, 0x11, 0xec, 0x34, 0x02, 0x71, 0xdd, 0xa0, 0xb8, 0x41, 0x5d, 0x72, 0x85, 0xad,
-	0xc8, 0x32, 0xaa, 0x43, 0x4b, 0x51, 0x99, 0x43, 0x91, 0xe3, 0x93, 0x31, 0x75, 0xc9, 0xf7, 0xe3,
-	0x46, 0xf0, 0x38, 0xac, 0x9b, 0xc8, 0xa9, 0xfb, 0x86, 0x85, 0xa1, 0xc1, 0x50, 0xe3, 0x5f, 0x45,
-	0x64, 0x51, 0x9f, 0xb3, 0x30, 0x89, 0x49, 0x42, 0x78, 0x30, 0xba, 0x0a, 0x4e, 0xc1, 0x21, 0xa8,
-	0x22, 0x79, 0xc5, 0x24, 0xc4, 0xb4, 0xd0, 0x93, 0x8a, 0x61, 0x1b, 0x79, 0xcc, 0xb0, 0x69, 0x28,
-	0xa8, 0xfe, 0x9a, 0x05, 0x1b, 0xdd, 0xa8, 0x3d, 0x5e, 0x01, 0x29, 0x0c, 0x85, 0xa4, 0x94, 0xac,
-	0x15, 0x0e, 0x9b, 0x0f, 0x77, 0x95, 0x8f, 0x4d, 0xe2, 0xda, 0x07, 0x55, 0x36, 0xa6, 0xe8, 0xc0,
-	0x37, 0xdc, 0xe1, 0xb5, 0xe1, 0xd6, 0xf6, 0x3e, 0x7d, 0xfb, 0x19, 0x75, 0xb1, 0x6d, 0xb8, 0xe3,
-	0xfe, 0xb7, 0x68, 0x5c, 0xbd, 0xfd, 0xfb, 0xb7, 0x74, 0xd6, 0x4d, 0xdf, 0x24, 0x5f, 0xe9, 0x29,
-	0x0c, 0xf9, 0x1d, 0x90, 0x71, 0x0c, 0x1b, 0x09, 0xa9, 0xc0, 0x64, 0xfb, 0xe1, 0xae, 0x22, 0xac,
-	0x30, 0x69, 0xee, 0xec, 0xbc, 0xad, 0xea, 0x81, 0x92, 0xff, 0x1c, 0xe4, 0x47, 0x1e, 0x72, 0xfb,
-	0x18, 0x0a, 0xe9, 0x00, 0x7a, 0xfd, 0x70, 0x57, 0x79, 0xb9, 0xfa, 0xcb, 0xf3, 0x5f, 0xcb, 0xcd,
-	0x28, 0x0d, 0xf2, 0x5f, 0x00, 0x10, 0x8d, 0x79, 0x66, 0x91, 0x91, 0x92, 0xb5, 0xe2, 0xae, 0x24,
-	0xcf, 0x85, 0x17, 0x67, 0xe0, 0x37, 0xe5, 0x6e, 0x58, 0x6b, 0x50, 0x2f, 0xd0, 0xb8, 0xe4, 0xbf,
-	0x01, 0x39, 0x8f, 0x19, 0x6c, 0xe4, 0x09, 0xd9, 0x00, 0x7e, 0x23, 0xaf, 0x4e, 0x5e, 0x8e, 0xe7,
-	0x74, 0x1e, 0xa8, 0xd7, 0x34, 0x17, 0x79, 0xf2, 0xaf, 0x41, 0x71, 0x68, 0x61, 0xe4, 0xb0, 0xbe,
-	0x01, 0xa1, 0x8b, 0x3c, 0x4f, 0xc8, 0xcd, 0xba, 0xd4, 0x9f, 0x85, 0xb7, 0x4a, 0x78, 0xc9, 0x97,
-	0x40, 0xc1, 0x63, 0x2e, 0x32, 0xec, 0x59, 0x13, 0x79, 0x29, 0x59, 0xcb, 0xe8, 0x1b, 0xe1, 0x85,
-	0x06, 0x67, 0x1e, 0xd1, 0x63, 0xec, 0xb1, 0x11, 0x7a, 0x84, 0xb7, 0xb1, 0xc7, 0x3e, 0x00, 0x43,
-	0x17, 0x19, 0x0c, 0xc1, 0xbe, 0xc1, 0x04, 0x20, 0x25, 0x6b, 0x9b, 0xbb, 0xa2, 0x1c, 0x6e, 0x80,
-	0x1c, 0x6f, 0x80, 0xdc, 0x8b, 0x37, 0x40, 0x2f, 0x44, 0x6a, 0x85, 0xcd, 0x50, 0x8a, 0x1c, 0x88,
-	0x1d, 0x73, 0x86, 0x6e, 0xae, 0x47, 0x23, 0x75, 0x88, 0xba, 0x23, 0xc7, 0x89, 0xd0, 0x0f, 0xd6,
-	0xa3, 0x91, 0x3a, 0x44, 0x3d, 0x46, 0x28, 0x0d, 0x7f, 0xf8, 0xd9, 0x7a, 0x34, 0x52, 0x2b, 0xac,
-	0xfa, 0x53, 0x1a, 0x3c, 0x8f, 0xf3, 0x88, 0x52, 0xe5, 0x8b, 0x4f, 0xeb, 0x1b, 0xec, 0x22, 0x3f,
-	0xbf, 0x8b, 0x8f, 0xdb, 0x16, 0x87, 0x9d, 0xfe, 0x2f, 0x61, 0x3f, 0xc6, 0xf9, 0xbf, 0xb7, 0xed,
-	0x3d, 0x0a, 0xe9, 0xdd, 0x8f, 0x69, 0x50, 0x5c, 0x9c, 0x23, 0x2f, 0x81, 0x8c, 0xd6, 0x3e, 0x55,
-	0xb9, 0x84, 0xb8, 0x35, 0x99, 0x4a, 0xfc, 0xe2, 0xab, 0x06, 0x2d, 0xc4, 0x7f, 0x02, 0x9e, 0x77,
-	0xd5, 0x4e, 0x5b, 0xeb, 0x1c, 0xf7, 0x75, 0xf5, 0xab, 0x0b, 0xf5, 0xbc, 0xc7, 0x25, 0x45, 0x69,
-	0x32, 0x95, 0xb6, 0x97, 0x22, 0x41, 0xdf, 0x8d, 0x90, 0xc7, 0xba, 0x61, 0x8f, 0xf3, 0x98, 0xd2,
-	0xed, 0xea, 0x67, 0x97, 0x2a, 0x97, 0x5a, 0x85, 0x29, 0x94, 0xba, 0xc4, 0x47, 0x31, 0xb6, 0x07,
-	0x8a, 0x31, 0xd6, 0xd2, 0x55, 0xa5, 0xa7, 0x72, 0x69, 0xb1, 0x32, 0x99, 0x4a, 0xa5, 0x45, 0xaa,
-	0x15, 0x84, 0x10, 0x43, 0x75, 0xb0, 0x19, 0x43, 0x27, 0x67, 0x87, 0x5c, 0x46, 0xdc, 0x9e, 0x4c,
-	0x25, 0x61, 0x91, 0x38, 0x21, 0x83, 0x58, 0xfe, 0x06, 0xe4, 0xf5, 0x8b, 0x4e, 0x47, 0xeb, 0x1c,
-	0x73, 0x59, 0xf1, 0xa3, 0xc9, 0x54, 0xfa, 0x70, 0xa9, 0x93, 0x70, 0xd6, 0xfc, 0x2b, 0x90, 0x3b,
-	0x52, 0xb4, 0x53, 0xb5, 0xcd, 0xe5, 0x44, 0x61, 0x32, 0x95, 0x5e, 0x2c, 0xca, 0x8e, 0x0c, 0x6c,
-	0x21, 0xc8, 0xbf, 0x03, 0x85, 0xd6, 0xd9, 0x97, 0xdd, 0x53, 0xb5, 0xa7, 0xb6, 0xb9, 0xbc, 0x58,
-	0x9a, 0x4c, 0xa5, 0x97, 0x4b, 0x3f, 0x4b, 0x6c, 0x6a, 0x21, 0x86, 0xa0, 0xb8, 0xf5, 0xc3, 0xcf,
-	0xe5, 0xc4, 0xed, 0x2f, 0xe5, 0xa5, 0x14, 0x0e, 0x5f, 0xfc, 0x7e, 0x5f, 0x4e, 0xfc, 0x71, 0x5f,
-	0x4e, 0xfc, 0x79, 0x5f, 0x4e, 0xdc, 0xfc, 0x55, 0x4e, 0x7c, 0x9d, 0xf2, 0x9b, 0x83, 0x5c, 0x90,
-	0xe6, 0xde, 0x3f, 0x01, 0x00, 0x00, 0xff, 0xff, 0xe9, 0xd8, 0xa6, 0x06, 0x17, 0x07, 0x00, 0x00,
+var fileDescriptor_pipeline_ffeb2eb4c83de168 = []byte{
+	// 761 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x92, 0x4f, 0x4f, 0xdb, 0x48,
+	0x18, 0xc6, 0x71, 0x12, 0x12, 0x32, 0x2c, 0xc1, 0xb2, 0x76, 0xc1, 0xeb, 0xa0, 0xc4, 0xca, 0xee,
+	0xa2, 0x80, 0x14, 0x87, 0xc0, 0xee, 0x4a, 0xa5, 0x6a, 0x51, 0xfe, 0x18, 0x64, 0x44, 0x43, 0x6a,
+	0x02, 0x87, 0xaa, 0x52, 0xe4, 0xc4, 0x43, 0x18, 0xd5, 0xf6, 0x4c, 0xed, 0x49, 0x24, 0xbe, 0x41,
+	0x95, 0x53, 0x4f, 0xbd, 0xe5, 0xd4, 0x7e, 0x0a, 0x2e, 0xed, 0x91, 0x63, 0x3f, 0x41, 0x5a, 0x85,
+	0x6f, 0xc0, 0x27, 0xa8, 0xe2, 0x3f, 0x90, 0x44, 0x91, 0x4a, 0xd5, 0x6b, 0x6f, 0x33, 0xaf, 0x9f,
+	0xdf, 0xe3, 0x79, 0xdf, 0xe7, 0x05, 0x49, 0x82, 0x08, 0x34, 0x90, 0x05, 0x9d, 0x7c, 0xb7, 0x90,
+	0x0f, 0x2e, 0x12, 0xb1, 0x31, 0xc5, 0xdc, 0x4a, 0xcb, 0xc0, 0x1d, 0x5d, 0xd2, 0x08, 0x92, 0xee,
+	0x64, 0x52, 0xb7, 0x20, 0x3c, 0x6a, 0x23, 0x7a, 0xd1, 0x69, 0x4a, 0x2d, 0x6c, 0xe6, 0xcf, 0x90,
+	0x0e, 0x71, 0x19, 0x23, 0x2b, 0xef, 0x8a, 0x73, 0x1a, 0x41, 0x79, 0x62, 0xe3, 0x73, 0x64, 0xf8,
+	0x96, 0xfe, 0xd9, 0xb3, 0x14, 0x72, 0x63, 0x68, 0x1b, 0xb7, 0x71, 0xde, 0x2d, 0x37, 0x3b, 0xe7,
+	0xee, 0xcd, 0xbd, 0xb8, 0x27, 0x5f, 0x9e, 0x6e, 0x63, 0xdc, 0x36, 0xe0, 0xbd, 0x8a, 0x22, 0x13,
+	0x3a, 0x54, 0x33, 0x89, 0x27, 0xc8, 0x7c, 0x9c, 0x07, 0x0b, 0x35, 0xff, 0x6d, 0xdc, 0x13, 0x10,
+	0x42, 0x3a, 0xcf, 0x88, 0x4c, 0x36, 0x5e, 0xca, 0x0d, 0x07, 0xe9, 0x90, 0x52, 0xb9, 0x1d, 0xa4,
+	0xff, 0x6a, 0x63, 0xdb, 0xdc, 0xcd, 0xd0, 0x4b, 0x02, 0x77, 0xbb, 0x9a, 0xdd, 0xba, 0xd0, 0xec,
+	0xec, 0xce, 0xff, 0x1b, 0x8f, 0x89, 0x8d, 0x4c, 0xcd, 0xbe, 0x6c, 0xbc, 0x82, 0x97, 0x19, 0x35,
+	0x84, 0x74, 0x6e, 0x0b, 0x44, 0x2c, 0xcd, 0x84, 0x7c, 0xc8, 0x35, 0x58, 0xbb, 0x1d, 0xa4, 0xf9,
+	0x19, 0x68, 0x61, 0x6b, 0x6b, 0x23, 0xa3, 0xba, 0x4a, 0xee, 0x5f, 0x10, 0xeb, 0x38, 0xd0, 0x6e,
+	0x20, 0x9d, 0x0f, 0xbb, 0x50, 0xf2, 0x76, 0x90, 0x5e, 0x9d, 0xfd, 0xbf, 0x8c, 0x1a, 0x1d, 0x69,
+	0x15, 0x9d, 0xdb, 0x03, 0xc0, 0x9f, 0xca, 0x08, 0x8c, 0x88, 0x4c, 0x36, 0xb1, 0x2d, 0x4a, 0x63,
+	0xb3, 0x0e, 0x46, 0xd6, 0x2d, 0x48, 0x35, 0xef, 0xac, 0xe8, 0x6a, 0x9c, 0x04, 0x47, 0xee, 0x25,
+	0x88, 0x3a, 0x54, 0xa3, 0x1d, 0x87, 0x9f, 0x77, 0xe1, 0x75, 0x69, 0x76, 0x50, 0x52, 0x30, 0x99,
+	0x13, 0x57, 0xfd, 0x9d, 0x96, 0x7c, 0x4f, 0xee, 0x1f, 0x90, 0x68, 0x19, 0x08, 0x5a, 0xb4, 0xa1,
+	0xe9, 0xba, 0x0d, 0x1d, 0x87, 0x8f, 0x8e, 0x7a, 0x53, 0x97, 0xbc, 0x6a, 0xd1, 0x2b, 0x72, 0x49,
+	0x10, 0x77, 0xa8, 0x0d, 0x35, 0x73, 0xd4, 0x44, 0x4c, 0x64, 0xb2, 0x11, 0x75, 0xc1, 0x2b, 0x28,
+	0xfa, 0xc8, 0xc3, 0xff, 0x18, 0x78, 0x2c, 0x78, 0x1e, 0x5e, 0x35, 0xf0, 0xd8, 0x03, 0xa0, 0x65,
+	0x43, 0x8d, 0x42, 0xbd, 0xa1, 0x51, 0x1e, 0x88, 0x4c, 0x76, 0x71, 0x5b, 0x90, 0xbc, 0xcc, 0xa5,
+	0x20, 0x73, 0xa9, 0x1e, 0x64, 0x5e, 0x8a, 0xbc, 0xfd, 0x92, 0x66, 0xd4, 0xb8, 0xcf, 0x14, 0xa9,
+	0x3b, 0x4a, 0x68, 0xe9, 0xc8, 0x6a, 0x8f, 0x0c, 0x16, 0x1f, 0x6a, 0xe0, 0x33, 0x9e, 0x81, 0xdd,
+	0xb1, 0x2c, 0xdf, 0xe0, 0xb7, 0x87, 0x1a, 0xf8, 0x8c, 0x67, 0xe0, 0x50, 0x4c, 0x88, 0xd7, 0xc2,
+	0xd2, 0x43, 0x0d, 0x7c, 0xa6, 0x48, 0x33, 0x57, 0x61, 0xb0, 0x1c, 0xe4, 0xe4, 0xa7, 0xcd, 0x25,
+	0xee, 0x17, 0xd9, 0xdd, 0x4c, 0x6e, 0x7c, 0x33, 0xfd, 0xdd, 0x7b, 0x7a, 0xb7, 0x04, 0xe1, 0x1f,
+	0x59, 0x82, 0xbb, 0x98, 0x7f, 0x7a, 0x0b, 0x7f, 0x85, 0x47, 0x37, 0xdf, 0x85, 0x41, 0x62, 0x72,
+	0xbe, 0x9c, 0x08, 0x22, 0x4a, 0xe5, 0x48, 0x66, 0xe7, 0x84, 0x95, 0x5e, 0x5f, 0xe4, 0x26, 0xbf,
+	0x2a, 0xba, 0x01, 0xb9, 0xff, 0xc0, 0x72, 0x4d, 0xae, 0x56, 0x94, 0xea, 0x41, 0x43, 0x95, 0x9f,
+	0x9f, 0xca, 0x27, 0x75, 0x96, 0x11, 0xc4, 0x5e, 0x5f, 0x5c, 0x9b, 0x8a, 0x0a, 0xbe, 0xee, 0x40,
+	0x87, 0xd6, 0xbc, 0x7e, 0xc7, 0xb1, 0x62, 0xad, 0xa6, 0x1e, 0x9f, 0xc9, 0x6c, 0x68, 0x16, 0x56,
+	0x24, 0xc4, 0xc6, 0x5d, 0x18, 0x60, 0x3b, 0x20, 0x11, 0x60, 0x65, 0x55, 0x2e, 0xd6, 0x65, 0x36,
+	0x2c, 0xa4, 0x7b, 0x7d, 0x31, 0x39, 0x49, 0x95, 0xdd, 0x58, 0x02, 0x28, 0x07, 0x16, 0x03, 0xe8,
+	0xf0, 0xb8, 0xc4, 0x46, 0x84, 0xb5, 0x5e, 0x5f, 0xe4, 0x27, 0x89, 0x43, 0xdc, 0x0c, 0xe4, 0xeb,
+	0x20, 0xa6, 0x9e, 0x56, 0xab, 0x4a, 0xf5, 0x80, 0x9d, 0x17, 0xfe, 0xec, 0xf5, 0xc5, 0x3f, 0xa6,
+	0x3a, 0xf1, 0x26, 0xce, 0xfd, 0x0d, 0xa2, 0xfb, 0x45, 0xe5, 0x48, 0xae, 0xb0, 0x51, 0x81, 0xef,
+	0xf5, 0xc5, 0xdf, 0x27, 0x65, 0xfb, 0x1a, 0x32, 0xa0, 0xce, 0x6d, 0x82, 0x78, 0xf9, 0xf8, 0x59,
+	0xed, 0x48, 0xae, 0xcb, 0x15, 0x36, 0x26, 0x24, 0x7b, 0x7d, 0x71, 0x75, 0xea, 0xb1, 0xd8, 0x24,
+	0x06, 0xa4, 0x50, 0x17, 0x56, 0xde, 0xbc, 0x4f, 0xcd, 0x5d, 0x7d, 0x48, 0x4d, 0xa5, 0x50, 0xe2,
+	0xaf, 0x87, 0x29, 0xe6, 0xf3, 0x30, 0xc5, 0x7c, 0x1d, 0xa6, 0x98, 0x4f, 0x37, 0x29, 0xe6, 0xfa,
+	0x26, 0xc5, 0xbc, 0x08, 0x75, 0x0b, 0xcd, 0xa8, 0x9b, 0xeb, 0xce, 0xb7, 0x00, 0x00, 0x00, 0xff,
+	0xff, 0x1a, 0x60, 0x09, 0x51, 0xfa, 0x06, 0x00, 0x00,
 }

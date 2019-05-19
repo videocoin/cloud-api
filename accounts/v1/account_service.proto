@@ -6,14 +6,15 @@ import "accounts/v1/account.proto";
 
 import "github.com/VideoCoin/cloud-api/rpc/health.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 
 option go_package = "v1";
-option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = false;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.goproto_registration) = true;
+option (gogoproto.messagename_all) = true;
 
 service AccountService {
     rpc Health(google.protobuf.Empty) returns (cloud.api.rpc.HealthStatus) {
@@ -34,11 +35,13 @@ service AccountService {
 }
 
 message AccountRequest {
-    string owner_id = 1 [(gogoproto.customname) = "OwnerID"];
+    string owner_id = 1 [
+        (gogoproto.customname) = "OwnerID"
+    ];
 }
 
 message Address {
-    string address = 1 [(validate.rules).string = {min_len: 40, max_len: 42}];
+    string address = 1;
 }
 
 message ListResponse {

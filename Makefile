@@ -21,7 +21,7 @@ protoc-rpc:
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 		-I${GOPATH}/src/github.com \
 		-I. \
-		--gofast_out=plugins=grpc:. \
+		--gogo_out=plugins=grpc:. \
 		./rpc/*.proto
 
 protoc-v1-%:
@@ -31,8 +31,12 @@ protoc-v1-%:
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 		-I${GOPATH}/src/github.com \
 		-I. \
-		--gofast_out=plugins=grpc:. \
-		--validate_out="lang=gogo:." \
+		--gogo_out=plugins=grpc:. \
+		Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,\
+		Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
+		Mgoogle/protobuf/struct.proto=github.com/gogo/protobuf/types,\
+		Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
+		Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types:. \
 		./$*/v1/*.proto
 
 protoc-gateway-v1-%:
@@ -42,7 +46,12 @@ protoc-gateway-v1-%:
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 		-I${GOPATH}/src/github.com \
 		-I. \
-		--gofast_out=plugins=grpc:. \
+		--gogo_out=plugins=grpc:. \
+		Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,\
+		Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
+		Mgoogle/protobuf/struct.proto=github.com/gogo/protobuf/types,\
+		Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
+		Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types:. \
 		--grpc-gateway_out=logtostderr=true:. \
 		--swagger_out=logtostderr=true:. \
 		./$*/v1/*.proto
