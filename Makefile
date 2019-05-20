@@ -32,7 +32,6 @@ protoc-v1-%:
 		-I${GOPATH}/src/github.com \
 		-I. \
 		--gofast_out=plugins=grpc:. \
-		--validate_out="lang=gogo:." \
 		./$*/v1/*.proto
 
 protoc-gateway-v1-%:

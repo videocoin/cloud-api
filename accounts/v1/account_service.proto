@@ -6,7 +6,7 @@ import "accounts/v1/account.proto";
 
 import "github.com/VideoCoin/cloud-api/rpc/health.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
+
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 
@@ -24,11 +24,19 @@ service AccountService {
 
     rpc Create(AccountRequest) returns (AccountProfile) {}
     rpc Get(AccountRequest) returns (AccountProfile) {}
-
-    rpc GetByAddress(Address) returns (AccountProfile) {}
     rpc List(google.protobuf.Empty) returns (ListResponse) {}
 
-    rpc Refresh(AccountRequest) returns (AccountProfile) {}
+    rpc GetByAddress(Address) returns (AccountProfile) {
+        option (google.api.http) = {
+            get: "/api/v1/accounts/{address}"
+        };
+    }
+
+    rpc Refresh(Address) returns (AccountProfile) {
+        option (google.api.http) = {
+            get: "/api/v1/accounts/{address}/refresh"
+        };
+    }
 
     rpc Key(AccountRequest) returns (AccountKey) {}
 }
@@ -38,7 +46,7 @@ message AccountRequest {
 }
 
 message Address {
-    string address = 1 [(validate.rules).string = {min_len: 40, max_len: 42}];
+    string address = 1;
 }
 
 message ListResponse {
