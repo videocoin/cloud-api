@@ -2,16 +2,21 @@ syntax = "proto3";
 
 package cloud.api.transactions.v1;
 
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "transactions/v1/transaction.proto";
+
 option go_package = "v1";
 option (gogoproto.unmarshaler_all) = false;
 option (gogoproto.marshaler_all) = false;
 option (gogoproto.sizer_all) = false;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "transactions/v1/transaction.proto";
-
 service TransactionService {
-    rpc GetTransactions(GetTransactionsRequest) returns (GetTransactionsResponse);
+    rpc GetTransactions(GetTransactionsRequest) returns (GetTransactionsResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/transactions/{address}"
+        };
+    }
 }
 
 message GetTransactionsRequest {

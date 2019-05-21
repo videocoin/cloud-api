@@ -47,14 +47,3 @@ protoc-gateway-v1-%:
 		--grpc-gateway_out=logtostderr=true:. \
 		--swagger_out=logtostderr=true:. \
 		./$*/v1/*.proto
-
-.PHONY: transactions
-transactions:
-	protoc \
-		-I/usr/local/include \
-		-I${GOPATH}/src \
-		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-		-I${GOPATH}/src/github.com \
-		-I. \
-		--gofast_out=plugins=grpc:. \
-		./transactions/v1/*.proto
