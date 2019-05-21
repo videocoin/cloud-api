@@ -12,6 +12,8 @@
 		Transaction
 		GetTransactionsRequest
 		GetTransactionsResponse
+		GetTransactionRequest
+		GetTransactionResponse
 */
 package v1
 

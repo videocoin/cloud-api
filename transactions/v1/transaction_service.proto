@@ -17,6 +17,12 @@ service TransactionService {
             get: "/api/v1/transactions/{address}"
         };
     }
+
+    rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/transaction/{hash}"
+        };
+    }
 }
 
 message GetTransactionsRequest {
@@ -25,4 +31,12 @@ message GetTransactionsRequest {
 
 message GetTransactionsResponse {
     repeated Transaction transactions = 1;
+}
+
+message GetTransactionRequest {
+    string hash = 1;
+}
+
+message GetTransactionResponse {
+    Transaction transaction = 1;
 }

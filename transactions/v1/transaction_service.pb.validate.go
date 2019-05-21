@@ -188,3 +188,154 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetTransactionsResponseValidationError{}
+
+// Validate checks the field values on GetTransactionRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *GetTransactionRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Hash
+
+	return nil
+}
+
+// GetTransactionRequestValidationError is the validation error returned by
+// GetTransactionRequest.Validate if the designated constraints aren't met.
+type GetTransactionRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTransactionRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTransactionRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTransactionRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTransactionRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTransactionRequestValidationError) ErrorName() string {
+	return "GetTransactionRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTransactionRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTransactionRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTransactionRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTransactionRequestValidationError{}
+
+// Validate checks the field values on GetTransactionResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *GetTransactionResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	{
+		tmp := m.GetTransaction()
+
+		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
+
+			if err := v.Validate(); err != nil {
+				return GetTransactionResponseValidationError{
+					field:  "Transaction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+	}
+
+	return nil
+}
+
+// GetTransactionResponseValidationError is the validation error returned by
+// GetTransactionResponse.Validate if the designated constraints aren't met.
+type GetTransactionResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTransactionResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTransactionResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTransactionResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTransactionResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTransactionResponseValidationError) ErrorName() string {
+	return "GetTransactionResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTransactionResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTransactionResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTransactionResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTransactionResponseValidationError{}

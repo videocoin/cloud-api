@@ -15,6 +15,30 @@
     "application/json"
   ],
   "paths": {
+    "/api/v1/transaction/{hash}": {
+      "get": {
+        "operationId": "GetTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetTransactionResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TransactionService"
+        ]
+      }
+    },
     "/api/v1/transactions/{address}": {
       "get": {
         "operationId": "GetTransactions",
@@ -49,6 +73,14 @@
         "TOKENIZED_FIAT"
       ],
       "default": "VID_NATIVE"
+    },
+    "v1GetTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/v1Transaction"
+        }
+      }
     },
     "v1GetTransactionsResponse": {
       "type": "object",
