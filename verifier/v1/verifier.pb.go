@@ -7,10 +7,10 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import rpc "github.com/VideoCoin/cloud-api/rpc"
+import _ "github.com/gogo/googleapis/google/api"
 import _ "github.com/gogo/protobuf/gogoproto"
-import empty "github.com/golang/protobuf/ptypes/empty"
+import types "github.com/gogo/protobuf/types"
 import _ "github.com/mwitkow/go-proto-validators"
-import _ "google.golang.org/genproto/googleapis/api/annotations"
 
 import (
 	context "golang.org/x/net/context"
@@ -130,8 +130,8 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type VerifierServiceClient interface {
-	Verify(ctx context.Context, in *VerifyRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	Health(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error)
+	Verify(ctx context.Context, in *VerifyRequest, opts ...grpc.CallOption) (*types.Empty, error)
+	Health(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error)
 }
 
 type verifierServiceClient struct {
@@ -142,8 +142,8 @@ func NewVerifierServiceClient(cc *grpc.ClientConn) VerifierServiceClient {
 	return &verifierServiceClient{cc}
 }
 
-func (c *verifierServiceClient) Verify(ctx context.Context, in *VerifyRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *verifierServiceClient) Verify(ctx context.Context, in *VerifyRequest, opts ...grpc.CallOption) (*types.Empty, error) {
+	out := new(types.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.verifier.v1.VerifierService/Verify", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -151,7 +151,7 @@ func (c *verifierServiceClient) Verify(ctx context.Context, in *VerifyRequest, o
 	return out, nil
 }
 
-func (c *verifierServiceClient) Health(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error) {
+func (c *verifierServiceClient) Health(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error) {
 	out := new(rpc.HealthStatus)
 	err := c.cc.Invoke(ctx, "/cloud.api.verifier.v1.VerifierService/Health", in, out, opts...)
 	if err != nil {
@@ -162,8 +162,8 @@ func (c *verifierServiceClient) Health(ctx context.Context, in *empty.Empty, opt
 
 // VerifierServiceServer is the server API for VerifierService service.
 type VerifierServiceServer interface {
-	Verify(context.Context, *VerifyRequest) (*empty.Empty, error)
-	Health(context.Context, *empty.Empty) (*rpc.HealthStatus, error)
+	Verify(context.Context, *VerifyRequest) (*types.Empty, error)
+	Health(context.Context, *types.Empty) (*rpc.HealthStatus, error)
 }
 
 func RegisterVerifierServiceServer(s *grpc.Server, srv VerifierServiceServer) {
@@ -189,7 +189,7 @@ func _VerifierService_Verify_Handler(srv interface{}, ctx context.Context, dec f
 }
 
 func _VerifierService_Health_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(empty.Empty)
+	in := new(types.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -201,7 +201,7 @@ func _VerifierService_Health_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/cloud.api.verifier.v1.VerifierService/Health",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VerifierServiceServer).Health(ctx, req.(*empty.Empty))
+		return srv.(VerifierServiceServer).Health(ctx, req.(*types.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
