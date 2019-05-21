@@ -6,14 +6,15 @@ import "accounts/v1/account.proto";
 
 import "github.com/VideoCoin/cloud-api/rpc/health.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 
 option go_package = "v1";
-option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = false;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.goproto_registration) = true;
+option (gogoproto.messagename_all) = true;
 
 service AccountService {
     rpc Health(google.protobuf.Empty) returns (cloud.api.rpc.HealthStatus) {
@@ -22,27 +23,23 @@ service AccountService {
         };
     }
 
+    rpc Get(AccountRequest) returns (AccountProfile) {
+        option (google.api.http) = {
+            get: "/api/v1/accounts/{id}"
+        };
+    }
+
+    rpc GetByAddress(Address) returns (AccountProfile) {}
+    rpc GetByOwner(AccountRequest) returns (AccountProfile) {}
     rpc Create(AccountRequest) returns (AccountProfile) {}
-    rpc Get(AccountRequest) returns (AccountProfile) {}
     rpc List(google.protobuf.Empty) returns (ListResponse) {}
-
-    rpc GetByAddress(Address) returns (AccountProfile) {
-        option (google.api.http) = {
-            get: "/api/v1/accounts/{address}"
-        };
-    }
-
-    rpc Refresh(Address) returns (AccountProfile) {
-        option (google.api.http) = {
-            get: "/api/v1/accounts/{address}/refresh"
-        };
-    }
 
     rpc Key(AccountRequest) returns (AccountKey) {}
 }
 
 message AccountRequest {
-    string owner_id = 1 [(gogoproto.customname) = "OwnerID"];
+    string id = 1;
+    string owner_id = 2;
 }
 
 message Address {

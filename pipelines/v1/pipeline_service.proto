@@ -9,12 +9,13 @@ import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 
 option go_package = "v1";
-option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = false;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.goproto_registration) = true;
+option (gogoproto.messagename_all) = true;
 
 service PipelineService {
     rpc Health(google.protobuf.Empty) returns (cloud.api.rpc.HealthStatus) {

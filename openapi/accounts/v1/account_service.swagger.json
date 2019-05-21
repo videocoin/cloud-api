@@ -15,9 +15,9 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/accounts/{address}": {
+    "/api/v1/accounts/{id}": {
       "get": {
-        "operationId": "GetByAddress",
+        "operationId": "Get",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -28,33 +28,15 @@
         },
         "parameters": [
           {
-            "name": "address",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
-          }
-        ],
-        "tags": [
-          "AccountService"
-        ]
-      }
-    },
-    "/api/v1/accounts/{address}/refresh": {
-      "get": {
-        "operationId": "Refresh",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1AccountProfile"
-            }
-          }
-        },
-        "parameters": [
+          },
           {
-            "name": "address",
-            "in": "path",
-            "required": true,
+            "name": "owner_id",
+            "in": "query",
+            "required": false,
             "type": "string"
           }
         ],
