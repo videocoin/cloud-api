@@ -31,6 +31,12 @@ service PipelineService {
         };
     }
 
+    rpc Delete(PipelineRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/pipelines/{id}",
+        };
+    }
+
     rpc Get(PipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
             get: "/api/v1/pipelines/{id}"
