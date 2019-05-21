@@ -10,9 +10,9 @@ import v1 "github.com/VideoCoin/cloud-api/profiles/v1"
 import rpc "github.com/VideoCoin/cloud-api/rpc"
 import v12 "github.com/VideoCoin/cloud-api/transcoder/v1"
 import v11 "github.com/VideoCoin/cloud-api/workorder/v1"
+import _ "github.com/gogo/googleapis/google/api"
 import _ "github.com/gogo/protobuf/gogoproto"
-import empty "github.com/golang/protobuf/ptypes/empty"
-import _ "google.golang.org/genproto/googleapis/api/annotations"
+import types "github.com/gogo/protobuf/types"
 
 import (
 	context "golang.org/x/net/context"
@@ -767,19 +767,19 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ManagerServiceClient interface {
 	AddJob(ctx context.Context, in *AddJobRequest, opts ...grpc.CallOption) (*AddJobResponse, error)
-	StopStream(ctx context.Context, in *StopStreamRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	Health(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error)
+	StopStream(ctx context.Context, in *StopStreamRequest, opts ...grpc.CallOption) (*types.Empty, error)
+	Health(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error)
 	GetStream(ctx context.Context, in *GetStreamRequest, opts ...grpc.CallOption) (*v11.WorkOrder, error)
-	UpdateStreamStatus(ctx context.Context, in *UpdateStreamStatusRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	VerifyChunk(ctx context.Context, in *VerifyChunkRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	UpdateContractAddr(ctx context.Context, in *ContractAddrRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	AddProfile(ctx context.Context, in *AddProfileRequest, opts ...grpc.CallOption) (*empty.Empty, error)
-	ChunkCreated(ctx context.Context, in *ChunkCreatedRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateStreamStatus(ctx context.Context, in *UpdateStreamStatusRequest, opts ...grpc.CallOption) (*types.Empty, error)
+	VerifyChunk(ctx context.Context, in *VerifyChunkRequest, opts ...grpc.CallOption) (*types.Empty, error)
+	UpdateContractAddr(ctx context.Context, in *ContractAddrRequest, opts ...grpc.CallOption) (*types.Empty, error)
+	AddProfile(ctx context.Context, in *AddProfileRequest, opts ...grpc.CallOption) (*types.Empty, error)
+	ChunkCreated(ctx context.Context, in *ChunkCreatedRequest, opts ...grpc.CallOption) (*types.Empty, error)
 	CheckBalance(ctx context.Context, in *CheckBalanceRequest, opts ...grpc.CallOption) (*CheckBalanceResponse, error)
-	GetProfiles(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*v1.Profiles, error)
+	GetProfiles(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*v1.Profiles, error)
 	GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*v1.Profile, error)
-	RegisterTranscoder(ctx context.Context, in *v12.Transcoder, opts ...grpc.CallOption) (*empty.Empty, error)
-	UpdateTranscoderStatus(ctx context.Context, in *UpdateTranscoderStatusRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	RegisterTranscoder(ctx context.Context, in *v12.Transcoder, opts ...grpc.CallOption) (*types.Empty, error)
+	UpdateTranscoderStatus(ctx context.Context, in *UpdateTranscoderStatusRequest, opts ...grpc.CallOption) (*types.Empty, error)
 }
 
 type managerServiceClient struct {
@@ -799,8 +799,8 @@ func (c *managerServiceClient) AddJob(ctx context.Context, in *AddJobRequest, op
 	return out, nil
 }
 
-func (c *managerServiceClient) StopStream(ctx context.Context, in *StopStreamRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *managerServiceClient) StopStream(ctx context.Context, in *StopStreamRequest, opts ...grpc.CallOption) (*types.Empty, error) {
+	out := new(types.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/StopStream", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -808,7 +808,7 @@ func (c *managerServiceClient) StopStream(ctx context.Context, in *StopStreamReq
 	return out, nil
 }
 
-func (c *managerServiceClient) Health(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error) {
+func (c *managerServiceClient) Health(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error) {
 	out := new(rpc.HealthStatus)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/Health", in, out, opts...)
 	if err != nil {
@@ -826,8 +826,8 @@ func (c *managerServiceClient) GetStream(ctx context.Context, in *GetStreamReque
 	return out, nil
 }
 
-func (c *managerServiceClient) UpdateStreamStatus(ctx context.Context, in *UpdateStreamStatusRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *managerServiceClient) UpdateStreamStatus(ctx context.Context, in *UpdateStreamStatusRequest, opts ...grpc.CallOption) (*types.Empty, error) {
+	out := new(types.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/UpdateStreamStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -835,8 +835,8 @@ func (c *managerServiceClient) UpdateStreamStatus(ctx context.Context, in *Updat
 	return out, nil
 }
 
-func (c *managerServiceClient) VerifyChunk(ctx context.Context, in *VerifyChunkRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *managerServiceClient) VerifyChunk(ctx context.Context, in *VerifyChunkRequest, opts ...grpc.CallOption) (*types.Empty, error) {
+	out := new(types.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/VerifyChunk", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -844,8 +844,8 @@ func (c *managerServiceClient) VerifyChunk(ctx context.Context, in *VerifyChunkR
 	return out, nil
 }
 
-func (c *managerServiceClient) UpdateContractAddr(ctx context.Context, in *ContractAddrRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *managerServiceClient) UpdateContractAddr(ctx context.Context, in *ContractAddrRequest, opts ...grpc.CallOption) (*types.Empty, error) {
+	out := new(types.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/UpdateContractAddr", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -853,8 +853,8 @@ func (c *managerServiceClient) UpdateContractAddr(ctx context.Context, in *Contr
 	return out, nil
 }
 
-func (c *managerServiceClient) AddProfile(ctx context.Context, in *AddProfileRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *managerServiceClient) AddProfile(ctx context.Context, in *AddProfileRequest, opts ...grpc.CallOption) (*types.Empty, error) {
+	out := new(types.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/AddProfile", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -862,8 +862,8 @@ func (c *managerServiceClient) AddProfile(ctx context.Context, in *AddProfileReq
 	return out, nil
 }
 
-func (c *managerServiceClient) ChunkCreated(ctx context.Context, in *ChunkCreatedRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *managerServiceClient) ChunkCreated(ctx context.Context, in *ChunkCreatedRequest, opts ...grpc.CallOption) (*types.Empty, error) {
+	out := new(types.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/ChunkCreated", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -880,7 +880,7 @@ func (c *managerServiceClient) CheckBalance(ctx context.Context, in *CheckBalanc
 	return out, nil
 }
 
-func (c *managerServiceClient) GetProfiles(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*v1.Profiles, error) {
+func (c *managerServiceClient) GetProfiles(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*v1.Profiles, error) {
 	out := new(v1.Profiles)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/GetProfiles", in, out, opts...)
 	if err != nil {
@@ -898,8 +898,8 @@ func (c *managerServiceClient) GetProfile(ctx context.Context, in *GetProfileReq
 	return out, nil
 }
 
-func (c *managerServiceClient) RegisterTranscoder(ctx context.Context, in *v12.Transcoder, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *managerServiceClient) RegisterTranscoder(ctx context.Context, in *v12.Transcoder, opts ...grpc.CallOption) (*types.Empty, error) {
+	out := new(types.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/RegisterTranscoder", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -907,8 +907,8 @@ func (c *managerServiceClient) RegisterTranscoder(ctx context.Context, in *v12.T
 	return out, nil
 }
 
-func (c *managerServiceClient) UpdateTranscoderStatus(ctx context.Context, in *UpdateTranscoderStatusRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *managerServiceClient) UpdateTranscoderStatus(ctx context.Context, in *UpdateTranscoderStatusRequest, opts ...grpc.CallOption) (*types.Empty, error) {
+	out := new(types.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/UpdateTranscoderStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -919,19 +919,19 @@ func (c *managerServiceClient) UpdateTranscoderStatus(ctx context.Context, in *U
 // ManagerServiceServer is the server API for ManagerService service.
 type ManagerServiceServer interface {
 	AddJob(context.Context, *AddJobRequest) (*AddJobResponse, error)
-	StopStream(context.Context, *StopStreamRequest) (*empty.Empty, error)
-	Health(context.Context, *empty.Empty) (*rpc.HealthStatus, error)
+	StopStream(context.Context, *StopStreamRequest) (*types.Empty, error)
+	Health(context.Context, *types.Empty) (*rpc.HealthStatus, error)
 	GetStream(context.Context, *GetStreamRequest) (*v11.WorkOrder, error)
-	UpdateStreamStatus(context.Context, *UpdateStreamStatusRequest) (*empty.Empty, error)
-	VerifyChunk(context.Context, *VerifyChunkRequest) (*empty.Empty, error)
-	UpdateContractAddr(context.Context, *ContractAddrRequest) (*empty.Empty, error)
-	AddProfile(context.Context, *AddProfileRequest) (*empty.Empty, error)
-	ChunkCreated(context.Context, *ChunkCreatedRequest) (*empty.Empty, error)
+	UpdateStreamStatus(context.Context, *UpdateStreamStatusRequest) (*types.Empty, error)
+	VerifyChunk(context.Context, *VerifyChunkRequest) (*types.Empty, error)
+	UpdateContractAddr(context.Context, *ContractAddrRequest) (*types.Empty, error)
+	AddProfile(context.Context, *AddProfileRequest) (*types.Empty, error)
+	ChunkCreated(context.Context, *ChunkCreatedRequest) (*types.Empty, error)
 	CheckBalance(context.Context, *CheckBalanceRequest) (*CheckBalanceResponse, error)
-	GetProfiles(context.Context, *empty.Empty) (*v1.Profiles, error)
+	GetProfiles(context.Context, *types.Empty) (*v1.Profiles, error)
 	GetProfile(context.Context, *GetProfileRequest) (*v1.Profile, error)
-	RegisterTranscoder(context.Context, *v12.Transcoder) (*empty.Empty, error)
-	UpdateTranscoderStatus(context.Context, *UpdateTranscoderStatusRequest) (*empty.Empty, error)
+	RegisterTranscoder(context.Context, *v12.Transcoder) (*types.Empty, error)
+	UpdateTranscoderStatus(context.Context, *UpdateTranscoderStatusRequest) (*types.Empty, error)
 }
 
 func RegisterManagerServiceServer(s *grpc.Server, srv ManagerServiceServer) {
@@ -975,7 +975,7 @@ func _ManagerService_StopStream_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _ManagerService_Health_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(empty.Empty)
+	in := new(types.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -987,7 +987,7 @@ func _ManagerService_Health_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/cloud.api.manager.v1.ManagerService/Health",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).Health(ctx, req.(*empty.Empty))
+		return srv.(ManagerServiceServer).Health(ctx, req.(*types.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1119,7 +1119,7 @@ func _ManagerService_CheckBalance_Handler(srv interface{}, ctx context.Context, 
 }
 
 func _ManagerService_GetProfiles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(empty.Empty)
+	in := new(types.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1131,7 +1131,7 @@ func _ManagerService_GetProfiles_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/cloud.api.manager.v1.ManagerService/GetProfiles",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetProfiles(ctx, req.(*empty.Empty))
+		return srv.(ManagerServiceServer).GetProfiles(ctx, req.(*types.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }

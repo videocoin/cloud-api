@@ -78,9 +78,7 @@ message CreatePipelineRequest {
 }
 
 message PipelineRequest {
-    string id = 1 [
-        (gogoproto.customname) = "ID"
-    ];
+    string id = 1;
 }
 
 message ListResponse {

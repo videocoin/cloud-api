@@ -29,7 +29,6 @@ enum PipelineStatus {
 
 message Pipeline {
     string id = 1 [
-        (gogoproto.customname) = "ID",
         (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""
     ];
     string name = 2 [

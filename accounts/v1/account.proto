@@ -20,14 +20,13 @@ message Account {
     string key = 4 [(gogoproto.moretags) = "gorm:\"type:varchar(512)\""];
     double balance = 5 [(validate.rules).double.gte = 0];
 
-    google.protobuf.Timestamp updated_at = 9;
+    google.protobuf.Timestamp updated_at = 9 [
+        (gogoproto.stdtime) = true
+    ];
 }
 
 message AccountProfile {
-    string id = 1 [
-        (gogoproto.customname) = "ID"
-    ];
-
+    string id = 1;
     string address = 2;
     double balance = 3;
     

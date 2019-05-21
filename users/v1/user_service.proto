@@ -2,11 +2,12 @@ syntax = "proto3";
 
 package cloud.api.users.v1;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "github.com/VideoCoin/cloud-api/rpc/health.proto";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 import "users/v1/user.proto";
 
@@ -125,9 +126,7 @@ message LoginUserResponse {
 }
 
 message UserRequest {
-    string id = 1 [
-        (gogoproto.customname) = "ID"
-    ];
+    string id = 1;
 }
 
 message ResetPasswordUserRequest {

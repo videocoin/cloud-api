@@ -2,9 +2,12 @@ syntax = "proto3";
 
 package cloud.api.users.v1;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "github.com/VideoCoin/cloud-api/accounts/v1/account.proto";
+
 import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option go_package = "v1";
 option (gogoproto.marshaler_all) = true;
@@ -25,7 +28,6 @@ enum UserRole {
 
 message User {
     string id = 1 [
-        (gogoproto.customname) = "ID",
         (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""
     ];
     string email = 2 [
@@ -45,15 +47,16 @@ message User {
     google.protobuf.Timestamp created_at = 8 [
         (gogoproto.stdtime) = true
     ];
-    string token = 9 [
+    string token = 13 [
+        (gogoproto.moretags) = "gorm:\"type:varchar(255);index\""
+    ];
+    string cent_token = 14 [
         (gogoproto.moretags) = "gorm:\"type:varchar(255);index\""
     ];
 }
 
 message UserProfile {
-    string id = 1 [
-        (gogoproto.customname) = "ID"
-    ];
+    string id = 1;
     string email = 2;
     string name = 3;
     bool is_active = 4;

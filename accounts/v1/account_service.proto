@@ -23,21 +23,23 @@ service AccountService {
         };
     }
 
-    rpc Create(AccountRequest) returns (AccountProfile) {}
-    rpc Get(AccountRequest) returns (AccountProfile) {}
+    rpc Get(AccountRequest) returns (AccountProfile) {
+        option (google.api.http) = {
+            get: "/api/v1/accounts/{id}"
+        };
+    }
 
     rpc GetByAddress(Address) returns (AccountProfile) {}
+    rpc GetByOwner(AccountRequest) returns (AccountProfile) {}
+    rpc Create(AccountRequest) returns (AccountProfile) {}
     rpc List(google.protobuf.Empty) returns (ListResponse) {}
-
-    rpc Refresh(AccountRequest) returns (AccountProfile) {}
 
     rpc Key(AccountRequest) returns (AccountKey) {}
 }
 
 message AccountRequest {
-    string owner_id = 1 [
-        (gogoproto.customname) = "OwnerID"
-    ];
+    string id = 1;
+    string owner_id = 2;
 }
 
 message Address {
