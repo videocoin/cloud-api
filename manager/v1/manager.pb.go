@@ -3,21 +3,25 @@
 
 package v1
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import v1 "github.com/VideoCoin/cloud-api/profiles/v1"
 import rpc "github.com/VideoCoin/cloud-api/rpc"
 import v11 "github.com/VideoCoin/cloud-api/transcoder/v1"
 import v12 "github.com/VideoCoin/cloud-api/workorder/v1"
-import _ "github.com/gogo/googleapis/google/api"
 import _ "github.com/gogo/protobuf/gogoproto"
-import types "github.com/gogo/protobuf/types"
+import empty "github.com/golang/protobuf/ptypes/empty"
+import _ "google.golang.org/genproto/googleapis/api/annotations"
 
 import (
 	context "golang.org/x/net/context"
 	grpc "google.golang.org/grpc"
 )
+
+import encoding_binary "encoding/binary"
+
+import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -28,7 +32,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type UpdateProfileRequest struct {
 	StreamId             int64        `protobuf:"varint,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
@@ -42,19 +46,28 @@ func (m *UpdateProfileRequest) Reset()         { *m = UpdateProfileRequest{} }
 func (m *UpdateProfileRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateProfileRequest) ProtoMessage()    {}
 func (*UpdateProfileRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{0}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{0}
 }
 func (m *UpdateProfileRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdateProfileRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *UpdateProfileRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdateProfileRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_UpdateProfileRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *UpdateProfileRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UpdateProfileRequest.Merge(dst, src)
 }
 func (m *UpdateProfileRequest) XXX_Size() int {
-	return xxx_messageInfo_UpdateProfileRequest.Size(m)
+	return m.Size()
 }
 func (m *UpdateProfileRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_UpdateProfileRequest.DiscardUnknown(m)
@@ -76,6 +89,10 @@ func (m *UpdateProfileRequest) GetProfileId() v1.ProfileId {
 	return v1.ProfileIdNone
 }
 
+func (*UpdateProfileRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.UpdateProfileRequest"
+}
+
 type Heartbeat struct {
 	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -87,19 +104,28 @@ func (m *Heartbeat) Reset()         { *m = Heartbeat{} }
 func (m *Heartbeat) String() string { return proto.CompactTextString(m) }
 func (*Heartbeat) ProtoMessage()    {}
 func (*Heartbeat) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{1}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{1}
 }
 func (m *Heartbeat) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Heartbeat.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *Heartbeat) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Heartbeat.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_Heartbeat.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *Heartbeat) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_Heartbeat.Merge(dst, src)
 }
 func (m *Heartbeat) XXX_Size() int {
-	return xxx_messageInfo_Heartbeat.Size(m)
+	return m.Size()
 }
 func (m *Heartbeat) XXX_DiscardUnknown() {
 	xxx_messageInfo_Heartbeat.DiscardUnknown(m)
@@ -114,6 +140,10 @@ func (m *Heartbeat) GetId() string {
 	return ""
 }
 
+func (*Heartbeat) XXX_MessageName() string {
+	return "cloud.api.manager.v1.Heartbeat"
+}
+
 type ProfileRequest struct {
 	ProfileId            v1.ProfileId `protobuf:"varint,2,opt,name=profile_id,json=profileId,proto3,enum=cloud.api.profiles.v1.ProfileId" json:"profile_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
@@ -125,19 +155,28 @@ func (m *ProfileRequest) Reset()         { *m = ProfileRequest{} }
 func (m *ProfileRequest) String() string { return proto.CompactTextString(m) }
 func (*ProfileRequest) ProtoMessage()    {}
 func (*ProfileRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{2}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{2}
 }
 func (m *ProfileRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ProfileRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *ProfileRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ProfileRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_ProfileRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *ProfileRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ProfileRequest.Merge(dst, src)
 }
 func (m *ProfileRequest) XXX_Size() int {
-	return xxx_messageInfo_ProfileRequest.Size(m)
+	return m.Size()
 }
 func (m *ProfileRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_ProfileRequest.DiscardUnknown(m)
@@ -152,6 +191,10 @@ func (m *ProfileRequest) GetProfileId() v1.ProfileId {
 	return v1.ProfileIdNone
 }
 
+func (*ProfileRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.ProfileRequest"
+}
+
 type CheckBalanceRequest struct {
 	ContractAddress      string   `protobuf:"bytes,1,opt,name=contract_address,json=contractAddress,proto3" json:"contract_address,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -163,19 +206,28 @@ func (m *CheckBalanceRequest) Reset()         { *m = CheckBalanceRequest{} }
 func (m *CheckBalanceRequest) String() string { return proto.CompactTextString(m) }
 func (*CheckBalanceRequest) ProtoMessage()    {}
 func (*CheckBalanceRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{3}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{3}
 }
 func (m *CheckBalanceRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CheckBalanceRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CheckBalanceRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_CheckBalanceRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_CheckBalanceRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *CheckBalanceRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CheckBalanceRequest.Merge(dst, src)
 }
 func (m *CheckBalanceRequest) XXX_Size() int {
-	return xxx_messageInfo_CheckBalanceRequest.Size(m)
+	return m.Size()
 }
 func (m *CheckBalanceRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_CheckBalanceRequest.DiscardUnknown(m)
@@ -190,6 +242,10 @@ func (m *CheckBalanceRequest) GetContractAddress() string {
 	return ""
 }
 
+func (*CheckBalanceRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.CheckBalanceRequest"
+}
+
 type CheckBalanceResponse struct {
 	Balance              float64  `protobuf:"fixed64,1,opt,name=balance,proto3" json:"balance,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -201,19 +257,28 @@ func (m *CheckBalanceResponse) Reset()         { *m = CheckBalanceResponse{} }
 func (m *CheckBalanceResponse) String() string { return proto.CompactTextString(m) }
 func (*CheckBalanceResponse) ProtoMessage()    {}
 func (*CheckBalanceResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{4}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{4}
 }
 func (m *CheckBalanceResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CheckBalanceResponse.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *CheckBalanceResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_CheckBalanceResponse.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_CheckBalanceResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *CheckBalanceResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_CheckBalanceResponse.Merge(dst, src)
 }
 func (m *CheckBalanceResponse) XXX_Size() int {
-	return xxx_messageInfo_CheckBalanceResponse.Size(m)
+	return m.Size()
 }
 func (m *CheckBalanceResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_CheckBalanceResponse.DiscardUnknown(m)
@@ -228,6 +293,10 @@ func (m *CheckBalanceResponse) GetBalance() float64 {
 	return 0
 }
 
+func (*CheckBalanceResponse) XXX_MessageName() string {
+	return "cloud.api.manager.v1.CheckBalanceResponse"
+}
+
 type ContractAddrRequest struct {
 	PipelineId           string   `protobuf:"bytes,1,opt,name=pipeline_id,json=pipelineId,proto3" json:"pipeline_id,omitempty"`
 	ContractAddress      string   `protobuf:"bytes,2,opt,name=contract_address,json=contractAddress,proto3" json:"contract_address,omitempty"`
@@ -240,19 +309,28 @@ func (m *ContractAddrRequest) Reset()         { *m = ContractAddrRequest{} }
 func (m *ContractAddrRequest) String() string { return proto.CompactTextString(m) }
 func (*ContractAddrRequest) ProtoMessage()    {}
 func (*ContractAddrRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{5}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{5}
 }
 func (m *ContractAddrRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ContractAddrRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *ContractAddrRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ContractAddrRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_ContractAddrRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *ContractAddrRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ContractAddrRequest.Merge(dst, src)
 }
 func (m *ContractAddrRequest) XXX_Size() int {
-	return xxx_messageInfo_ContractAddrRequest.Size(m)
+	return m.Size()
 }
 func (m *ContractAddrRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_ContractAddrRequest.DiscardUnknown(m)
@@ -274,6 +352,10 @@ func (m *ContractAddrRequest) GetContractAddress() string {
 	return ""
 }
 
+func (*ContractAddrRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.ContractAddrRequest"
+}
+
 type VerifyChunkRequest struct {
 	StreamId             int64    `protobuf:"varint,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
 	SourceChunkId        uint64   `protobuf:"varint,2,opt,name=source_chunk_id,json=sourceChunkId,proto3" json:"source_chunk_id,omitempty"`
@@ -289,19 +371,28 @@ func (m *VerifyChunkRequest) Reset()         { *m = VerifyChunkRequest{} }
 func (m *VerifyChunkRequest) String() string { return proto.CompactTextString(m) }
 func (*VerifyChunkRequest) ProtoMessage()    {}
 func (*VerifyChunkRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{6}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{6}
 }
 func (m *VerifyChunkRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_VerifyChunkRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *VerifyChunkRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_VerifyChunkRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_VerifyChunkRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *VerifyChunkRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_VerifyChunkRequest.Merge(dst, src)
 }
 func (m *VerifyChunkRequest) XXX_Size() int {
-	return xxx_messageInfo_VerifyChunkRequest.Size(m)
+	return m.Size()
 }
 func (m *VerifyChunkRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_VerifyChunkRequest.DiscardUnknown(m)
@@ -344,6 +435,10 @@ func (m *VerifyChunkRequest) GetBitrate() uint32 {
 	return 0
 }
 
+func (*VerifyChunkRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.VerifyChunkRequest"
+}
+
 type ChunkCreatedRequest struct {
 	StreamId             int64    `protobuf:"varint,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
 	SourceChunkId        int64    `protobuf:"varint,2,opt,name=source_chunk_id,json=sourceChunkId,proto3" json:"source_chunk_id,omitempty"`
@@ -358,19 +453,28 @@ func (m *ChunkCreatedRequest) Reset()         { *m = ChunkCreatedRequest{} }
 func (m *ChunkCreatedRequest) String() string { return proto.CompactTextString(m) }
 func (*ChunkCreatedRequest) ProtoMessage()    {}
 func (*ChunkCreatedRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{7}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{7}
 }
 func (m *ChunkCreatedRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ChunkCreatedRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *ChunkCreatedRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ChunkCreatedRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_ChunkCreatedRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *ChunkCreatedRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_ChunkCreatedRequest.Merge(dst, src)
 }
 func (m *ChunkCreatedRequest) XXX_Size() int {
-	return xxx_messageInfo_ChunkCreatedRequest.Size(m)
+	return m.Size()
 }
 func (m *ChunkCreatedRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_ChunkCreatedRequest.DiscardUnknown(m)
@@ -406,6 +510,10 @@ func (m *ChunkCreatedRequest) GetBitrate() uint32 {
 	return 0
 }
 
+func (*ChunkCreatedRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.ChunkCreatedRequest"
+}
+
 type TranscoderStatusRequest struct {
 	TranscoderId         string               `protobuf:"bytes,1,opt,name=transcoder_id,json=transcoderId,proto3" json:"transcoder_id,omitempty"`
 	Status               v11.TranscoderStatus `protobuf:"varint,2,opt,name=status,proto3,enum=cloud.api.transcoder.v1.TranscoderStatus" json:"status,omitempty"`
@@ -418,19 +526,28 @@ func (m *TranscoderStatusRequest) Reset()         { *m = TranscoderStatusRequest
 func (m *TranscoderStatusRequest) String() string { return proto.CompactTextString(m) }
 func (*TranscoderStatusRequest) ProtoMessage()    {}
 func (*TranscoderStatusRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{8}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{8}
 }
 func (m *TranscoderStatusRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_TranscoderStatusRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *TranscoderStatusRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_TranscoderStatusRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_TranscoderStatusRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *TranscoderStatusRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_TranscoderStatusRequest.Merge(dst, src)
 }
 func (m *TranscoderStatusRequest) XXX_Size() int {
-	return xxx_messageInfo_TranscoderStatusRequest.Size(m)
+	return m.Size()
 }
 func (m *TranscoderStatusRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_TranscoderStatusRequest.DiscardUnknown(m)
@@ -452,6 +569,10 @@ func (m *TranscoderStatusRequest) GetStatus() v11.TranscoderStatus {
 	return v11.TranscoderStatusAvailable
 }
 
+func (*TranscoderStatusRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.TranscoderStatusRequest"
+}
+
 type StreamStatusRequest struct {
 	TranscoderId         string           `protobuf:"bytes,1,opt,name=transcoder_id,json=transcoderId,proto3" json:"transcoder_id,omitempty"`
 	StreamHash           string           `protobuf:"bytes,2,opt,name=stream_hash,json=streamHash,proto3" json:"stream_hash,omitempty"`
@@ -467,19 +588,28 @@ func (m *StreamStatusRequest) Reset()         { *m = StreamStatusRequest{} }
 func (m *StreamStatusRequest) String() string { return proto.CompactTextString(m) }
 func (*StreamStatusRequest) ProtoMessage()    {}
 func (*StreamStatusRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{9}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{9}
 }
 func (m *StreamStatusRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_StreamStatusRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *StreamStatusRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_StreamStatusRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_StreamStatusRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *StreamStatusRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_StreamStatusRequest.Merge(dst, src)
 }
 func (m *StreamStatusRequest) XXX_Size() int {
-	return xxx_messageInfo_StreamStatusRequest.Size(m)
+	return m.Size()
 }
 func (m *StreamStatusRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_StreamStatusRequest.DiscardUnknown(m)
@@ -522,6 +652,10 @@ func (m *StreamStatusRequest) GetIngestStatus() v12.IngestStatus {
 	return v12.IngestStatusNone
 }
 
+func (*StreamStatusRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.StreamStatusRequest"
+}
+
 type JobResponse struct {
 	RtmpInputUrl         string   `protobuf:"bytes,1,opt,name=rtmp_input_url,json=rtmpInputUrl,proto3" json:"rtmp_input_url,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -533,19 +667,28 @@ func (m *JobResponse) Reset()         { *m = JobResponse{} }
 func (m *JobResponse) String() string { return proto.CompactTextString(m) }
 func (*JobResponse) ProtoMessage()    {}
 func (*JobResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{10}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{10}
 }
 func (m *JobResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_JobResponse.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *JobResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_JobResponse.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_JobResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *JobResponse) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_JobResponse.Merge(dst, src)
 }
 func (m *JobResponse) XXX_Size() int {
-	return xxx_messageInfo_JobResponse.Size(m)
+	return m.Size()
 }
 func (m *JobResponse) XXX_DiscardUnknown() {
 	xxx_messageInfo_JobResponse.DiscardUnknown(m)
@@ -560,6 +703,10 @@ func (m *JobResponse) GetRtmpInputUrl() string {
 	return ""
 }
 
+func (*JobResponse) XXX_MessageName() string {
+	return "cloud.api.manager.v1.JobResponse"
+}
+
 type JobRequest struct {
 	PipelineId           string       `protobuf:"bytes,1,opt,name=pipeline_id,json=pipelineId,proto3" json:"pipeline_id,omitempty"`
 	ProfileId            v1.ProfileId `protobuf:"varint,3,opt,name=profile_id,json=profileId,proto3,enum=cloud.api.profiles.v1.ProfileId" json:"profile_id,omitempty"`
@@ -572,19 +719,28 @@ func (m *JobRequest) Reset()         { *m = JobRequest{} }
 func (m *JobRequest) String() string { return proto.CompactTextString(m) }
 func (*JobRequest) ProtoMessage()    {}
 func (*JobRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{11}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{11}
 }
 func (m *JobRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_JobRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *JobRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_JobRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_JobRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *JobRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_JobRequest.Merge(dst, src)
 }
 func (m *JobRequest) XXX_Size() int {
-	return xxx_messageInfo_JobRequest.Size(m)
+	return m.Size()
 }
 func (m *JobRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_JobRequest.DiscardUnknown(m)
@@ -606,6 +762,10 @@ func (m *JobRequest) GetProfileId() v1.ProfileId {
 	return v1.ProfileIdNone
 }
 
+func (*JobRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.JobRequest"
+}
+
 type UpdateJobRequest struct {
 	PipelineId           string       `protobuf:"bytes,1,opt,name=pipeline_id,json=pipelineId,proto3" json:"pipeline_id,omitempty"`
 	ProfileId            v1.ProfileId `protobuf:"varint,2,opt,name=profile_id,json=profileId,proto3,enum=cloud.api.profiles.v1.ProfileId" json:"profile_id,omitempty"`
@@ -621,19 +781,28 @@ func (m *UpdateJobRequest) Reset()         { *m = UpdateJobRequest{} }
 func (m *UpdateJobRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateJobRequest) ProtoMessage()    {}
 func (*UpdateJobRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{12}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{12}
 }
 func (m *UpdateJobRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UpdateJobRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *UpdateJobRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UpdateJobRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_UpdateJobRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *UpdateJobRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_UpdateJobRequest.Merge(dst, src)
 }
 func (m *UpdateJobRequest) XXX_Size() int {
-	return xxx_messageInfo_UpdateJobRequest.Size(m)
+	return m.Size()
 }
 func (m *UpdateJobRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_UpdateJobRequest.DiscardUnknown(m)
@@ -676,6 +845,10 @@ func (m *UpdateJobRequest) GetStreamAddress() string {
 	return ""
 }
 
+func (*UpdateJobRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.UpdateJobRequest"
+}
+
 type StreamRequest struct {
 	StreamId             int64    `protobuf:"varint,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -687,19 +860,28 @@ func (m *StreamRequest) Reset()         { *m = StreamRequest{} }
 func (m *StreamRequest) String() string { return proto.CompactTextString(m) }
 func (*StreamRequest) ProtoMessage()    {}
 func (*StreamRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{13}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{13}
 }
 func (m *StreamRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_StreamRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *StreamRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_StreamRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_StreamRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *StreamRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_StreamRequest.Merge(dst, src)
 }
 func (m *StreamRequest) XXX_Size() int {
-	return xxx_messageInfo_StreamRequest.Size(m)
+	return m.Size()
 }
 func (m *StreamRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_StreamRequest.DiscardUnknown(m)
@@ -714,6 +896,10 @@ func (m *StreamRequest) GetStreamId() int64 {
 	return 0
 }
 
+func (*StreamRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.StreamRequest"
+}
+
 type StopStreamRequest struct {
 	StreamHash           string   `protobuf:"bytes,1,opt,name=stream_hash,json=streamHash,proto3" json:"stream_hash,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -725,19 +911,28 @@ func (m *StopStreamRequest) Reset()         { *m = StopStreamRequest{} }
 func (m *StopStreamRequest) String() string { return proto.CompactTextString(m) }
 func (*StopStreamRequest) ProtoMessage()    {}
 func (*StopStreamRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_manager_874fb47e5b484c54, []int{14}
+	return fileDescriptor_manager_ec2080fe23ef6563, []int{14}
 }
 func (m *StopStreamRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_StopStreamRequest.Unmarshal(m, b)
+	return m.Unmarshal(b)
 }
 func (m *StopStreamRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_StopStreamRequest.Marshal(b, m, deterministic)
+	if deterministic {
+		return xxx_messageInfo_StopStreamRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
 }
 func (dst *StopStreamRequest) XXX_Merge(src proto.Message) {
 	xxx_messageInfo_StopStreamRequest.Merge(dst, src)
 }
 func (m *StopStreamRequest) XXX_Size() int {
-	return xxx_messageInfo_StopStreamRequest.Size(m)
+	return m.Size()
 }
 func (m *StopStreamRequest) XXX_DiscardUnknown() {
 	xxx_messageInfo_StopStreamRequest.DiscardUnknown(m)
@@ -752,6 +947,9 @@ func (m *StopStreamRequest) GetStreamHash() string {
 	return ""
 }
 
+func (*StopStreamRequest) XXX_MessageName() string {
+	return "cloud.api.manager.v1.StopStreamRequest"
+}
 func init() {
 	proto.RegisterType((*UpdateProfileRequest)(nil), "cloud.api.manager.v1.UpdateProfileRequest")
 	proto.RegisterType((*Heartbeat)(nil), "cloud.api.manager.v1.Heartbeat")
@@ -786,17 +984,17 @@ type ManagerServiceClient interface {
 	Run(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*v12.JobProfile, error)
 	Get(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*v12.JobProfile, error)
 	Update(ctx context.Context, in *UpdateJobRequest, opts ...grpc.CallOption) (*v12.JobProfile, error)
-	StopStream(ctx context.Context, in *StopStreamRequest, opts ...grpc.CallOption) (*types.Empty, error)
-	Health(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error)
+	StopStream(ctx context.Context, in *StopStreamRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	Health(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error)
 	GetStream(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*v12.JobProfile, error)
-	UpdateStreamStatus(ctx context.Context, in *StreamStatusRequest, opts ...grpc.CallOption) (*types.Empty, error)
-	VerifyChunk(ctx context.Context, in *VerifyChunkRequest, opts ...grpc.CallOption) (*types.Empty, error)
-	ChunkCreated(ctx context.Context, in *ChunkCreatedRequest, opts ...grpc.CallOption) (*types.Empty, error)
+	UpdateStreamStatus(ctx context.Context, in *StreamStatusRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	VerifyChunk(ctx context.Context, in *VerifyChunkRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	ChunkCreated(ctx context.Context, in *ChunkCreatedRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 	CheckBalance(ctx context.Context, in *CheckBalanceRequest, opts ...grpc.CallOption) (*CheckBalanceResponse, error)
-	GetProfiles(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*v1.Profiles, error)
+	GetProfiles(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*v1.Profiles, error)
 	GetProfile(ctx context.Context, in *ProfileRequest, opts ...grpc.CallOption) (*v1.Profile, error)
-	RegisterTranscoder(ctx context.Context, in *v11.Transcoder, opts ...grpc.CallOption) (*types.Empty, error)
-	UpdateTranscoderStatus(ctx context.Context, in *TranscoderStatusRequest, opts ...grpc.CallOption) (*types.Empty, error)
+	RegisterTranscoder(ctx context.Context, in *v11.Transcoder, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateTranscoderStatus(ctx context.Context, in *TranscoderStatusRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type managerServiceClient struct {
@@ -843,8 +1041,8 @@ func (c *managerServiceClient) Update(ctx context.Context, in *UpdateJobRequest,
 	return out, nil
 }
 
-func (c *managerServiceClient) StopStream(ctx context.Context, in *StopStreamRequest, opts ...grpc.CallOption) (*types.Empty, error) {
-	out := new(types.Empty)
+func (c *managerServiceClient) StopStream(ctx context.Context, in *StopStreamRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/StopStream", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -852,7 +1050,7 @@ func (c *managerServiceClient) StopStream(ctx context.Context, in *StopStreamReq
 	return out, nil
 }
 
-func (c *managerServiceClient) Health(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error) {
+func (c *managerServiceClient) Health(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error) {
 	out := new(rpc.HealthStatus)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/Health", in, out, opts...)
 	if err != nil {
@@ -870,8 +1068,8 @@ func (c *managerServiceClient) GetStream(ctx context.Context, in *StreamRequest,
 	return out, nil
 }
 
-func (c *managerServiceClient) UpdateStreamStatus(ctx context.Context, in *StreamStatusRequest, opts ...grpc.CallOption) (*types.Empty, error) {
-	out := new(types.Empty)
+func (c *managerServiceClient) UpdateStreamStatus(ctx context.Context, in *StreamStatusRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/UpdateStreamStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -879,8 +1077,8 @@ func (c *managerServiceClient) UpdateStreamStatus(ctx context.Context, in *Strea
 	return out, nil
 }
 
-func (c *managerServiceClient) VerifyChunk(ctx context.Context, in *VerifyChunkRequest, opts ...grpc.CallOption) (*types.Empty, error) {
-	out := new(types.Empty)
+func (c *managerServiceClient) VerifyChunk(ctx context.Context, in *VerifyChunkRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/VerifyChunk", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -888,8 +1086,8 @@ func (c *managerServiceClient) VerifyChunk(ctx context.Context, in *VerifyChunkR
 	return out, nil
 }
 
-func (c *managerServiceClient) ChunkCreated(ctx context.Context, in *ChunkCreatedRequest, opts ...grpc.CallOption) (*types.Empty, error) {
-	out := new(types.Empty)
+func (c *managerServiceClient) ChunkCreated(ctx context.Context, in *ChunkCreatedRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/ChunkCreated", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -906,7 +1104,7 @@ func (c *managerServiceClient) CheckBalance(ctx context.Context, in *CheckBalanc
 	return out, nil
 }
 
-func (c *managerServiceClient) GetProfiles(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*v1.Profiles, error) {
+func (c *managerServiceClient) GetProfiles(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*v1.Profiles, error) {
 	out := new(v1.Profiles)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/GetProfiles", in, out, opts...)
 	if err != nil {
@@ -924,8 +1122,8 @@ func (c *managerServiceClient) GetProfile(ctx context.Context, in *ProfileReques
 	return out, nil
 }
 
-func (c *managerServiceClient) RegisterTranscoder(ctx context.Context, in *v11.Transcoder, opts ...grpc.CallOption) (*types.Empty, error) {
-	out := new(types.Empty)
+func (c *managerServiceClient) RegisterTranscoder(ctx context.Context, in *v11.Transcoder, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/RegisterTranscoder", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -933,8 +1131,8 @@ func (c *managerServiceClient) RegisterTranscoder(ctx context.Context, in *v11.T
 	return out, nil
 }
 
-func (c *managerServiceClient) UpdateTranscoderStatus(ctx context.Context, in *TranscoderStatusRequest, opts ...grpc.CallOption) (*types.Empty, error) {
-	out := new(types.Empty)
+func (c *managerServiceClient) UpdateTranscoderStatus(ctx context.Context, in *TranscoderStatusRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/UpdateTranscoderStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -948,17 +1146,17 @@ type ManagerServiceServer interface {
 	Run(context.Context, *JobRequest) (*v12.JobProfile, error)
 	Get(context.Context, *JobRequest) (*v12.JobProfile, error)
 	Update(context.Context, *UpdateJobRequest) (*v12.JobProfile, error)
-	StopStream(context.Context, *StopStreamRequest) (*types.Empty, error)
-	Health(context.Context, *types.Empty) (*rpc.HealthStatus, error)
+	StopStream(context.Context, *StopStreamRequest) (*empty.Empty, error)
+	Health(context.Context, *empty.Empty) (*rpc.HealthStatus, error)
 	GetStream(context.Context, *StreamRequest) (*v12.JobProfile, error)
-	UpdateStreamStatus(context.Context, *StreamStatusRequest) (*types.Empty, error)
-	VerifyChunk(context.Context, *VerifyChunkRequest) (*types.Empty, error)
-	ChunkCreated(context.Context, *ChunkCreatedRequest) (*types.Empty, error)
+	UpdateStreamStatus(context.Context, *StreamStatusRequest) (*empty.Empty, error)
+	VerifyChunk(context.Context, *VerifyChunkRequest) (*empty.Empty, error)
+	ChunkCreated(context.Context, *ChunkCreatedRequest) (*empty.Empty, error)
 	CheckBalance(context.Context, *CheckBalanceRequest) (*CheckBalanceResponse, error)
-	GetProfiles(context.Context, *types.Empty) (*v1.Profiles, error)
+	GetProfiles(context.Context, *empty.Empty) (*v1.Profiles, error)
 	GetProfile(context.Context, *ProfileRequest) (*v1.Profile, error)
-	RegisterTranscoder(context.Context, *v11.Transcoder) (*types.Empty, error)
-	UpdateTranscoderStatus(context.Context, *TranscoderStatusRequest) (*types.Empty, error)
+	RegisterTranscoder(context.Context, *v11.Transcoder) (*empty.Empty, error)
+	UpdateTranscoderStatus(context.Context, *TranscoderStatusRequest) (*empty.Empty, error)
 }
 
 func RegisterManagerServiceServer(s *grpc.Server, srv ManagerServiceServer) {
@@ -1056,7 +1254,7 @@ func _ManagerService_StopStream_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _ManagerService_Health_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(types.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1068,7 +1266,7 @@ func _ManagerService_Health_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/cloud.api.manager.v1.ManagerService/Health",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).Health(ctx, req.(*types.Empty))
+		return srv.(ManagerServiceServer).Health(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1164,7 +1362,7 @@ func _ManagerService_CheckBalance_Handler(srv interface{}, ctx context.Context, 
 }
 
 func _ManagerService_GetProfiles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(types.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1176,7 +1374,7 @@ func _ManagerService_GetProfiles_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/cloud.api.manager.v1.ManagerService/GetProfiles",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetProfiles(ctx, req.(*types.Empty))
+		return srv.(ManagerServiceServer).GetProfiles(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1304,86 +1502,2559 @@ var _ManagerService_serviceDesc = grpc.ServiceDesc{
 	Metadata: "manager/v1/manager.proto",
 }
 
-func init() { proto.RegisterFile("manager/v1/manager.proto", fileDescriptor_manager_874fb47e5b484c54) }
+func (m *UpdateProfileRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
 
-var fileDescriptor_manager_874fb47e5b484c54 = []byte{
-	// 1248 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x56, 0x4d, 0x73, 0xe3, 0x44,
-	0x13, 0x5e, 0xd9, 0x49, 0xde, 0xa4, 0x13, 0x7b, 0xf3, 0x4e, 0xc2, 0xe2, 0x55, 0x82, 0xe3, 0x9d,
-	0x7c, 0x90, 0x84, 0x8d, 0x14, 0xef, 0x52, 0x54, 0x01, 0x45, 0xc1, 0x6e, 0xa0, 0x12, 0x6f, 0x15,
-	0x05, 0x38, 0xec, 0x1e, 0xb8, 0x18, 0x59, 0x9a, 0xd8, 0x4a, 0x1c, 0x8d, 0x76, 0x34, 0xf2, 0x7e,
-	0xb8, 0x72, 0x80, 0x1b, 0x17, 0xaa, 0x28, 0x0e, 0x5c, 0xf8, 0x31, 0x1c, 0x39, 0x52, 0xc5, 0x8d,
-	0x0b, 0x54, 0x8a, 0x1f, 0x42, 0x69, 0x66, 0x64, 0xc9, 0x8e, 0x95, 0x78, 0x3f, 0x6e, 0xea, 0xd6,
-	0x74, 0x3f, 0x4f, 0xf7, 0x74, 0xf7, 0x34, 0x94, 0x4e, 0x2d, 0xcf, 0x6a, 0x11, 0x66, 0x76, 0xab,
-	0xa6, 0xfa, 0x34, 0x7c, 0x46, 0x39, 0x45, 0x8b, 0x76, 0x87, 0x86, 0x8e, 0x61, 0xf9, 0xae, 0x11,
-	0xff, 0xe8, 0x56, 0x75, 0xb3, 0xe5, 0xf2, 0x76, 0xd8, 0x34, 0x6c, 0x7a, 0x6a, 0x3e, 0x72, 0x1d,
-	0x42, 0xf7, 0xa8, 0xeb, 0x99, 0xe2, 0xe8, 0x8e, 0xe5, 0xbb, 0x26, 0xf3, 0x6d, 0xb3, 0x4d, 0xac,
-	0x0e, 0x6f, 0x4b, 0x37, 0xfa, 0x52, 0x8b, 0xd2, 0x56, 0x87, 0x98, 0x42, 0x6a, 0x86, 0x47, 0x26,
-	0x39, 0xf5, 0xf9, 0x33, 0xf5, 0x73, 0x59, 0xfd, 0x8c, 0x2c, 0x2d, 0xcf, 0xa3, 0xdc, 0xe2, 0x2e,
-	0xf5, 0x02, 0xf5, 0x77, 0x27, 0x85, 0xd5, 0xa2, 0x2d, 0x9a, 0xf8, 0x88, 0x24, 0x21, 0x88, 0x2f,
-	0x75, 0xfc, 0xfd, 0x2b, 0xa8, 0xf9, 0x8c, 0x1e, 0xb9, 0x1d, 0x12, 0x44, 0xa1, 0xc6, 0xdf, 0xca,
-	0xf4, 0xc3, 0x2b, 0x4c, 0x9f, 0x50, 0x76, 0x42, 0x99, 0x23, 0xd3, 0xd4, 0x17, 0x94, 0xf1, 0x47,
-	0x57, 0x18, 0x73, 0x66, 0x79, 0x81, 0x4d, 0x95, 0x75, 0x22, 0x49, 0x73, 0xcc, 0x61, 0xf1, 0xa1,
-	0xef, 0x58, 0x9c, 0x7c, 0x29, 0x39, 0xd5, 0xc9, 0xe3, 0x90, 0x04, 0x1c, 0x2d, 0xc1, 0x4c, 0xc0,
-	0x19, 0xb1, 0x4e, 0x1b, 0xae, 0x53, 0xd2, 0x2a, 0xda, 0x66, 0xbe, 0x3e, 0x2d, 0x15, 0x35, 0x07,
-	0x7d, 0x0c, 0xa0, 0x42, 0x88, 0xfe, 0xe6, 0x2a, 0xda, 0x66, 0xf1, 0x4e, 0xc5, 0x48, 0x6e, 0xac,
-	0x1f, 0x5f, 0xb7, 0x6a, 0x28, 0xbf, 0x35, 0xa7, 0x3e, 0xe3, 0xc7, 0x9f, 0x78, 0x09, 0x66, 0x0e,
-	0x88, 0xc5, 0x78, 0x93, 0x58, 0x1c, 0x15, 0x21, 0xa7, 0x30, 0x66, 0xea, 0x39, 0xd7, 0xc1, 0x5f,
-	0x41, 0x71, 0x88, 0xcc, 0x2b, 0xe3, 0x7d, 0x02, 0x0b, 0x7b, 0x6d, 0x62, 0x9f, 0xdc, 0xb7, 0x3a,
-	0x96, 0x67, 0xf7, 0xfd, 0x6e, 0xc1, 0xbc, 0x4d, 0x3d, 0xce, 0x2c, 0x9b, 0x37, 0x2c, 0xc7, 0x61,
-	0x24, 0x08, 0x14, 0x8f, 0xeb, 0xb1, 0xfe, 0x9e, 0x54, 0xe3, 0x5d, 0x58, 0x1c, 0xf4, 0x10, 0xf8,
-	0xd4, 0x0b, 0x08, 0x2a, 0xc1, 0xff, 0x9a, 0x52, 0x25, 0x2c, 0xb5, 0x7a, 0x2c, 0x62, 0x0b, 0x16,
-	0xf6, 0x52, 0x4e, 0x62, 0xcc, 0x15, 0x98, 0xf5, 0x5d, 0x9f, 0x74, 0x5c, 0x8f, 0x34, 0xfa, 0x61,
-	0x43, 0xac, 0xaa, 0x39, 0x23, 0x49, 0xe5, 0x46, 0x93, 0xfa, 0x4d, 0x03, 0xf4, 0x88, 0x30, 0xf7,
-	0xe8, 0xd9, 0x5e, 0x3b, 0xf4, 0x4e, 0xc6, 0xba, 0xbb, 0x0d, 0xb8, 0x1e, 0xd0, 0x90, 0xd9, 0xa4,
-	0x61, 0x47, 0x36, 0x71, 0x42, 0x27, 0xea, 0x05, 0xa9, 0x16, 0x9e, 0xe4, 0x39, 0x46, 0x82, 0xb0,
-	0xc3, 0x93, 0x73, 0x79, 0x79, 0x4e, 0xaa, 0xe3, 0x73, 0xab, 0x50, 0x68, 0x5b, 0x41, 0xbb, 0xe1,
-	0xb8, 0x01, 0x17, 0x69, 0x98, 0xa8, 0x68, 0x9b, 0x93, 0xf5, 0xb9, 0x48, 0xf9, 0xa9, 0xd2, 0x89,
-	0x2c, 0xb9, 0x9c, 0x59, 0x9c, 0x94, 0x26, 0x2b, 0xda, 0x66, 0xa1, 0x1e, 0x8b, 0xf8, 0x57, 0x2d,
-	0xba, 0x9a, 0xd0, 0x3b, 0xd9, 0x63, 0xc4, 0xe2, 0xc4, 0x79, 0x95, 0x18, 0xf2, 0x63, 0xc6, 0x90,
-	0x1f, 0x8e, 0x21, 0x45, 0x6f, 0x62, 0x90, 0xde, 0x77, 0x1a, 0xbc, 0xf9, 0x75, 0xbf, 0x67, 0x0e,
-	0xb9, 0xc5, 0xc3, 0x20, 0xa6, 0xb8, 0x0a, 0x85, 0xa4, 0x9d, 0x92, 0xbb, 0x9c, 0x4b, 0x94, 0x35,
-	0x07, 0xdd, 0x83, 0xa9, 0x40, 0x58, 0xa9, 0xb2, 0xdd, 0x4a, 0x95, 0x6d, 0xaa, 0x19, 0xbb, 0x55,
-	0xe3, 0x02, 0x8c, 0x32, 0xc4, 0x7f, 0x69, 0xb0, 0x70, 0x28, 0x42, 0x7f, 0x09, 0xfc, 0x15, 0x98,
-	0x55, 0x79, 0x8c, 0x2e, 0x44, 0x15, 0x12, 0x48, 0xd5, 0x81, 0x15, 0xb4, 0xd1, 0x8d, 0x3e, 0xc1,
-	0xbc, 0xf8, 0xa7, 0x24, 0xa4, 0xc3, 0x34, 0x23, 0x47, 0xa1, 0xe7, 0x10, 0x47, 0x24, 0x65, 0xba,
-	0xde, 0x97, 0x51, 0x0d, 0x0a, 0xae, 0xd7, 0x22, 0x01, 0x6f, 0x28, 0xd3, 0x49, 0x11, 0xdb, 0x5a,
-	0x2a, 0xb6, 0x64, 0x4c, 0x75, 0xab, 0x46, 0x4d, 0x1c, 0x56, 0xec, 0xe7, 0xdc, 0x94, 0x84, 0xef,
-	0xc2, 0xec, 0x03, 0xda, 0xec, 0xb7, 0xd3, 0x1a, 0x14, 0x19, 0x3f, 0xf5, 0x1b, 0xae, 0xe7, 0x87,
-	0xbc, 0x11, 0xb2, 0x4e, 0x1c, 0x54, 0xa4, 0xad, 0x45, 0xca, 0x87, 0xac, 0x83, 0x3d, 0x00, 0x61,
-	0x34, 0x66, 0x47, 0x0d, 0x8e, 0x8f, 0xfc, 0x8b, 0x8f, 0x8f, 0xbf, 0x35, 0x98, 0x97, 0x53, 0xf2,
-	0xe5, 0x61, 0x5f, 0x7c, 0x6a, 0xa1, 0x75, 0x28, 0xda, 0x1d, 0x97, 0x78, 0xc9, 0x1c, 0x90, 0x57,
-	0x54, 0x90, 0x5a, 0x35, 0x05, 0x06, 0x5b, 0x65, 0x62, 0xa8, 0x55, 0xd6, 0xa1, 0xa8, 0x7e, 0xc6,
-	0x3e, 0x26, 0xa5, 0x0f, 0xa9, 0x8d, 0x27, 0xc9, 0x6d, 0x28, 0xc8, 0x12, 0x1b, 0xa7, 0xff, 0xf0,
-	0xbb, 0xf0, 0xff, 0x43, 0x4e, 0xfd, 0x41, 0x8b, 0xa1, 0x4a, 0xd3, 0x86, 0x2b, 0xed, 0xce, 0x8f,
-	0x45, 0x28, 0x7e, 0x2e, 0xdf, 0xf2, 0x43, 0xc2, 0xba, 0xae, 0x4d, 0xd0, 0x31, 0x4c, 0xc9, 0xbe,
-	0x47, 0xe9, 0xc4, 0x24, 0x0f, 0xbe, 0x91, 0xe4, 0x5b, 0xc7, 0x59, 0xd5, 0xf5, 0x80, 0x36, 0x55,
-	0xfa, 0xb0, 0xfe, 0xfd, 0x9f, 0xff, 0xfe, 0x9c, 0x5b, 0xc4, 0xd7, 0xc5, 0x9b, 0xde, 0xad, 0x9a,
-	0xc7, 0xb4, 0x69, 0x7a, 0xe4, 0xc9, 0x07, 0xda, 0x36, 0x62, 0x90, 0xaf, 0x87, 0xde, 0x6b, 0x02,
-	0x5a, 0x17, 0x40, 0x2b, 0xf8, 0xad, 0x34, 0x50, 0x2f, 0x55, 0x0f, 0x67, 0x26, 0x0b, 0x3d, 0xe4,
-	0x41, 0x7e, 0x9f, 0xf0, 0xd7, 0x84, 0x79, 0x4b, 0x60, 0x2e, 0xa1, 0x9b, 0x99, 0x98, 0xe8, 0x39,
-	0x4c, 0xc9, 0x3a, 0x45, 0x1b, 0xa3, 0x21, 0x87, 0xab, 0x78, 0x2c, 0xe0, 0x35, 0x01, 0x5c, 0xd6,
-	0xb3, 0x81, 0xa3, 0xfc, 0xf6, 0x00, 0x92, 0xa2, 0x40, 0x6f, 0x8f, 0xc6, 0xbf, 0x50, 0x36, 0xfa,
-	0x0d, 0x43, 0x6e, 0x61, 0x46, 0xbc, 0x5e, 0x19, 0x9f, 0x45, 0x2b, 0x1a, 0xbe, 0x2d, 0x40, 0x37,
-	0xf0, 0xad, 0x18, 0x54, 0x56, 0x92, 0x19, 0x70, 0xea, 0x9b, 0xbd, 0x54, 0xa5, 0x09, 0xf0, 0x2f,
-	0x60, 0xea, 0x40, 0xec, 0x7d, 0x28, 0xc3, 0x9f, 0xbe, 0x94, 0x22, 0xc4, 0x7c, 0xdb, 0x90, 0xc7,
-	0xd5, 0x14, 0x9a, 0x17, 0x60, 0x80, 0xa6, 0xd5, 0xf6, 0xf8, 0x1c, 0x3d, 0x85, 0x99, 0x7d, 0xc2,
-	0x55, 0x30, 0xab, 0x59, 0xc1, 0xa4, 0x03, 0x19, 0x27, 0x93, 0x58, 0xe0, 0x2c, 0x23, 0x7d, 0x28,
-	0xa8, 0x5e, 0xbf, 0xd7, 0xce, 0xd0, 0x0f, 0x1a, 0x20, 0x79, 0x4d, 0xe9, 0xa1, 0x8f, 0xb6, 0x2e,
-	0xe3, 0x30, 0xf0, 0x30, 0x64, 0xa6, 0x74, 0x57, 0xa0, 0x6f, 0xe3, 0xf5, 0x0c, 0x74, 0x91, 0xcd,
-	0x48, 0x8a, 0x9c, 0x89, 0xb4, 0x1e, 0xc3, 0x6c, 0x6a, 0xbf, 0x40, 0x9b, 0xa3, 0x39, 0x5c, 0x5c,
-	0x41, 0x32, 0x29, 0xdc, 0x14, 0x14, 0x16, 0x70, 0x31, 0xa6, 0xd0, 0x15, 0xb6, 0x11, 0x56, 0x00,
-	0x73, 0xe9, 0x45, 0x20, 0x2b, 0xe0, 0x11, 0xcb, 0x42, 0x26, 0x5a, 0x45, 0xa0, 0xe9, 0xf8, 0x8d,
-	0x18, 0x4d, 0xae, 0x01, 0xb6, 0xb4, 0x8e, 0x40, 0x7f, 0xd2, 0x22, 0xd4, 0x64, 0xaf, 0xcb, 0x46,
-	0xbd, 0xb0, 0x3d, 0xea, 0xdb, 0xe3, 0x1c, 0x95, 0xef, 0x1a, 0xde, 0x16, 0x4c, 0xd6, 0x10, 0x8e,
-	0x99, 0xa8, 0x2d, 0xd1, 0xec, 0x0d, 0xef, 0x7a, 0x67, 0xe8, 0x5b, 0x98, 0xdd, 0x27, 0x5c, 0x95,
-	0x4c, 0x90, 0x59, 0xd0, 0x2b, 0x97, 0x3f, 0x25, 0x01, 0x2e, 0x09, 0x4c, 0x84, 0xe6, 0x63, 0xcc,
-	0xf8, 0x14, 0x7a, 0x0a, 0x90, 0x20, 0xa0, 0xb5, 0xd1, 0x71, 0x0c, 0xee, 0xe0, 0x7a, 0xf9, 0x72,
-	0xb8, 0x78, 0x48, 0xa0, 0xe5, 0x21, 0x34, 0xb3, 0x97, 0x3c, 0x82, 0x67, 0xe8, 0x31, 0xa0, 0x3a,
-	0x69, 0xb9, 0x01, 0x27, 0x2c, 0xd9, 0x77, 0x06, 0xfa, 0x2b, 0x6b, 0x29, 0xca, 0xbc, 0xe4, 0xb2,
-	0x00, 0x2e, 0xe1, 0x85, 0x18, 0x38, 0xf1, 0x10, 0x44, 0x57, 0xfc, 0x8b, 0x06, 0x37, 0x64, 0x3f,
-	0x0d, 0x6f, 0x58, 0x68, 0x67, 0x74, 0xe4, 0x19, 0x0b, 0x5f, 0x26, 0x83, 0xf7, 0x04, 0x83, 0x5d,
-	0xfc, 0xce, 0x45, 0x06, 0x66, 0x6f, 0x60, 0x45, 0x1b, 0xe8, 0xae, 0xfb, 0xf3, 0xbf, 0x9f, 0x97,
-	0xaf, 0xfd, 0x71, 0x5e, 0xbe, 0xf6, 0xcf, 0x79, 0xf9, 0xda, 0x37, 0xb9, 0x6e, 0xb5, 0x39, 0x25,
-	0x3c, 0xdf, 0xfd, 0x2f, 0x00, 0x00, 0xff, 0xff, 0xcc, 0xae, 0x89, 0x43, 0x18, 0x0f, 0x00, 0x00,
+func (m *UpdateProfileRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.StreamId != 0 {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.StreamId))
+	}
+	if m.ProfileId != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.ProfileId))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *Heartbeat) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Heartbeat) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.Id) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.Id)))
+		i += copy(dAtA[i:], m.Id)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *ProfileRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ProfileRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.ProfileId != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.ProfileId))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CheckBalanceRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CheckBalanceRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.ContractAddress) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.ContractAddress)))
+		i += copy(dAtA[i:], m.ContractAddress)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *CheckBalanceResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *CheckBalanceResponse) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.Balance != 0 {
+		dAtA[i] = 0x9
+		i++
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Balance))))
+		i += 8
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *ContractAddrRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ContractAddrRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.PipelineId) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.PipelineId)))
+		i += copy(dAtA[i:], m.PipelineId)
+	}
+	if len(m.ContractAddress) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.ContractAddress)))
+		i += copy(dAtA[i:], m.ContractAddress)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *VerifyChunkRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *VerifyChunkRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.StreamId != 0 {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.StreamId))
+	}
+	if m.SourceChunkId != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.SourceChunkId))
+	}
+	if m.ResultChunkId != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.ResultChunkId))
+	}
+	if m.HashDistance != 0 {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.HashDistance))
+	}
+	if m.Bitrate != 0 {
+		dAtA[i] = 0x28
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.Bitrate))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *ChunkCreatedRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ChunkCreatedRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.StreamId != 0 {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.StreamId))
+	}
+	if m.SourceChunkId != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.SourceChunkId))
+	}
+	if m.ResultChunkId != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.ResultChunkId))
+	}
+	if m.Bitrate != 0 {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.Bitrate))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *TranscoderStatusRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TranscoderStatusRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.TranscoderId) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.TranscoderId)))
+		i += copy(dAtA[i:], m.TranscoderId)
+	}
+	if m.Status != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.Status))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *StreamStatusRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *StreamStatusRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.TranscoderId) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.TranscoderId)))
+		i += copy(dAtA[i:], m.TranscoderId)
+	}
+	if len(m.StreamHash) > 0 {
+		dAtA[i] = 0x12
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.StreamHash)))
+		i += copy(dAtA[i:], m.StreamHash)
+	}
+	if len(m.Status) > 0 {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.Status)))
+		i += copy(dAtA[i:], m.Status)
+	}
+	if m.Refunded {
+		dAtA[i] = 0x20
+		i++
+		if m.Refunded {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.IngestStatus != 0 {
+		dAtA[i] = 0x28
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.IngestStatus))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *JobResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *JobResponse) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.RtmpInputUrl) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.RtmpInputUrl)))
+		i += copy(dAtA[i:], m.RtmpInputUrl)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *JobRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *JobRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.PipelineId) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.PipelineId)))
+		i += copy(dAtA[i:], m.PipelineId)
+	}
+	if m.ProfileId != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.ProfileId))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *UpdateJobRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *UpdateJobRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.PipelineId) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.PipelineId)))
+		i += copy(dAtA[i:], m.PipelineId)
+	}
+	if m.ProfileId != 0 {
+		dAtA[i] = 0x10
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.ProfileId))
+	}
+	if len(m.ClientAddress) > 0 {
+		dAtA[i] = 0x1a
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.ClientAddress)))
+		i += copy(dAtA[i:], m.ClientAddress)
+	}
+	if m.StreamId != 0 {
+		dAtA[i] = 0x20
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.StreamId))
+	}
+	if len(m.StreamAddress) > 0 {
+		dAtA[i] = 0x2a
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.StreamAddress)))
+		i += copy(dAtA[i:], m.StreamAddress)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *StreamRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *StreamRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if m.StreamId != 0 {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(m.StreamId))
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func (m *StopStreamRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalTo(dAtA)
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *StopStreamRequest) MarshalTo(dAtA []byte) (int, error) {
+	var i int
+	_ = i
+	var l int
+	_ = l
+	if len(m.StreamHash) > 0 {
+		dAtA[i] = 0xa
+		i++
+		i = encodeVarintManager(dAtA, i, uint64(len(m.StreamHash)))
+		i += copy(dAtA[i:], m.StreamHash)
+	}
+	if m.XXX_unrecognized != nil {
+		i += copy(dAtA[i:], m.XXX_unrecognized)
+	}
+	return i, nil
+}
+
+func encodeVarintManager(dAtA []byte, offset int, v uint64) int {
+	for v >= 1<<7 {
+		dAtA[offset] = uint8(v&0x7f | 0x80)
+		v >>= 7
+		offset++
+	}
+	dAtA[offset] = uint8(v)
+	return offset + 1
+}
+func (m *UpdateProfileRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.StreamId != 0 {
+		n += 1 + sovManager(uint64(m.StreamId))
+	}
+	if m.ProfileId != 0 {
+		n += 1 + sovManager(uint64(m.ProfileId))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *Heartbeat) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Id)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *ProfileRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.ProfileId != 0 {
+		n += 1 + sovManager(uint64(m.ProfileId))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *CheckBalanceRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.ContractAddress)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *CheckBalanceResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Balance != 0 {
+		n += 9
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *ContractAddrRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.PipelineId)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	l = len(m.ContractAddress)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *VerifyChunkRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.StreamId != 0 {
+		n += 1 + sovManager(uint64(m.StreamId))
+	}
+	if m.SourceChunkId != 0 {
+		n += 1 + sovManager(uint64(m.SourceChunkId))
+	}
+	if m.ResultChunkId != 0 {
+		n += 1 + sovManager(uint64(m.ResultChunkId))
+	}
+	if m.HashDistance != 0 {
+		n += 1 + sovManager(uint64(m.HashDistance))
+	}
+	if m.Bitrate != 0 {
+		n += 1 + sovManager(uint64(m.Bitrate))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *ChunkCreatedRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.StreamId != 0 {
+		n += 1 + sovManager(uint64(m.StreamId))
+	}
+	if m.SourceChunkId != 0 {
+		n += 1 + sovManager(uint64(m.SourceChunkId))
+	}
+	if m.ResultChunkId != 0 {
+		n += 1 + sovManager(uint64(m.ResultChunkId))
+	}
+	if m.Bitrate != 0 {
+		n += 1 + sovManager(uint64(m.Bitrate))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *TranscoderStatusRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.TranscoderId)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	if m.Status != 0 {
+		n += 1 + sovManager(uint64(m.Status))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *StreamStatusRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.TranscoderId)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	l = len(m.StreamHash)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	l = len(m.Status)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	if m.Refunded {
+		n += 2
+	}
+	if m.IngestStatus != 0 {
+		n += 1 + sovManager(uint64(m.IngestStatus))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *JobResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.RtmpInputUrl)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *JobRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.PipelineId)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	if m.ProfileId != 0 {
+		n += 1 + sovManager(uint64(m.ProfileId))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *UpdateJobRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.PipelineId)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	if m.ProfileId != 0 {
+		n += 1 + sovManager(uint64(m.ProfileId))
+	}
+	l = len(m.ClientAddress)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	if m.StreamId != 0 {
+		n += 1 + sovManager(uint64(m.StreamId))
+	}
+	l = len(m.StreamAddress)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *StreamRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.StreamId != 0 {
+		n += 1 + sovManager(uint64(m.StreamId))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func (m *StopStreamRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.StreamHash)
+	if l > 0 {
+		n += 1 + l + sovManager(uint64(l))
+	}
+	if m.XXX_unrecognized != nil {
+		n += len(m.XXX_unrecognized)
+	}
+	return n
+}
+
+func sovManager(x uint64) (n int) {
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
+}
+func sozManager(x uint64) (n int) {
+	return sovManager(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (m *UpdateProfileRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateProfileRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateProfileRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamId", wireType)
+			}
+			m.StreamId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.StreamId |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProfileId", wireType)
+			}
+			m.ProfileId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Heartbeat) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Heartbeat: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Heartbeat: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Id = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ProfileRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ProfileRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ProfileRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProfileId", wireType)
+			}
+			m.ProfileId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *CheckBalanceRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: CheckBalanceRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: CheckBalanceRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ContractAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ContractAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *CheckBalanceResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: CheckBalanceResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: CheckBalanceResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Balance", wireType)
+			}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			iNdEx += 8
+			m.Balance = float64(math.Float64frombits(v))
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ContractAddrRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ContractAddrRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ContractAddrRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PipelineId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PipelineId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ContractAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ContractAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *VerifyChunkRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: VerifyChunkRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: VerifyChunkRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamId", wireType)
+			}
+			m.StreamId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.StreamId |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SourceChunkId", wireType)
+			}
+			m.SourceChunkId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SourceChunkId |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ResultChunkId", wireType)
+			}
+			m.ResultChunkId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ResultChunkId |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HashDistance", wireType)
+			}
+			m.HashDistance = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.HashDistance |= (int32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Bitrate", wireType)
+			}
+			m.Bitrate = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Bitrate |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ChunkCreatedRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ChunkCreatedRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ChunkCreatedRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamId", wireType)
+			}
+			m.StreamId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.StreamId |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SourceChunkId", wireType)
+			}
+			m.SourceChunkId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SourceChunkId |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ResultChunkId", wireType)
+			}
+			m.ResultChunkId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ResultChunkId |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Bitrate", wireType)
+			}
+			m.Bitrate = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Bitrate |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *TranscoderStatusRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TranscoderStatusRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TranscoderStatusRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TranscoderId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TranscoderId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			m.Status = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Status |= (v11.TranscoderStatus(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *StreamStatusRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: StreamStatusRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: StreamStatusRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TranscoderId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TranscoderId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamHash", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.StreamHash = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Status = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Refunded", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Refunded = bool(v != 0)
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field IngestStatus", wireType)
+			}
+			m.IngestStatus = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.IngestStatus |= (v12.IngestStatus(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *JobResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: JobResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: JobResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RtmpInputUrl", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RtmpInputUrl = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *JobRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: JobRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: JobRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PipelineId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PipelineId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProfileId", wireType)
+			}
+			m.ProfileId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: UpdateJobRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: UpdateJobRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PipelineId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PipelineId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProfileId", wireType)
+			}
+			m.ProfileId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamId", wireType)
+			}
+			m.StreamId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.StreamId |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamAddress", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.StreamAddress = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *StreamRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: StreamRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: StreamRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamId", wireType)
+			}
+			m.StreamId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.StreamId |= (int64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *StopStreamRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: StopStreamRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: StopStreamRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StreamHash", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= (uint64(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthManager
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.StreamHash = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipManager(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if skippy < 0 {
+				return ErrInvalidLengthManager
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func skipManager(dAtA []byte) (n int, err error) {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return 0, ErrIntOverflowManager
+			}
+			if iNdEx >= l {
+				return 0, io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= (uint64(b) & 0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		wireType := int(wire & 0x7)
+		switch wireType {
+		case 0:
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				iNdEx++
+				if dAtA[iNdEx-1] < 0x80 {
+					break
+				}
+			}
+			return iNdEx, nil
+		case 1:
+			iNdEx += 8
+			return iNdEx, nil
+		case 2:
+			var length int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return 0, ErrIntOverflowManager
+				}
+				if iNdEx >= l {
+					return 0, io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				length |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			iNdEx += length
+			if length < 0 {
+				return 0, ErrInvalidLengthManager
+			}
+			return iNdEx, nil
+		case 3:
+			for {
+				var innerWire uint64
+				var start int = iNdEx
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return 0, ErrIntOverflowManager
+					}
+					if iNdEx >= l {
+						return 0, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					innerWire |= (uint64(b) & 0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				innerWireType := int(innerWire & 0x7)
+				if innerWireType == 4 {
+					break
+				}
+				next, err := skipManager(dAtA[start:])
+				if err != nil {
+					return 0, err
+				}
+				iNdEx = start + next
+			}
+			return iNdEx, nil
+		case 4:
+			return iNdEx, nil
+		case 5:
+			iNdEx += 4
+			return iNdEx, nil
+		default:
+			return 0, fmt.Errorf("proto: illegal wireType %d", wireType)
+		}
+	}
+	panic("unreachable")
+}
+
+var (
+	ErrInvalidLengthManager = fmt.Errorf("proto: negative length found during unmarshaling")
+	ErrIntOverflowManager   = fmt.Errorf("proto: integer overflow")
+)
+
+func init() { proto.RegisterFile("manager/v1/manager.proto", fileDescriptor_manager_ec2080fe23ef6563) }
+
+var fileDescriptor_manager_ec2080fe23ef6563 = []byte{
+	// 1261 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x56, 0xcf, 0x73, 0xdb, 0xc4,
+	0x17, 0xff, 0xca, 0x4e, 0xf2, 0x4d, 0x5e, 0x62, 0x37, 0x6c, 0x42, 0x71, 0x95, 0xe0, 0xb8, 0xdb,
+	0xa4, 0xa4, 0xa1, 0x91, 0xe2, 0x96, 0x61, 0x06, 0x18, 0x06, 0xda, 0xc0, 0x24, 0xee, 0x0c, 0x03,
+	0x38, 0xb4, 0x07, 0x2e, 0x46, 0x96, 0x36, 0xb6, 0x12, 0x47, 0xab, 0xae, 0x56, 0xee, 0x0f, 0x4f,
+	0x0e, 0x70, 0xe3, 0xc2, 0x0c, 0xc3, 0x01, 0x0e, 0xfc, 0x31, 0x3d, 0xf6, 0xc8, 0x0c, 0x37, 0x2e,
+	0x30, 0x09, 0x7f, 0x08, 0xa3, 0xdd, 0x95, 0x25, 0x3b, 0x56, 0xe2, 0xfe, 0xb8, 0xe9, 0x3d, 0xed,
+	0x7b, 0x9f, 0xcf, 0x7b, 0xfb, 0xde, 0xdb, 0x07, 0xa5, 0x23, 0xcb, 0xb3, 0x5a, 0x84, 0x99, 0xdd,
+	0xaa, 0xa9, 0x3e, 0x0d, 0x9f, 0x51, 0x4e, 0xd1, 0xa2, 0xdd, 0xa1, 0xa1, 0x63, 0x58, 0xbe, 0x6b,
+	0xc4, 0x3f, 0xba, 0x55, 0xdd, 0x6c, 0xb9, 0xbc, 0x1d, 0x36, 0x0d, 0x9b, 0x1e, 0x99, 0x0f, 0x5c,
+	0x87, 0xd0, 0x6d, 0xea, 0x7a, 0xa6, 0x38, 0xba, 0x69, 0xf9, 0xae, 0xc9, 0x7c, 0xdb, 0x6c, 0x13,
+	0xab, 0xc3, 0xdb, 0xd2, 0x8d, 0xbe, 0xd4, 0xa2, 0xb4, 0xd5, 0x21, 0xa6, 0x90, 0x9a, 0xe1, 0xbe,
+	0x49, 0x8e, 0x7c, 0xfe, 0x44, 0xfd, 0x5c, 0x56, 0x3f, 0x23, 0x4b, 0xcb, 0xf3, 0x28, 0xb7, 0xb8,
+	0x4b, 0xbd, 0x40, 0xfd, 0xdd, 0x4c, 0x61, 0xb5, 0x68, 0x8b, 0x26, 0x3e, 0x22, 0x49, 0x08, 0xe2,
+	0x4b, 0x1d, 0xff, 0xe0, 0x02, 0x6a, 0x3e, 0xa3, 0xfb, 0x6e, 0x87, 0x04, 0x51, 0xa8, 0xf1, 0xb7,
+	0x32, 0xfd, 0xe8, 0x02, 0xd3, 0x47, 0x94, 0x1d, 0x52, 0xe6, 0xc8, 0x34, 0xf5, 0x05, 0x65, 0xfc,
+	0xf1, 0x05, 0xc6, 0x9c, 0x59, 0x5e, 0x60, 0x53, 0x65, 0x9d, 0x48, 0xd2, 0x1c, 0x73, 0x58, 0xbc,
+	0xef, 0x3b, 0x16, 0x27, 0x5f, 0x49, 0x4e, 0x75, 0xf2, 0x30, 0x24, 0x01, 0x47, 0x4b, 0x30, 0x13,
+	0x70, 0x46, 0xac, 0xa3, 0x86, 0xeb, 0x94, 0xb4, 0x8a, 0xb6, 0x9e, 0xaf, 0x4f, 0x4b, 0x45, 0xcd,
+	0x41, 0x9f, 0x00, 0xa8, 0x10, 0xa2, 0xbf, 0xb9, 0x8a, 0xb6, 0x5e, 0xbc, 0x55, 0x31, 0x92, 0x1b,
+	0xeb, 0xc7, 0xd7, 0xad, 0x1a, 0xca, 0x6f, 0xcd, 0xa9, 0xcf, 0xf8, 0xf1, 0x27, 0x5e, 0x82, 0x99,
+	0x5d, 0x62, 0x31, 0xde, 0x24, 0x16, 0x47, 0x45, 0xc8, 0x29, 0x8c, 0x99, 0x7a, 0xce, 0x75, 0xf0,
+	0xd7, 0x50, 0x1c, 0x22, 0xf3, 0xca, 0x78, 0x9f, 0xc2, 0xc2, 0x76, 0x9b, 0xd8, 0x87, 0x77, 0xad,
+	0x8e, 0xe5, 0xd9, 0x7d, 0xbf, 0x37, 0x60, 0xde, 0xa6, 0x1e, 0x67, 0x96, 0xcd, 0x1b, 0x96, 0xe3,
+	0x30, 0x12, 0x04, 0x8a, 0xc7, 0xa5, 0x58, 0x7f, 0x47, 0xaa, 0xf1, 0x16, 0x2c, 0x0e, 0x7a, 0x08,
+	0x7c, 0xea, 0x05, 0x04, 0x95, 0xe0, 0xff, 0x4d, 0xa9, 0x12, 0x96, 0x5a, 0x3d, 0x16, 0xb1, 0x05,
+	0x0b, 0xdb, 0x29, 0x27, 0x31, 0xe6, 0x0a, 0xcc, 0xfa, 0xae, 0x4f, 0x3a, 0xae, 0x47, 0x1a, 0xfd,
+	0xb0, 0x21, 0x56, 0xd5, 0x9c, 0x91, 0xa4, 0x72, 0xa3, 0x49, 0x3d, 0xd3, 0x00, 0x3d, 0x20, 0xcc,
+	0xdd, 0x7f, 0xb2, 0xdd, 0x0e, 0xbd, 0xc3, 0xb1, 0xee, 0xee, 0x3a, 0x5c, 0x0a, 0x68, 0xc8, 0x6c,
+	0xd2, 0xb0, 0x23, 0x9b, 0x38, 0xa1, 0x13, 0xf5, 0x82, 0x54, 0x0b, 0x4f, 0xf2, 0x1c, 0x23, 0x41,
+	0xd8, 0xe1, 0xc9, 0xb9, 0xbc, 0x3c, 0x27, 0xd5, 0xf1, 0xb9, 0x6b, 0x50, 0x68, 0x5b, 0x41, 0xbb,
+	0xe1, 0xb8, 0x01, 0x17, 0x69, 0x98, 0xa8, 0x68, 0xeb, 0x93, 0xf5, 0xb9, 0x48, 0xf9, 0x99, 0xd2,
+	0x89, 0x2c, 0xb9, 0x9c, 0x59, 0x9c, 0x94, 0x26, 0x2b, 0xda, 0x7a, 0xa1, 0x1e, 0x8b, 0xf8, 0x77,
+	0x2d, 0xba, 0x9a, 0xd0, 0x3b, 0xdc, 0x66, 0xc4, 0xe2, 0xc4, 0x79, 0x95, 0x18, 0xf2, 0x63, 0xc6,
+	0x90, 0x1f, 0x8e, 0x21, 0x45, 0x6f, 0x62, 0x90, 0xde, 0xf7, 0x1a, 0xbc, 0xf5, 0x4d, 0xbf, 0x67,
+	0xf6, 0xb8, 0xc5, 0xc3, 0x20, 0xa6, 0x78, 0x0d, 0x0a, 0x49, 0x3b, 0x25, 0x77, 0x39, 0x97, 0x28,
+	0x6b, 0x0e, 0xba, 0x03, 0x53, 0x81, 0xb0, 0x52, 0x65, 0x7b, 0x23, 0x55, 0xb6, 0xa9, 0x66, 0xec,
+	0x56, 0x8d, 0x33, 0x30, 0xca, 0x10, 0xff, 0xa5, 0xc1, 0xc2, 0x9e, 0x08, 0xfd, 0x25, 0xf0, 0x57,
+	0x60, 0x56, 0xe5, 0x31, 0xba, 0x10, 0x55, 0x48, 0x20, 0x55, 0xbb, 0x56, 0xd0, 0x46, 0x97, 0xfb,
+	0x04, 0xf3, 0xe2, 0x9f, 0x92, 0x90, 0x0e, 0xd3, 0x8c, 0xec, 0x87, 0x9e, 0x43, 0x1c, 0x91, 0x94,
+	0xe9, 0x7a, 0x5f, 0x46, 0x35, 0x28, 0xb8, 0x5e, 0x8b, 0x04, 0xbc, 0xa1, 0x4c, 0x27, 0x45, 0x6c,
+	0xab, 0xa9, 0xd8, 0x92, 0x31, 0xd5, 0xad, 0x1a, 0x35, 0x71, 0x58, 0xb1, 0x9f, 0x73, 0x53, 0x12,
+	0xbe, 0x0d, 0xb3, 0xf7, 0x68, 0xb3, 0xdf, 0x4e, 0xab, 0x50, 0x64, 0xfc, 0xc8, 0x6f, 0xb8, 0x9e,
+	0x1f, 0xf2, 0x46, 0xc8, 0x3a, 0x71, 0x50, 0x91, 0xb6, 0x16, 0x29, 0xef, 0xb3, 0x0e, 0xf6, 0x00,
+	0x84, 0xd1, 0x98, 0x1d, 0x35, 0x38, 0x3e, 0xf2, 0x2f, 0x3e, 0x3e, 0xfe, 0xd6, 0x60, 0x5e, 0x4e,
+	0xc9, 0x97, 0x87, 0x7d, 0xf1, 0xa9, 0x85, 0xd6, 0xa0, 0x68, 0x77, 0x5c, 0xe2, 0x25, 0x73, 0x40,
+	0x5e, 0x51, 0x41, 0x6a, 0xd5, 0x14, 0x18, 0x6c, 0x95, 0x89, 0xa1, 0x56, 0x59, 0x83, 0xa2, 0xfa,
+	0x19, 0xfb, 0x98, 0x94, 0x3e, 0xa4, 0x36, 0x9e, 0x24, 0x37, 0xa1, 0x20, 0x4b, 0x6c, 0x9c, 0xfe,
+	0xc3, 0xef, 0xc1, 0x1b, 0x7b, 0x9c, 0xfa, 0x83, 0x16, 0x43, 0x95, 0xa6, 0x0d, 0x57, 0xda, 0xad,
+	0x9f, 0x8a, 0x50, 0xfc, 0x42, 0xbe, 0xe5, 0x7b, 0x84, 0x75, 0x5d, 0x9b, 0xa0, 0x03, 0x98, 0x92,
+	0x7d, 0x8f, 0xd2, 0x89, 0x49, 0x1e, 0x7c, 0x23, 0xc9, 0xb7, 0x8e, 0xb3, 0xaa, 0xeb, 0x1e, 0x6d,
+	0xaa, 0xf4, 0x61, 0xfd, 0x87, 0x3f, 0xff, 0xfd, 0x25, 0xb7, 0x88, 0x2f, 0x89, 0x37, 0xbd, 0x5b,
+	0x35, 0x0f, 0x68, 0xd3, 0xf4, 0xc8, 0xa3, 0x0f, 0xb5, 0x0d, 0xc4, 0x20, 0x5f, 0x0f, 0xbd, 0xd7,
+	0x04, 0xb4, 0x26, 0x80, 0x56, 0xf0, 0xdb, 0x69, 0xa0, 0x5e, 0xaa, 0x1e, 0x8e, 0x4d, 0x16, 0x7a,
+	0xc8, 0x83, 0xfc, 0x0e, 0xe1, 0xaf, 0x09, 0xf3, 0xaa, 0xc0, 0x5c, 0x42, 0x57, 0x32, 0x31, 0xd1,
+	0x53, 0x98, 0x92, 0x75, 0x8a, 0xae, 0x8f, 0x86, 0x1c, 0xae, 0xe2, 0xb1, 0x80, 0x57, 0x05, 0x70,
+	0x59, 0xcf, 0x06, 0x8e, 0xf2, 0xdb, 0x03, 0x48, 0x8a, 0x02, 0xbd, 0x33, 0x1a, 0xff, 0x4c, 0xd9,
+	0xe8, 0x97, 0x0d, 0xb9, 0x85, 0x19, 0xf1, 0x7a, 0x65, 0x7c, 0x1e, 0xad, 0x68, 0xf8, 0xa6, 0x00,
+	0xbd, 0x8e, 0xaf, 0xc6, 0xa0, 0xb2, 0x92, 0xcc, 0x80, 0x53, 0xdf, 0xec, 0xa5, 0x2a, 0x4d, 0x80,
+	0x7f, 0x09, 0x53, 0xbb, 0x62, 0xef, 0x43, 0x19, 0xfe, 0xf4, 0xa5, 0x14, 0x21, 0xe6, 0xdb, 0x86,
+	0x3c, 0xae, 0xa6, 0xd0, 0xbc, 0x00, 0x03, 0x34, 0xad, 0xb6, 0xc7, 0xa7, 0xe8, 0x31, 0xcc, 0xec,
+	0x10, 0xae, 0x82, 0xb9, 0x96, 0x15, 0x4c, 0x3a, 0x90, 0x71, 0x32, 0x89, 0x05, 0xce, 0x32, 0xd2,
+	0x87, 0x82, 0xea, 0xf5, 0x7b, 0xed, 0x18, 0xfd, 0xa8, 0x01, 0x92, 0xd7, 0x94, 0x1e, 0xfa, 0xe8,
+	0xc6, 0x79, 0x1c, 0x06, 0x1e, 0x86, 0xcc, 0x94, 0x6e, 0x09, 0xf4, 0x0d, 0xbc, 0x96, 0x81, 0x2e,
+	0xb2, 0x19, 0x49, 0x91, 0x33, 0x91, 0xd6, 0x03, 0x98, 0x4d, 0xed, 0x17, 0x68, 0x7d, 0x34, 0x87,
+	0xb3, 0x2b, 0x48, 0x26, 0x85, 0x2b, 0x82, 0xc2, 0x02, 0x2e, 0xc6, 0x14, 0xba, 0xc2, 0x36, 0xc2,
+	0x0a, 0x60, 0x2e, 0xbd, 0x08, 0x64, 0x05, 0x3c, 0x62, 0x59, 0xc8, 0x44, 0xab, 0x08, 0x34, 0x1d,
+	0xbf, 0x19, 0xa3, 0xc9, 0x35, 0xc0, 0x96, 0xd6, 0x11, 0xe8, 0xcf, 0x5a, 0x84, 0x9a, 0xec, 0x75,
+	0xd9, 0xa8, 0x67, 0xb6, 0x47, 0x7d, 0x63, 0x9c, 0xa3, 0xf2, 0x5d, 0xc3, 0x1b, 0x82, 0xc9, 0x2a,
+	0xc2, 0x31, 0x13, 0xb5, 0x25, 0x9a, 0xbd, 0xe1, 0x5d, 0xef, 0x18, 0x7d, 0x07, 0xb3, 0x3b, 0x84,
+	0xab, 0x92, 0x09, 0x32, 0x0b, 0x7a, 0xe5, 0xfc, 0xa7, 0x24, 0xc0, 0x25, 0x81, 0x89, 0xd0, 0x7c,
+	0x8c, 0x19, 0x9f, 0x42, 0x8f, 0x01, 0x12, 0x04, 0xb4, 0x3a, 0x3a, 0x8e, 0xc1, 0x1d, 0x5c, 0x2f,
+	0x9f, 0x0f, 0x17, 0x0f, 0x09, 0xb4, 0x3c, 0x84, 0x66, 0xf6, 0x92, 0x47, 0xf0, 0x18, 0x3d, 0x04,
+	0x54, 0x27, 0x2d, 0x37, 0xe0, 0x84, 0x25, 0xfb, 0xce, 0x40, 0x7f, 0x65, 0x2d, 0x45, 0x99, 0x97,
+	0x5c, 0x16, 0xc0, 0x25, 0xbc, 0x10, 0x03, 0x27, 0x1e, 0x82, 0xe8, 0x8a, 0x7f, 0xd5, 0xe0, 0xb2,
+	0xec, 0xa7, 0xe1, 0x0d, 0x0b, 0x6d, 0x8e, 0x8e, 0x3c, 0x63, 0xe1, 0xcb, 0x64, 0xf0, 0xbe, 0x60,
+	0xb0, 0x85, 0xdf, 0x3d, 0xcb, 0xc0, 0xec, 0x0d, 0xac, 0x68, 0x03, 0xdd, 0x75, 0x77, 0xf9, 0xf9,
+	0x49, 0x59, 0xfb, 0xe3, 0xa4, 0xac, 0xfd, 0x73, 0x52, 0xd6, 0x7e, 0x3b, 0x2d, 0xff, 0xef, 0xd9,
+	0x69, 0x59, 0x7b, 0x7e, 0x5a, 0xd6, 0xbe, 0xcd, 0x75, 0xab, 0xcd, 0x29, 0x81, 0x72, 0xfb, 0xbf,
+	0x00, 0x00, 0x00, 0xff, 0xff, 0x02, 0x05, 0x9b, 0x7d, 0x24, 0x0f, 0x00, 0x00,
 }

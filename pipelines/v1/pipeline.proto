@@ -3,6 +3,7 @@ syntax = "proto3";
 package cloud.api.pipelines.v1;
 
 import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
+import "github.com/VideoCoin/cloud-api/workorder/v1/workorder.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -37,7 +38,9 @@ message Pipeline {
     string user_id = 3 [
         (gogoproto.moretags) = "gorm:\"type:varchar(36)\""
     ];
+
     cloud.api.profiles.v1.ProfileId profile_id = 4;
+    
     PipelineStatus status = 5 [
         (gogoproto.moretags) = "gorm:\"type:varchar(100)\""
     ];
@@ -66,7 +69,7 @@ message PipelineProfile {
     PipelineStatus status = 3;
     
     cloud.api.profiles.v1.ProfileId profile_id = 4;
-    //cloud.api.workorder.v1.JobProfile job_profile = 5;
+    cloud.api.workorder.v1.JobProfile job_profile = 5;
 
     google.protobuf.Timestamp created_at = 10 [
         (gogoproto.stdtime) = true
