@@ -21,8 +21,9 @@ message Transaction {
 }
 
 enum TransactionSource {
-    ETH = 0;
-    VID = 1;
+    UNDETECTED = 0;
+    ETH = 1;
+    VID = 2;
 }
 
 enum CurrencyType {
