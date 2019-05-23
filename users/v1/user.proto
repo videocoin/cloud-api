@@ -2,28 +2,63 @@ syntax = "proto3";
 
 package cloud.api.users.v1;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "github.com/VideoCoin/cloud-api/accounts/v1/account.proto";
+
 import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 option go_package = "v1";
-option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = false;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.goproto_registration) = true;
+option (gogoproto.messagename_all) = true;
+
+enum UserRole {
+    option (gogoproto.goproto_enum_prefix) = false;
+    option (gogoproto.enum_customname) = "UserRole";
+
+    REGULAR = 0 [(gogoproto.enumvalue_customname) = "UserRoleRegular"];
+    MANAGER = 1 [(gogoproto.enumvalue_customname) = "UserRoleManager"];
+    QA      = 2 [(gogoproto.enumvalue_customname) = "UserRoleQa"];
+    SUPER   = 3 [(gogoproto.enumvalue_customname) = "UserRoleSuper"];
+}
 
 message User {
-    string id = 1 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
-    string email = 2 [(validate.rules).string.email = true, (gogoproto.moretags) = "gorm:\"unique_index\""];
-    string password = 3 [(validate.rules).string.min_len = 5, (gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
-    string name = 4 [(validate.rules).string.min_len = 3, (gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
-    google.protobuf.Timestamp created_at = 5 [(validate.rules).timestamp.required = true, (gogoproto.stdtime) = true];
-    string token = 6 [(gogoproto.moretags) = "gorm:\"type:varchar(255);index\""];
+    string id = 1 [
+        (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""
+    ];
+    string email = 2 [
+        (gogoproto.moretags) = "gorm:\"unique_index\""
+    ];
+    string password = 3 [
+        (gogoproto.moretags) = "gorm:\"type:varchar(100)\""
+    ];
+    string name = 4 [
+        (gogoproto.moretags) = "gorm:\"type:varchar(100)\""
+    ];
+    UserRole role = 5;
+    bool is_active = 6;
+    google.protobuf.Timestamp activated_at = 7 [
+        (gogoproto.stdtime) = true
+    ];
+    google.protobuf.Timestamp created_at = 8 [
+        (gogoproto.stdtime) = true
+    ];
+    string token = 13 [
+        (gogoproto.moretags) = "gorm:\"type:varchar(255);index\""
+    ];
+    string cent_token = 14 [
+        (gogoproto.moretags) = "gorm:\"type:varchar(255);index\""
+    ];
 }
 
 message UserProfile {
     string id = 1;
     string email = 2;
     string name = 3;
-    cloud.api.account.v1.AccountProfile account = 4;
+    bool is_active = 4;
+    cloud.api.account.v1.AccountProfile account = 5;
 }

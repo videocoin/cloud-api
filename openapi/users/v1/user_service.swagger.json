@@ -285,6 +285,10 @@
         "balance": {
           "type": "number",
           "format": "double"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -372,7 +376,7 @@
         "name": {
           "type": "string"
         },
-        "activated": {
+        "is_active": {
           "type": "boolean",
           "format": "boolean"
         },

@@ -3,15 +3,15 @@ syntax = "proto3";
 package cloud.api.pipelines.v1;
 
 import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
-
-import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "v1";
-option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = false;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.goproto_registration) = true;
+option (gogoproto.messagename_all) = true;
 
 enum PipelineStatus {
     option (gogoproto.goproto_enum_prefix) = false;
@@ -28,21 +28,36 @@ enum PipelineStatus {
 }
 
 message Pipeline {
-    string id = 1 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""];
-    string name = 2 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
-    string user_id = 3 [(validate.rules).string.len = 36, (gogoproto.moretags) = "gorm:\"type:varchar(36)\""];
-
+    string id = 1 [
+        (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""
+    ];
+    string name = 2 [
+        (gogoproto.moretags) = "gorm:\"type:varchar(100)\""
+    ];
+    string user_id = 3 [
+        (gogoproto.moretags) = "gorm:\"type:varchar(36)\""
+    ];
     cloud.api.profiles.v1.ProfileId profile_id = 4;
-    PipelineStatus status = 5 [(gogoproto.moretags) = "gorm:\"type:varchar(100)\""];
+    PipelineStatus status = 5 [
+        (gogoproto.moretags) = "gorm:\"type:varchar(100)\""
+    ];
 
     string client_address = 6;
     uint64 stream_id = 7;
     string stream_address = 8;
     
-    google.protobuf.Timestamp created_at = 10;
-    google.protobuf.Timestamp pending_at = 11;
-    google.protobuf.Timestamp running_at = 12;
-    google.protobuf.Timestamp stopped_at = 13;
+    google.protobuf.Timestamp created_at = 10 [
+        (gogoproto.stdtime) = true
+    ];
+    google.protobuf.Timestamp pending_at = 11 [
+        (gogoproto.stdtime) = true
+    ];
+    google.protobuf.Timestamp running_at = 12 [
+        (gogoproto.stdtime) = true
+    ];
+    google.protobuf.Timestamp stopped_at = 13 [
+        (gogoproto.stdtime) = true
+    ];
 }
 
 message PipelineProfile {
@@ -53,9 +68,17 @@ message PipelineProfile {
     cloud.api.profiles.v1.ProfileId profile_id = 4;
     //cloud.api.workorder.v1.JobProfile job_profile = 5;
 
-    google.protobuf.Timestamp created_at = 10;
-    google.protobuf.Timestamp pending_at = 11;
-    google.protobuf.Timestamp running_at = 12;
-    google.protobuf.Timestamp stopped_at = 13;
+    google.protobuf.Timestamp created_at = 10 [
+        (gogoproto.stdtime) = true
+    ];
+    google.protobuf.Timestamp pending_at = 11 [
+        (gogoproto.stdtime) = true
+    ];
+    google.protobuf.Timestamp running_at = 12 [
+        (gogoproto.stdtime) = true
+    ];
+    google.protobuf.Timestamp stopped_at = 13 [
+        (gogoproto.stdtime) = true
+    ];
 }
 

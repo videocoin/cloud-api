@@ -78,6 +78,28 @@
           "PipelineService"
         ]
       },
+      "delete": {
+        "operationId": "Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PipelineService"
+        ]
+      },
       "put": {
         "operationId": "Update",
         "responses": {

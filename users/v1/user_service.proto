@@ -2,20 +2,21 @@ syntax = "proto3";
 
 package cloud.api.users.v1;
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 import "github.com/VideoCoin/cloud-api/rpc/health.proto";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 import "users/v1/user.proto";
 
-
 option go_package = "v1";
-option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = false;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.goproto_registration) = true;
+option (gogoproto.messagename_all) = true;
 
 service UserService {
     rpc Health(google.protobuf.Empty) returns (cloud.api.rpc.HealthStatus) {
@@ -29,7 +30,7 @@ service UserService {
             post: "/api/v1/users",
             body: "*"
         };
-    }
+	}
 
     rpc Login(LoginUserRequest) returns (LoginUserResponse) {
         option (google.api.http) = {
@@ -46,7 +47,8 @@ service UserService {
 
     rpc ResetPassword(ResetPasswordUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-            post: "/api/v1/auth/reset"
+            post: "/api/v1/auth/reset",
+            body: "*"
         };
     }
 
@@ -56,15 +58,24 @@ service UserService {
         };
     }
 
+    rpc Activate(UserRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/api/v1/user/{id}/activate",
+            body: "*"
+        };
+    }
+
     rpc StartRecovery(StartRecoveryUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-            post: "/api/v1/recovery/start"
+            post: "/api/v1/recovery/start",
+            body: "*"
         };
     }
 
     rpc Recover(RecoverUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-            post: "/api/v1/recover"
+            post: "/api/v1/recover",
+            body: "*"
         };
     }
 
@@ -82,19 +93,36 @@ service UserService {
 }
 
 message CreateUserRequest {
-    string email = 1 [(validate.rules).string.email = true];
-    string password = 2 [(validate.rules).string.min_len = 5];
-    string name = 3 [(validate.rules).string.min_len = 3];
-    string confirm_password = 4 [(validate.rules).string.min_len = 5];
+    string email = 1 [
+        (gogoproto.moretags) = "validate:\"required,email\""
+    ];
+
+    string password = 2 [
+        (gogoproto.moretags) = "validate:\"secure-password\""
+    ];
+
+    string name = 3 [
+        (gogoproto.moretags) = "validate:\"min=2,max=100\""
+    ];
+
+    string confirm_password = 4 [
+        (gogoproto.moretags) = "validate:\"confirm-password=Password\""
+    ];
 }
 
 message LoginUserRequest {
-    string email = 1 [(validate.rules).string.email = true];
-    string password = 2 [(validate.rules).string.min_len = 5];
+    string email = 1 [
+        (gogoproto.moretags) = "validate:\"required,email\""
+    ];
+
+    string password = 2 [
+        (gogoproto.moretags) = "validate:\"required\""
+    ];
 }
 
 message LoginUserResponse {
     string token = 1;
+    string cent_token = 2;
 }
 
 message UserRequest {
@@ -102,18 +130,30 @@ message UserRequest {
 }
 
 message ResetPasswordUserRequest {
-    string password = 1 [(validate.rules).string.min_len = 5];
-    string confirm_password = 2 [(validate.rules).string.min_len = 5];
+    string password = 1 [
+        (gogoproto.moretags) = "validate:\"secure-password\""
+    ];
+    string confirm_password = 2 [
+        (gogoproto.moretags) = "validate:\"confirm-password=Password\""
+    ];
 }
 
 message StartRecoveryUserRequest {
-    string email = 1 [(validate.rules).string.email = true];
+    string email = 1 [
+        (gogoproto.moretags) = "validate:\"required,email\""
+    ];
 }
 
 message RecoverUserRequest {
-    string token = 1;
-    string password = 2 [(validate.rules).string.min_len = 3];
-    string confirm_password = 3 [(validate.rules).string.min_len = 5];
+    string token = 1 [
+        (gogoproto.moretags) = "validate:\"required\""
+    ];
+    string password = 2 [
+        (gogoproto.moretags) = "validate:\"secure-password\""
+    ];
+    string confirm_password = 3 [
+        (gogoproto.moretags) = "validate:\"confirm-password=Password\""
+    ];
 }
 
 message WhitelistResponse {
@@ -121,5 +161,7 @@ message WhitelistResponse {
 }
 
 message LookupByAddressRequest {
-    string address = 1 [(validate.rules).string = {min_len: 40, max_len: 42}];
+    string address = 1 [
+        (gogoproto.moretags) = "validate:\"required\""
+    ];
 }
