@@ -15,6 +15,30 @@
     "application/json"
   ],
   "paths": {
+    "/api/v1/address/{address}": {
+      "get": {
+        "operationId": "GetTransactions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetTransactionsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TransactionService"
+        ]
+      }
+    },
     "/api/v1/transaction/{hash}": {
       "get": {
         "operationId": "GetTransaction",
@@ -38,42 +62,9 @@
           "TransactionService"
         ]
       }
-    },
-    "/api/v1/transactions/{address}": {
-      "get": {
-        "operationId": "GetTransactions",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1GetTransactionsResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "address",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "TransactionService"
-        ]
-      }
     }
   },
   "definitions": {
-    "v1CurrencyType": {
-      "type": "string",
-      "enum": [
-        "VID_NATIVE",
-        "VIDERC20",
-        "TOKENIZED_FIAT"
-      ],
-      "default": "VID_NATIVE"
-    },
     "v1GetTransactionResponse": {
       "type": "object",
       "properties": {
@@ -117,17 +108,26 @@
           "format": "int64"
         },
         "type": {
-          "$ref": "#/definitions/v1CurrencyType"
+          "$ref": "#/definitions/v1TransactionType"
         }
       }
     },
     "v1TransactionSource": {
       "type": "string",
       "enum": [
+        "UNDETECTED",
         "ETH",
         "VID"
       ],
-      "default": "ETH"
+      "default": "UNDETECTED"
+    },
+    "v1TransactionType": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "DEPOSIT"
+      ],
+      "default": "UNKNOWN"
     }
   }
 }
