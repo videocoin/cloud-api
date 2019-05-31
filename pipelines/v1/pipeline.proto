@@ -45,9 +45,7 @@ message Pipeline {
         (gogoproto.moretags) = "gorm:\"type:varchar(100)\""
     ];
 
-    string client_address = 6;
-    uint64 stream_id = 7;
-    string stream_address = 8;
+    uint64 stream_id = 6;
     
     google.protobuf.Timestamp created_at = 10 [
         (gogoproto.stdtime) = true

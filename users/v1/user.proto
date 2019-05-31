@@ -21,9 +21,9 @@ enum UserRole {
     option (gogoproto.enum_customname) = "UserRole";
 
     REGULAR = 0 [(gogoproto.enumvalue_customname) = "UserRoleRegular"];
-    MANAGER = 1 [(gogoproto.enumvalue_customname) = "UserRoleManager"];
-    QA      = 2 [(gogoproto.enumvalue_customname) = "UserRoleQa"];
-    SUPER   = 3 [(gogoproto.enumvalue_customname) = "UserRoleSuper"];
+    QA      = 3 [(gogoproto.enumvalue_customname) = "UserRoleQa"];
+    MANAGER = 6 [(gogoproto.enumvalue_customname) = "UserRoleManager"];
+    SUPER   = 9 [(gogoproto.enumvalue_customname) = "UserRoleSuper"];
 }
 
 message User {
@@ -48,9 +48,6 @@ message User {
         (gogoproto.stdtime) = true
     ];
     string token = 13 [
-        (gogoproto.moretags) = "gorm:\"type:varchar(255);index\""
-    ];
-    string cent_token = 14 [
         (gogoproto.moretags) = "gorm:\"type:varchar(255);index\""
     ];
 }

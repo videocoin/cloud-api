@@ -122,7 +122,6 @@ message LoginUserRequest {
 
 message LoginUserResponse {
     string token = 1;
-    string cent_token = 2;
 }
 
 message UserRequest {
