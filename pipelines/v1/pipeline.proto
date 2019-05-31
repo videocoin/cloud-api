@@ -44,6 +44,8 @@ message Pipeline {
     PipelineStatus status = 5 [
         (gogoproto.moretags) = "gorm:\"type:varchar(100)\""
     ];
+
+    uint64 stream_id = 6;
     
     google.protobuf.Timestamp created_at = 10 [
         (gogoproto.stdtime) = true
