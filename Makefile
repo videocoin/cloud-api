@@ -5,13 +5,13 @@ protoc: protoc-rpc \
 	protoc-gateway-v1-users \
 	protoc-gateway-v1-pipelines \
 	protoc-gateway-v1-accounts \
+	protoc-gateway-v1-manager \
+	protoc-gateway-v1-verifier \
 	protoc-v1-notifications \
 	protoc-v1-emitter \
 	protoc-v1-profiles \
-	protoc-v1-verifier \
 	protoc-v1-workorder \
 	protoc-v1-transcoder \
-	protoc-v1-manager
 
 protoc-rpc:
 	protoc \
@@ -29,9 +29,13 @@ protoc-v1-%:
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 		-I${GOPATH}/src/github.com \
 		-I. \
-		--gofast_out=plugins=grpc:. \
-		--grpc-gateway_out=logtostderr=true:. \
-		--validate_out="lang=gogo:." \
+		--gogofast_out=plugins=grpc,\
+Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
+Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
+Mgoogle/protobuf/empty.proto=github.com/gogo/protobuf/types,\
+Mgoogle/api/annotations.proto=github.com/gogo/googleapis/google/api,\
+Mgoogle/protobuf/field_mask.proto=github.com/gogo/protobuf/types:\
+. \
 		./$*/v1/*.proto
 
 protoc-gateway-v1-%:
