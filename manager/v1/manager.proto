@@ -120,7 +120,6 @@ service ManagerService {
   rpc UpdateTranscoderStatus(TranscoderStatusRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       post: "/api/v1/transcoder/{transcoder_id}/{status}"
-      body: "*"
     };
   }; 
 }
