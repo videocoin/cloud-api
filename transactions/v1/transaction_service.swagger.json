@@ -104,8 +104,7 @@
           "format": "date-time"
         },
         "value": {
-          "type": "string",
-          "format": "int64"
+          "type": "string"
         },
         "type": {
           "$ref": "#/definitions/v1TransactionType"
