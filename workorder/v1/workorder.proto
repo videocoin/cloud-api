@@ -40,7 +40,7 @@ message WorkOrder {
     uint32 id = 1;
     string pipeline_id = 2;
     string transcoder_id = 3;
-    cloud.api.profiles.v1.ProfileId profile_id = 4 [ (gogoproto.moretags) = "gorm:\"profile_id;type:INTEGER;DEFAULT:0\"sql:\"type:INTEGER;DEFAULT:0\"" ];
+    cloud.api.profiles.v1.ProfileId profile_id = 4;
     string client_address = 5;
     string stream_address = 6;
     int64 stream_id = 7;
