@@ -304,7 +304,7 @@
           "type": "string"
         },
         "status": {
-          "type": "string"
+          "$ref": "#/definitions/v1WorkOrderStatus"
         },
         "ingest_status": {
           "$ref": "#/definitions/v1IngestStatus"
@@ -419,6 +419,20 @@
           "$ref": "#/definitions/v1ProfileId"
         }
       }
+    },
+    "v1WorkOrderStatus": {
+      "type": "string",
+      "enum": [
+        "none",
+        "new",
+        "pending",
+        "processing",
+        "ready",
+        "complete",
+        "canceld",
+        "failed"
+      ],
+      "default": "none"
     }
   }
 }
