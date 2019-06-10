@@ -264,6 +264,16 @@
         }
       }
     },
+    "v1IngestStatus": {
+      "type": "string",
+      "enum": [
+        "ingest_status_none",
+        "ingest_status_active",
+        "ingest_status_inactive",
+        "ingest_status_error"
+      ],
+      "default": "ingest_status_none"
+    },
     "v1JobProfile": {
       "type": "object",
       "properties": {
@@ -294,10 +304,10 @@
           "type": "string"
         },
         "status": {
-          "type": "string"
+          "$ref": "#/definitions/v1WorkOrderStatus"
         },
         "ingest_status": {
-          "type": "string"
+          "$ref": "#/definitions/v1IngestStatus"
         }
       }
     },
@@ -409,6 +419,20 @@
           "$ref": "#/definitions/v1ProfileId"
         }
       }
+    },
+    "v1WorkOrderStatus": {
+      "type": "string",
+      "enum": [
+        "none",
+        "new",
+        "pending",
+        "processing",
+        "ready",
+        "complete",
+        "canceld",
+        "failed"
+      ],
+      "default": "none"
     }
   }
 }
