@@ -32,4 +32,5 @@ enum TransactionType {
     ESCROW = 2;
     STREAM_ENDED = 3;
     INPUT_CHUNK_ADDED = 4;
+    CHUNK_PROOF_SUBMITTED = 5;
 }
