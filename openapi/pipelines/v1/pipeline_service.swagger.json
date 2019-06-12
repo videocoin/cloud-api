@@ -55,6 +55,36 @@
         ]
       }
     },
+    "/api/v1/pipelines/code/{id}": {
+      "get": {
+        "operationId": "GetByAccessCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1PipelineProfile"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_code",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PipelineService"
+        ]
+      }
+    },
     "/api/v1/pipelines/{id}": {
       "get": {
         "operationId": "Get",
@@ -71,6 +101,12 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_code",
+            "in": "query",
+            "required": false,
             "type": "string"
           }
         ],
@@ -93,6 +129,12 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_code",
+            "in": "query",
+            "required": false,
             "type": "string"
           }
         ],
@@ -304,7 +346,7 @@
           "type": "string"
         },
         "status": {
-          "type": "string"
+          "$ref": "#/definitions/v1WorkOrderStatus"
         },
         "ingest_status": {
           "$ref": "#/definitions/v1IngestStatus"
@@ -355,6 +397,9 @@
         "stopped_at": {
           "type": "string",
           "format": "date-time"
+        },
+        "access_code": {
+          "type": "string"
         }
       }
     },
@@ -362,6 +407,9 @@
       "type": "object",
       "properties": {
         "id": {
+          "type": "string"
+        },
+        "access_code": {
           "type": "string"
         }
       }
@@ -419,6 +467,20 @@
           "$ref": "#/definitions/v1ProfileId"
         }
       }
+    },
+    "v1WorkOrderStatus": {
+      "type": "string",
+      "enum": [
+        "none",
+        "new",
+        "pending",
+        "processing",
+        "ready",
+        "complete",
+        "canceld",
+        "failed"
+      ],
+      "default": "none"
     }
   }
 }
