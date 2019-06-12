@@ -43,6 +43,12 @@ service PipelineService {
         };
     }
 
+    rpc GetByAccessCode(PipelineRequest) returns (PipelineProfile) {
+        option (google.api.http) = {
+            get: "/api/v1/pipelines/code/{id}"
+        };
+    }
+
     rpc List(google.protobuf.Empty) returns (ListResponse) {
         option (google.api.http) = {
             get: "/api/v1/pipelines"
@@ -85,6 +91,7 @@ message CreatePipelineRequest {
 
 message PipelineRequest {
     string id = 1;
+    string access_code = 2;
 }
 
 message ListResponse {

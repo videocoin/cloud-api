@@ -59,6 +59,8 @@ message Pipeline {
     google.protobuf.Timestamp stopped_at = 13 [
         (gogoproto.stdtime) = true
     ];
+
+    string access_code = 14;
 }
 
 message PipelineProfile {
@@ -81,5 +83,7 @@ message PipelineProfile {
     google.protobuf.Timestamp stopped_at = 13 [
         (gogoproto.stdtime) = true
     ];
+
+    string access_code = 14;
 }
 
