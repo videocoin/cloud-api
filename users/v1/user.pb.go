@@ -5,7 +5,7 @@ package v1
 
 import (
 	fmt "fmt"
-	v1 "github.com/VideoCoin/cloud-api/accounts/v1"
+	v1 "github.com/videocoin/cloud-api/accounts/v1"
 	_ "github.com/gogo/googleapis/google/api"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"

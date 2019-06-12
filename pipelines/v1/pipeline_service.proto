@@ -3,8 +3,8 @@ syntax = "proto3";
 package cloud.api.pipelines.v1;
 
 import "pipelines/v1/pipeline.proto";
-import "github.com/VideoCoin/cloud-api/rpc/health.proto";
-import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
+import "github.com/videocoin/cloud-api/rpc/health.proto";
+import "github.com/videocoin/cloud-api/profiles/v1/profiles.proto";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";

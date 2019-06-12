@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package cloud.api.users.v1;
 
-import "github.com/VideoCoin/cloud-api/rpc/health.proto";
+import "github.com/videocoin/cloud-api/rpc/health.proto";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";

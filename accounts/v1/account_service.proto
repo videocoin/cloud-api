@@ -4,7 +4,7 @@ package cloud.api.account.v1;
 
 import "accounts/v1/account.proto";
 
-import "github.com/VideoCoin/cloud-api/rpc/health.proto";
+import "github.com/videocoin/cloud-api/rpc/health.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";

@@ -1,4 +1,4 @@
-module github.com/VideoCoin/cloud-api
+module github.com/videocoin/cloud-api
 
 go 1.12
 

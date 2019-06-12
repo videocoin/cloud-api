@@ -6,7 +6,7 @@ package v1
 import (
 	context "context"
 	fmt "fmt"
-	rpc "github.com/VideoCoin/cloud-api/rpc"
+	rpc "github.com/videocoin/cloud-api/rpc"
 	_ "github.com/gogo/googleapis/google/api"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
