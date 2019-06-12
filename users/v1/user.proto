@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package cloud.api.users.v1;
 
-import "github.com/VideoCoin/cloud-api/accounts/v1/account.proto";
+import "github.com/videocoin/cloud-api/accounts/v1/account.proto";
 
 import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
