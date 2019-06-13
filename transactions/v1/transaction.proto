@@ -33,4 +33,5 @@ enum TransactionType {
     STREAM_ENDED = 3;
     INPUT_CHUNK_ADDED = 4;
     CHUNK_PROOF_SUBMITTED = 5;
+    CHUNK_PROOF_VALIDATED = 6;
 }
