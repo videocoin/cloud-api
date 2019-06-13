@@ -34,4 +34,5 @@ enum TransactionType {
     INPUT_CHUNK_ADDED = 4;
     CHUNK_PROOF_SUBMITTED = 5;
     CHUNK_PROOF_VALIDATED = 6;
+    ACCOUNT_FUNDED = 7;
 }
