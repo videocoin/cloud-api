@@ -3,18 +3,19 @@ syntax = "proto3";
 package cloud.api.pipelines.v1;
 
 import "pipelines/v1/pipeline.proto";
-import "github.com/VideoCoin/cloud-api/rpc/health.proto";
-import "github.com/VideoCoin/cloud-api/profiles/v1/profiles.proto";
+import "github.com/videocoin/cloud-api/rpc/health.proto";
+import "github.com/videocoin/cloud-api/profiles/v1/profiles.proto";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
 
 option go_package = "v1";
-option (gogoproto.unmarshaler_all) = false;
-option (gogoproto.marshaler_all) = false;
-option (gogoproto.sizer_all) = false;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.goproto_registration) = true;
+option (gogoproto.messagename_all) = true;
 
 service PipelineService {
     rpc Health(google.protobuf.Empty) returns (cloud.api.rpc.HealthStatus) {
@@ -30,9 +31,21 @@ service PipelineService {
         };
     }
 
+    rpc Delete(PipelineRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/pipelines/{id}",
+        };
+    }
+
     rpc Get(PipelineRequest) returns (PipelineProfile) {
         option (google.api.http) = {
             get: "/api/v1/pipelines/{id}"
+        };
+    }
+
+    rpc GetByAccessCode(PipelineRequest) returns (PipelineProfile) {
+        option (google.api.http) = {
+            get: "/api/v1/pipelines/code/{access_code}"
         };
     }
 
@@ -78,6 +91,7 @@ message CreatePipelineRequest {
 
 message PipelineRequest {
     string id = 1;
+    string access_code = 2;
 }
 
 message ListResponse {

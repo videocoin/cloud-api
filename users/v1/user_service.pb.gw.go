@@ -13,8 +13,8 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/gogo/protobuf/types"
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes/empty"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/grpc-ecosystem/grpc-gateway/utilities"
 	"google.golang.org/grpc"
@@ -30,7 +30,7 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 
 func request_UserService_Health_0(ctx context.Context, marshaler runtime.Marshaler, client UserServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq empty.Empty
+	var protoReq types.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.Health(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -73,7 +73,7 @@ func request_UserService_Login_0(ctx context.Context, marshaler runtime.Marshale
 }
 
 func request_UserService_Logout_0(ctx context.Context, marshaler runtime.Marshaler, client UserServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq empty.Empty
+	var protoReq types.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.Logout(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -99,7 +99,7 @@ func request_UserService_ResetPassword_0(ctx context.Context, marshaler runtime.
 }
 
 func request_UserService_Get_0(ctx context.Context, marshaler runtime.Marshaler, client UserServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq empty.Empty
+	var protoReq types.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.Get(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -177,7 +177,7 @@ func request_UserService_Recover_0(ctx context.Context, marshaler runtime.Marsha
 }
 
 func request_UserService_Whitelist_0(ctx context.Context, marshaler runtime.Marshaler, client UserServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq empty.Empty
+	var protoReq types.Empty
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.Whitelist(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))

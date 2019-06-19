@@ -55,6 +55,36 @@
         ]
       }
     },
+    "/api/v1/pipelines/code/{id}": {
+      "get": {
+        "operationId": "GetByAccessCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1PipelineProfile"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_code",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PipelineService"
+        ]
+      }
+    },
     "/api/v1/pipelines/{id}": {
       "get": {
         "operationId": "Get",
@@ -71,6 +101,40 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_code",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PipelineService"
+        ]
+      },
+      "delete": {
+        "operationId": "Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_code",
+            "in": "query",
+            "required": false,
             "type": "string"
           }
         ],
@@ -242,6 +306,53 @@
         }
       }
     },
+    "v1IngestStatus": {
+      "type": "string",
+      "enum": [
+        "ingest_status_none",
+        "ingest_status_active",
+        "ingest_status_inactive",
+        "ingest_status_error"
+      ],
+      "default": "ingest_status_none"
+    },
+    "v1JobProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "pipeline_id": {
+          "type": "string"
+        },
+        "profile_id": {
+          "$ref": "#/definitions/v1ProfileId"
+        },
+        "ingest_input_url": {
+          "type": "string"
+        },
+        "transcode_output_url": {
+          "type": "string"
+        },
+        "client_address": {
+          "type": "string"
+        },
+        "stream_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stream_address": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/v1WorkOrderStatus"
+        },
+        "ingest_status": {
+          "$ref": "#/definitions/v1IngestStatus"
+        }
+      }
+    },
     "v1ListResponse": {
       "type": "object",
       "properties": {
@@ -268,6 +379,9 @@
         "profile_id": {
           "$ref": "#/definitions/v1ProfileId"
         },
+        "job_profile": {
+          "$ref": "#/definitions/v1JobProfile"
+        },
         "created_at": {
           "type": "string",
           "format": "date-time"
@@ -283,6 +397,9 @@
         "stopped_at": {
           "type": "string",
           "format": "date-time"
+        },
+        "access_code": {
+          "type": "string"
         }
       }
     },
@@ -290,6 +407,9 @@
       "type": "object",
       "properties": {
         "id": {
+          "type": "string"
+        },
+        "access_code": {
           "type": "string"
         }
       }
@@ -347,6 +467,20 @@
           "$ref": "#/definitions/v1ProfileId"
         }
       }
+    },
+    "v1WorkOrderStatus": {
+      "type": "string",
+      "enum": [
+        "none",
+        "new",
+        "pending",
+        "processing",
+        "ready",
+        "complete",
+        "canceld",
+        "failed"
+      ],
+      "default": "none"
     }
   }
 }
