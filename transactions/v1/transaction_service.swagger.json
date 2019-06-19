@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/address/{address}/limit/{limit}/offset/{offset}": {
+    "/api/v1/address/{address}": {
       "get": {
         "operationId": "GetTransactions",
         "responses": {
@@ -35,15 +35,15 @@
           },
           {
             "name": "limit",
-            "in": "path",
-            "required": true,
+            "in": "query",
+            "required": false,
             "type": "string",
             "format": "uint64"
           },
           {
             "name": "offset",
-            "in": "path",
-            "required": true,
+            "in": "query",
+            "required": false,
             "type": "string",
             "format": "uint64"
           }

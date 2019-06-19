@@ -14,7 +14,7 @@ option (gogoproto.sizer_all) = false;
 service TransactionService {
     rpc GetTransactions(GetTransactionsRequest) returns (GetTransactionsResponse) {
         option (google.api.http) = {
-            get: "/api/v1/address/{address}/limit/{limit}/offset/{offset}"
+            get: "/api/v1/address/{address}"
         };
     }
 
