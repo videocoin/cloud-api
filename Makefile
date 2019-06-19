@@ -12,7 +12,6 @@ protoc: protoc-rpc \
 	protoc-v1-profiles \
 	protoc-v1-workorder \
 	protoc-v1-transcoder \
-	protoc-v1-manager \
 	protoc-v1-transactions
 
 
