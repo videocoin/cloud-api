@@ -55,7 +55,7 @@
         ]
       }
     },
-    "/api/v1/pipelines/code/{id}": {
+    "/api/v1/pipelines/code/{access_code}": {
       "get": {
         "operationId": "GetByAccessCode",
         "responses": {
@@ -68,13 +68,13 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "access_code",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "access_code",
+            "name": "id",
             "in": "query",
             "required": false,
             "type": "string"
@@ -320,8 +320,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
         },
         "pipeline_id": {
           "type": "string"
