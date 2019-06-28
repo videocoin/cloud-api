@@ -7,6 +7,8 @@ require (
 	github.com/gogo/protobuf v1.2.1
 	github.com/golang/protobuf v1.3.1
 	github.com/grpc-ecosystem/grpc-gateway v1.9.0
+	github.com/jinzhu/gorm v1.9.9
+	github.com/satori/go.uuid v1.2.0
 	golang.org/x/net v0.0.0-20190522155817-f3200d17e092
 	google.golang.org/grpc v1.21.0
 )
