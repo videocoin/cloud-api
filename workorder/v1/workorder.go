@@ -40,12 +40,9 @@ func (w *WorkOrder) CheckErrs() []error {
 }
 
 func (w *WorkOrder) BeforeCreate(scope *gorm.Scope) error {
-	uuid, err := uuid.NewV4()
-	if err != nil {
-		return err
-	}
+	uuid := uuid.NewV4()
 
-	err = scope.SetColumn("id", uuid.String())
+	err := scope.SetColumn("id", uuid.String())
 	if err != nil {
 		return err
 	}
