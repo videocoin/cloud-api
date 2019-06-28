@@ -162,5 +162,6 @@ message UpdateJobRequest {
   int64 stream_id = 4;
   string stream_address = 5;
   cloud.api.workorder.v1.WorkOrderStatus status = 6;
+  cloud.api.workorder.v1.IngestStatus ingest_status = 7;
 }
 
