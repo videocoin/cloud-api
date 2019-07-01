@@ -306,15 +306,15 @@
         }
       }
     },
-    "v1IngestStatus": {
+    "v1InputStatus": {
       "type": "string",
       "enum": [
-        "ingest_status_none",
-        "ingest_status_active",
-        "ingest_status_inactive",
-        "ingest_status_error"
+        "INPUT_STATUS_NONE",
+        "INPUT_STATUS_PENDING",
+        "INPUT_STATUS_ACTIVE",
+        "INPUT_STATUS_ERROR"
       ],
-      "default": "ingest_status_none"
+      "default": "INPUT_STATUS_NONE"
     },
     "v1JobProfile": {
       "type": "object",
@@ -325,16 +325,10 @@
         "pipeline_id": {
           "type": "string"
         },
-        "profile_id": {
-          "$ref": "#/definitions/v1ProfileId"
-        },
         "ingest_input_url": {
           "type": "string"
         },
         "transcode_output_url": {
-          "type": "string"
-        },
-        "client_address": {
           "type": "string"
         },
         "stream_id": {
@@ -345,12 +339,37 @@
           "type": "string"
         },
         "status": {
-          "$ref": "#/definitions/v1WorkOrderStatus"
+          "$ref": "#/definitions/v1JobStatus"
         },
-        "ingest_status": {
-          "$ref": "#/definitions/v1IngestStatus"
+        "input_status": {
+          "$ref": "#/definitions/v1InputStatus"
         }
       }
+    },
+    "v1JobProfiles": {
+      "type": "object",
+      "properties": {
+        "job_profiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1JobProfile"
+          }
+        }
+      }
+    },
+    "v1JobStatus": {
+      "type": "string",
+      "enum": [
+        "JOB_STATUS_NONE",
+        "JOB_STATUS_NEW",
+        "JOB_STATUS_PENDING",
+        "JOB_STATUS_PROCESSING",
+        "JOB_STATUS_READY",
+        "JOB_STATUS_COMPLETED",
+        "JOB_STATUS_CANCELLED",
+        "JOB_STATUS_FAILED"
+      ],
+      "default": "JOB_STATUS_NONE"
     },
     "v1ListResponse": {
       "type": "object",
@@ -372,30 +391,19 @@
         "name": {
           "type": "string"
         },
-        "status": {
-          "$ref": "#/definitions/v1PipelineStatus"
-        },
         "profile_id": {
           "$ref": "#/definitions/v1ProfileId"
         },
-        "job_profile": {
-          "$ref": "#/definitions/v1JobProfile"
+        "jobs": {
+          "$ref": "#/definitions/v1JobProfiles"
         },
         "created_at": {
           "type": "string",
           "format": "date-time"
         },
-        "pending_at": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "running_at": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "stopped_at": {
-          "type": "string",
-          "format": "date-time"
+        "is_activated": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "access_code": {
           "type": "string"
@@ -412,20 +420,6 @@
           "type": "string"
         }
       }
-    },
-    "v1PipelineStatus": {
-      "type": "string",
-      "enum": [
-        "IDLE",
-        "PENDING_REQUEST",
-        "PENDING_APPROVE",
-        "PENDING_CREATE",
-        "PENDING_JOB",
-        "RUNNING",
-        "FAILED",
-        "COMPLETED"
-      ],
-      "default": "IDLE"
     },
     "v1ProfileId": {
       "type": "string",
@@ -459,27 +453,10 @@
         "stream_address": {
           "type": "string"
         },
-        "status": {
-          "$ref": "#/definitions/v1PipelineStatus"
-        },
         "profile_id": {
           "$ref": "#/definitions/v1ProfileId"
         }
       }
-    },
-    "v1WorkOrderStatus": {
-      "type": "string",
-      "enum": [
-        "none",
-        "new",
-        "pending",
-        "processing",
-        "ready",
-        "complete",
-        "canceld",
-        "failed"
-      ],
-      "default": "none"
     }
   }
 }
