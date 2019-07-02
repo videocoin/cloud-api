@@ -97,6 +97,7 @@ service ManagerService {
   rpc ChunkCreated(ChunkCreatedRequest) returns (google.protobuf.Empty) {};
 
   rpc RegisterTranscoder(cloud.api.transcoder.v1.Transcoder) returns (google.protobuf.Empty) {};
+
 }
 
 
