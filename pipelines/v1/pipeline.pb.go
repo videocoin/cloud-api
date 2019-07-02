@@ -14,6 +14,7 @@ import (
 	v1 "github.com/videocoin/cloud-api/profiles/v1"
 	io "io"
 	math "math"
+	math_bits "math/bits"
 	time "time"
 )
 
@@ -313,9 +314,9 @@ func (m *Pipeline) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x52
 		i++
 		i = encodeVarintPipeline(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)))
-		n1, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i:])
-		if err != nil {
-			return 0, err
+		n1, err1 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i:])
+		if err1 != nil {
+			return 0, err1
 		}
 		i += n1
 	}
@@ -377,9 +378,9 @@ func (m *PipelineProfile) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x2a
 		i++
 		i = encodeVarintPipeline(dAtA, i, uint64(m.Jobs.Size()))
-		n2, err := m.Jobs.MarshalTo(dAtA[i:])
-		if err != nil {
-			return 0, err
+		n2, err2 := m.Jobs.MarshalTo(dAtA[i:])
+		if err2 != nil {
+			return 0, err2
 		}
 		i += n2
 	}
@@ -387,9 +388,9 @@ func (m *PipelineProfile) MarshalTo(dAtA []byte) (int, error) {
 		dAtA[i] = 0x52
 		i++
 		i = encodeVarintPipeline(dAtA, i, uint64(github_com_gogo_protobuf_types.SizeOfStdTime(*m.CreatedAt)))
-		n3, err := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i:])
-		if err != nil {
-			return 0, err
+		n3, err3 := github_com_gogo_protobuf_types.StdTimeMarshalTo(*m.CreatedAt, dAtA[i:])
+		if err3 != nil {
+			return 0, err3
 		}
 		i += n3
 	}
@@ -501,14 +502,7 @@ func (m *PipelineProfile) Size() (n int) {
 }
 
 func sovPipeline(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozPipeline(x uint64) (n int) {
 	return sovPipeline(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -528,7 +522,7 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -556,7 +550,7 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -566,6 +560,9 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipeline
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipeline
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -585,7 +582,7 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -595,6 +592,9 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipeline
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipeline
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -614,7 +614,7 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -624,6 +624,9 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipeline
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipeline
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -643,7 +646,7 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
+				m.ProfileId |= v1.ProfileId(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -662,7 +665,7 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -671,6 +674,9 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipeline
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipeline
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -695,7 +701,7 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= (int(b) & 0x7F) << shift
+				v |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -715,7 +721,7 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -725,6 +731,9 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipeline
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipeline
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -737,6 +746,9 @@ func (m *Pipeline) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPipeline
 			}
 			if (iNdEx + skippy) > l {
@@ -767,7 +779,7 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -795,7 +807,7 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -805,6 +817,9 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipeline
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipeline
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -824,7 +839,7 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -834,6 +849,9 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipeline
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipeline
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -853,7 +871,7 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
+				m.ProfileId |= v1.ProfileId(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -872,7 +890,7 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -881,6 +899,9 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipeline
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipeline
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -905,7 +926,7 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -914,6 +935,9 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipeline
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipeline
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -938,7 +962,7 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= (int(b) & 0x7F) << shift
+				v |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -958,7 +982,7 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -968,6 +992,9 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipeline
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipeline
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -980,6 +1007,9 @@ func (m *PipelineProfile) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthPipeline
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPipeline
 			}
 			if (iNdEx + skippy) > l {
@@ -1049,8 +1079,11 @@ func skipPipeline(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthPipeline
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthPipeline
 			}
 			return iNdEx, nil
@@ -1081,6 +1114,9 @@ func skipPipeline(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthPipeline
+				}
 			}
 			return iNdEx, nil
 		case 4:
