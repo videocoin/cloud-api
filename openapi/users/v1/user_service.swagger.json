@@ -60,7 +60,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1LoginUserResponse"
+              "$ref": "#/definitions/v1TokenResponse"
             }
           }
         },
@@ -157,6 +157,76 @@
         ]
       }
     },
+    "/api/v1/tokens": {
+      "get": {
+        "operationId": "ListApiTokens",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UserApiListResponse"
+            }
+          }
+        },
+        "tags": [
+          "UserService"
+        ]
+      },
+      "post": {
+        "operationId": "CreateApiToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateUserApiTokenResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UserApiTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/api/v1/tokens/{id}": {
+      "delete": {
+        "operationId": "DeleteApiToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
     "/api/v1/user": {
       "get": {
         "operationId": "Get",
@@ -212,7 +282,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1LoginUserResponse"
+              "$ref": "#/definitions/v1TokenResponse"
             }
           }
         },
@@ -292,6 +362,20 @@
         }
       }
     },
+    "v1CreateUserApiTokenResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
     "v1CreateUserRequest": {
       "type": "object",
       "properties": {
@@ -316,14 +400,6 @@
           "type": "string"
         },
         "password": {
-          "type": "string"
-        }
-      }
-    },
-    "v1LoginUserResponse": {
-      "type": "object",
-      "properties": {
-        "token": {
           "type": "string"
         }
       }
@@ -357,6 +433,47 @@
       "type": "object",
       "properties": {
         "email": {
+          "type": "string"
+        }
+      }
+    },
+    "v1TokenResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UserApiListResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1UserApiTokenResponse"
+          }
+        }
+      }
+    },
+    "v1UserApiTokenRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UserApiTokenResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
           "type": "string"
         }
       }

@@ -14,8 +14,11 @@ import (
 	v1 "github.com/videocoin/cloud-api/profiles/v1"
 	rpc "github.com/videocoin/cloud-api/rpc"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	io "io"
 	math "math"
+	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -499,6 +502,41 @@ type PipelineServiceServer interface {
 	Run(context.Context, *PipelineRequest) (*PipelineProfile, error)
 	Complete(context.Context, *PipelineRequest) (*PipelineProfile, error)
 	Cancel(context.Context, *PipelineRequest) (*PipelineProfile, error)
+}
+
+// UnimplementedPipelineServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedPipelineServiceServer struct {
+}
+
+func (*UnimplementedPipelineServiceServer) Health(ctx context.Context, req *types.Empty) (*rpc.HealthStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Health not implemented")
+}
+func (*UnimplementedPipelineServiceServer) Create(ctx context.Context, req *CreatePipelineRequest) (*PipelineProfile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (*UnimplementedPipelineServiceServer) Delete(ctx context.Context, req *PipelineRequest) (*types.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (*UnimplementedPipelineServiceServer) Get(ctx context.Context, req *PipelineRequest) (*PipelineProfile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (*UnimplementedPipelineServiceServer) GetByAccessCode(ctx context.Context, req *PipelineRequest) (*PipelineProfile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetByAccessCode not implemented")
+}
+func (*UnimplementedPipelineServiceServer) List(ctx context.Context, req *types.Empty) (*ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (*UnimplementedPipelineServiceServer) Update(ctx context.Context, req *UpdatePipelineRequest) (*PipelineProfile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (*UnimplementedPipelineServiceServer) Run(ctx context.Context, req *PipelineRequest) (*PipelineProfile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Run not implemented")
+}
+func (*UnimplementedPipelineServiceServer) Complete(ctx context.Context, req *PipelineRequest) (*PipelineProfile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Complete not implemented")
+}
+func (*UnimplementedPipelineServiceServer) Cancel(ctx context.Context, req *PipelineRequest) (*PipelineProfile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Cancel not implemented")
 }
 
 func RegisterPipelineServiceServer(s *grpc.Server, srv PipelineServiceServer) {
@@ -998,14 +1036,7 @@ func (m *UpdatePipelineRequest) Size() (n int) {
 }
 
 func sovPipelineService(x uint64) (n int) {
-	for {
-		n++
-		x >>= 7
-		if x == 0 {
-			break
-		}
-	}
-	return n
+	return (math_bits.Len64(x|1) + 6) / 7
 }
 func sozPipelineService(x uint64) (n int) {
 	return sovPipelineService(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -1025,7 +1056,7 @@ func (m *CreatePipelineRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -1053,7 +1084,7 @@ func (m *CreatePipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1063,6 +1094,9 @@ func (m *CreatePipelineRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipelineService
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipelineService
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1082,7 +1116,7 @@ func (m *CreatePipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
+				m.ProfileId |= v1.ProfileId(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1094,6 +1128,9 @@ func (m *CreatePipelineRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthPipelineService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPipelineService
 			}
 			if (iNdEx + skippy) > l {
@@ -1124,7 +1161,7 @@ func (m *PipelineRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -1152,7 +1189,7 @@ func (m *PipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1162,6 +1199,9 @@ func (m *PipelineRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipelineService
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipelineService
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1181,7 +1221,7 @@ func (m *PipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1191,6 +1231,9 @@ func (m *PipelineRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipelineService
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipelineService
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1203,6 +1246,9 @@ func (m *PipelineRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthPipelineService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPipelineService
 			}
 			if (iNdEx + skippy) > l {
@@ -1233,7 +1279,7 @@ func (m *ListResponse) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -1261,7 +1307,7 @@ func (m *ListResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= (int(b) & 0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1270,6 +1316,9 @@ func (m *ListResponse) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipelineService
 			}
 			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipelineService
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1285,6 +1334,9 @@ func (m *ListResponse) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthPipelineService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPipelineService
 			}
 			if (iNdEx + skippy) > l {
@@ -1315,7 +1367,7 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= (uint64(b) & 0x7F) << shift
+			wire |= uint64(b&0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -1343,7 +1395,7 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1353,6 +1405,9 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipelineService
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipelineService
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1372,7 +1427,7 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1382,6 +1437,9 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipelineService
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipelineService
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1401,7 +1459,7 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1411,6 +1469,9 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipelineService
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipelineService
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1430,7 +1491,7 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1440,6 +1501,9 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipelineService
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipelineService
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1459,7 +1523,7 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StreamId |= (uint64(b) & 0x7F) << shift
+				m.StreamId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1478,7 +1542,7 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= (uint64(b) & 0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1488,6 +1552,9 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthPipelineService
 			}
 			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthPipelineService
+			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1507,7 +1574,7 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
+				m.ProfileId |= v1.ProfileId(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1519,6 +1586,9 @@ func (m *UpdatePipelineRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
+				return ErrInvalidLengthPipelineService
+			}
+			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthPipelineService
 			}
 			if (iNdEx + skippy) > l {
@@ -1588,8 +1658,11 @@ func skipPipelineService(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			iNdEx += length
 			if length < 0 {
+				return 0, ErrInvalidLengthPipelineService
+			}
+			iNdEx += length
+			if iNdEx < 0 {
 				return 0, ErrInvalidLengthPipelineService
 			}
 			return iNdEx, nil
@@ -1620,6 +1693,9 @@ func skipPipelineService(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
+				if iNdEx < 0 {
+					return 0, ErrInvalidLengthPipelineService
+				}
 			}
 			return iNdEx, nil
 		case 4:
