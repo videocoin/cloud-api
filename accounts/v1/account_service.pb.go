@@ -13,11 +13,8 @@ import (
 	golang_proto "github.com/golang/protobuf/proto"
 	rpc "github.com/videocoin/cloud-api/rpc"
 	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	io "io"
 	math "math"
-	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -344,32 +341,6 @@ type AccountServiceServer interface {
 	Key(context.Context, *AccountRequest) (*AccountKey, error)
 }
 
-// UnimplementedAccountServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedAccountServiceServer struct {
-}
-
-func (*UnimplementedAccountServiceServer) Health(ctx context.Context, req *types.Empty) (*rpc.HealthStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Health not implemented")
-}
-func (*UnimplementedAccountServiceServer) Get(ctx context.Context, req *AccountRequest) (*AccountProfile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
-}
-func (*UnimplementedAccountServiceServer) GetByAddress(ctx context.Context, req *Address) (*AccountProfile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetByAddress not implemented")
-}
-func (*UnimplementedAccountServiceServer) GetByOwner(ctx context.Context, req *AccountRequest) (*AccountProfile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetByOwner not implemented")
-}
-func (*UnimplementedAccountServiceServer) Create(ctx context.Context, req *AccountRequest) (*AccountProfile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
-}
-func (*UnimplementedAccountServiceServer) List(ctx context.Context, req *types.Empty) (*ListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
-}
-func (*UnimplementedAccountServiceServer) Key(ctx context.Context, req *AccountRequest) (*AccountKey, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Key not implemented")
-}
-
 func RegisterAccountServiceServer(s *grpc.Server, srv AccountServiceServer) {
 	s.RegisterService(&_AccountService_serviceDesc, srv)
 }
@@ -694,7 +665,14 @@ func (m *ListResponse) Size() (n int) {
 }
 
 func sovAccountService(x uint64) (n int) {
-	return (math_bits.Len64(x|1) + 6) / 7
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
 }
 func sozAccountService(x uint64) (n int) {
 	return sovAccountService(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -714,7 +692,7 @@ func (m *AccountRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -742,7 +720,7 @@ func (m *AccountRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -752,9 +730,6 @@ func (m *AccountRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthAccountService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAccountService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -774,7 +749,7 @@ func (m *AccountRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -784,9 +759,6 @@ func (m *AccountRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthAccountService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAccountService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -799,9 +771,6 @@ func (m *AccountRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthAccountService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthAccountService
 			}
 			if (iNdEx + skippy) > l {
@@ -832,7 +801,7 @@ func (m *Address) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -860,7 +829,7 @@ func (m *Address) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -870,9 +839,6 @@ func (m *Address) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthAccountService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAccountService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -885,9 +851,6 @@ func (m *Address) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthAccountService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthAccountService
 			}
 			if (iNdEx + skippy) > l {
@@ -918,7 +881,7 @@ func (m *ListResponse) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -946,7 +909,7 @@ func (m *ListResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -955,9 +918,6 @@ func (m *ListResponse) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthAccountService
 			}
 			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthAccountService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -973,9 +933,6 @@ func (m *ListResponse) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthAccountService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthAccountService
 			}
 			if (iNdEx + skippy) > l {
@@ -1045,11 +1002,8 @@ func skipAccountService(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			if length < 0 {
-				return 0, ErrInvalidLengthAccountService
-			}
 			iNdEx += length
-			if iNdEx < 0 {
+			if length < 0 {
 				return 0, ErrInvalidLengthAccountService
 			}
 			return iNdEx, nil
@@ -1080,9 +1034,6 @@ func skipAccountService(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
-				if iNdEx < 0 {
-					return 0, ErrInvalidLengthAccountService
-				}
 			}
 			return iNdEx, nil
 		case 4:

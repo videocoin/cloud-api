@@ -11,7 +11,6 @@ import (
 	v1 "github.com/videocoin/cloud-api/profiles/v1"
 	io "io"
 	math "math"
-	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -867,7 +866,14 @@ func (m *JobProfiles) Size() (n int) {
 }
 
 func sovJob(x uint64) (n int) {
-	return (math_bits.Len64(x|1) + 6) / 7
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
 }
 func sozJob(x uint64) (n int) {
 	return sovJob(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -887,7 +893,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -915,7 +921,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -925,9 +931,6 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -947,7 +950,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -956,9 +959,6 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -981,7 +981,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				byteLen |= int(b&0x7F) << shift
+				byteLen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -990,9 +990,6 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + byteLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1015,7 +1012,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1025,9 +1022,6 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1047,7 +1041,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1057,9 +1051,6 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1079,7 +1070,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProfileId |= v1.ProfileId(b&0x7F) << shift
+				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1098,7 +1089,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1108,9 +1099,6 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1130,7 +1118,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1140,9 +1128,6 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1162,7 +1147,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StreamId |= int64(b&0x7F) << shift
+				m.StreamId |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1181,7 +1166,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1191,9 +1176,6 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1213,7 +1195,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1223,9 +1205,6 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1245,7 +1224,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1255,9 +1234,6 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1277,7 +1253,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Status |= JobStatus(b&0x7F) << shift
+				m.Status |= (JobStatus(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1296,7 +1272,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.CreatedAt |= int64(b&0x7F) << shift
+				m.CreatedAt |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1315,7 +1291,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= int(b&0x7F) << shift
+				v |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1335,7 +1311,7 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.InputStatus |= InputStatus(b&0x7F) << shift
+				m.InputStatus |= (InputStatus(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1347,9 +1323,6 @@ func (m *Job) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthJob
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthJob
 			}
 			if (iNdEx + skippy) > l {
@@ -1380,7 +1353,7 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -1408,7 +1381,7 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1418,9 +1391,6 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1440,7 +1410,7 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1450,9 +1420,6 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1472,7 +1439,7 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1482,9 +1449,6 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1504,7 +1468,7 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1514,9 +1478,6 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1536,7 +1497,7 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StreamId |= int64(b&0x7F) << shift
+				m.StreamId |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1555,7 +1516,7 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1565,9 +1526,6 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1587,7 +1545,7 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Status |= JobStatus(b&0x7F) << shift
+				m.Status |= (JobStatus(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1606,7 +1564,7 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.InputStatus |= InputStatus(b&0x7F) << shift
+				m.InputStatus |= (InputStatus(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1618,9 +1576,6 @@ func (m *JobProfile) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthJob
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthJob
 			}
 			if (iNdEx + skippy) > l {
@@ -1651,7 +1606,7 @@ func (m *JobProfiles) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -1679,7 +1634,7 @@ func (m *JobProfiles) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1688,9 +1643,6 @@ func (m *JobProfiles) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthJob
 			}
 			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthJob
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -1706,9 +1658,6 @@ func (m *JobProfiles) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthJob
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthJob
 			}
 			if (iNdEx + skippy) > l {
@@ -1778,11 +1727,8 @@ func skipJob(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			if length < 0 {
-				return 0, ErrInvalidLengthJob
-			}
 			iNdEx += length
-			if iNdEx < 0 {
+			if length < 0 {
 				return 0, ErrInvalidLengthJob
 			}
 			return iNdEx, nil
@@ -1813,9 +1759,6 @@ func skipJob(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
-				if iNdEx < 0 {
-					return 0, ErrInvalidLengthJob
-				}
 			}
 			return iNdEx, nil
 		case 4:

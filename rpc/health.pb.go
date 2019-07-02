@@ -10,7 +10,6 @@ import (
 	golang_proto "github.com/golang/protobuf/proto"
 	io "io"
 	math "math"
-	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -150,7 +149,14 @@ func (m *HealthStatus) Size() (n int) {
 }
 
 func sovHealth(x uint64) (n int) {
-	return (math_bits.Len64(x|1) + 6) / 7
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
 }
 func sozHealth(x uint64) (n int) {
 	return sovHealth(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -170,7 +176,7 @@ func (m *HealthStatus) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -198,7 +204,7 @@ func (m *HealthStatus) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -208,9 +214,6 @@ func (m *HealthStatus) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthHealth
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthHealth
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -223,9 +226,6 @@ func (m *HealthStatus) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthHealth
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthHealth
 			}
 			if (iNdEx + skippy) > l {
@@ -295,11 +295,8 @@ func skipHealth(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			if length < 0 {
-				return 0, ErrInvalidLengthHealth
-			}
 			iNdEx += length
-			if iNdEx < 0 {
+			if length < 0 {
 				return 0, ErrInvalidLengthHealth
 			}
 			return iNdEx, nil
@@ -330,9 +327,6 @@ func skipHealth(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
-				if iNdEx < 0 {
-					return 0, ErrInvalidLengthHealth
-				}
 			}
 			return iNdEx, nil
 		case 4:

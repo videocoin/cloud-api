@@ -13,11 +13,8 @@ import (
 	golang_proto "github.com/golang/protobuf/proto"
 	rpc "github.com/videocoin/cloud-api/rpc"
 	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	io "io"
 	math "math"
-	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -227,26 +224,6 @@ type EmitterServiceServer interface {
 	EndStream(context.Context, *StreamRequest) (*types.Empty, error)
 }
 
-// UnimplementedEmitterServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedEmitterServiceServer struct {
-}
-
-func (*UnimplementedEmitterServiceServer) Health(ctx context.Context, req *types.Empty) (*rpc.HealthStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Health not implemented")
-}
-func (*UnimplementedEmitterServiceServer) RequestStream(ctx context.Context, req *StreamRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RequestStream not implemented")
-}
-func (*UnimplementedEmitterServiceServer) ApproveStream(ctx context.Context, req *StreamRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ApproveStream not implemented")
-}
-func (*UnimplementedEmitterServiceServer) CreateStream(ctx context.Context, req *StreamRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateStream not implemented")
-}
-func (*UnimplementedEmitterServiceServer) EndStream(ctx context.Context, req *StreamRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method EndStream not implemented")
-}
-
 func RegisterEmitterServiceServer(s *grpc.Server, srv EmitterServiceServer) {
 	s.RegisterService(&_EmitterService_serviceDesc, srv)
 }
@@ -451,7 +428,14 @@ func (m *StreamRequest) Size() (n int) {
 }
 
 func sovEmitterService(x uint64) (n int) {
-	return (math_bits.Len64(x|1) + 6) / 7
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
 }
 func sozEmitterService(x uint64) (n int) {
 	return sovEmitterService(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -471,7 +455,7 @@ func (m *StreamRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -499,7 +483,7 @@ func (m *StreamRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -509,9 +493,6 @@ func (m *StreamRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthEmitterService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthEmitterService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -531,7 +512,7 @@ func (m *StreamRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -541,9 +522,6 @@ func (m *StreamRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthEmitterService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthEmitterService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -563,7 +541,7 @@ func (m *StreamRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StreamId |= uint64(b&0x7F) << shift
+				m.StreamId |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -582,7 +560,7 @@ func (m *StreamRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -592,9 +570,6 @@ func (m *StreamRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthEmitterService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthEmitterService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -607,9 +582,6 @@ func (m *StreamRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthEmitterService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthEmitterService
 			}
 			if (iNdEx + skippy) > l {
@@ -679,11 +651,8 @@ func skipEmitterService(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			if length < 0 {
-				return 0, ErrInvalidLengthEmitterService
-			}
 			iNdEx += length
-			if iNdEx < 0 {
+			if length < 0 {
 				return 0, ErrInvalidLengthEmitterService
 			}
 			return iNdEx, nil
@@ -714,9 +683,6 @@ func skipEmitterService(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
-				if iNdEx < 0 {
-					return 0, ErrInvalidLengthEmitterService
-				}
 			}
 			return iNdEx, nil
 		case 4:

@@ -14,11 +14,8 @@ import (
 	_ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger/options"
 	rpc "github.com/videocoin/cloud-api/rpc"
 	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	io "io"
 	math "math"
-	math_bits "math/bits"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1064,53 +1061,6 @@ type UserServiceServer interface {
 	DeleteApiToken(context.Context, *UserApiTokenRequest) (*types.Empty, error)
 }
 
-// UnimplementedUserServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedUserServiceServer struct {
-}
-
-func (*UnimplementedUserServiceServer) Health(ctx context.Context, req *types.Empty) (*rpc.HealthStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Health not implemented")
-}
-func (*UnimplementedUserServiceServer) Create(ctx context.Context, req *CreateUserRequest) (*TokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
-}
-func (*UnimplementedUserServiceServer) Login(ctx context.Context, req *LoginUserRequest) (*TokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
-}
-func (*UnimplementedUserServiceServer) Logout(ctx context.Context, req *types.Empty) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
-}
-func (*UnimplementedUserServiceServer) ResetPassword(ctx context.Context, req *ResetPasswordUserRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ResetPassword not implemented")
-}
-func (*UnimplementedUserServiceServer) Get(ctx context.Context, req *types.Empty) (*UserProfile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
-}
-func (*UnimplementedUserServiceServer) Activate(ctx context.Context, req *UserRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Activate not implemented")
-}
-func (*UnimplementedUserServiceServer) StartRecovery(ctx context.Context, req *StartRecoveryUserRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StartRecovery not implemented")
-}
-func (*UnimplementedUserServiceServer) Recover(ctx context.Context, req *RecoverUserRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Recover not implemented")
-}
-func (*UnimplementedUserServiceServer) Whitelist(ctx context.Context, req *types.Empty) (*WhitelistResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Whitelist not implemented")
-}
-func (*UnimplementedUserServiceServer) LookupByAddress(ctx context.Context, req *LookupByAddressRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LookupByAddress not implemented")
-}
-func (*UnimplementedUserServiceServer) ListApiTokens(ctx context.Context, req *types.Empty) (*UserApiListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListApiTokens not implemented")
-}
-func (*UnimplementedUserServiceServer) CreateApiToken(ctx context.Context, req *UserApiTokenRequest) (*CreateUserApiTokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateApiToken not implemented")
-}
-func (*UnimplementedUserServiceServer) DeleteApiToken(ctx context.Context, req *UserApiTokenRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteApiToken not implemented")
-}
-
 func RegisterUserServiceServer(s *grpc.Server, srv UserServiceServer) {
 	s.RegisterService(&_UserService_serviceDesc, srv)
 }
@@ -2130,7 +2080,14 @@ func (m *UserApiListResponse) Size() (n int) {
 }
 
 func sovUserService(x uint64) (n int) {
-	return (math_bits.Len64(x|1) + 6) / 7
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
 }
 func sozUserService(x uint64) (n int) {
 	return sovUserService(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -2150,7 +2107,7 @@ func (m *CreateUserRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2178,7 +2135,7 @@ func (m *CreateUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2188,9 +2145,6 @@ func (m *CreateUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2210,7 +2164,7 @@ func (m *CreateUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2220,9 +2174,6 @@ func (m *CreateUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2242,7 +2193,7 @@ func (m *CreateUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2252,9 +2203,6 @@ func (m *CreateUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2274,7 +2222,7 @@ func (m *CreateUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2284,9 +2232,6 @@ func (m *CreateUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2299,9 +2244,6 @@ func (m *CreateUserRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -2332,7 +2274,7 @@ func (m *LoginUserRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2360,7 +2302,7 @@ func (m *LoginUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2370,9 +2312,6 @@ func (m *LoginUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2392,7 +2331,7 @@ func (m *LoginUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2402,9 +2341,6 @@ func (m *LoginUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2417,9 +2353,6 @@ func (m *LoginUserRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -2450,7 +2383,7 @@ func (m *TokenResponse) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2478,7 +2411,7 @@ func (m *TokenResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2488,9 +2421,6 @@ func (m *TokenResponse) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2503,9 +2433,6 @@ func (m *TokenResponse) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -2536,7 +2463,7 @@ func (m *UserRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2564,7 +2491,7 @@ func (m *UserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2574,9 +2501,6 @@ func (m *UserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2589,9 +2513,6 @@ func (m *UserRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -2622,7 +2543,7 @@ func (m *ResetPasswordUserRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2650,7 +2571,7 @@ func (m *ResetPasswordUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2660,9 +2581,6 @@ func (m *ResetPasswordUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2682,7 +2600,7 @@ func (m *ResetPasswordUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2692,9 +2610,6 @@ func (m *ResetPasswordUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2707,9 +2622,6 @@ func (m *ResetPasswordUserRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -2740,7 +2652,7 @@ func (m *StartRecoveryUserRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2768,7 +2680,7 @@ func (m *StartRecoveryUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2778,9 +2690,6 @@ func (m *StartRecoveryUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2793,9 +2702,6 @@ func (m *StartRecoveryUserRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -2826,7 +2732,7 @@ func (m *RecoverUserRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2854,7 +2760,7 @@ func (m *RecoverUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2864,9 +2770,6 @@ func (m *RecoverUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2886,7 +2789,7 @@ func (m *RecoverUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2896,9 +2799,6 @@ func (m *RecoverUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2918,7 +2818,7 @@ func (m *RecoverUserRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2928,9 +2828,6 @@ func (m *RecoverUserRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2943,9 +2840,6 @@ func (m *RecoverUserRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -2976,7 +2870,7 @@ func (m *WhitelistResponse) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -3004,7 +2898,7 @@ func (m *WhitelistResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3014,9 +2908,6 @@ func (m *WhitelistResponse) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3029,9 +2920,6 @@ func (m *WhitelistResponse) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -3062,7 +2950,7 @@ func (m *LookupByAddressRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -3090,7 +2978,7 @@ func (m *LookupByAddressRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3100,9 +2988,6 @@ func (m *LookupByAddressRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3115,9 +3000,6 @@ func (m *LookupByAddressRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -3148,7 +3030,7 @@ func (m *UserApiTokenRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -3176,7 +3058,7 @@ func (m *UserApiTokenRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3186,9 +3068,6 @@ func (m *UserApiTokenRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3208,7 +3087,7 @@ func (m *UserApiTokenRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3218,9 +3097,6 @@ func (m *UserApiTokenRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3233,9 +3109,6 @@ func (m *UserApiTokenRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -3266,7 +3139,7 @@ func (m *CreateUserApiTokenResponse) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -3294,7 +3167,7 @@ func (m *CreateUserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3304,9 +3177,6 @@ func (m *CreateUserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3326,7 +3196,7 @@ func (m *CreateUserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3336,9 +3206,6 @@ func (m *CreateUserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3358,7 +3225,7 @@ func (m *CreateUserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3368,9 +3235,6 @@ func (m *CreateUserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3383,9 +3247,6 @@ func (m *CreateUserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -3416,7 +3277,7 @@ func (m *UserApiTokenResponse) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -3444,7 +3305,7 @@ func (m *UserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3454,9 +3315,6 @@ func (m *UserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3476,7 +3334,7 @@ func (m *UserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3486,9 +3344,6 @@ func (m *UserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3501,9 +3356,6 @@ func (m *UserApiTokenResponse) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -3534,7 +3386,7 @@ func (m *UserApiListResponse) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -3562,7 +3414,7 @@ func (m *UserApiListResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				msglen |= (int(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -3571,9 +3423,6 @@ func (m *UserApiListResponse) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthUserService
 			}
 			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthUserService
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -3589,9 +3438,6 @@ func (m *UserApiListResponse) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthUserService
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthUserService
 			}
 			if (iNdEx + skippy) > l {
@@ -3661,11 +3507,8 @@ func skipUserService(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			if length < 0 {
-				return 0, ErrInvalidLengthUserService
-			}
 			iNdEx += length
-			if iNdEx < 0 {
+			if length < 0 {
 				return 0, ErrInvalidLengthUserService
 			}
 			return iNdEx, nil
@@ -3696,9 +3539,6 @@ func skipUserService(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
-				if iNdEx < 0 {
-					return 0, ErrInvalidLengthUserService
-				}
 			}
 			return iNdEx, nil
 		case 4:

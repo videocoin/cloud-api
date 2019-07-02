@@ -7,10 +7,6 @@ import (
 	context "context"
 	encoding_binary "encoding/binary"
 	fmt "fmt"
-	io "io"
-	math "math"
-	math_bits "math/bits"
-
 	_ "github.com/gogo/googleapis/google/api"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
@@ -21,8 +17,8 @@ import (
 	rpc "github.com/videocoin/cloud-api/rpc"
 	v11 "github.com/videocoin/cloud-api/transcoder/v1"
 	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
+	io "io"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -750,7 +746,6 @@ type ManagerServiceClient interface {
 	Run(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*v12.JobProfile, error)
 	Stop(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*v12.JobProfile, error)
 	Get(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*v12.JobProfile, error)
-	GetFromStream(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*v12.JobProfile, error)
 	Update(ctx context.Context, in *UpdateJobRequest, opts ...grpc.CallOption) (*v12.JobProfile, error)
 	Health(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*rpc.HealthStatus, error)
 	UpdateStatus(ctx context.Context, in *UpdateJobRequest, opts ...grpc.CallOption) (*types.Empty, error)
@@ -802,15 +797,6 @@ func (c *managerServiceClient) Stop(ctx context.Context, in *JobRequest, opts ..
 func (c *managerServiceClient) Get(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*v12.JobProfile, error) {
 	out := new(v12.JobProfile)
 	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/Get", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) GetFromStream(ctx context.Context, in *JobRequest, opts ...grpc.CallOption) (*v12.JobProfile, error) {
-	out := new(v12.JobProfile)
-	err := c.cc.Invoke(ctx, "/cloud.api.manager.v1.ManagerService/GetFromStream", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -922,7 +908,6 @@ type ManagerServiceServer interface {
 	Run(context.Context, *JobRequest) (*v12.JobProfile, error)
 	Stop(context.Context, *JobRequest) (*v12.JobProfile, error)
 	Get(context.Context, *JobRequest) (*v12.JobProfile, error)
-	GetFromStream(context.Context, *JobRequest) (*v12.JobProfile, error)
 	Update(context.Context, *UpdateJobRequest) (*v12.JobProfile, error)
 	Health(context.Context, *types.Empty) (*rpc.HealthStatus, error)
 	UpdateStatus(context.Context, *UpdateJobRequest) (*types.Empty, error)
@@ -934,56 +919,6 @@ type ManagerServiceServer interface {
 	VerifyChunk(context.Context, *VerifyChunkRequest) (*types.Empty, error)
 	ChunkCreated(context.Context, *ChunkCreatedRequest) (*types.Empty, error)
 	RegisterTranscoder(context.Context, *v11.Transcoder) (*types.Empty, error)
-}
-
-// UnimplementedManagerServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedManagerServiceServer struct {
-}
-
-func (*UnimplementedManagerServiceServer) Create(ctx context.Context, req *JobRequest) (*v12.JobProfile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
-}
-func (*UnimplementedManagerServiceServer) Run(ctx context.Context, req *JobRequest) (*v12.JobProfile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Run not implemented")
-}
-func (*UnimplementedManagerServiceServer) Stop(ctx context.Context, req *JobRequest) (*v12.JobProfile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Stop not implemented")
-}
-func (*UnimplementedManagerServiceServer) Get(ctx context.Context, req *JobRequest) (*v12.JobProfile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
-}
-func (*UnimplementedManagerServiceServer) GetFromStream(ctx context.Context, req *JobRequest) (*v12.JobProfile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetFromStream not implemented")
-}
-func (*UnimplementedManagerServiceServer) Update(ctx context.Context, req *UpdateJobRequest) (*v12.JobProfile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
-}
-func (*UnimplementedManagerServiceServer) Health(ctx context.Context, req *types.Empty) (*rpc.HealthStatus, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Health not implemented")
-}
-func (*UnimplementedManagerServiceServer) UpdateStatus(ctx context.Context, req *UpdateJobRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateStatus not implemented")
-}
-func (*UnimplementedManagerServiceServer) VerifyChunk(ctx context.Context, req *VerifyChunkRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method VerifyChunk not implemented")
-}
-func (*UnimplementedManagerServiceServer) ChunkCreated(ctx context.Context, req *ChunkCreatedRequest) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ChunkCreated not implemented")
-}
-func (*UnimplementedManagerServiceServer) CheckBalance(ctx context.Context, req *CheckBalanceRequest) (*CheckBalanceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckBalance not implemented")
-}
-func (*UnimplementedManagerServiceServer) GetProfiles(ctx context.Context, req *types.Empty) (*v1.Profiles, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetProfiles not implemented")
-}
-func (*UnimplementedManagerServiceServer) GetProfile(ctx context.Context, req *ProfileRequest) (*v1.Profile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetProfile not implemented")
-}
-func (*UnimplementedManagerServiceServer) RegisterTranscoder(ctx context.Context, req *v11.Transcoder) (*types.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RegisterTranscoder not implemented")
-}
-func (*UnimplementedManagerServiceServer) GetWork(ctx context.Context, req *types.Empty) (*v11.Assignment, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetWork not implemented")
 }
 
 func RegisterManagerServiceServer(s *grpc.Server, srv ManagerServiceServer) {
@@ -1058,24 +993,6 @@ func _ManagerService_Get_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ManagerServiceServer).Get(ctx, req.(*JobRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_GetFromStream_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JobRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetFromStream(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/cloud.api.manager.v1.ManagerService/GetFromStream",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetFromStream(ctx, req.(*JobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1297,10 +1214,6 @@ var _ManagerService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _ManagerService_Get_Handler,
-		},
-		{
-			MethodName: "GetFromStream",
-			Handler:    _ManagerService_GetFromStream_Handler,
 		},
 		{
 			MethodName: "Update",
@@ -1893,7 +1806,14 @@ func (m *UpdateJobRequest) Size() (n int) {
 }
 
 func sovManager(x uint64) (n int) {
-	return (math_bits.Len64(x|1) + 6) / 7
+	for {
+		n++
+		x >>= 7
+		if x == 0 {
+			break
+		}
+	}
+	return n
 }
 func sozManager(x uint64) (n int) {
 	return sovManager(uint64((x << 1) ^ uint64((int64(x) >> 63))))
@@ -1913,7 +1833,7 @@ func (m *ProfileRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -1941,7 +1861,7 @@ func (m *ProfileRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProfileId |= v1.ProfileId(b&0x7F) << shift
+				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -1953,9 +1873,6 @@ func (m *ProfileRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthManager
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthManager
 			}
 			if (iNdEx + skippy) > l {
@@ -1986,7 +1903,7 @@ func (m *CheckBalanceRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2014,7 +1931,7 @@ func (m *CheckBalanceRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2024,9 +1941,6 @@ func (m *CheckBalanceRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthManager
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthManager
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2039,9 +1953,6 @@ func (m *CheckBalanceRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthManager
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthManager
 			}
 			if (iNdEx + skippy) > l {
@@ -2072,7 +1983,7 @@ func (m *CheckBalanceResponse) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2106,9 +2017,6 @@ func (m *CheckBalanceResponse) Unmarshal(dAtA []byte) error {
 			if skippy < 0 {
 				return ErrInvalidLengthManager
 			}
-			if (iNdEx + skippy) < 0 {
-				return ErrInvalidLengthManager
-			}
 			if (iNdEx + skippy) > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2137,7 +2045,7 @@ func (m *ContractAddrRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2165,7 +2073,7 @@ func (m *ContractAddrRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2175,9 +2083,6 @@ func (m *ContractAddrRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthManager
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthManager
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2197,7 +2102,7 @@ func (m *ContractAddrRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2207,9 +2112,6 @@ func (m *ContractAddrRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthManager
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthManager
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2222,9 +2124,6 @@ func (m *ContractAddrRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthManager
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthManager
 			}
 			if (iNdEx + skippy) > l {
@@ -2255,7 +2154,7 @@ func (m *VerifyChunkRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2283,7 +2182,7 @@ func (m *VerifyChunkRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StreamId |= int64(b&0x7F) << shift
+				m.StreamId |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2302,7 +2201,7 @@ func (m *VerifyChunkRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.SourceChunkId |= uint64(b&0x7F) << shift
+				m.SourceChunkId |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2321,7 +2220,7 @@ func (m *VerifyChunkRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ResultChunkId |= uint64(b&0x7F) << shift
+				m.ResultChunkId |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2340,7 +2239,7 @@ func (m *VerifyChunkRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.HashDistance |= int32(b&0x7F) << shift
+				m.HashDistance |= (int32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2359,7 +2258,7 @@ func (m *VerifyChunkRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Bitrate |= uint32(b&0x7F) << shift
+				m.Bitrate |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2371,9 +2270,6 @@ func (m *VerifyChunkRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthManager
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthManager
 			}
 			if (iNdEx + skippy) > l {
@@ -2404,7 +2300,7 @@ func (m *ChunkCreatedRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2432,7 +2328,7 @@ func (m *ChunkCreatedRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StreamId |= int64(b&0x7F) << shift
+				m.StreamId |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2451,7 +2347,7 @@ func (m *ChunkCreatedRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.SourceChunkId |= int64(b&0x7F) << shift
+				m.SourceChunkId |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2470,7 +2366,7 @@ func (m *ChunkCreatedRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ResultChunkId |= int64(b&0x7F) << shift
+				m.ResultChunkId |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2489,7 +2385,7 @@ func (m *ChunkCreatedRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Bitrate |= uint32(b&0x7F) << shift
+				m.Bitrate |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2501,9 +2397,6 @@ func (m *ChunkCreatedRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthManager
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthManager
 			}
 			if (iNdEx + skippy) > l {
@@ -2534,7 +2427,7 @@ func (m *TranscoderStatusRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2562,7 +2455,7 @@ func (m *TranscoderStatusRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2572,9 +2465,6 @@ func (m *TranscoderStatusRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthManager
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthManager
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2594,7 +2484,7 @@ func (m *TranscoderStatusRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Status |= v11.TranscoderStatus(b&0x7F) << shift
+				m.Status |= (v11.TranscoderStatus(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2606,9 +2496,6 @@ func (m *TranscoderStatusRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthManager
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthManager
 			}
 			if (iNdEx + skippy) > l {
@@ -2639,7 +2526,7 @@ func (m *JobRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2667,7 +2554,7 @@ func (m *JobRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2677,9 +2564,6 @@ func (m *JobRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthManager
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthManager
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2747,7 +2631,7 @@ func (m *JobRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProfileId |= v1.ProfileId(b&0x7F) << shift
+				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2759,9 +2643,6 @@ func (m *JobRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthManager
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthManager
 			}
 			if (iNdEx + skippy) > l {
@@ -2792,7 +2673,7 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 			}
 			b := dAtA[iNdEx]
 			iNdEx++
-			wire |= uint64(b&0x7F) << shift
+			wire |= (uint64(b) & 0x7F) << shift
 			if b < 0x80 {
 				break
 			}
@@ -2820,7 +2701,7 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2830,9 +2711,6 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthManager
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthManager
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2852,7 +2730,7 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ProfileId |= v1.ProfileId(b&0x7F) << shift
+				m.ProfileId |= (v1.ProfileId(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2871,7 +2749,7 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2881,9 +2759,6 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthManager
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthManager
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2903,7 +2778,7 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.StreamId |= int64(b&0x7F) << shift
+				m.StreamId |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2922,7 +2797,7 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				stringLen |= (uint64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2932,9 +2807,6 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 				return ErrInvalidLengthManager
 			}
 			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthManager
-			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
@@ -2954,7 +2826,7 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Status |= v12.JobStatus(b&0x7F) << shift
+				m.Status |= (v12.JobStatus(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2973,7 +2845,7 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.InputStatus |= v12.InputStatus(b&0x7F) << shift
+				m.InputStatus |= (v12.InputStatus(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -2985,9 +2857,6 @@ func (m *UpdateJobRequest) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			if skippy < 0 {
-				return ErrInvalidLengthManager
-			}
-			if (iNdEx + skippy) < 0 {
 				return ErrInvalidLengthManager
 			}
 			if (iNdEx + skippy) > l {
@@ -3057,11 +2926,8 @@ func skipManager(dAtA []byte) (n int, err error) {
 					break
 				}
 			}
-			if length < 0 {
-				return 0, ErrInvalidLengthManager
-			}
 			iNdEx += length
-			if iNdEx < 0 {
+			if length < 0 {
 				return 0, ErrInvalidLengthManager
 			}
 			return iNdEx, nil
@@ -3092,9 +2958,6 @@ func skipManager(dAtA []byte) (n int, err error) {
 					return 0, err
 				}
 				iNdEx = start + next
-				if iNdEx < 0 {
-					return 0, ErrInvalidLengthManager
-				}
 			}
 			return iNdEx, nil
 		case 4:
