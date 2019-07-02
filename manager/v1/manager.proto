@@ -28,26 +28,26 @@ service ManagerService {
 
   rpc Run(JobRequest) returns (cloud.api.jobs.v1.JobProfile) {
     option (google.api.http) = {
-      post: "/api/v1/job/{stream_id}/run"
+      post: "/api/v1/job/{id}/run"
     };
   };
 
   rpc Stop(JobRequest) returns (cloud.api.jobs.v1.JobProfile) {
     option (google.api.http) = {
-      post: "/api/v1/job/{stream_id}/stop"
+      post: "/api/v1/job/{id}/stop"
     };
   };
 
   rpc Get(JobRequest) returns (cloud.api.jobs.v1.JobProfile) {
     option (google.api.http) = {
-      get: "/api/v1/job/{stream_id}"
+      get: "/api/v1/job/{id}"
     };
   };
 
 
   rpc Update(UpdateJobRequest) returns (cloud.api.jobs.v1.JobProfile) {
     option (google.api.http) = {
-      put: "/api/v1/job/{stream_id}"
+      put: "/api/v1/job/{id}"
       body: "*"
     };
   };
