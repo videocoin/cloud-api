@@ -44,11 +44,6 @@ service ManagerService {
     };
   };
 
-  rpc GetFromStream(JobRequest) returns (cloud.api.jobs.v1.JobProfile) {
-    option (google.api.http) = {
-      get: "/api/v1/job/from_stream/{stream_id}"
-    };
-  };
 
   rpc Update(UpdateJobRequest) returns (cloud.api.jobs.v1.JobProfile) {
     option (google.api.http) = {
@@ -66,21 +61,6 @@ service ManagerService {
   rpc UpdateStatus(UpdateJobRequest) returns (google.protobuf.Empty){
     option (google.api.http) = {
       post: "/api/v1/job/{id}/{status}"
-      body: "*"
-    };
-  };
-
-  rpc VerifyChunk(VerifyChunkRequest) returns (google.protobuf.Empty) {
-    option (google.api.http) = {
-      post: "/api/v1/verify"
-      body: "*"
-    };
-  };
-
-
-  rpc ChunkCreated(ChunkCreatedRequest) returns (google.protobuf.Empty) {
-    option (google.api.http) = {
-      post: "/api/v1/chunk_created"
       body: "*"
     };
   };
@@ -103,18 +83,20 @@ service ManagerService {
     };
   };
 
-  rpc RegisterTranscoder(cloud.api.transcoder.v1.Transcoder) returns (google.protobuf.Empty) {
-    option (google.api.http) = {
-      post: "/api/v1/transcoders"
-      body: "*"
-    };
-  }; 
 
   rpc GetWork(google.protobuf.Empty) returns (cloud.api.transcoder.v1.Assignment) {
     option (google.api.http) = {
       get: "/api/v1/work"
     };
   };
+
+  rpc GetByStreamId(JobRequest) returns (cloud.api.jobs.v1.JobProfile) {};
+
+  rpc VerifyChunk(VerifyChunkRequest) returns (google.protobuf.Empty) {};
+
+  rpc ChunkCreated(ChunkCreatedRequest) returns (google.protobuf.Empty) {};
+
+  rpc RegisterTranscoder(cloud.api.transcoder.v1.Transcoder) returns (google.protobuf.Empty) {};
 }
 
 
