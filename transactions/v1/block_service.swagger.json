@@ -1,0 +1,90 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "transactions/v1/block_service.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/blocks": {
+      "get": {
+        "operationId": "GetBlocks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetBlocksResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "BlockService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "v1Block": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "tx_num": {
+          "type": "string",
+          "format": "int64"
+        },
+        "gas_used": {
+          "type": "string"
+        },
+        "gas_limit": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "v1GetBlocksResponse": {
+      "type": "object",
+      "properties": {
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Block"
+          }
+        }
+      }
+    }
+  }
+}

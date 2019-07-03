@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package cloud.api.transactions.v1;
+
+option go_package = "v1";
+option (gogoproto.unmarshaler_all) = false;
+option (gogoproto.marshaler_all) = false;
+option (gogoproto.sizer_all) = false;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+
+message Block {
+    string number = 1;
+    google.protobuf.Timestamp timestamp = 2;
+    int64 tx_num = 3;
+    string gas_used = 4;
+    string gas_limit = 5;
+    double size = 6;
+}
