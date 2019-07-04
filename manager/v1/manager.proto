@@ -91,11 +91,7 @@ service ManagerService {
   };
 
 
-  rpc GetAllJobs(JobRequest) returns (cloud.api.transcoder.v1.Assignment) {
-    option (google.api.http) = {
-      get: "/api/v1/jobs/{pipeline_id}"
-    };
-  };
+  rpc GetAllJobsByPipelineId(JobRequest) returns (cloud.api.jobs.v1.JobProfiles) {};
 
   rpc GetByStreamId(JobRequest) returns (cloud.api.jobs.v1.JobProfile) {};
 
