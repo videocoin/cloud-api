@@ -43,6 +43,10 @@ func (m *GetTransactionsRequest) Validate() error {
 
 	// no validation rules for Address
 
+	// no validation rules for Limit
+
+	// no validation rules for Offset
+
 	return nil
 }
 

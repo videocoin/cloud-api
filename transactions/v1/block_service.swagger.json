@@ -52,6 +52,9 @@
     "v1Block": {
       "type": "object",
       "properties": {
+        "hash": {
+          "type": "string"
+        },
         "number": {
           "type": "string"
         },
