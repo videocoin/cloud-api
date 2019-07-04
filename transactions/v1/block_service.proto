@@ -17,6 +17,12 @@ service BlockService {
             get: "/api/v1/blocks"
         };
     }
+
+    rpc GetBlocs(GetBlockRequest) returns (GetBlockResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/block/{hash}"
+        };
+    }
 }
 
 message GetBlocksRequest {
@@ -26,4 +32,12 @@ message GetBlocksRequest {
 
 message GetBlocksResponse {
     repeated Block blocks = 1;
+}
+
+message GetBlockRequest {
+    string hash = 1;
+}
+
+message GetBlockResponse {
+    Block block = 1;
 }

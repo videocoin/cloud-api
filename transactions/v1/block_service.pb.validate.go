@@ -188,3 +188,150 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetBlocksResponseValidationError{}
+
+// Validate checks the field values on GetBlockRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *GetBlockRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Hash
+
+	return nil
+}
+
+// GetBlockRequestValidationError is the validation error returned by
+// GetBlockRequest.Validate if the designated constraints aren't met.
+type GetBlockRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBlockRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBlockRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBlockRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBlockRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBlockRequestValidationError) ErrorName() string { return "GetBlockRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetBlockRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBlockRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBlockRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBlockRequestValidationError{}
+
+// Validate checks the field values on GetBlockResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, an
+// error is returned.
+func (m *GetBlockResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	{
+		tmp := m.GetBlock()
+
+		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
+
+			if err := v.Validate(); err != nil {
+				return GetBlockResponseValidationError{
+					field:  "Block",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+	}
+
+	return nil
+}
+
+// GetBlockResponseValidationError is the validation error returned by
+// GetBlockResponse.Validate if the designated constraints aren't met.
+type GetBlockResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBlockResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBlockResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBlockResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBlockResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBlockResponseValidationError) ErrorName() string { return "GetBlockResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetBlockResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBlockResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBlockResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBlockResponseValidationError{}

@@ -14,6 +14,8 @@
 		Block
 		GetBlocksRequest
 		GetBlocksResponse
+		GetBlockRequest
+		GetBlockResponse
 		Transaction
 		GetTransactionsRequest
 		GetTransactionsResponse

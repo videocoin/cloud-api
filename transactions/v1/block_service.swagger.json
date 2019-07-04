@@ -15,6 +15,30 @@
     "application/json"
   ],
   "paths": {
+    "/api/v1/block/{hash}": {
+      "get": {
+        "operationId": "GetBlocs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetBlockResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BlockService"
+        ]
+      }
+    },
     "/api/v1/blocks": {
       "get": {
         "operationId": "GetBlocks",
@@ -75,6 +99,14 @@
         "size": {
           "type": "number",
           "format": "double"
+        }
+      }
+    },
+    "v1GetBlockResponse": {
+      "type": "object",
+      "properties": {
+        "block": {
+          "$ref": "#/definitions/v1Block"
         }
       }
     },
