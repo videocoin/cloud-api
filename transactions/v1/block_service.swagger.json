@@ -17,7 +17,7 @@
   "paths": {
     "/api/v1/block/{hash}": {
       "get": {
-        "operationId": "GetBlocs",
+        "operationId": "GetBlock",
         "responses": {
           "200": {
             "description": "A successful response.",

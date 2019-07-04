@@ -18,7 +18,7 @@ service BlockService {
         };
     }
 
-    rpc GetBlocs(GetBlockRequest) returns (GetBlockResponse) {
+    rpc GetBlock(GetBlockRequest) returns (GetBlockResponse) {
         option (google.api.http) = {
             get: "/api/v1/block/{hash}"
         };
