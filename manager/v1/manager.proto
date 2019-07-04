@@ -90,6 +90,13 @@ service ManagerService {
     };
   };
 
+
+  rpc GetAllJobs(google.protobuf.Empty) returns (cloud.api.transcoder.v1.Assignment) {
+    option (google.api.http) = {
+      get: "/api/v1/{pipeline_id}/jobs"
+    };
+  };
+
   rpc GetByStreamId(JobRequest) returns (cloud.api.jobs.v1.JobProfile) {};
 
   rpc VerifyChunk(VerifyChunkRequest) returns (google.protobuf.Empty) {};
