@@ -19,3 +19,13 @@ message Block {
     string gas_limit = 6;
     double size = 7;
 }
+
+message BlockDetail {
+    string hash = 1;
+    string number = 2;
+    google.protobuf.Timestamp timestamp = 3;
+    string gas_used = 4;
+    string gas_limit = 5;
+    double size = 6;
+    repeated string transactions = 7;
+}

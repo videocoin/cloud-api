@@ -17,6 +17,7 @@
 		GetActionRequest
 		GetActionResponse
 		Block
+		BlockDetail
 		GetBlocksRequest
 		GetBlocksResponse
 		GetBlockRequest
