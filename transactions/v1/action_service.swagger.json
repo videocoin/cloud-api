@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "transactions/v1/transaction_service.proto",
+    "title": "transactions/v1/action_service.proto",
     "version": "version not set"
   },
   "schemes": [
@@ -17,12 +17,12 @@
   "paths": {
     "/api/v1/address/{address}": {
       "get": {
-        "operationId": "GetTransactions",
+        "operationId": "GetActions",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetTransactionsResponse"
+              "$ref": "#/definitions/v1GetActionsResponse"
             }
           }
         },
@@ -49,18 +49,18 @@
           }
         ],
         "tags": [
-          "TransactionService"
+          "ActionService"
         ]
       }
     },
     "/api/v1/transaction/{hash}": {
       "get": {
-        "operationId": "GetTransaction",
+        "operationId": "GetAction",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetTransactionResponse"
+              "$ref": "#/definitions/v1GetActionResponse"
             }
           }
         },
@@ -73,36 +73,17 @@
           }
         ],
         "tags": [
-          "TransactionService"
+          "ActionService"
         ]
       }
     }
   },
   "definitions": {
-    "v1GetTransactionResponse": {
-      "type": "object",
-      "properties": {
-        "transaction": {
-          "$ref": "#/definitions/v1Transaction"
-        }
-      }
-    },
-    "v1GetTransactionsResponse": {
-      "type": "object",
-      "properties": {
-        "transactions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1Transaction"
-          }
-        }
-      }
-    },
-    "v1Transaction": {
+    "v1Action": {
       "type": "object",
       "properties": {
         "source": {
-          "$ref": "#/definitions/v1TransactionSource"
+          "$ref": "#/definitions/v1ActionSource"
         },
         "hash": {
           "type": "string"
@@ -121,11 +102,11 @@
           "type": "string"
         },
         "type": {
-          "$ref": "#/definitions/v1TransactionType"
+          "$ref": "#/definitions/v1ActionType"
         }
       }
     },
-    "v1TransactionSource": {
+    "v1ActionSource": {
       "type": "string",
       "enum": [
         "UNDETECTED",
@@ -134,7 +115,7 @@
       ],
       "default": "UNDETECTED"
     },
-    "v1TransactionType": {
+    "v1ActionType": {
       "type": "string",
       "enum": [
         "UNKNOWN",
@@ -147,6 +128,25 @@
         "ACCOUNT_FUNDED"
       ],
       "default": "UNKNOWN"
+    },
+    "v1GetActionResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/v1Action"
+        }
+      }
+    },
+    "v1GetActionsResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Action"
+          }
+        }
+      }
     }
   }
 }

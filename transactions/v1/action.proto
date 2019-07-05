@@ -10,23 +10,23 @@ option (gogoproto.sizer_all) = false;
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
 
-message Transaction {
-    TransactionSource source = 1;
+message Action {
+    ActionSource source = 1;
     string hash = 2;
     string from = 3;
     string to = 4;
     google.protobuf.Timestamp created_at = 5;
     string value = 6;
-    TransactionType type = 7;
+    ActionType type = 7;
 }
 
-enum TransactionSource {
+enum ActionSource {
     UNDETECTED = 0;
     ETH = 1;
     VID = 2;
 }
 
-enum TransactionType {
+enum ActionType {
     UNKNOWN = 0;
     DEPOSIT = 1;
     ESCROW = 2;

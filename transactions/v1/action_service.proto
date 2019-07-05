@@ -4,41 +4,41 @@ package cloud.api.transactions.v1;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/api/annotations.proto";
-import "transactions/v1/transaction.proto";
+import "transactions/v1/action.proto";
 
 option go_package = "v1";
 option (gogoproto.unmarshaler_all) = false;
 option (gogoproto.marshaler_all) = false;
 option (gogoproto.sizer_all) = false;
 
-service TransactionService {
-    rpc GetTransactions(GetTransactionsRequest) returns (GetTransactionsResponse) {
+service ActionService {
+    rpc GetActions(GetActionsRequest) returns (GetActionsResponse) {
         option (google.api.http) = {
             get: "/api/v1/address/{address}"
         };
     }
 
-    rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse) {
+    rpc GetAction(GetActionRequest) returns (GetActionResponse) {
         option (google.api.http) = {
             get: "/api/v1/transaction/{hash}"
         };
     }
 }
 
-message GetTransactionsRequest {
+message GetActionsRequest {
     string address = 1;
     uint64 limit = 2;
     uint64 offset = 3;
 }
 
-message GetTransactionsResponse {
-    repeated Transaction transactions = 1;
+message GetActionsResponse {
+    repeated Action transactions = 1;
 }
 
-message GetTransactionRequest {
+message GetActionRequest {
     string hash = 1;
 }
 
-message GetTransactionResponse {
-    Transaction transaction = 1;
+message GetActionResponse {
+    Action transaction = 1;
 }

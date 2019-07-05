@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "transactions/v1/transaction.proto",
+    "title": "transactions/v1/action.proto",
     "version": "version not set"
   },
   "schemes": [
