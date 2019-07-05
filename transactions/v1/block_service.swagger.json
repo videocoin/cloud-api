@@ -102,11 +102,45 @@
         }
       }
     },
+    "v1BlockDetail": {
+      "type": "object",
+      "properties": {
+        "hash": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "gas_used": {
+          "type": "string"
+        },
+        "gas_limit": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extra_data": {
+          "type": "string"
+        }
+      }
+    },
     "v1GetBlockResponse": {
       "type": "object",
       "properties": {
         "block": {
-          "$ref": "#/definitions/v1Block"
+          "$ref": "#/definitions/v1BlockDetail"
         }
       }
     },

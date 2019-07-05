@@ -157,6 +157,8 @@ func (m *BlockDetail) Validate() error {
 
 	// no validation rules for Size
 
+	// no validation rules for ExtraData
+
 	return nil
 }
 

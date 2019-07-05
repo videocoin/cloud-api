@@ -28,4 +28,5 @@ message BlockDetail {
     string gas_limit = 5;
     double size = 6;
     repeated string transactions = 7;
+    string extra_data = 8;
 }

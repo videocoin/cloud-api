@@ -39,5 +39,5 @@ message GetBlockRequest {
 }
 
 message GetBlockResponse {
-    Block block = 1;
+    BlockDetail block = 1;
 }
