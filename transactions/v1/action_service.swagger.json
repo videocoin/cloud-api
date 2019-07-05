@@ -15,7 +15,31 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/address/{address}": {
+    "/api/v1/action/{hash}": {
+      "get": {
+        "operationId": "GetAction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetActionResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ActionService"
+        ]
+      }
+    },
+    "/api/v1/actions/{address}": {
       "get": {
         "operationId": "GetActions",
         "responses": {
@@ -46,30 +70,6 @@
             "required": false,
             "type": "string",
             "format": "uint64"
-          }
-        ],
-        "tags": [
-          "ActionService"
-        ]
-      }
-    },
-    "/api/v1/transaction/{hash}": {
-      "get": {
-        "operationId": "GetAction",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1GetActionResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "hash",
-            "in": "path",
-            "required": true,
-            "type": "string"
           }
         ],
         "tags": [
