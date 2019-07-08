@@ -91,7 +91,7 @@ service ManagerService {
   };
 
 
-  rpc GetAllJobsByPipelineId(JobRequest) returns (cloud.api.jobs.v1.JobProfiles) {};
+  rpc GetAllJobsByPipelineId(JobRequest) returns (stream cloud.api.jobs.v1.JobProfile) {};
 
   rpc GetByStreamId(JobRequest) returns (cloud.api.jobs.v1.JobProfile) {};
 
