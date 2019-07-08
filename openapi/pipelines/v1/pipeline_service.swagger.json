@@ -55,36 +55,6 @@
         ]
       }
     },
-    "/api/v1/pipelines/code/{access_code}": {
-      "get": {
-        "operationId": "GetByAccessCode",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1PipelineProfile"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "access_code",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "PipelineService"
-        ]
-      }
-    },
     "/api/v1/pipelines/{id}": {
       "get": {
         "operationId": "Get",
@@ -104,7 +74,7 @@
             "type": "string"
           },
           {
-            "name": "access_code",
+            "name": "stream_id",
             "in": "query",
             "required": false,
             "type": "string"
@@ -132,7 +102,7 @@
             "type": "string"
           },
           {
-            "name": "access_code",
+            "name": "stream_id",
             "in": "query",
             "required": false,
             "type": "string"
@@ -173,14 +143,42 @@
         ]
       }
     },
-    "/api/v1/pipelines/{id}/cancel": {
-      "post": {
-        "operationId": "Cancel",
+    "/api/v1/pipelines/{id}/streams": {
+      "get": {
+        "operationId": "GetStreams",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1PipelineProfile"
+              "$ref": "#/definitions/v1JobProfiles"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stream_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PipelineService"
+        ]
+      },
+      "post": {
+        "operationId": "CreateStream",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1JobProfile"
             }
           }
         },
@@ -205,20 +203,56 @@
         ]
       }
     },
-    "/api/v1/pipelines/{id}/complete": {
-      "post": {
-        "operationId": "Complete",
+    "/api/v1/pipelines/{id}/streams/{stream_id}": {
+      "delete": {
+        "operationId": "DeleteStream",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1PipelineProfile"
+              "properties": {}
             }
           }
         },
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stream_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PipelineService"
+        ]
+      }
+    },
+    "/api/v1/pipelines/{id}/streams/{stream_id}/cancel": {
+      "post": {
+        "operationId": "CancelStream",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1JobProfile"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stream_id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -237,20 +271,26 @@
         ]
       }
     },
-    "/api/v1/pipelines/{id}/run": {
+    "/api/v1/pipelines/{id}/streams/{stream_id}/run": {
       "post": {
-        "operationId": "Run",
+        "operationId": "RunStream",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1PipelineProfile"
+              "$ref": "#/definitions/v1JobProfile"
             }
           }
         },
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stream_id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -400,13 +440,6 @@
         "created_at": {
           "type": "string",
           "format": "date-time"
-        },
-        "is_activated": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "access_code": {
-          "type": "string"
         }
       }
     },
@@ -416,7 +449,7 @@
         "id": {
           "type": "string"
         },
-        "access_code": {
+        "stream_id": {
           "type": "string"
         }
       }
@@ -437,20 +470,7 @@
         "id": {
           "type": "string"
         },
-        "user_id": {
-          "type": "string"
-        },
         "name": {
-          "type": "string"
-        },
-        "client_address": {
-          "type": "string"
-        },
-        "stream_id": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "stream_address": {
           "type": "string"
         },
         "profile_id": {
