@@ -59,7 +59,7 @@ func (m *Block) Validate() error {
 		}
 	}
 
-	// no validation rules for TxNum
+	// no validation rules for NumTxs
 
 	// no validation rules for GasUsed
 

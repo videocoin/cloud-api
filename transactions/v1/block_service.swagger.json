@@ -86,7 +86,7 @@
           "type": "string",
           "format": "date-time"
         },
-        "tx_num": {
+        "num_txs": {
           "type": "string",
           "format": "int64"
         },
