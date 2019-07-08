@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package cloud.api.transactions.v1;
+
+option go_package = "v1";
+option (gogoproto.unmarshaler_all) = false;
+option (gogoproto.marshaler_all) = false;
+option (gogoproto.sizer_all) = false;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+
+message Transaction {
+    string hash = 1;
+    string from = 2;
+    string to = 3;
+    google.protobuf.Timestamp timestamp = 4;
+    string value = 6;
+    string block_number = 7;
+}

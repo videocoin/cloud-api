@@ -9,6 +9,8 @@
 		transactions/v1/action_service.proto
 		transactions/v1/block.proto
 		transactions/v1/block_service.proto
+		transactions/v1/transaction.proto
+		transactions/v1/transaction_service.proto
 
 	It has these top-level messages:
 		Action
@@ -22,6 +24,11 @@
 		GetBlocksResponse
 		GetBlockRequest
 		GetBlockResponse
+		Transaction
+		GetTransactionsRequest
+		GetTransactionsResponse
+		GetTransactionRequest
+		GetTransactionResponse
 */
 package v1
 
