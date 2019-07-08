@@ -389,7 +389,7 @@
     "v1JobProfiles": {
       "type": "object",
       "properties": {
-        "job_profiles": {
+        "items": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/v1JobProfile"
