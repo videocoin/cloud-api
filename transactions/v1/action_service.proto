@@ -32,7 +32,7 @@ message GetActionsRequest {
 }
 
 message GetActionsResponse {
-    repeated Action transactions = 1;
+    repeated Action actions = 1;
 }
 
 message GetActionRequest {
@@ -40,5 +40,5 @@ message GetActionRequest {
 }
 
 message GetActionResponse {
-    Action transaction = 1;
+    Action action = 1;
 }

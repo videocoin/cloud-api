@@ -114,7 +114,7 @@ func (m *GetActionsResponse) Validate() error {
 		return nil
 	}
 
-	for idx, item := range m.GetTransactions() {
+	for idx, item := range m.GetActions() {
 		_, _ = idx, item
 
 		{
@@ -124,7 +124,7 @@ func (m *GetActionsResponse) Validate() error {
 
 				if err := v.Validate(); err != nil {
 					return GetActionsResponseValidationError{
-						field:  fmt.Sprintf("Transactions[%v]", idx),
+						field:  fmt.Sprintf("Actions[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					}
@@ -269,13 +269,13 @@ func (m *GetActionResponse) Validate() error {
 	}
 
 	{
-		tmp := m.GetTransaction()
+		tmp := m.GetAction()
 
 		if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
 
 			if err := v.Validate(); err != nil {
 				return GetActionResponseValidationError{
-					field:  "Transaction",
+					field:  "Action",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}

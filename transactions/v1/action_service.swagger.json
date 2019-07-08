@@ -132,7 +132,7 @@
     "v1GetActionResponse": {
       "type": "object",
       "properties": {
-        "transaction": {
+        "action": {
           "$ref": "#/definitions/v1Action"
         }
       }
@@ -140,7 +140,7 @@
     "v1GetActionsResponse": {
       "type": "object",
       "properties": {
-        "transactions": {
+        "actions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/v1Action"
