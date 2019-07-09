@@ -83,7 +83,7 @@
       "type": "object",
       "properties": {
         "transaction": {
-          "$ref": "#/definitions/v1Transaction"
+          "$ref": "#/definitions/v1TransactionDetail"
         }
       }
     },
@@ -115,6 +115,39 @@
           "format": "date-time"
         },
         "value": {
+          "type": "string"
+        }
+      }
+    },
+    "v1TransactionDetail": {
+      "type": "object",
+      "properties": {
+        "hash": {
+          "type": "string"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "value": {
+          "type": "string"
+        },
+        "block_number": {
+          "type": "string"
+        },
+        "block_hash": {
+          "type": "string"
+        },
+        "nonce": {
+          "type": "string"
+        },
+        "input": {
           "type": "string"
         }
       }
