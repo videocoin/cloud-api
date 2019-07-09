@@ -40,5 +40,5 @@ message GetTransactionRequest {
 }
 
 message GetTransactionResponse {
-    Transaction transaction = 1;
+    TransactionDetail transaction = 1;
 }
