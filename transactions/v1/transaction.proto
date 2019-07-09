@@ -16,5 +16,16 @@ message Transaction {
     string to = 3;
     google.protobuf.Timestamp timestamp = 4;
     string value = 6;
+}
+
+message TransactionDetail {
+    string hash = 1;
+    string from = 2;
+    string to = 3;
+    google.protobuf.Timestamp timestamp = 4;
+    string value = 6;
     string block_number = 7;
+    string block_hash = 8;
+    string nonce = 9;
+    string input = 10;
 }

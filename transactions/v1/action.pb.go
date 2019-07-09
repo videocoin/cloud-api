@@ -25,6 +25,7 @@
 		GetBlockRequest
 		GetBlockResponse
 		Transaction
+		TransactionDetail
 		GetTransactionsRequest
 		GetTransactionsResponse
 		GetTransactionRequest

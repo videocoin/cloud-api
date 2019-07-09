@@ -116,9 +116,6 @@
         },
         "value": {
           "type": "string"
-        },
-        "block_number": {
-          "type": "string"
         }
       }
     }
