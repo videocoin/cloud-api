@@ -134,6 +134,8 @@ func (m *BlockDetail) Validate() error {
 
 	// no validation rules for Hash
 
+	// no validation rules for ParentHash
+
 	// no validation rules for Number
 
 	{

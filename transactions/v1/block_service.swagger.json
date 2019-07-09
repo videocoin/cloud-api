@@ -108,6 +108,9 @@
         "hash": {
           "type": "string"
         },
+        "parent_hash": {
+          "type": "string"
+        },
         "number": {
           "type": "string"
         },

@@ -22,11 +22,12 @@ message Block {
 
 message BlockDetail {
     string hash = 1;
-    string number = 2;
-    google.protobuf.Timestamp timestamp = 3;
-    string gas_used = 4;
-    string gas_limit = 5;
-    double size = 6;
-    repeated string transactions = 7;
-    string extra_data = 8;
+    string parent_hash = 2;
+    string number = 3;
+    google.protobuf.Timestamp timestamp = 4;
+    string gas_used = 5;
+    string gas_limit = 6;
+    double size = 7;
+    repeated string transactions = 8;
+    string extra_data = 9;
 }
