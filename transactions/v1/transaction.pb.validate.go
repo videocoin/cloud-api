@@ -160,6 +160,10 @@ func (m *TransactionDetail) Validate() error {
 
 	// no validation rules for Input
 
+	// no validation rules for Gas
+
+	// no validation rules for GasPrice
+
 	return nil
 }
 

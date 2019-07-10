@@ -28,4 +28,6 @@ message TransactionDetail {
     string block_hash = 8;
     uint64 nonce = 9;
     string input = 10;
+    string gas = 11;
+    string gas_price = 12;
 }

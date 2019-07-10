@@ -150,6 +150,12 @@
         },
         "input": {
           "type": "string"
+        },
+        "gas": {
+          "type": "string"
+        },
+        "gas_price": {
+          "type": "string"
         }
       }
     }
