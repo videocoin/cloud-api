@@ -152,7 +152,8 @@
           "type": "string"
         },
         "gas": {
-          "type": "string"
+          "type": "string",
+          "format": "uint64"
         },
         "gas_price": {
           "type": "string"
