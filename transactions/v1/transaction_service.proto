@@ -23,6 +23,12 @@ service TransactionService {
             get: "/api/v1/transaction/{hash}"
         };
     }
+
+    rpc GetAllTransactions(GetAllTransactionsRequest) returns (GetAllTransactionsResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/transactions"
+        };
+    }
 }
 
 message GetTransactionsRequest {
@@ -41,4 +47,13 @@ message GetTransactionRequest {
 
 message GetTransactionResponse {
     TransactionDetail transaction = 1;
+}
+
+message GetAllTransactionsRequest {
+    uint64 limit = 1;
+    uint64 offset = 2;
+}
+
+message GetAllTransactionsResponse {
+    repeated Transaction transactions = 1;
 }

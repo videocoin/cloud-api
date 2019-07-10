@@ -76,9 +76,52 @@
           "TransactionService"
         ]
       }
+    },
+    "/api/v1/transactions": {
+      "get": {
+        "operationId": "GetAllTransactions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAllTransactionsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "TransactionService"
+        ]
+      }
     }
   },
   "definitions": {
+    "v1GetAllTransactionsResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Transaction"
+          }
+        }
+      }
+    },
     "v1GetTransactionResponse": {
       "type": "object",
       "properties": {

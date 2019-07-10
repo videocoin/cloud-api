@@ -343,3 +343,161 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetTransactionResponseValidationError{}
+
+// Validate checks the field values on GetAllTransactionsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *GetAllTransactionsRequest) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Limit
+
+	// no validation rules for Offset
+
+	return nil
+}
+
+// GetAllTransactionsRequestValidationError is the validation error returned by
+// GetAllTransactionsRequest.Validate if the designated constraints aren't met.
+type GetAllTransactionsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAllTransactionsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAllTransactionsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAllTransactionsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAllTransactionsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAllTransactionsRequestValidationError) ErrorName() string {
+	return "GetAllTransactionsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAllTransactionsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAllTransactionsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAllTransactionsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAllTransactionsRequestValidationError{}
+
+// Validate checks the field values on GetAllTransactionsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *GetAllTransactionsResponse) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	for idx, item := range m.GetTransactions() {
+		_, _ = idx, item
+
+		{
+			tmp := item
+
+			if v, ok := interface{}(tmp).(interface{ Validate() error }); ok {
+
+				if err := v.Validate(); err != nil {
+					return GetAllTransactionsResponseValidationError{
+						field:  fmt.Sprintf("Transactions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// GetAllTransactionsResponseValidationError is the validation error returned
+// by GetAllTransactionsResponse.Validate if the designated constraints aren't met.
+type GetAllTransactionsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAllTransactionsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAllTransactionsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAllTransactionsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAllTransactionsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAllTransactionsResponseValidationError) ErrorName() string {
+	return "GetAllTransactionsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAllTransactionsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAllTransactionsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAllTransactionsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAllTransactionsResponseValidationError{}

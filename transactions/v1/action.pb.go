@@ -30,6 +30,8 @@
 		GetTransactionsResponse
 		GetTransactionRequest
 		GetTransactionResponse
+		GetAllTransactionsRequest
+		GetAllTransactionsResponse
 */
 package v1
 
