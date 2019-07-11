@@ -19,6 +19,7 @@ protoc: protoc-rpc \
 	protoc-gateway-v1-accounts \
 	protoc-gateway-v1-streams \
 	protoc-gateway-v1-profiles \
+	protoc-gateway-v1-miners \
 	protoc-v1-accounts \
 	protoc-v1-validator \
 	protoc-v1-syncer \
