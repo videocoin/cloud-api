@@ -76,6 +76,31 @@
           "ActionService"
         ]
       }
+    },
+    "/api/v1/stream/{stream_id}": {
+      "get": {
+        "operationId": "GetActionsByStreamId",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetActionsByStreamIdResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stream_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "ActionService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -134,6 +159,17 @@
       "properties": {
         "action": {
           "$ref": "#/definitions/v1Action"
+        }
+      }
+    },
+    "v1GetActionsByStreamIdResponse": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Action"
+          }
         }
       }
     },

@@ -23,6 +23,12 @@ service ActionService {
             get: "/api/v1/action/{hash}"
         };
     }
+
+    rpc GetActionsByStreamId(GetActionsByStreamIdRequest) returns (GetActionsByStreamIdResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/stream/{stream_id}"
+        };
+    }
 }
 
 message GetActionsRequest {
@@ -41,4 +47,12 @@ message GetActionRequest {
 
 message GetActionResponse {
     Action action = 1;
+}
+
+message GetActionsByStreamIdRequest {
+    uint64 stream_id = 1;
+}
+
+message GetActionsByStreamIdResponse {
+    repeated Action actions = 1;
 }

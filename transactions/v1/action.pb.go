@@ -18,6 +18,8 @@
 		GetActionsResponse
 		GetActionRequest
 		GetActionResponse
+		GetActionsByStreamIdRequest
+		GetActionsByStreamIdResponse
 		Block
 		BlockDetail
 		GetBlocksRequest
