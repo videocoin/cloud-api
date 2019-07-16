@@ -90,6 +90,11 @@ service ManagerService {
     };
   };
 
+  rpc Submitproof(SubmitProofRequest) returns (google.protobuf.Empty) {};
+  rpc VerifyProof(VerifyProofRequest) returns (google.protobuf.Empty) {};
+  rpc EscrowRefund(EscrowRefundRequest) returns (google.protobuf.Empty) {};
+  rpc AddInputChunkId(AddInputChunkIdRequest) returns (google.protobuf.Empty) {};
+
 
   rpc GetAllJobsByPipelineId(JobRequest) returns (cloud.api.jobs.v1.JobProfiles) {};
 
@@ -160,3 +165,24 @@ message UpdateJobRequest {
   cloud.api.jobs.v1.InputStatus input_status = 8;
 }
 
+message SubmitProofRequest {
+  string contract_address = 1;
+  uint32 bitrate = 2;
+  uint64 input_chunk_id = 3;
+  uint64 output_chunk_id = 4;
+}
+
+message VerifyProofRequest {
+  string contract_address = 1;
+  uint32 bitrate = 2;
+  uint64 input_chunk_id = 3;
+}
+
+message EscrowRefundRequest {
+  string contract_address = 1;
+}
+
+message AddInputChunkIdRequest {
+  string contract_address = 1;
+  int64 input_chunk_id = 2;
+}
