@@ -166,7 +166,7 @@ message SubmitProofRequest {
 }
 
 message SubmitProofResponse {
-  string tx = 1;
+  bytes tx = 1;
 }
 
 message VerifyProofRequest {
