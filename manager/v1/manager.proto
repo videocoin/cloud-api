@@ -90,7 +90,7 @@ service ManagerService {
     };
   };
 
-  rpc Submitproof(SubmitProofRequest) returns (google.protobuf.Empty) {};
+  rpc SubmitProof(SubmitProofRequest) returns (google.protobuf.Empty) {};
   rpc VerifyProof(VerifyProofRequest) returns (google.protobuf.Empty) {};
   rpc EscrowRefund(EscrowRefundRequest) returns (google.protobuf.Empty) {};
   rpc AddInputChunkId(AddInputChunkIdRequest) returns (google.protobuf.Empty) {};
