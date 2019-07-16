@@ -177,6 +177,7 @@ message VerifyProofRequest {
   int64 bitrate = 2;
   int64 input_chunk_id = 3;
   int64 distance = 4;
+  int64 stream_id = 5;
 }
 
 message EscrowRefundRequest {
