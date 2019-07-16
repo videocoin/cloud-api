@@ -167,16 +167,16 @@ message UpdateJobRequest {
 
 message SubmitProofRequest {
   string contract_address = 1;
-  uint32 bitrate = 2;
-  uint64 input_chunk_id = 3;
-  uint64 output_chunk_id = 5;
+  int64 bitrate = 2;
+  int64 input_chunk_id = 3;
+  int64 output_chunk_id = 5;
 }
 
 message VerifyProofRequest {
   string contract_address = 1;
-  uint32 bitrate = 2;
-  uint64 input_chunk_id = 3;
-  uint64 distance = 4;
+  int64 bitrate = 2;
+  int64 input_chunk_id = 3;
+  int64 distance = 4;
 }
 
 message EscrowRefundRequest {
