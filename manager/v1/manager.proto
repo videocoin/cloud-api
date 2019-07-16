@@ -94,16 +94,9 @@ service ManagerService {
   rpc VerifyProof(VerifyProofRequest) returns (google.protobuf.Empty) {};
   rpc EscrowRefund(EscrowRefundRequest) returns (google.protobuf.Empty) {};
   rpc AddInputChunkId(AddInputChunkIdRequest) returns (google.protobuf.Empty) {};
-
-
   rpc GetAllJobsByPipelineId(JobRequest) returns (cloud.api.jobs.v1.JobProfiles) {};
-
   rpc GetByStreamId(JobRequest) returns (cloud.api.jobs.v1.JobProfile) {};
-
-  rpc VerifyChunk(VerifyChunkRequest) returns (google.protobuf.Empty) {};
-
   rpc ChunkCreated(ChunkCreatedRequest) returns (google.protobuf.Empty) {};
-
   rpc RegisterTranscoder(cloud.api.transcoder.v1.Transcoder) returns (google.protobuf.Empty) {};
 
 }
