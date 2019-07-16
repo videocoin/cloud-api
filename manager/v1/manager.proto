@@ -169,13 +169,14 @@ message SubmitProofRequest {
   string contract_address = 1;
   uint32 bitrate = 2;
   uint64 input_chunk_id = 3;
-  uint64 output_chunk_id = 4;
+  uint64 output_chunk_id = 5;
 }
 
 message VerifyProofRequest {
   string contract_address = 1;
   uint32 bitrate = 2;
   uint64 input_chunk_id = 3;
+  uint64 distance = 4;
 }
 
 message EscrowRefundRequest {
