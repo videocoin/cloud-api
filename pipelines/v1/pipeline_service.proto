@@ -70,6 +70,12 @@ service PipelineService {
         };
     }
 
+    rpc GetStream(PipelineRequest) returns (cloud.api.jobs.v1.JobProfile) {
+        option (google.api.http) = {
+            get: "/api/v1/pipelines/{id}/streams/{stream_id}"
+        };
+    }
+
     rpc GetStreams(PipelineRequest) returns (cloud.api.jobs.v1.JobProfiles) {
         option (google.api.http) = {
             get: "/api/v1/pipelines/{id}/streams"

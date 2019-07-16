@@ -204,6 +204,34 @@
       }
     },
     "/api/v1/pipelines/{id}/streams/{stream_id}": {
+      "get": {
+        "operationId": "GetStream",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1JobProfile"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stream_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PipelineService"
+        ]
+      },
       "delete": {
         "operationId": "DeleteStream",
         "responses": {
