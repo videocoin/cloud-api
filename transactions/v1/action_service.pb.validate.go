@@ -352,6 +352,10 @@ func (m *GetActionsByStreamIdRequest) Validate() error {
 
 	// no validation rules for StreamId
 
+	// no validation rules for Limit
+
+	// no validation rules for Offset
+
 	return nil
 }
 
