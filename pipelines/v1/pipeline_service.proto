@@ -108,7 +108,7 @@ message PipelineRequest {
 }
 
 message ListResponse {
-    repeated PipelineProfile items = 1;
+    repeated PipelineListItem items = 1;
 }
 
 message UpdatePipelineRequest {
