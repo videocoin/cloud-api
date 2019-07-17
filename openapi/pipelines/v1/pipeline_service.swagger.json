@@ -445,8 +445,38 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1PipelineProfile"
+            "$ref": "#/definitions/v1PipelineListItem"
           }
+        }
+      }
+    },
+    "v1PipelineListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "profile_id": {
+          "$ref": "#/definitions/v1ProfileId"
+        },
+        "jobs_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "jobs_ready": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "jobs_pending": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
