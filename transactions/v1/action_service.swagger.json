@@ -164,7 +164,8 @@
         "INPUT_CHUNK_ADDED",
         "CHUNK_PROOF_SUBMITTED",
         "CHUNK_PROOF_VALIDATED",
-        "ACCOUNT_FUNDED"
+        "ACCOUNT_FUNDED",
+        "STREAM_REQUESTED"
       ],
       "default": "UNKNOWN"
     },
