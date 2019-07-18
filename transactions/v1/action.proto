@@ -36,4 +36,5 @@ enum ActionType {
     CHUNK_PROOF_VALIDATED = 6;
     ACCOUNT_FUNDED = 7;
     STREAM_REQUESTED = 8;
+    STREAM_APPROVED = 9;
 }

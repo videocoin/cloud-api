@@ -165,7 +165,8 @@
         "CHUNK_PROOF_SUBMITTED",
         "CHUNK_PROOF_VALIDATED",
         "ACCOUNT_FUNDED",
-        "STREAM_REQUESTED"
+        "STREAM_REQUESTED",
+        "STREAM_APPROVED"
       ],
       "default": "UNKNOWN"
     },
