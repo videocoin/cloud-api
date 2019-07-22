@@ -40,4 +40,5 @@ enum ActionType {
     VALIDATOR_ADDED = 10;
     VALIDATOR_REMOVED = 11;
     REFUND_ALLOWED = 12;
+    REFUND_REVOKED = 13;
 }
