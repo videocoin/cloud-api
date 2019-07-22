@@ -37,4 +37,5 @@ enum ActionType {
     ACCOUNT_FUNDED = 7;
     STREAM_REQUESTED = 8;
     STREAM_APPROVED = 9;
+    VALIDATOR_ADDED = 10;
 }
