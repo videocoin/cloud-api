@@ -167,7 +167,8 @@
         "ACCOUNT_FUNDED",
         "STREAM_REQUESTED",
         "STREAM_APPROVED",
-        "VALIDATOR_ADDED"
+        "VALIDATOR_ADDED",
+        "VALIDATOR_REMOVED"
       ],
       "default": "UNKNOWN"
     },

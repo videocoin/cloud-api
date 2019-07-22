@@ -38,4 +38,5 @@ enum ActionType {
     STREAM_REQUESTED = 8;
     STREAM_APPROVED = 9;
     VALIDATOR_ADDED = 10;
+    VALIDATOR_REMOVED = 11;
 }
