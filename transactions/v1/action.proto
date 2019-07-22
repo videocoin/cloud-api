@@ -39,4 +39,5 @@ enum ActionType {
     STREAM_APPROVED = 9;
     VALIDATOR_ADDED = 10;
     VALIDATOR_REMOVED = 11;
+    REFUND_ALLOWED = 12;
 }

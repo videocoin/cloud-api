@@ -168,7 +168,8 @@
         "STREAM_REQUESTED",
         "STREAM_APPROVED",
         "VALIDATOR_ADDED",
-        "VALIDATOR_REMOVED"
+        "VALIDATOR_REMOVED",
+        "REFUND_ALLOWED"
       ],
       "default": "UNKNOWN"
     },
