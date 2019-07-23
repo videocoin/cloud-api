@@ -56,62 +56,6 @@
       }
     },
     "/api/v1/pipelines/{id}": {
-      "get": {
-        "operationId": "Get",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1PipelineProfile"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "stream_id",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "PipelineService"
-        ]
-      },
-      "delete": {
-        "operationId": "Delete",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "properties": {}
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "stream_id",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "PipelineService"
-        ]
-      },
       "put": {
         "operationId": "Update",
         "responses": {
@@ -143,9 +87,55 @@
         ]
       }
     },
-    "/api/v1/pipelines/{id}/streams": {
+    "/api/v1/pipelines/{pipeline_id}": {
       "get": {
-        "operationId": "GetStreams",
+        "operationId": "Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1PipelineProfile"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pipeline_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PipelineService"
+        ]
+      },
+      "delete": {
+        "operationId": "Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pipeline_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PipelineService"
+        ]
+      }
+    },
+    "/api/v1/pipelines/{pipeline_id}/streams": {
+      "get": {
+        "operationId": "ListStreams",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -156,22 +146,18 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "pipeline_id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "stream_id",
-            "in": "query",
-            "required": false,
             "type": "string"
           }
         ],
         "tags": [
           "PipelineService"
         ]
-      },
+      }
+    },
+    "/api/v1/streams": {
       "post": {
         "operationId": "CreateStream",
         "responses": {
@@ -184,17 +170,11 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1PipelineRequest"
+              "$ref": "#/definitions/v1CreateStreamRequest"
             }
           }
         ],
@@ -203,7 +183,7 @@
         ]
       }
     },
-    "/api/v1/pipelines/{id}/streams/{stream_id}": {
+    "/api/v1/streams/{stream_id}": {
       "get": {
         "operationId": "GetStream",
         "responses": {
@@ -215,12 +195,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "stream_id",
             "in": "path",
@@ -244,12 +218,6 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "stream_id",
             "in": "path",
             "required": true,
@@ -261,7 +229,7 @@
         ]
       }
     },
-    "/api/v1/pipelines/{id}/streams/{stream_id}/cancel": {
+    "/api/v1/streams/{stream_id}/cancel": {
       "post": {
         "operationId": "CancelStream",
         "responses": {
@@ -274,12 +242,6 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "stream_id",
             "in": "path",
             "required": true,
@@ -290,7 +252,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1PipelineRequest"
+              "$ref": "#/definitions/v1StreamRequest"
             }
           }
         ],
@@ -299,7 +261,7 @@
         ]
       }
     },
-    "/api/v1/pipelines/{id}/streams/{stream_id}/run": {
+    "/api/v1/streams/{stream_id}/run": {
       "post": {
         "operationId": "RunStream",
         "responses": {
@@ -312,12 +274,6 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "stream_id",
             "in": "path",
             "required": true,
@@ -328,7 +284,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1PipelineRequest"
+              "$ref": "#/definitions/v1StreamRequest"
             }
           }
         ],
@@ -371,6 +327,14 @@
         },
         "profile_id": {
           "$ref": "#/definitions/v1ProfileId"
+        }
+      }
+    },
+    "v1CreateStreamRequest": {
+      "type": "object",
+      "properties": {
+        "pipeline_id": {
+          "type": "string"
         }
       }
     },
@@ -462,15 +426,15 @@
         "profile_id": {
           "$ref": "#/definitions/v1ProfileId"
         },
-        "jobs_count": {
+        "streams_count": {
           "type": "integer",
           "format": "int32"
         },
-        "jobs_ready": {
+        "streams_ready": {
           "type": "integer",
           "format": "int32"
         },
-        "jobs_pending": {
+        "streams_pending": {
           "type": "integer",
           "format": "int32"
         },
@@ -492,23 +456,12 @@
         "profile_id": {
           "$ref": "#/definitions/v1ProfileId"
         },
-        "jobs": {
+        "streams": {
           "$ref": "#/definitions/v1JobProfiles"
         },
         "created_at": {
           "type": "string",
           "format": "date-time"
-        }
-      }
-    },
-    "v1PipelineRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "stream_id": {
-          "type": "string"
         }
       }
     },
@@ -521,6 +474,14 @@
         "profile_id_fhd"
       ],
       "default": "profile_id_none"
+    },
+    "v1StreamRequest": {
+      "type": "object",
+      "properties": {
+        "stream_id": {
+          "type": "string"
+        }
+      }
     },
     "v1UpdatePipelineRequest": {
       "type": "object",
