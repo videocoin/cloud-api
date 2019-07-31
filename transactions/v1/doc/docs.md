@@ -15,6 +15,8 @@
 - [transactions/v1/action_service.proto](#transactions/v1/action_service.proto)
     - [GetActionRequest](#cloud.api.transactions.v1.GetActionRequest)
     - [GetActionResponse](#cloud.api.transactions.v1.GetActionResponse)
+    - [GetActionsByStreamIdRequest](#cloud.api.transactions.v1.GetActionsByStreamIdRequest)
+    - [GetActionsByStreamIdResponse](#cloud.api.transactions.v1.GetActionsByStreamIdResponse)
     - [GetActionsRequest](#cloud.api.transactions.v1.GetActionsRequest)
     - [GetActionsResponse](#cloud.api.transactions.v1.GetActionsResponse)
   
@@ -119,12 +121,19 @@
 | ---- | ------ | ----------- |
 | UNKNOWN | 0 |  |
 | DEPOSIT | 1 |  |
-| ESCROW | 2 |  |
+| STREAM_CREATED | 2 |  |
 | STREAM_ENDED | 3 |  |
 | INPUT_CHUNK_ADDED | 4 |  |
 | CHUNK_PROOF_SUBMITTED | 5 |  |
 | CHUNK_PROOF_VALIDATED | 6 |  |
+| CHUNK_PROOF_SCRAPPED | 14 |  |
 | ACCOUNT_FUNDED | 7 |  |
+| STREAM_REQUESTED | 8 |  |
+| STREAM_APPROVED | 9 |  |
+| VALIDATOR_ADDED | 10 |  |
+| VALIDATOR_REMOVED | 11 |  |
+| REFUND_ALLOWED | 12 |  |
+| REFUND_REVOKED | 13 |  |
 
 
  
@@ -166,6 +175,38 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | action | [Action](#cloud.api.transactions.v1.Action) |  |  |
+
+
+
+
+
+
+<a name="cloud.api.transactions.v1.GetActionsByStreamIdRequest"></a>
+
+### GetActionsByStreamIdRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| stream_id | [uint64](#uint64) |  |  |
+| limit | [uint64](#uint64) |  |  |
+| offset | [uint64](#uint64) |  |  |
+
+
+
+
+
+
+<a name="cloud.api.transactions.v1.GetActionsByStreamIdResponse"></a>
+
+### GetActionsByStreamIdResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| actions | [Action](#cloud.api.transactions.v1.Action) | repeated |  |
 
 
 
@@ -219,6 +260,7 @@
 | ----------- | ------------ | ------------- | ------------|
 | GetActions | [GetActionsRequest](#cloud.api.transactions.v1.GetActionsRequest) | [GetActionsResponse](#cloud.api.transactions.v1.GetActionsResponse) |  |
 | GetAction | [GetActionRequest](#cloud.api.transactions.v1.GetActionRequest) | [GetActionResponse](#cloud.api.transactions.v1.GetActionResponse) |  |
+| GetActionsByStreamId | [GetActionsByStreamIdRequest](#cloud.api.transactions.v1.GetActionsByStreamIdRequest) | [GetActionsByStreamIdResponse](#cloud.api.transactions.v1.GetActionsByStreamIdResponse) |  |
 
  
 
