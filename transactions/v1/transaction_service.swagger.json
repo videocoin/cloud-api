@@ -200,6 +200,10 @@
         },
         "gas_price": {
           "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     }

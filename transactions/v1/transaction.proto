@@ -30,4 +30,5 @@ message TransactionDetail {
     string input = 10;
     uint64 gas = 11;
     string gas_price = 12;
+    uint64 status = 13;
 }

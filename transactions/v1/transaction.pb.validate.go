@@ -164,6 +164,8 @@ func (m *TransactionDetail) Validate() error {
 
 	// no validation rules for GasPrice
 
+	// no validation rules for Status
+
 	return nil
 }
 
