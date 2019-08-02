@@ -459,6 +459,7 @@
 | input | [string](#string) |  |  |
 | gas | [uint64](#uint64) |  |  |
 | gas_price | [string](#string) |  |  |
+| status | [uint64](#uint64) |  |  |
 
 
 
