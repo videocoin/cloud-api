@@ -93,9 +93,9 @@ service ManagerService {
   rpc SubmitProof(SubmitProofRequest) returns (SubmitProofResponse) {};
   rpc VerifyProof(VerifyProofRequest) returns (google.protobuf.Empty) {};
   rpc EscrowRefund(EscrowRefundRequest) returns (google.protobuf.Empty) {};
-  rpc AddInputChunkId(AddInputChunkIdRequest) returns (google.protobuf.Empty) {};
-  rpc GetAllJobsByPipelineId(JobRequest) returns (cloud.api.jobs.v1.JobProfiles) {};
-  rpc GetByStreamId(JobRequest) returns (cloud.api.jobs.v1.JobProfile) {};
+  rpc AddInputChunkID(AddInputChunkIdRequest) returns (google.protobuf.Empty) {};
+  rpc GetAllJobsByPipelineID(JobRequest) returns (cloud.api.jobs.v1.JobProfiles) {};
+  rpc GetByStreamID(JobRequest) returns (cloud.api.jobs.v1.JobProfile) {};
   rpc RegisterTranscoder(cloud.api.transcoder.v1.Transcoder) returns (google.protobuf.Empty) {};
 
 }
