@@ -50,7 +50,6 @@ message Job {
     ];
 
     string pipeline_id = 4;
-    string transcoder_id = 5;
     cloud.api.profiles.v1.ProfileId profile_id = 6;
     string client_address = 7;
     string stream_address = 8;
