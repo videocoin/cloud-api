@@ -37,4 +37,9 @@ message StreamRequest {
     string user_id = 1;
     uint64 stream_id = 2;
     string client_address = 3;
+    repeated Profile profiles = 4;
+}
+
+message Profile {
+    string name = 1;
 }
