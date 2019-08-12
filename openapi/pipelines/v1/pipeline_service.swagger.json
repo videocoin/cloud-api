@@ -36,7 +36,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1PipelineProfile"
+              "$ref": "#/definitions/v1PipelineListItem"
             }
           }
         },
@@ -394,6 +394,8 @@
       "enum": [
         "JOB_STATUS_NONE",
         "JOB_STATUS_NEW",
+        "JOB_STATUS_PREPARING",
+        "JOB_STATUS_PREPARED",
         "JOB_STATUS_PENDING",
         "JOB_STATUS_PROCESSING",
         "JOB_STATUS_READY",
