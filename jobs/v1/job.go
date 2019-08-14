@@ -50,10 +50,10 @@ func (j *Job) BeforeCreate(scope *gorm.Scope) error {
 	return scope.SetColumn("created_at", time.Now().Unix())
 }
 
-func (j *Job) AfterSave(scope *gorm.Scope) error {
+func (j *Job) BeforeSave(scope *gorm.Scope) error {
 	return scope.SetColumn("updated_at", time.Now().Unix())
 }
 
-func (j *Job) AfterUpdate(scope *gorm.Scope) error {
+func (j *Job) BeforeUpdate(scope *gorm.Scope) error {
 	return scope.SetColumn("updated_at", time.Now().Unix())
 }
