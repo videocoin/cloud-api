@@ -275,6 +275,30 @@
         ]
       }
     },
+    "/api/v1/user/{id}/key": {
+      "get": {
+        "operationId": "Key",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1KeyResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
     "/api/v1/users": {
       "post": {
         "operationId": "Create",
@@ -389,6 +413,14 @@
           "type": "string"
         },
         "confirm_password": {
+          "type": "string"
+        }
+      }
+    },
+    "v1KeyResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
           "type": "string"
         }
       }
