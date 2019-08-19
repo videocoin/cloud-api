@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package cloud.api.transactions.v1;
+
+option go_package = "v1";
+option (gogoproto.unmarshaler_all) = false;
+option (gogoproto.marshaler_all) = false;
+option (gogoproto.sizer_all) = false;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+message Account {
+    string balance = 1;
+}
+

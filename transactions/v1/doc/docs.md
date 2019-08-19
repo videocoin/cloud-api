@@ -3,6 +3,22 @@
 
 ## Table of Contents
 
+- [transactions/v1/account.proto](#transactions/v1/account.proto)
+    - [Account](#cloud.api.transactions.v1.Account)
+  
+  
+  
+  
+
+- [transactions/v1/account_service.proto](#transactions/v1/account_service.proto)
+    - [GetAccountRequest](#cloud.api.transactions.v1.GetAccountRequest)
+    - [GetAccountResponse](#cloud.api.transactions.v1.GetAccountResponse)
+  
+  
+  
+    - [AccountService](#cloud.api.transactions.v1.AccountService)
+  
+
 - [transactions/v1/action.proto](#transactions/v1/action.proto)
     - [Action](#cloud.api.transactions.v1.Action)
   
@@ -66,6 +82,93 @@
   
 
 - [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="transactions/v1/account.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## transactions/v1/account.proto
+
+
+
+<a name="cloud.api.transactions.v1.Account"></a>
+
+### Account
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| balance | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="transactions/v1/account_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## transactions/v1/account_service.proto
+
+
+
+<a name="cloud.api.transactions.v1.GetAccountRequest"></a>
+
+### GetAccountRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| address | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="cloud.api.transactions.v1.GetAccountResponse"></a>
+
+### GetAccountResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account | [Account](#cloud.api.transactions.v1.Account) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="cloud.api.transactions.v1.AccountService"></a>
+
+### AccountService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| GetAccount | [GetAccountRequest](#cloud.api.transactions.v1.GetAccountRequest) | [GetAccountResponse](#cloud.api.transactions.v1.GetAccountResponse) |  |
+
+ 
 
 
 

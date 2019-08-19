@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package cloud.api.transactions.v1;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "transactions/v1/account.proto";
+
+option go_package = "v1";
+option (gogoproto.unmarshaler_all) = false;
+option (gogoproto.marshaler_all) = false;
+option (gogoproto.sizer_all) = false;
+
+service AccountService {
+    rpc GetAccount (GetAccountRequest) returns (GetAccountResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/account/{address}"
+        };
+    }
+}
+
+message GetAccountRequest {
+    string address = 1;
+}
+
+message GetAccountResponse {
+    Account account = 1;
+}
+
