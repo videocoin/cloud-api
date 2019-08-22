@@ -6,7 +6,7 @@ protoc: protoc-rpc \
 	protoc-gateway-v1-pipelines \
 	protoc-gateway-v1-accounts \
 	protoc-gateway-v1-manager \
-	protoc-gateway-v1-verifier \
+	protoc-v1-verifier \
 	protoc-v1-notifications \
 	protoc-v1-emitter \
 	protoc-v1-profiles \
