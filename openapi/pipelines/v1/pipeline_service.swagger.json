@@ -375,6 +375,22 @@
         },
         "input_status": {
           "$ref": "#/definitions/v1InputStatus"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ready_at": {
+          "type": "string",
+          "format": "int64"
+        },
+        "completed_at": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
