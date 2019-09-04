@@ -5,7 +5,7 @@ package cloud.api.pipelines.v1;
 import "pipelines/v1/pipeline.proto";
 import "github.com/videocoin/cloud-api/rpc/health.proto";
 import "github.com/videocoin/cloud-api/profiles/v1/profiles.proto";
-import "github.com/videocoin/cloud-api/jobs/v1/job.proto";
+import "github.com/videocoin/cloud-api/streams/v1/stream.proto";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
@@ -57,13 +57,13 @@ service PipelineService {
         };
     }
 
-    rpc ListStreams(PipelineRequest) returns (cloud.api.jobs.v1.JobProfiles) {
+    rpc ListStreams(PipelineRequest) returns (cloud.api.streams.v1.StreamProfiles) {
         option (google.api.http) = {
             get: "/api/v1/pipelines/{pipeline_id}/streams"
         };
     }
 
-    rpc CreateStream(CreateStreamRequest) returns (cloud.api.jobs.v1.JobProfile) {
+    rpc CreateStream(CreateStreamRequest) returns (cloud.api.streams.v1.StreamProfile) {
         option (google.api.http) = {
             post: "/api/v1/streams"
             body: "*"
@@ -76,20 +76,20 @@ service PipelineService {
         };
     }
 
-    rpc GetStream(StreamRequest) returns (cloud.api.jobs.v1.JobProfile) {
+    rpc GetStream(StreamRequest) returns (cloud.api.streams.v1.StreamProfile) {
         option (google.api.http) = {
             get: "/api/v1/streams/{stream_id}"
         };
     }
 
-    rpc RunStream(StreamRequest) returns (cloud.api.jobs.v1.JobProfile) {
+    rpc RunStream(StreamRequest) returns (cloud.api.streams.v1.StreamProfile) {
         option (google.api.http) = {
             post: "/api/v1/streams/{stream_id}/run"
             body: "*"
         };
     }
 
-    rpc CancelStream(StreamRequest) returns (cloud.api.jobs.v1.JobProfile) {
+    rpc CancelStream(StreamRequest) returns (cloud.api.streams.v1.StreamProfile) {
         option (google.api.http) = {
             post: "/api/v1/streams/{stream_id}/cancel"
             body: "*"

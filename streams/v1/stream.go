@@ -10,12 +10,12 @@ import (
 )
 
 // CheckErrs used to ensure a job is valid before passing to transcoder
-func (j *Job) CheckErrs() []error {
+func (s *Stream) CheckErrs() []error {
 	var errs = make([]error, 0)
 
 	err := fmt.Errorf("invalid profile")
 	for _, p := range []profiles_v1.ProfileId{profiles_v1.ProfileIdFHD, profiles_v1.ProfileIdHD, profiles_v1.ProfileIdSD} {
-		if p == j.ProfileId {
+		if p == s.ProfileId {
 			err = nil
 		}
 	}
@@ -24,15 +24,15 @@ func (j *Job) CheckErrs() []error {
 		errs = append(errs, err)
 	}
 
-	if j.ClientAddress == "" {
+	if s.ClientAddress == "" {
 		errs = append(errs, fmt.Errorf("invalid client address"))
 	}
 
-	if j.StreamId <= 0 {
+	if s.StreamContractId <= 0 {
 		errs = append(errs, fmt.Errorf("invalid stream id"))
 	}
 
-	if j.StreamAddress == "" {
+	if s.StreamContractAddress == "" {
 		errs = append(errs, fmt.Errorf("invalid stream address"))
 	}
 
@@ -62,6 +62,6 @@ func (j *Job) BeforeUpdate(scope *gorm.Scope) error {
 	if err := scope.SetColumn("updated_at", time.Now().Unix()); err != nil {
 		return err
 	}
-	
+
 	return nil
 }

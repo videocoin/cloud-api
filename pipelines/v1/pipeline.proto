@@ -3,7 +3,7 @@ syntax = "proto3";
 package cloud.api.pipelines.v1;
 
 import "github.com/videocoin/cloud-api/profiles/v1/profiles.proto";
-import "github.com/videocoin/cloud-api/jobs/v1/job.proto";
+import "github.com/videocoin/cloud-api/streams/v1/stream.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -52,7 +52,7 @@ message PipelineProfile {
     string name = 2;
     
     cloud.api.profiles.v1.ProfileId profile_id = 4;
-    cloud.api.jobs.v1.JobProfiles streams = 5;
+    cloud.api.streams.v1.StreamProfiles streams = 5;
 
     google.protobuf.Timestamp created_at = 10 [
         (gogoproto.stdtime) = true
