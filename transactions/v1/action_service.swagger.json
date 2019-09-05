@@ -173,7 +173,8 @@
         "VALIDATOR_REMOVED",
         "REFUND_ALLOWED",
         "REFUND_REVOKED",
-        "TRANSFER_EXECUTED"
+        "TRANSFER_EXECUTED",
+        "OUT_OF_FUNDS"
       ],
       "default": "UNKNOWN"
     },
