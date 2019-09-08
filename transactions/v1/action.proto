@@ -45,4 +45,5 @@ enum ActionType {
     REFUND_REVOKED = 13;
     TRANSFER_EXECUTED = 16;
     OUT_OF_FUNDS = 17;
+    STREAM_DEPOSITED = 18;
 }

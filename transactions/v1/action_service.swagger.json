@@ -174,7 +174,8 @@
         "REFUND_ALLOWED",
         "REFUND_REVOKED",
         "TRANSFER_EXECUTED",
-        "OUT_OF_FUNDS"
+        "OUT_OF_FUNDS",
+        "STREAM_DEPOSITED"
       ],
       "default": "UNKNOWN"
     },

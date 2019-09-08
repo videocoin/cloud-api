@@ -239,6 +239,8 @@
 | REFUND_ALLOWED | 12 |  |
 | REFUND_REVOKED | 13 |  |
 | TRANSFER_EXECUTED | 16 |  |
+| OUT_OF_FUNDS | 17 |  |
+| STREAM_DEPOSITED | 18 |  |
 
 
  
