@@ -22,7 +22,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListResponse"
+              "$ref": "#/definitions/v1PipelineListResponse"
             }
           }
         },
@@ -133,30 +133,6 @@
         ]
       }
     },
-    "/api/v1/pipelines/{pipeline_id}/streams": {
-      "get": {
-        "operationId": "ListStreams",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1JobProfiles"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "pipeline_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "PipelineService"
-        ]
-      }
-    },
     "/api/v1/streams": {
       "post": {
         "operationId": "CreateStream",
@@ -164,7 +140,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1JobProfile"
+              "$ref": "#/definitions/v1StreamProfile"
             }
           }
         },
@@ -183,20 +159,20 @@
         ]
       }
     },
-    "/api/v1/streams/{stream_id}": {
+    "/api/v1/streams/{id}": {
       "get": {
         "operationId": "GetStream",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1JobProfile"
+              "$ref": "#/definitions/v1StreamProfile"
             }
           }
         },
         "parameters": [
           {
-            "name": "stream_id",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -218,7 +194,7 @@
         },
         "parameters": [
           {
-            "name": "stream_id",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -227,22 +203,52 @@
         "tags": [
           "PipelineService"
         ]
+      },
+      "put": {
+        "operationId": "UpdateStream",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1PipelineProfile"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateStreamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PipelineService"
+        ]
       }
     },
-    "/api/v1/streams/{stream_id}/cancel": {
+    "/api/v1/streams/{id}/cancel": {
       "post": {
         "operationId": "CancelStream",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1JobProfile"
+              "$ref": "#/definitions/v1StreamProfile"
             }
           }
         },
         "parameters": [
           {
-            "name": "stream_id",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -261,20 +267,20 @@
         ]
       }
     },
-    "/api/v1/streams/{stream_id}/run": {
+    "/api/v1/streams/{id}/run": {
       "post": {
         "operationId": "RunStream",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1JobProfile"
+              "$ref": "#/definitions/v1StreamProfile"
             }
           }
         },
         "parameters": [
           {
-            "name": "stream_id",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -286,6 +292,30 @@
             "schema": {
               "$ref": "#/definitions/v1StreamRequest"
             }
+          }
+        ],
+        "tags": [
+          "PipelineService"
+        ]
+      }
+    },
+    "/api/v1/streams/{pipeline_id}": {
+      "get": {
+        "operationId": "ListStreams",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1StreamProfiles"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pipeline_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
@@ -348,90 +378,6 @@
       ],
       "default": "INPUT_STATUS_NONE"
     },
-    "v1JobProfile": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "pipeline_id": {
-          "type": "string"
-        },
-        "ingest_input_url": {
-          "type": "string"
-        },
-        "transcode_output_url": {
-          "type": "string"
-        },
-        "stream_id": {
-          "type": "string",
-          "format": "int64"
-        },
-        "stream_address": {
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/v1JobStatus"
-        },
-        "input_status": {
-          "$ref": "#/definitions/v1InputStatus"
-        },
-        "created_at": {
-          "type": "string",
-          "format": "int64"
-        },
-        "updated_at": {
-          "type": "string",
-          "format": "int64"
-        },
-        "ready_at": {
-          "type": "string",
-          "format": "int64"
-        },
-        "completed_at": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
-    "v1JobProfiles": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1JobProfile"
-          }
-        }
-      }
-    },
-    "v1JobStatus": {
-      "type": "string",
-      "enum": [
-        "JOB_STATUS_NONE",
-        "JOB_STATUS_NEW",
-        "JOB_STATUS_PREPARING",
-        "JOB_STATUS_PREPARED",
-        "JOB_STATUS_PENDING",
-        "JOB_STATUS_PROCESSING",
-        "JOB_STATUS_READY",
-        "JOB_STATUS_COMPLETED",
-        "JOB_STATUS_CANCELLED",
-        "JOB_STATUS_FAILED"
-      ],
-      "default": "JOB_STATUS_NONE"
-    },
-    "v1ListResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1PipelineListItem"
-          }
-        }
-      }
-    },
     "v1PipelineListItem": {
       "type": "object",
       "properties": {
@@ -462,6 +408,17 @@
         }
       }
     },
+    "v1PipelineListResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1PipelineListItem"
+          }
+        }
+      }
+    },
     "v1PipelineProfile": {
       "type": "object",
       "properties": {
@@ -475,7 +432,7 @@
           "$ref": "#/definitions/v1ProfileId"
         },
         "streams": {
-          "$ref": "#/definitions/v1JobProfiles"
+          "$ref": "#/definitions/v1StreamProfiles"
         },
         "created_at": {
           "type": "string",
@@ -493,13 +450,82 @@
       ],
       "default": "profile_id_none"
     },
+    "v1StreamProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "pipeline_id": {
+          "type": "string"
+        },
+        "input_url": {
+          "type": "string"
+        },
+        "output_url": {
+          "type": "string"
+        },
+        "stream_contract_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stream_contract_address": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/v1StreamStatus"
+        },
+        "input_status": {
+          "$ref": "#/definitions/v1InputStatus"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ready_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completed_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1StreamProfiles": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1StreamProfile"
+          }
+        }
+      }
+    },
     "v1StreamRequest": {
       "type": "object",
       "properties": {
-        "stream_id": {
+        "id": {
           "type": "string"
         }
       }
+    },
+    "v1StreamStatus": {
+      "type": "string",
+      "enum": [
+        "STREAM_STATUS_NONE",
+        "STREAM_STATUS_NEW",
+        "STREAM_STATUS_PREPARING",
+        "STREAM_STATUS_PREPARED",
+        "STREAM_STATUS_PENDING",
+        "STREAM_STATUS_PROCESSING",
+        "STREAM_STATUS_READY",
+        "STREAM_STATUS_COMPLETED",
+        "STREAM_STATUS_CANCELLED",
+        "STREAM_STATUS_FAILED"
+      ],
+      "default": "STREAM_STATUS_NONE"
     },
     "v1UpdatePipelineRequest": {
       "type": "object",
@@ -512,6 +538,14 @@
         },
         "profile_id": {
           "$ref": "#/definitions/v1ProfileId"
+        }
+      }
+    },
+    "v1UpdateStreamRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
         }
       }
     }
