@@ -5,6 +5,8 @@ package cloud.api.streams.v1;
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "github.com/videocoin/cloud-api/profiles/v1/profiles.proto";
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "v1";
 option (gogoproto.marshaler_all) = true;
 option (gogoproto.unmarshaler_all) = true;
@@ -43,21 +45,19 @@ message Stream {
         (gogoproto.moretags) = "gorm:\"type:char(36);\""
     ];
 
-    string pipeline_id = 2;
-    string user_id = 3;
+    string user_id = 2;
+    string name = 3;
 
     cloud.api.profiles.v1.ProfileId profile_id = 4;
 
     StreamStatus status = 5;
     InputStatus input_status = 6;
 
-    string client_address = 7; // ??? why we need this
-    int64 stream_contract_id = 8;
+    uint64 stream_contract_id = 8;
     string stream_contract_address = 9;
     
-    string transcode_input_url = 10;
-    string ingest_input_url = 11;
-    string transcode_output_url = 12;
+    string input_url = 11;
+    string output_url = 12;
 
     bool refunded = 13;
 
@@ -76,14 +76,6 @@ message Stream {
     google.protobuf.Timestamp completed_at = 19 [
         (gogoproto.stdtime) = true
     ];
-
-    bytes chunks = 25 [
-        (gogoproto.moretags) = "gorm:\"chunks;type:json\"sql:\"type:json\""
-    ];
-
-    bytes worker = 26 [
-        (gogoproto.moretags) = "gorm:\"worker;type:binary(32);DEFAULT:NULL\"sql:\"type:binary(32);DEFAULT:null\""
-    ];
 }
 
 message Streams {
@@ -92,18 +84,22 @@ message Streams {
 
 message StreamProfile {
     string id = 1;
-    string pipeline_id = 2;
+    string name = 2;
 
-    string ingest_input_url = 4;
-    string transcode_output_url = 5;
+    string input_url = 4;
+    string output_url = 5;
 
-    int64 stream_contract_id = 7;
+    uint64 stream_contract_id = 7;
     string stream_contract_address = 8;
 
     StreamStatus status = 9;
     InputStatus input_status = 10;
 
     google.protobuf.Timestamp created_at = 11 [
+        (gogoproto.stdtime) = true
+    ];
+
+    google.protobuf.Timestamp updated_at = 17 [
         (gogoproto.stdtime) = true
     ];
 
