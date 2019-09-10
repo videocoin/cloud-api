@@ -33,7 +33,7 @@ message User {
     string email = 2 [
         (gogoproto.moretags) = "gorm:\"unique_index\""
     ];
-    string password = 3 [
+    bytes password = 3 [
         (gogoproto.moretags) = "gorm:\"type:varchar(100)\""
     ];
     string name = 4 [
