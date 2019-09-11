@@ -56,6 +56,8 @@ service StreamService {
       };
     };
 
+    rpc UpdateStatus(UpdateStreamRequest) returns (google.protobuf.Empty) {};
+
     rpc Run(StreamRequest) returns (StreamProfile) {
       option (google.api.http) = {
         post: "/api/v1/streams/{id}/run"
