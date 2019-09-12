@@ -16,7 +16,7 @@ func (u *User) BeforeCreate(scope *gorm.Scope) error {
 		return err
 	}
 
-	return scope.SetColumn("created_at", time.Now().Unix())
+	return scope.SetColumn("created_at", time.Now())
 }
 
 // DisplayName satisfies the interface for Qor Admin
