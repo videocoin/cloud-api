@@ -11,6 +11,8 @@
 		transactions/v1/action_service.proto
 		transactions/v1/block.proto
 		transactions/v1/block_service.proto
+		transactions/v1/stream.proto
+		transactions/v1/stream_service.proto
 		transactions/v1/transaction.proto
 		transactions/v1/transaction_service.proto
 
@@ -31,6 +33,9 @@
 		GetBlocksResponse
 		GetBlockRequest
 		GetBlockResponse
+		Stream
+		GetStreamInfoRequest
+		GetStreamInfoResponse
 		Transaction
 		TransactionDetail
 		GetTransactionsRequest

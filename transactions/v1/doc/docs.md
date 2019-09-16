@@ -60,6 +60,22 @@
     - [BlockService](#cloud.api.transactions.v1.BlockService)
   
 
+- [transactions/v1/stream.proto](#transactions/v1/stream.proto)
+    - [Stream](#cloud.api.transactions.v1.Stream)
+  
+  
+  
+  
+
+- [transactions/v1/stream_service.proto](#transactions/v1/stream_service.proto)
+    - [GetStreamInfoRequest](#cloud.api.transactions.v1.GetStreamInfoRequest)
+    - [GetStreamInfoResponse](#cloud.api.transactions.v1.GetStreamInfoResponse)
+  
+  
+  
+    - [StreamService](#cloud.api.transactions.v1.StreamService)
+  
+
 - [transactions/v1/transaction.proto](#transactions/v1/transaction.proto)
     - [Transaction](#cloud.api.transactions.v1.Transaction)
     - [TransactionDetail](#cloud.api.transactions.v1.TransactionDetail)
@@ -516,6 +532,95 @@
 | ----------- | ------------ | ------------- | ------------|
 | GetBlocks | [GetBlocksRequest](#cloud.api.transactions.v1.GetBlocksRequest) | [GetBlocksResponse](#cloud.api.transactions.v1.GetBlocksResponse) |  |
 | GetBlock | [GetBlockRequest](#cloud.api.transactions.v1.GetBlockRequest) | [GetBlockResponse](#cloud.api.transactions.v1.GetBlockResponse) |  |
+
+ 
+
+
+
+<a name="transactions/v1/stream.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## transactions/v1/stream.proto
+
+
+
+<a name="cloud.api.transactions.v1.Stream"></a>
+
+### Stream
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| stream_id | [string](#string) |  |  |
+| address | [string](#string) |  |  |
+| protocol_version | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="transactions/v1/stream_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## transactions/v1/stream_service.proto
+
+
+
+<a name="cloud.api.transactions.v1.GetStreamInfoRequest"></a>
+
+### GetStreamInfoRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| stream_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="cloud.api.transactions.v1.GetStreamInfoResponse"></a>
+
+### GetStreamInfoResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| stream | [Stream](#cloud.api.transactions.v1.Stream) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="cloud.api.transactions.v1.StreamService"></a>
+
+### StreamService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| GetStreamInfo | [GetStreamInfoRequest](#cloud.api.transactions.v1.GetStreamInfoRequest) | [GetStreamInfoResponse](#cloud.api.transactions.v1.GetStreamInfoResponse) |  |
 
  
 

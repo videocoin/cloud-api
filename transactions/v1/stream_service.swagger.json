@@ -1,0 +1,67 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "transactions/v1/stream_service.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/stream-info/{stream_id}": {
+      "get": {
+        "operationId": "GetStreamInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetStreamInfoResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "stream_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StreamService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "v1GetStreamInfoResponse": {
+      "type": "object",
+      "properties": {
+        "stream": {
+          "$ref": "#/definitions/v1Stream"
+        }
+      }
+    },
+    "v1Stream": {
+      "type": "object",
+      "properties": {
+        "stream_id": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "protocol_version": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
