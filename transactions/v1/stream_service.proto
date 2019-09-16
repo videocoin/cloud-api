@@ -20,7 +20,7 @@ service StreamService {
 }
 
 message GetStreamInfoRequest {
-    string stream_id = 1;
+    uint64 stream_id = 1;
 }
 
 message GetStreamInfoResponse {

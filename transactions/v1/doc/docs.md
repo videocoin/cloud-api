@@ -585,7 +585,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| stream_id | [string](#string) |  |  |
+| stream_id | [uint64](#uint64) |  |  |
 
 
 

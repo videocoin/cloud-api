@@ -44,7 +44,7 @@ func request_StreamService_GetStreamInfo_0(ctx context.Context, marshaler runtim
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "stream_id")
 	}
 
-	protoReq.StreamId, err = runtime.String(val)
+	protoReq.StreamId, err = runtime.Uint64(val)
 
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "stream_id", err)
