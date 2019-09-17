@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cloud.api.verifier.v1;
+package cloud.api.validator.v1;
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
@@ -12,7 +12,7 @@ option (gogoproto.unmarshaler_all) = false;
 option (gogoproto.marshaler_all) = false;
 option (gogoproto.sizer_all) = false;
 
-service VerifierService {
+service ValidatorService {
   rpc Health(google.protobuf.Empty) returns (cloud.api.rpc.HealthStatus) {
     option (google.api.http) = {
       get : "/healthz"
@@ -23,11 +23,11 @@ service VerifierService {
 }
 
 message VerifyRequest {
-    int64 stream_id = 1;
-    uint32 bitrate = 2;
-    uint64 input_id = 3;
-    uint64 output_id = 4;
-    string source_chunk_url = 5;
-    string result_chunk_url = 6;
-    string contract_address = 7;
+    int64 stream_contract_id = 1;
+    string stream_contract_address = 2;
+    uint32 bitrate = 3;
+    uint64 input_id = 4;
+    uint64 output_id = 5;
+    string input_url = 6;
+    string output_url = 7;
 }
