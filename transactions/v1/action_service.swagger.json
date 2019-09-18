@@ -140,6 +140,37 @@
             "required": false,
             "type": "string",
             "format": "uint64"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "UNKNOWN",
+                "DEPOSIT",
+                "STREAM_CREATED",
+                "STREAM_ENDED",
+                "INPUT_CHUNK_ADDED",
+                "CHUNK_PROOF_SUBMITTED",
+                "CHUNK_PROOF_VALIDATED",
+                "CHUNK_PROOF_SCRAPPED",
+                "ACCOUNT_FUNDED",
+                "STREAM_REQUESTED",
+                "STREAM_REFUNDED",
+                "STREAM_APPROVED",
+                "VALIDATOR_ADDED",
+                "VALIDATOR_REMOVED",
+                "REFUND_ALLOWED",
+                "REFUND_REVOKED",
+                "TRANSFER_EXECUTED",
+                "OUT_OF_FUNDS",
+                "STREAM_DEPOSITED"
+              ]
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [

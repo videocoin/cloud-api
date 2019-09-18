@@ -315,6 +315,7 @@
 | stream_id | [uint64](#uint64) |  |  |
 | limit | [uint64](#uint64) |  |  |
 | offset | [uint64](#uint64) |  |  |
+| filter | [ActionType](#cloud.api.transactions.v1.ActionType) | repeated |  |
 
 
 
