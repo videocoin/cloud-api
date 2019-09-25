@@ -7,6 +7,7 @@ import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "github.com/videocoin/cloud-api/rpc/health.proto";
+import "github.com/videocoin/cloud-api/profiles/v1/profiles.proto";
 import "github.com/videocoin/cloud-api/streams/v1/stream.proto";
 
 option go_package = "v1";
@@ -26,13 +27,15 @@ message StreamRequest {
 }
 
 message StreamResponse {
-  string id = 1;
+  string id = 1 [(gogoproto.customname) = "ID"];
   string name = 2;
 
-  string input_url = 4;
-  string output_url = 5;
+  cloud.api.profiles.v1.ProfileId profile_id = 3 [(gogoproto.customname) = "ProfileID"];
 
-  uint64 stream_contract_id = 7;
+  string input_url = 4 [(gogoproto.customname) = "InputURL"];
+  string output_url = 5 [(gogoproto.customname) = "OutputURL"];
+
+  uint64 stream_contract_id = 7 [(gogoproto.customname) = "StreamContractID"];
   string stream_contract_address = 8;
 
   streams.v1.StreamStatus status = 9;
