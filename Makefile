@@ -4,6 +4,7 @@ default: protoc
 protoc: protoc-rpc \
 	protoc-gateway-v1-users \
 	protoc-gateway-v1-accounts \
+	protoc-v1-syncer \
 	protoc-gateway-v1-streams \
 	protoc-gateway-v1-profiles \
 	protoc-v1-verifier \
