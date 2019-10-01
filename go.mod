@@ -6,9 +6,11 @@ require (
 	github.com/gogo/googleapis v1.2.0
 	github.com/gogo/protobuf v1.2.1
 	github.com/golang/protobuf v1.3.1
-	github.com/grpc-ecosystem/grpc-gateway v1.9.0
-	github.com/jinzhu/gorm v1.9.9
-	github.com/satori/go.uuid v1.2.0
-	golang.org/x/net v0.0.0-20190522155817-f3200d17e092
-	google.golang.org/grpc v1.21.0
+	github.com/grpc-ecosystem/grpc-gateway v1.9.3
+	github.com/videocoin/cloud-pkg v0.0.5
+	google.golang.org/grpc v1.21.1
 )
+
+replace github.com/videocoin/cloud-pkg => ../cloud-pkg
+
+replace github.com/videocoin/cloud-api => ../cloud-api
