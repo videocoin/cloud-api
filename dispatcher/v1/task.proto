@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package cloud.api.dispatcher.v1;
+
+import "google/api/annotations.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+import "github.com/videocoin/cloud-api/profiles/v1/profiles.proto";
+
+option go_package = "v1";
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.goproto_registration) = true;
+option (gogoproto.messagename_all) = true;
+
+enum TaskStatus {
+    option (gogoproto.goproto_enum_prefix) = false;
+    option (gogoproto.enum_customname) = "TaskStatus";
+
+    CREATED = 0 [(gogoproto.enumvalue_customname) = "TaskStatusCreated"];
+    PENDING = 1 [(gogoproto.enumvalue_customname) = "TaskStatusPending"];
+    ASSIGNED = 2 [(gogoproto.enumvalue_customname) = "TaskStatusAssigned"];
+    ENCODING = 3 [(gogoproto.enumvalue_customname) = "TaskStatusEncoding"];
+    COMPLETED = 4 [(gogoproto.enumvalue_customname) = "TaskStatusCompleted"];
+    FAILED = 5 [(gogoproto.enumvalue_customname) = "TaskStatusFailed"];
+    CANCELED = 6 [(gogoproto.enumvalue_customname) = "TaskStatusCanceled"];
+}
+
+message TaskInput {
+    string uri = 1 [(gogoproto.customname) = "URI"];
+}
+
+message TaskOutput {
+    string codec = 1;
+    string format = 2;
+    uint32 width = 3;
+    uint32 height = 4;
+    uint32 bitrate = 5;
+    uint32 framerate = 6;
+    uint32 gop_size = 7;
+    uint32 const_rate_factor = 8;
+    uint32 min_rate = 9;
+    uint32 max_rate = 10;
+    uint32 buf_size = 11;
+    string preset = 12;
+    string profile = 13;
+    string profile_level = 14;
+    string x264opts = 15;
+    uint32 segment_time = 16;
+    uint32 segment_list_size = 17;
+}
+
+message Task {
+    string id = 1 [(gogoproto.customname) = "ID"];
+    int32 owner_id = 2 [(gogoproto.customname) = "OwnerID"];
+    google.protobuf.Timestamp created_at = 3;
+    TaskStatus status = 4;
+    cloud.api.profiles.v1.ProfileId profile_id = 5 [(gogoproto.customname) = "ProfileID"];
+
+    TaskInput input = 6;
+    TaskOutput output = 7;
+
+    string cmdline = 8;
+}
