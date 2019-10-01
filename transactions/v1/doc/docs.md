@@ -60,6 +60,22 @@
     - [BlockService](#cloud.api.transactions.v1.BlockService)
   
 
+- [transactions/v1/status.proto](#transactions/v1/status.proto)
+    - [Status](#cloud.api.transactions.v1.Status)
+  
+  
+  
+  
+
+- [transactions/v1/status_service.proto](#transactions/v1/status_service.proto)
+    - [GetStatusRequest](#cloud.api.transactions.v1.GetStatusRequest)
+    - [GetStatusResponse](#cloud.api.transactions.v1.GetStatusResponse)
+  
+  
+  
+    - [StatusService](#cloud.api.transactions.v1.StatusService)
+  
+
 - [transactions/v1/stream.proto](#transactions/v1/stream.proto)
     - [Stream](#cloud.api.transactions.v1.Stream)
   
@@ -534,6 +550,88 @@
 | ----------- | ------------ | ------------- | ------------|
 | GetBlocks | [GetBlocksRequest](#cloud.api.transactions.v1.GetBlocksRequest) | [GetBlocksResponse](#cloud.api.transactions.v1.GetBlocksResponse) |  |
 | GetBlock | [GetBlockRequest](#cloud.api.transactions.v1.GetBlockRequest) | [GetBlockResponse](#cloud.api.transactions.v1.GetBlockResponse) |  |
+
+ 
+
+
+
+<a name="transactions/v1/status.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## transactions/v1/status.proto
+
+
+
+<a name="cloud.api.transactions.v1.Status"></a>
+
+### Status
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| synced | [bool](#bool) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="transactions/v1/status_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## transactions/v1/status_service.proto
+
+
+
+<a name="cloud.api.transactions.v1.GetStatusRequest"></a>
+
+### GetStatusRequest
+
+
+
+
+
+
+
+<a name="cloud.api.transactions.v1.GetStatusResponse"></a>
+
+### GetStatusResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [Status](#cloud.api.transactions.v1.Status) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="cloud.api.transactions.v1.StatusService"></a>
+
+### StatusService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| GetStatus | [GetStatusRequest](#cloud.api.transactions.v1.GetStatusRequest) | [GetStatusResponse](#cloud.api.transactions.v1.GetStatusResponse) |  |
 
  
 
