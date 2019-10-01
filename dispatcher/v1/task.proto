@@ -37,7 +37,7 @@ message TaskOutput {
 message Task {
     string id = 1 [(gogoproto.customname) = "ID"];
     int32 owner_id = 2 [(gogoproto.customname) = "OwnerID"];
-    google.protobuf.Timestamp created_at = 3;
+    google.protobuf.Timestamp created_at = 3 [(gogoproto.stdtime) = true];
     TaskStatus status = 4;
     string profile_id = 5 [(gogoproto.customname) = "ProfileID"];
 
