@@ -22,9 +22,14 @@ service DispatcherService {
       };
     }
 
+    rpc GetPendingTask(TaskPendingRequest) returns (cloud.api.dispatcher.v1.Task) {}
     rpc GetTask(TaskRequest) returns (cloud.api.dispatcher.v1.Task) {}
 }
 
-message TaskRequest {
+message TaskPendingRequest {
   string machine_id = 1 [(gogoproto.customname) = "MachineID"];
+}
+
+message TaskRequest {
+  string id = 1 [(gogoproto.customname) = "ID"];
 }
