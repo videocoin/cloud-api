@@ -46,17 +46,16 @@ func (output *TaskOutput) Scan(src interface{}) error {
 }
 
 func (s TaskStatus) Value() (driver.Value, error) {
-	return s.String(), nil
+	return TaskStatus_name[int32(s)], nil
 }
 
 func (s *TaskStatus) Scan(src interface{}) error {
-	sID, ok := src.(string)
+	sID, ok := src.([]byte)
 	if !ok {
-		return errors.New("type assertion .(string) failed.")
+		return errors.New("type assertion .([]byte) failed.")
 	}
 
-	sid := TaskStatus(TaskStatus_value[sID])
-	s = &sid
+	*s = TaskStatus(TaskStatus_value[string(sID)])
 
 	return nil
 }

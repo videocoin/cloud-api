@@ -6,6 +6,7 @@ import "github.com/videocoin/cloud-api/rpc/health.proto";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "dispatcher/v1/task.proto";
 
 option go_package = "v1";
 option (gogoproto.marshaler_all) = true;
@@ -20,4 +21,10 @@ service DispatcherService {
         get: "/healthz"
       };
     }
+
+    rpc GetTask(TaskRequest) returns (cloud.api.dispatcher.v1.Task) {}
+}
+
+message TaskRequest {
+  string machine_id = 1 [(gogoproto.customname) = "MachineID"];
 }
