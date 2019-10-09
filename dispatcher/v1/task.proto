@@ -55,4 +55,8 @@ message Task {
     string machine_id = 9 [
         (gogoproto.customname) = "MachineID"
     ];
+    uint64 stream_contract_id = 10 [
+        (gogoproto.customname) = "StreamContractID"
+    ];
+    string stream_contract_address = 11;
 }
