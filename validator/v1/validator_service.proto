@@ -19,15 +19,13 @@ service ValidatorService {
     };
   };
 
-  rpc Verify(VerifyRequest) returns (google.protobuf.Empty) {}
+  rpc ValidateProof(ValidateProofRequest) returns (google.protobuf.Empty) {}
 }
 
-message VerifyRequest {
-    int64 stream_contract_id = 1;
+message ValidateProofRequest {
+    string stream_contract_id = 1;
     string stream_contract_address = 2;
-    uint32 bitrate = 3;
-    uint64 input_id = 4;
-    uint64 output_id = 5;
-    string input_url = 6;
-    string output_url = 7;
+    int64 profile_id = 3;
+    int64 input_id = 4;
+    int64 output_id = 5;
 }
