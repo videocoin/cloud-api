@@ -3,11 +3,13 @@ default: protoc
 
 protoc: protoc-rpc \
 	protoc-gateway-v1-users \
+	protoc-gateway-v1-streams \
 	protoc-gateway-v1-accounts \
-	protoc-v1-syncer \
 	protoc-gateway-v1-streams \
 	protoc-gateway-v1-profiles \
-	protoc-v1-verifier \
+	protoc-v1-accounts \
+	protoc-v1-validator \
+	protoc-v1-syncer \
 	protoc-v1-notifications \
 	protoc-v1-emitter \
 	protoc-v1-dispatcher \
