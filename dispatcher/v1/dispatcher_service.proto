@@ -29,9 +29,10 @@ service DispatcherService {
 }
 
 message TaskPendingRequest {
-  string machine_id = 1 [(gogoproto.customname) = "MachineID"];
+  string client_id = 1 [(gogoproto.customname) = "ClientID"];
 }
 
 message TaskRequest {
-  string id = 1 [(gogoproto.customname) = "ID"];
+  string client_id = 1 [(gogoproto.customname) = "ClientID"];
+  string id = 2 [(gogoproto.customname) = "ID"];
 }

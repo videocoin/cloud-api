@@ -52,8 +52,8 @@ message Task {
     TaskInput input = 6;
     TaskOutput output = 7;
     string cmdline = 8;
-    string machine_id = 9 [
-        (gogoproto.customname) = "MachineID"
+    string client_id = 9 [
+        (gogoproto.customname) = "ClientID"
     ];
     uint64 stream_contract_id = 10 [
         (gogoproto.customname) = "StreamContractID"
