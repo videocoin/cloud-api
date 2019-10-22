@@ -1,7 +1,7 @@
 DOCKER_IMAGE_NAME = protobuf-build-env
-LIVE_PLANET_PROJECT_NAME = videocoin-network
+PROJECT_NAME = videocoin-network
 
-REPOSITORY=gcr.io/$(LIVE_PLANET_PROJECT_NAME)/$(DOCKER_IMAGE_NAME)
+REPOSITORY=gcr.io/$(PROJECT_NAME)/$(DOCKER_IMAGE_NAME)
 
 build:
 	docker build -t $(REPOSITORY) .

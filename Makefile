@@ -84,12 +84,12 @@ Mgoogle/protobuf/field_mask.proto=github.com/gogo/protobuf/types:\
 
 
 DOCKER_IMAGE_NAME = protobuf-build-env
-LIVE_PLANET_PROJECT_NAME = videocoin-network
-REPOSITORY=gcr.io/$(LIVE_PLANET_PROJECT_NAME)/$(DOCKER_IMAGE_NAME)
+PROJECT_NAME = videocoin-network
+REPOSITORY=gcr.io/$(PROJECT_NAME)/$(DOCKER_IMAGE_NAME)
 
 DOCKER_BUILD_COMMAND=docker run \
     -v $(shell pwd):/go_workspace/src/github.com/videocoin/cloud-api -v $(shell pwd)/proto_gen.mk:/app/proto_gen.mk -w $(shell pwd) \
-	gcr.io/liveplanet-cloud-internal/protobuf-build-env
+	gcr.io/videocoin-network/protobuf-build-env
 
 docker-pull-image:
 	docker pull $(REPOSITORY):latest
