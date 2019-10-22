@@ -82,3 +82,40 @@ Mgoogle/protobuf/field_mask.proto=github.com/gogo/protobuf/types:\
 	# Workaround for https://github.com/grpc-ecosystem/grpc-gateway/issues/229.
 	sed -i.bak "s/empty.Empty/types.Empty/g" ./$*/v1/*.pb.gw.go && rm ./$*/v1/*.pb.gw.go.bak
 
+
+DOCKER_IMAGE_NAME = protobuf-build-env
+LIVE_PLANET_PROJECT_NAME = videocoin-network
+REPOSITORY=gcr.io/$(LIVE_PLANET_PROJECT_NAME)/$(DOCKER_IMAGE_NAME)
+
+DOCKER_BUILD_COMMAND=docker run \
+    -v $(shell pwd):/go_workspace/src/github.com/videocoin/cloud-api -v $(shell pwd)/proto_gen.mk:/app/proto_gen.mk -w $(shell pwd) \
+	gcr.io/liveplanet-cloud-internal/protobuf-build-env
+
+docker-pull-image:
+	docker pull $(REPOSITORY):latest
+
+docker-protoc: docker-protoc-rpc \
+	docker-protoc-gateway-v1-users \
+	docker-protoc-gateway-v1-streams \
+	docker-protoc-gateway-v1-accounts \
+	docker-protoc-gateway-v1-streams \
+	docker-protoc-gateway-v1-profiles \
+	docker-protoc-v1-accounts \
+	docker-protoc-v1-validator \
+	docker-protoc-v1-syncer \
+	docker-protoc-v1-notifications \
+	docker-protoc-v1-emitter \
+	docker-protoc-v1-dispatcher \
+	docker-protoc-private-v1-streams
+
+docker-protoc-rpc:
+	${DOCKER_BUILD_COMMAND} --target protoc-rpc
+
+docker-protoc-gateway-v1-%:
+	${DOCKER_BUILD_COMMAND} --target protoc-gateway-v1-$*
+
+docker-protoc-private-v1-%:
+	${DOCKER_BUILD_COMMAND} --target protoc-private-v1-$*
+
+docker-protoc-v1-%:
+	${DOCKER_BUILD_COMMAND} --target protoc-v1-$*
