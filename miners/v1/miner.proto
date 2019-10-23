@@ -19,19 +19,3 @@ enum MinerStatus {
     MINER_STATUS_IDLE = 1 [(gogoproto.enumvalue_customname) = "MinerStatusIdle"];
     MINER_STATUS_BUSY = 2 [(gogoproto.enumvalue_customname) = "MinerStatusBusy"];
 }
-
-message Miner {
-    string id = 1 [
-        (gogoproto.moretags) = "gorm:\"type:varchar(36);primary_key\""
-    ];
-
-    string user_id = 2 [
-        (gogoproto.moretags) = "gorm:\"type:varchar(36);\""
-    ];
-    
-    string hash = 3;
-
-    MinerStatus status = 4;
-    int64 cpu_idle = 5;
-    bool is_online = 6;
-}

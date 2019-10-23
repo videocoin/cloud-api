@@ -24,52 +24,36 @@ service MinersService {
         };
     }
 
-    rpc Create(google.protobuf.Empty) returns (CreateResponse) {
+    rpc Create(google.protobuf.Empty) returns (MinerResponse) {
         option (google.api.http) = {
             post: "/api/v1/miners",
             body: "*"
         };
     }
-    rpc Get(Request) returns (Response) {
+
+    rpc Get(MinerRequest) returns (MinerResponse) {
         option (google.api.http) = {
             get: "/api/v1/miners/{id}"
         };
     }
-    rpc Validate(Request) returns (Response) {
-        option (google.api.http) = {
-            get: "/api/v1/miners/{hash}/validate"
-        };
-    }
-    rpc List(ListRequest) returns (ListResponse) {
+
+    rpc List(MinerRequest) returns (MinerListResponse) {
         option (google.api.http) = {
             get: "/api/v1/miners"
         };
     }
     
-    rpc UpdateStatus(Request) returns (Response) {}
+    rpc UpdateStatus(MinerRequest) returns (MinerResponse) {}
 }
 
-message CreateResponse {
+message MinerRequest {
     string id = 1;
-    string key = 2;
 }
 
-message Request {
+message MinerResponse {
     string id = 1;
-    string hash = 2;
-    MinerStatus status = 3;
 }
 
-message Response {
-    string id = 1;
-    MinerStatus status = 2;
-    int64 cpu_idle = 3;
-}
-
-message ListRequest {
-    MinerStatus status = 1;
-}
-
-message ListResponse {
-    repeated Miner items = 1;
+message MinerListResponse {
+    repeated MinerResponse items = 1;
 }
