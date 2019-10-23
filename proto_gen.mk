@@ -1,7 +1,7 @@
 GOPATH ?= unset_please_set
 
 protoc-rpc:
-	cd /go_workspace/src/github.com/videocoin/cloud-api && protoc \
+	protoc \
 		-I . \
 		-I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/ \
 		-I ${GOPATH}/src/github.com/gogo/googleapis/ \
@@ -10,7 +10,7 @@ protoc-rpc:
 		./rpc/*.proto
 
 protoc-gateway-v1-%:
-	cd /go_workspace/src/github.com/videocoin/cloud-api && protoc \
+	protoc \
 		-I . \
 		-I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/ \
 		-I ${GOPATH}/src/github.com/gogo/googleapis/ \
@@ -33,10 +33,10 @@ Mgoogle/protobuf/field_mask.proto=github.com/gogo/protobuf/types:\
 		./$*/v1/*.proto
 
 	# Workaround for https://github.com/grpc-ecosystem/grpc-gateway/issues/229.
-	cd /go_workspace/src/github.com/videocoin/cloud-api && sed -i.bak "s/empty.Empty/types.Empty/g" ./$*/v1/*.pb.gw.go && rm ./$*/v1/*.pb.gw.go.bak
+	sed -i.bak "s/empty.Empty/types.Empty/g" ./$*/v1/*.pb.gw.go && rm ./$*/v1/*.pb.gw.go.bak
 
 protoc-v1-%:
-	cd /go_workspace/src/github.com/videocoin/cloud-api && protoc \
+	protoc \
 		-I/usr/local/include \
 		-I${GOPATH}/src \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
@@ -52,7 +52,7 @@ Mgoogle/protobuf/field_mask.proto=github.com/gogo/protobuf/types:\
 		./$*/v1/*.proto
 
 protoc-private-v1-%:
-	cd /go_workspace/src/github.com/videocoin/cloud-api && protoc \
+	protoc \
 		-I/usr/local/include \
 		-I${GOPATH}/src \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
