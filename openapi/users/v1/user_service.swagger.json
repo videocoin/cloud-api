@@ -341,6 +341,58 @@
         ]
       }
     },
+    "/api/v1/withdraw": {
+      "post": {
+        "operationId": "Withdraw",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1WithdrawRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/api/v1/withdraw/start": {
+      "post": {
+        "operationId": "StartWithdraw",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1WithdrawResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1StartWithdrawRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
     "/healthz": {
       "get": {
         "operationId": "Health",
@@ -469,6 +521,18 @@
         }
       }
     },
+    "v1StartWithdrawRequest": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "v1TokenResponse": {
       "type": "object",
       "properties": {
@@ -547,6 +611,25 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "v1WithdrawRequest": {
+      "type": "object",
+      "properties": {
+        "transfer_id": {
+          "type": "string"
+        },
+        "pin": {
+          "type": "string"
+        }
+      }
+    },
+    "v1WithdrawResponse": {
+      "type": "object",
+      "properties": {
+        "transfer_id": {
+          "type": "string"
         }
       }
     }

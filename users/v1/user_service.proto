@@ -3,7 +3,7 @@ syntax = "proto3";
 package cloud.api.users.v1;
 
 import "github.com/videocoin/cloud-api/rpc/health.proto";
-import "github.com/videocoin/cloud-api/confirmations/v1/confirmation.proto";
+import "github.com/videocoin/cloud-api/transfers/v1/transfer.proto";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
@@ -117,7 +117,7 @@ service UserService {
         };
     }
 
-    rpc StartWithdraw(google.protobuf.Empty) returns (WithdrawResponse) {
+    rpc StartWithdraw(StartWithdrawRequest) returns (WithdrawResponse) {
         option (google.api.http) = {
             post: "/api/v1/withdraw/start",
             body: "*"
@@ -229,13 +229,24 @@ message UserApiListResponse {
     repeated UserApiTokenResponse items = 1;
 }
 
+message StartWithdrawRequest {
+    string address = 1 [
+        (gogoproto.moretags) = "validate:\"required\""
+    ];
+    double amount = 2 [
+        (gogoproto.moretags) = "validate:\"required,gt=0\""
+    ];
+}
+
 message WithdrawRequest {
-    string confirmation_id = 1;
-    string address = 2;
-    double amount = 3;
-    string pin = 4;
+    string transfer_id = 1 [
+        (gogoproto.moretags) = "validate:\"required\""
+    ];
+    string pin = 2 [
+        (gogoproto.moretags) = "validate:\"required,len=6\""
+    ];
 }
 
 message WithdrawResponse {
-    string confirmation_id = 1;
+    string transfer_id = 1;
 }
