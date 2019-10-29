@@ -11,5 +11,3 @@ require (
 	github.com/videocoin/cloud-pkg v0.0.5
 	google.golang.org/grpc v1.21.1
 )
-
-replace github.com/videocoin/cloud-pkg => ../cloud-pkg
