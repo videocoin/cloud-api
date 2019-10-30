@@ -15,7 +15,6 @@ default: protoc
 
 protoc: protoc-rpc \
 	protoc-gateway-v1-users \
-	protoc-gateway-v1-streams \
 	protoc-gateway-v1-accounts \
 	protoc-gateway-v1-streams \
 	protoc-gateway-v1-profiles \
@@ -34,10 +33,10 @@ docker-pull-image:
 
 docker-protoc: docker-protoc-rpc \
 	docker-protoc-gateway-v1-users \
-	docker-protoc-gateway-v1-streams \
 	docker-protoc-gateway-v1-accounts \
 	docker-protoc-gateway-v1-streams \
 	docker-protoc-gateway-v1-profiles \
+	docker-protoc-gateway-v1-miners \
 	docker-protoc-v1-accounts \
 	docker-protoc-v1-transfers \
 	docker-protoc-v1-validator \

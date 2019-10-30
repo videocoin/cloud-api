@@ -392,33 +392,9 @@
           "UserService"
         ]
       }
-    },
-    "/healthz": {
-      "get": {
-        "operationId": "Health",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/rpcHealthStatus"
-            }
-          }
-        },
-        "tags": [
-          "UserService"
-        ]
-      }
     }
   },
   "definitions": {
-    "rpcHealthStatus": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string"
-        }
-      }
-    },
     "v1AccountProfile": {
       "type": "object",
       "properties": {
