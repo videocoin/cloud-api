@@ -58,6 +58,7 @@ message MinerRequest {
 message MinerResponse {
     string id = 1;
     MinerStatus status = 2;
+    map<string, string> tags = 3;
 }
 
 message MinerListResponse {
