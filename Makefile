@@ -1,59 +1,32 @@
-include proto_gen.mk
+GOOS?=linux
+GOARCH?=amd64
 
+GCP_PROJECT=videocoin-network
 
-DOCKER_IMAGE_NAME = protobuf-build-env
-PROJECT_NAME = videocoin-network
-REPOSITORY=gcr.io/$(PROJECT_NAME)/$(DOCKER_IMAGE_NAME)
+NAME=swagger
+VERSION=$$(git describe --abbrev=0)-$$(git rev-parse --abbrev-ref HEAD)-$$(git rev-parse --short HEAD)
 
-DOCKER_BUILD_COMMAND=docker run \
-    -v $(shell pwd):/go_workspace/src/github.com/videocoin/cloud-api \
-    -v $(shell pwd)/proto_gen.mk:/app/proto_gen.mk \
-    -w /go_workspace/src/github.com/videocoin/cloud-api \
-	gcr.io/videocoin-network/protobuf-build-env
+.PHONY: deploy
 
-default: protoc
+default: build
 
-protoc: protoc-rpc \
-	protoc-gateway-v1-users \
-	protoc-gateway-v1-accounts \
-	protoc-gateway-v1-streams \
-	protoc-gateway-v1-profiles \
-	protoc-gateway-v1-miners \
-	protoc-v1-accounts \
-	protoc-v1-transfers \
-	protoc-v1-validator \
-	protoc-v1-syncer \
-	protoc-v1-notifications \
-	protoc-v1-emitter \
-	protoc-v1-dispatcher \
-	protoc-private-v1-streams
+version:
+	@echo ${VERSION}
 
-docker-pull-image:
-	docker pull $(REPOSITORY):latest
+build:
+	GOOS=${GOOS} GOARCH=${GOARCH} \
+		go build \
+			-ldflags="-w -s -X main.Version=${VERSION}" \
+			-o bin/${NAME} \
+			./swagger/main.go
 
-docker-protoc: docker-protoc-rpc \
-	docker-protoc-gateway-v1-users \
-	docker-protoc-gateway-v1-accounts \
-	docker-protoc-gateway-v1-streams \
-	docker-protoc-gateway-v1-profiles \
-	docker-protoc-gateway-v1-miners \
-	docker-protoc-v1-accounts \
-	docker-protoc-v1-transfers \
-	docker-protoc-v1-validator \
-	docker-protoc-v1-syncer \
-	docker-protoc-v1-notifications \
-	docker-protoc-v1-emitter \
-	docker-protoc-v1-dispatcher \
-	docker-protoc-private-v1-streams
+docker-build:
+	docker build -t gcr.io/${GCP_PROJECT}/${NAME}:${VERSION} -f Dockerfile.swagger .
 
-docker-protoc-rpc:
-	${DOCKER_BUILD_COMMAND} --target protoc-rpc
+docker-push:
+	docker push gcr.io/${GCP_PROJECT}/${NAME}:${VERSION}
 
-docker-protoc-gateway-v1-%:
-	${DOCKER_BUILD_COMMAND} --target protoc-gateway-v1-$*
+release: docker-build docker-push
 
-docker-protoc-private-v1-%:
-	${DOCKER_BUILD_COMMAND} --target protoc-private-v1-$*
-
-docker-protoc-v1-%:
-	${DOCKER_BUILD_COMMAND} --target protoc-v1-$*
+deploy:
+	ENV=${ENV} swagger/deploy/deploy.sh

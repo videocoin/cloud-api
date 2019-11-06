@@ -8,8 +8,8 @@ eventually each project that requires proto files will use the same version of p
 
 Pull docker image
 
-- `make docker-pull-image`
+- `cd proto && make docker-pull-image`
 
 Generate files
 
-- `make docker-protoc`
+- `cd proto && make docker-protoc`
