@@ -97,7 +97,8 @@
                 "REFUND_REVOKED",
                 "TRANSFER_EXECUTED",
                 "OUT_OF_FUNDS",
-                "STREAM_DEPOSITED"
+                "STREAM_DEPOSITED",
+                "STREAM_MANAGER_OWNERSHIP_TRANSFERRED"
               ]
             },
             "collectionFormat": "multi"
@@ -167,7 +168,8 @@
                 "REFUND_REVOKED",
                 "TRANSFER_EXECUTED",
                 "OUT_OF_FUNDS",
-                "STREAM_DEPOSITED"
+                "STREAM_DEPOSITED",
+                "STREAM_MANAGER_OWNERSHIP_TRANSFERRED"
               ]
             },
             "collectionFormat": "multi"
@@ -237,7 +239,8 @@
         "REFUND_REVOKED",
         "TRANSFER_EXECUTED",
         "OUT_OF_FUNDS",
-        "STREAM_DEPOSITED"
+        "STREAM_DEPOSITED",
+        "STREAM_MANAGER_OWNERSHIP_TRANSFERRED"
       ],
       "default": "UNKNOWN"
     },
