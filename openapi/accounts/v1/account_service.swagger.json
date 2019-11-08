@@ -61,19 +61,11 @@
     "v1AccountProfile": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
-        },
         "address": {
           "type": "string"
         },
         "balance": {
-          "type": "number",
-          "format": "double"
-        },
-        "updated_at": {
-          "type": "string",
-          "format": "date-time"
+          "type": "string"
         }
       }
     },
@@ -85,6 +77,28 @@
           "items": {
             "$ref": "#/definitions/v1AccountProfile"
           }
+        }
+      }
+    },
+    "v1TransferResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "to_address": {
+          "type": "string"
+        },
+        "pin": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "string",
+          "format": "byte"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     }
