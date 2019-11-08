@@ -102,7 +102,8 @@
                 "BRIDGE_FUNDED",
                 "BRIDGE_TRANSFER_WITHIN_LIMITS",
                 "BRIDGE_TRANSFER_EXCEEDED_LIMITS",
-                "BRIDGE_TRANSFER_REJECTED"
+                "BRIDGE_TRANSFER_REJECTED",
+                "BRIDGE_OWNERSHIP_TRANSFERRED"
               ]
             },
             "collectionFormat": "multi"
@@ -177,7 +178,8 @@
                 "BRIDGE_FUNDED",
                 "BRIDGE_TRANSFER_WITHIN_LIMITS",
                 "BRIDGE_TRANSFER_EXCEEDED_LIMITS",
-                "BRIDGE_TRANSFER_REJECTED"
+                "BRIDGE_TRANSFER_REJECTED",
+                "BRIDGE_OWNERSHIP_TRANSFERRED"
               ]
             },
             "collectionFormat": "multi"
@@ -252,7 +254,8 @@
         "BRIDGE_FUNDED",
         "BRIDGE_TRANSFER_WITHIN_LIMITS",
         "BRIDGE_TRANSFER_EXCEEDED_LIMITS",
-        "BRIDGE_TRANSFER_REJECTED"
+        "BRIDGE_TRANSFER_REJECTED",
+        "BRIDGE_OWNERSHIP_TRANSFERRED"
       ],
       "default": "UNKNOWN"
     },
