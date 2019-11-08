@@ -98,7 +98,8 @@
                 "TRANSFER_EXECUTED",
                 "OUT_OF_FUNDS",
                 "STREAM_DEPOSITED",
-                "STREAM_MANAGER_OWNERSHIP_TRANSFERRED"
+                "STREAM_MANAGER_OWNERSHIP_TRANSFERRED",
+                "BRIDGE_FUNDED"
               ]
             },
             "collectionFormat": "multi"
@@ -169,7 +170,8 @@
                 "TRANSFER_EXECUTED",
                 "OUT_OF_FUNDS",
                 "STREAM_DEPOSITED",
-                "STREAM_MANAGER_OWNERSHIP_TRANSFERRED"
+                "STREAM_MANAGER_OWNERSHIP_TRANSFERRED",
+                "BRIDGE_FUNDED"
               ]
             },
             "collectionFormat": "multi"
@@ -240,7 +242,8 @@
         "TRANSFER_EXECUTED",
         "OUT_OF_FUNDS",
         "STREAM_DEPOSITED",
-        "STREAM_MANAGER_OWNERSHIP_TRANSFERRED"
+        "STREAM_MANAGER_OWNERSHIP_TRANSFERRED",
+        "BRIDGE_FUNDED"
       ],
       "default": "UNKNOWN"
     },
