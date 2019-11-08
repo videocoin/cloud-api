@@ -398,19 +398,11 @@
     "v1AccountProfile": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
-        },
         "address": {
           "type": "string"
         },
         "balance": {
-          "type": "number",
-          "format": "double"
-        },
-        "updated_at": {
-          "type": "string",
-          "format": "date-time"
+          "type": "string"
         }
       }
     },
@@ -504,8 +496,7 @@
           "type": "string"
         },
         "amount": {
-          "type": "number",
-          "format": "double"
+          "type": "string"
         }
       }
     },
