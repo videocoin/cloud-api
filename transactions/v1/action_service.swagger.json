@@ -100,7 +100,8 @@
                 "STREAM_DEPOSITED",
                 "STREAM_MANAGER_OWNERSHIP_TRANSFERRED",
                 "BRIDGE_FUNDED",
-                "BRIDGE_TRANSFER_WITHIN_LIMITS"
+                "BRIDGE_TRANSFER_WITHIN_LIMITS",
+                "BRIDGE_TRANSFER_EXCEEDED_LIMITS"
               ]
             },
             "collectionFormat": "multi"
@@ -173,7 +174,8 @@
                 "STREAM_DEPOSITED",
                 "STREAM_MANAGER_OWNERSHIP_TRANSFERRED",
                 "BRIDGE_FUNDED",
-                "BRIDGE_TRANSFER_WITHIN_LIMITS"
+                "BRIDGE_TRANSFER_WITHIN_LIMITS",
+                "BRIDGE_TRANSFER_EXCEEDED_LIMITS"
               ]
             },
             "collectionFormat": "multi"
@@ -246,7 +248,8 @@
         "STREAM_DEPOSITED",
         "STREAM_MANAGER_OWNERSHIP_TRANSFERRED",
         "BRIDGE_FUNDED",
-        "BRIDGE_TRANSFER_WITHIN_LIMITS"
+        "BRIDGE_TRANSFER_WITHIN_LIMITS",
+        "BRIDGE_TRANSFER_EXCEEDED_LIMITS"
       ],
       "default": "UNKNOWN"
     },
