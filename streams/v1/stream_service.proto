@@ -72,7 +72,7 @@ service StreamService {
 
 message CreateStreamRequest {
     string name = 1 [
-      (gogoproto.moretags) = "validate:\"required\""
+      (gogoproto.moretags) = "validate:\"required,gt=0,lte=255\""
     ];
 
     string profile_id = 2 [
@@ -87,7 +87,9 @@ message StreamRequest {
 
 message UpdateStreamRequest {
   string id = 1;
-  string name = 2;
+  string name = 2 [
+    (gogoproto.moretags) = "validate:\"required,gt=0,lte=255\""
+  ];
   uint64 stream_contract_id = 3;
   string stream_contract_address = 4;
   StreamStatus status = 5;
