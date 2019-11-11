@@ -1,0 +1,75 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "profiles/v1/profiles_service.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/profiles": {
+      "get": {
+        "summary": "This API call returns a list of supported output transcoding profiles. Most notably, the items in the response list the ID of a profile which is required when creating a new stream object.",
+        "operationId": "List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ProfileListItems"
+            }
+          }
+        },
+        "tags": [
+          "ProfilesService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "v1ProfileListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "is_enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "v1ProfileListItems": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ProfileListItem"
+          }
+        }
+      }
+    },
+    "v1RenderResponse": {
+      "type": "object",
+      "properties": {
+        "render": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

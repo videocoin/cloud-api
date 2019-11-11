@@ -307,13 +307,20 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type StreamServiceClient interface {
+	// This API call creates a new stream with the specified name and output transcoding profile. A stream object is returned from this API call.
 	Create(ctx context.Context, in *CreateStreamRequest, opts ...grpc.CallOption) (*StreamProfile, error)
+	// This API call gets the details of the stream associated with the ID passed. The stream must belong to the account specified
 	Get(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*StreamProfile, error)
+	// This API call deletes the stream with the specified ID.
 	Delete(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*types.Empty, error)
+	// This API call gets all streams that belongs to a specific account.
 	List(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*StreamProfiles, error)
+	// This API call modify the stream with the specified ID.
 	Update(ctx context.Context, in *UpdateStreamRequest, opts ...grpc.CallOption) (*StreamProfile, error)
 	UpdateStatus(ctx context.Context, in *UpdateStreamRequest, opts ...grpc.CallOption) (*types.Empty, error)
+	// This API call transitions a newly created stream to begin preparing input and output destinations.
 	Run(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*StreamProfile, error)
+	// This API call stops or cancels a stream based on its input and output destination state.
 	Stop(ctx context.Context, in *StreamRequest, opts ...grpc.CallOption) (*StreamProfile, error)
 }
 
@@ -399,13 +406,20 @@ func (c *streamServiceClient) Stop(ctx context.Context, in *StreamRequest, opts 
 
 // StreamServiceServer is the server API for StreamService service.
 type StreamServiceServer interface {
+	// This API call creates a new stream with the specified name and output transcoding profile. A stream object is returned from this API call.
 	Create(context.Context, *CreateStreamRequest) (*StreamProfile, error)
+	// This API call gets the details of the stream associated with the ID passed. The stream must belong to the account specified
 	Get(context.Context, *StreamRequest) (*StreamProfile, error)
+	// This API call deletes the stream with the specified ID.
 	Delete(context.Context, *StreamRequest) (*types.Empty, error)
+	// This API call gets all streams that belongs to a specific account.
 	List(context.Context, *types.Empty) (*StreamProfiles, error)
+	// This API call modify the stream with the specified ID.
 	Update(context.Context, *UpdateStreamRequest) (*StreamProfile, error)
 	UpdateStatus(context.Context, *UpdateStreamRequest) (*types.Empty, error)
+	// This API call transitions a newly created stream to begin preparing input and output destinations.
 	Run(context.Context, *StreamRequest) (*StreamProfile, error)
+	// This API call stops or cancels a stream based on its input and output destination state.
 	Stop(context.Context, *StreamRequest) (*StreamProfile, error)
 }
 

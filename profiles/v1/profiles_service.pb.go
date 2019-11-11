@@ -332,6 +332,7 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ProfilesServiceClient interface {
+	// This API call returns a list of supported output transcoding profiles. Most notably, the items in the response list the ID of a profile which is required when creating a new stream object.
 	List(ctx context.Context, in *types.Empty, opts ...grpc.CallOption) (*ProfileListItems, error)
 	Render(ctx context.Context, in *RenderRequest, opts ...grpc.CallOption) (*RenderResponse, error)
 }
@@ -364,6 +365,7 @@ func (c *profilesServiceClient) Render(ctx context.Context, in *RenderRequest, o
 
 // ProfilesServiceServer is the server API for ProfilesService service.
 type ProfilesServiceServer interface {
+	// This API call returns a list of supported output transcoding profiles. Most notably, the items in the response list the ID of a profile which is required when creating a new stream object.
 	List(context.Context, *types.Empty) (*ProfileListItems, error)
 	Render(context.Context, *RenderRequest) (*RenderResponse, error)
 }
