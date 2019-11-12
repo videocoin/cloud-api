@@ -4,6 +4,7 @@ package cloud.api.streams.v1;
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 import "streams/v1/stream.proto";
@@ -14,6 +15,32 @@ option (gogoproto.unmarshaler_all) = true;
 option (gogoproto.sizer_all) = true;
 option (gogoproto.goproto_registration) = true;
 option (gogoproto.messagename_all) = true;
+
+option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
+	info: {
+		title: "Videocoin api";
+		version: "1.0";
+	};
+	schemes: HTTPS;
+	consumes: "application/json";
+	produces: "application/json";
+	security_definitions: {
+		security: {
+			key: "ApiKeyAuth";
+			value: {
+				type: TYPE_API_KEY;
+				in: IN_HEADER;
+				name: "Authorization";
+			}
+		}
+	}
+	security: {
+		security_requirement: {
+			key: "ApiKeyAuth";
+			value: {};
+		}
+	}
+};
 
 service StreamService {
     /* This API call creates a new stream with the specified name and output transcoding profile. A stream object is returned from this API call. */
@@ -72,26 +99,43 @@ service StreamService {
 
 message CreateStreamRequest {
     string name = 1 [
-      (gogoproto.moretags) = "validate:\"required,gt=0,lte=255\""
+      (gogoproto.moretags) = "validate:\"required,gt=0,lte=255\"",
+      (grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {description: "Name of stream being created. Length is between 1 and 255 symbols.", required: ['name']}
     ];
 
     string profile_id = 2 [
-      (gogoproto.moretags) = "validate:\"required\""
+      (gogoproto.moretags) = "validate:\"required\"",
+      (grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {description: "ID of output transcoding profile that will be used to transcode the incoming stream. Read more under Profiles section.", required: ['profile_id']}
     ];
 }
 
 message StreamRequest {
-  string id = 1;
-  uint64 stream_contract_id = 2;
+  string id = 1 [
+      (grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {description: "Stream ID"}
+  ];
+  uint64 stream_contract_id = 2 [
+      (grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {description: "Stream ID in VideoCoin stream chain"}
+  ];
 }
 
 message UpdateStreamRequest {
-  string id = 1;
-  string name = 2 [
-    (gogoproto.moretags) = "validate:\"required,gt=0,lte=255\""
+  string id = 1 [
+      (grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {description: "Stream ID"}
   ];
-  uint64 stream_contract_id = 3;
-  string stream_contract_address = 4;
-  StreamStatus status = 5;
-  InputStatus input_status = 6;
+  string name = 2 [
+      (gogoproto.moretags) = "validate:\"required,gt=0,lte=255\"";
+      (grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {description: "Name of stream being created. Length is between 1 and 255 symbols"}
+  ];
+  uint64 stream_contract_id = 3 [
+      (grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {description: "Stream ID in VideoCoin stream chain"}
+  ];
+  string stream_contract_address = 4 [
+      (grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {description: "Stream contract address"}
+  ];
+  StreamStatus status = 5 [
+      (grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {description: "The status of a stream is affected by API calls made on a stream object"}
+  ];
+  InputStatus input_status = 6 [
+      (grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {description: "The status of a stream's ingest is affected by the state of the encoder that's sending video data to the stream"}
+  ];
 }
