@@ -47,6 +47,10 @@ func (m *GetActionsRequest) Validate() error {
 
 	// no validation rules for Offset
 
+	// no validation rules for Before
+
+	// no validation rules for After
+
 	return nil
 }
 

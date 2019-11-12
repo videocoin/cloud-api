@@ -36,6 +36,8 @@ message GetActionsRequest {
     uint64 limit = 2;
     uint64 offset = 3;
     repeated ActionType filter = 4;
+    uint64 before = 5;
+    uint64 after = 6;
 }
 
 message GetActionsResponse {
