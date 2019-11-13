@@ -1,7 +1,7 @@
 import json
 # result = ''
 
-with open('./streams/v1/stream_service.swagger.json') as f:
+with open('./streams/v1/streams_service.swagger.json') as f:
     result = json.load(f)
 
 with open('./profiles/v1/profiles_service.swagger.json') as f:
