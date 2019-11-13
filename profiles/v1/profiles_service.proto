@@ -38,6 +38,29 @@ option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
 			value: {};
 		}
 	}
+	responses: {
+		key: "401";
+		value: {
+			description: "Returned when the user is not logged in.";
+		}
+	}
+	responses: {
+		key: "403";
+		value: {
+			description: "Returned when the user does not have permission to access the resource.";
+		}
+	}
+	responses: {
+		key: "404";
+		value: {
+			description: "Returned when the resource does not exist.";
+			schema: {
+			    example: {
+                    value: '{ "message": "Not found", "fields": null }'
+                }
+			}
+		}
+	}
 };
 
 service ProfilesService {
