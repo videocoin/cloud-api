@@ -506,7 +506,10 @@
           "$ref": "#/definitions/v1InputStatus",
           "description": "The status of a stream's ingest is affected by the state of the encoder that's sending video data to the stream"
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     }
   },
   "securityDefinitions": {
