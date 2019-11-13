@@ -1,11 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "profiles/v1/profiles_service.proto",
-    "version": "version not set"
+    "title": "Videocoin api",
+    "version": "1.0"
   },
   "schemes": [
-    "http",
     "https"
   ],
   "consumes": [
@@ -24,6 +23,23 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/v1ProfileListItems"
+            }
+          },
+          "401": {
+            "description": "Returned when the user is not logged in.",
+            "schema": {}
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "example": {
+                "message": "Not found",
+                "fields": null
+              }
             }
           }
         },
@@ -71,5 +87,17 @@
         }
       }
     }
-  }
+  },
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ]
 }
