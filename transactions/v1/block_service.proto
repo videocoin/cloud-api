@@ -27,7 +27,9 @@ service BlockService {
 
 message GetBlocksRequest {
     uint64 limit = 1;
-    uint64 offset = 2;
+    uint64 offset = 2 [deprecated=true];
+    uint64 before = 3;
+    uint64 after = 4;
 }
 
 message GetBlocksResponse {
