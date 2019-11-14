@@ -876,6 +876,8 @@
 | address | [string](#string) |  |  |
 | limit | [uint64](#uint64) |  |  |
 | offset | [uint64](#uint64) |  |  |
+| before | [uint64](#uint64) |  |  |
+| after | [uint64](#uint64) |  |  |
 
 
 

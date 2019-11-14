@@ -34,7 +34,9 @@ service TransactionService {
 message GetTransactionsRequest {
     string address = 1;
     uint64 limit = 2;
-    uint64 offset = 3;
+    uint64 offset = 3 [deprecated=true];
+    uint64 before = 4;
+    uint64 after = 5;
 }
 
 message GetTransactionsResponse {
