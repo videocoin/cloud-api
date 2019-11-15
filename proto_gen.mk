@@ -53,11 +53,10 @@ Mgoogle/protobuf/field_mask.proto=github.com/gogo/protobuf/types:\
 
 protoc-private-v1-%:
 	protoc \
-		-I/usr/local/include \
-		-I${GOPATH}/src \
-		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-		-I${GOPATH}/src/github.com \
-		-I. \
+		-I . \
+		-I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/ \
+		-I ${GOPATH}/src/github.com/gogo/googleapis/ \
+		-I ${GOPATH}/src \
 		--gogofast_out=plugins=grpc,\
 Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
 Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
