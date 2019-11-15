@@ -559,6 +559,9 @@
         },
         "account": {
           "$ref": "#/definitions/v1AccountProfile"
+        },
+        "role": {
+          "$ref": "#/definitions/v1UserRole"
         }
       }
     },
@@ -569,6 +572,17 @@
           "type": "string"
         }
       }
+    },
+    "v1UserRole": {
+      "type": "string",
+      "enum": [
+        "USER_ROLE_REGULAR",
+        "USER_ROLE_MINER",
+        "USER_ROLE_QA",
+        "USER_ROLE_MANAGER",
+        "USER_ROLE_SUPER"
+      ],
+      "default": "USER_ROLE_REGULAR"
     },
     "v1WhitelistResponse": {
       "type": "object",
