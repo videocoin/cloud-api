@@ -22,7 +22,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ProfileListItems"
+              "$ref": "#/definitions/v1ProfileListResponse"
             }
           },
           "401": {
@@ -50,7 +50,18 @@
     }
   },
   "definitions": {
-    "v1ProfileListItem": {
+    "v1ProfileListResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ProfileResponse"
+          }
+        }
+      }
+    },
+    "v1ProfileResponse": {
       "type": "object",
       "properties": {
         "id": {
@@ -65,17 +76,6 @@
         "is_enabled": {
           "type": "boolean",
           "format": "boolean"
-        }
-      }
-    },
-    "v1ProfileListItems": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1ProfileListItem"
-          }
         }
       }
     },
