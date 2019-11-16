@@ -149,6 +149,9 @@
         "id": {
           "type": "string"
         },
+        "name": {
+          "type": "string"
+        },
         "status": {
           "$ref": "#/definitions/v1MinerStatus"
         },
@@ -163,11 +166,12 @@
     "v1MinerStatus": {
       "type": "string",
       "enum": [
+        "NEW",
         "OFFLINE",
         "IDLE",
         "BUSY"
       ],
-      "default": "OFFLINE"
+      "default": "NEW"
     },
     "v1PingResponse": {
       "type": "object"
