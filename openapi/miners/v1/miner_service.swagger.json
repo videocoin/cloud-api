@@ -249,24 +249,24 @@
       "type": "object",
       "properties": {
         "cpu_cores": {
-          "type": "integer",
-          "format": "int32"
+          "type": "number",
+          "format": "double"
         },
         "cpu_freq": {
-          "type": "integer",
-          "format": "int32"
+          "type": "number",
+          "format": "double"
         },
         "cpu_usage": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         },
         "mem_usage": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         },
         "mem_total": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         }
       }
     },
