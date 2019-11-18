@@ -32,13 +32,12 @@ service MinersService {
     rpc Delete(MinerRequest) returns (MinerResponse) {
         option (google.api.http) = {
             delete: "/api/v1/miners/{id}"
-            body: "*"
         };
     }
 
     rpc Update(UpdateMinerRequest) returns (MinerResponse) {
         option (google.api.http) = {
-            patch: "/api/v1/miners/{id}"
+            put: "/api/v1/miners/{id}"
             body: "*"
         };
     }
