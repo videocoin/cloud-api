@@ -104,7 +104,7 @@
                 "BRIDGE_TRANSFER_EXCEEDED_LIMITS",
                 "BRIDGE_TRANSFER_REJECTED",
                 "BRIDGE_OWNERSHIP_TRANSFERRED",
-                "WITHDRAW_EVENT"
+                "DEPOSIT_BANK_ACCOUNT"
               ]
             },
             "collectionFormat": "multi"
@@ -195,7 +195,7 @@
                 "BRIDGE_TRANSFER_EXCEEDED_LIMITS",
                 "BRIDGE_TRANSFER_REJECTED",
                 "BRIDGE_OWNERSHIP_TRANSFERRED",
-                "WITHDRAW_EVENT"
+                "DEPOSIT_BANK_ACCOUNT"
               ]
             },
             "collectionFormat": "multi"
@@ -272,7 +272,7 @@
         "BRIDGE_TRANSFER_EXCEEDED_LIMITS",
         "BRIDGE_TRANSFER_REJECTED",
         "BRIDGE_OWNERSHIP_TRANSFERRED",
-        "WITHDRAW_EVENT"
+        "DEPOSIT_BANK_ACCOUNT"
       ],
       "default": "UNKNOWN"
     },
