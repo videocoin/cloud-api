@@ -85,6 +85,58 @@
         "tags": [
           "MinersService"
         ]
+      },
+      "delete": {
+        "operationId": "Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1MinerResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MinersService"
+        ]
+      },
+      "put": {
+        "operationId": "Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1MinerResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateMinerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MinersService"
+        ]
       }
     },
     "/api/v1/miners/{id}/tags": {
@@ -160,6 +212,9 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "system_info": {
+          "$ref": "#/definitions/v1SystemInfo"
         }
       }
     },
@@ -190,6 +245,31 @@
         }
       }
     },
+    "v1SystemInfo": {
+      "type": "object",
+      "properties": {
+        "cpu_cores": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "cpu_freq": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "cpu_usage": {
+          "type": "number",
+          "format": "float"
+        },
+        "mem_usage": {
+          "type": "number",
+          "format": "float"
+        },
+        "mem_total": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
     "v1Tag": {
       "type": "object",
       "properties": {
@@ -197,6 +277,17 @@
           "type": "string"
         },
         "value": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateMinerRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
           "type": "string"
         }
       }
