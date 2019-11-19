@@ -104,7 +104,7 @@
                 "BRIDGE_TRANSFER_EXCEEDED_LIMITS",
                 "BRIDGE_TRANSFER_REJECTED",
                 "BRIDGE_OWNERSHIP_TRANSFERRED",
-                "DEPOSIT_BANK_ACCOUNT"
+                "DEPOSIT_ERC20"
               ]
             },
             "collectionFormat": "multi"
@@ -195,7 +195,7 @@
                 "BRIDGE_TRANSFER_EXCEEDED_LIMITS",
                 "BRIDGE_TRANSFER_REJECTED",
                 "BRIDGE_OWNERSHIP_TRANSFERRED",
-                "DEPOSIT_BANK_ACCOUNT"
+                "DEPOSIT_ERC20"
               ]
             },
             "collectionFormat": "multi"
@@ -272,7 +272,7 @@
         "BRIDGE_TRANSFER_EXCEEDED_LIMITS",
         "BRIDGE_TRANSFER_REJECTED",
         "BRIDGE_OWNERSHIP_TRANSFERRED",
-        "DEPOSIT_BANK_ACCOUNT"
+        "DEPOSIT_ERC20"
       ],
       "default": "UNKNOWN"
     },
