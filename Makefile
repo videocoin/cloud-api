@@ -57,3 +57,9 @@ docker-protoc-private-v1-%:
 
 docker-protoc-v1-%:
 	${DOCKER_BUILD_COMMAND} --target protoc-v1-$*
+
+docker-protoc-python-gateway-v1-%:
+	${DOCKER_BUILD_COMMAND} --target protoc-python-gateway-v1-$*
+
+docker-protoc-python-private-v1-%:
+	${DOCKER_BUILD_COMMAND} --target protoc-python-private-v1-$*

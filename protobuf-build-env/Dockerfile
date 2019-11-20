@@ -24,8 +24,11 @@ RUN git clone --depth 1 --branch v1.24.2 https://github.com/grpc/grpc && \
     cd grpc && \
     git submodule update --init && \
     make -j3 install && \
+    make clean && \
+    make grpc_python_plugin && \
     cd third_party/protobuf && ./autogen.sh && ./configure --disable-shared && make -j3 install && \
     cd /app && \
+    cp /app/grpc/bins/opt/grpc_python_plugin /usr/bin/grpc_python_plugin && \
     rm -rf grpc
 
 RUN pip3 install \

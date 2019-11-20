@@ -65,3 +65,26 @@ Mgoogle/api/annotations.proto=github.com/gogo/googleapis/google/api,\
 Mgoogle/protobuf/field_mask.proto=github.com/gogo/protobuf/types:\
 . \
 		./$*/private/v1/*.proto
+
+protoc-python-gateway-v1-%:
+	protoc \
+		-I . \
+		-I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/ \
+		-I ${GOPATH}/src/github.com/gogo/googleapis/ \
+		-I ${GOPATH}/src \
+		--python_out=. \
+		--grpc_python_out=. \
+		--plugin=protoc-gen-grpc_python=/usr/bin/grpc_python_plugin \
+		./$*/v1/*.proto
+
+
+protoc-python-private-v1-%:
+	protoc \
+		-I . \
+		-I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/ \
+		-I ${GOPATH}/src/github.com/gogo/googleapis/ \
+		-I ${GOPATH}/src \
+		--python_out=. \
+		--grpc_python_out=. \
+		--plugin=protoc-gen-grpc_python=/usr/bin/grpc_python_plugin \
+		./$*/private/v1/*.proto
