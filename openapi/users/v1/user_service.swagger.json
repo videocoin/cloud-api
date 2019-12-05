@@ -403,6 +403,10 @@
         },
         "balance": {
           "type": "string"
+        },
+        "is_locked": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },

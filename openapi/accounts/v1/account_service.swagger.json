@@ -50,6 +50,9 @@
     "v1AccountKey": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "address": {
           "type": "string"
         },
@@ -66,6 +69,10 @@
         },
         "balance": {
           "type": "string"
+        },
+        "is_locked": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
