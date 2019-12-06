@@ -243,9 +243,9 @@
         ]
       }
     },
-    "/api/v1/user/{id}/activate": {
+    "/api/v1/user/confirm": {
       "post": {
-        "operationId": "Activate",
+        "operationId": "Confirm",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -256,17 +256,37 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
+            "name": "body",
+            "in": "body",
             "required": true,
-            "type": "string"
-          },
+            "schema": {
+              "$ref": "#/definitions/v1ConfirmUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/api/v1/user/confirm/start": {
+      "post": {
+        "operationId": "StartConfirmation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1UserRequest"
+              "properties": {}
             }
           }
         ],
@@ -407,6 +427,14 @@
         "is_locked": {
           "type": "boolean",
           "format": "boolean"
+        }
+      }
+    },
+    "v1ConfirmUserRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
         }
       }
     },
@@ -566,14 +594,6 @@
         },
         "role": {
           "$ref": "#/definitions/v1UserRole"
-        }
-      }
-    },
-    "v1UserRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
         }
       }
     },
