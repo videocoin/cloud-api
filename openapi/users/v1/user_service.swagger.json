@@ -105,6 +105,22 @@
         ]
       }
     },
+    "/api/v1/keys": {
+      "get": {
+        "operationId": "Keys",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1KeysResponse"
+            }
+          }
+        },
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
     "/api/v1/recover": {
       "post": {
         "operationId": "Recover",
@@ -474,6 +490,17 @@
       "properties": {
         "key": {
           "type": "string"
+        }
+      }
+    },
+    "v1KeysResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1KeyResponse"
+          }
         }
       }
     },

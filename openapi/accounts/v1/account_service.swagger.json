@@ -61,6 +61,17 @@
         }
       }
     },
+    "v1AccountKeys": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1AccountKey"
+          }
+        }
+      }
+    },
     "v1AccountProfile": {
       "type": "object",
       "properties": {
