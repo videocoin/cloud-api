@@ -44,7 +44,8 @@ docker-protoc: docker-protoc-rpc \
 	docker-protoc-v1-notifications \
 	docker-protoc-v1-emitter \
 	docker-protoc-v1-dispatcher \
-	docker-protoc-private-v1-streams
+	docker-protoc-private-v1-streams \
+	docker-protoc-manager-v1-profiles
 
 docker-protoc-rpc:
 	${DOCKER_BUILD_COMMAND} --target protoc-rpc
@@ -63,3 +64,6 @@ docker-protoc-python-gateway-v1-%:
 
 docker-protoc-python-private-v1-%:
 	${DOCKER_BUILD_COMMAND} --target protoc-python-private-v1-$*
+
+docker-protoc-manager-v1-%:
+	${DOCKER_BUILD_COMMAND} --target protoc-manager-v1-$*
