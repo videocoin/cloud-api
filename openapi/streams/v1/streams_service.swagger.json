@@ -338,6 +338,20 @@
           "required": [
             "profile_id"
           ]
+        },
+        "input_type": {
+          "$ref": "#/definitions/v1InputType",
+          "description": "Input type of stream",
+          "required": [
+            "input_type"
+          ]
+        },
+        "output_type": {
+          "$ref": "#/definitions/v1OutputType",
+          "description": "Output type of stream",
+          "required": [
+            "output_type"
+          ]
         }
       },
       "required": [
@@ -355,6 +369,21 @@
       ],
       "default": "INPUT_STATUS_NONE",
       "description": "The status of a stream's ingest is affected by the state of the encoder that's sending video data to the stream.\n\n - INPUT_STATUS_NONE: The stream has been created or has ended and is not receiving any input\n - INPUT_STATUS_PENDING: Ingest is awaiting for incoming data\n - INPUT_STATUS_ACTIVE: Ingest is receiving data\n - INPUT_STATUS_ERROR: Ingest has been failed to process incoming data"
+    },
+    "v1InputType": {
+      "type": "string",
+      "enum": [
+        "INPUT_TYPE_RTMP",
+        "INPUT_TYPE_WEBRTC"
+      ],
+      "default": "INPUT_TYPE_RTMP"
+    },
+    "v1OutputType": {
+      "type": "string",
+      "enum": [
+        "OUTPUT_TYPE_HLS"
+      ],
+      "default": "OUTPUT_TYPE_HLS"
     },
     "v1StreamListResponse": {
       "type": "object",
@@ -457,6 +486,12 @@
         "rtmp_url": {
           "type": "string",
           "description": "Unique ingest RTMP URL for stream to receive video data from encoder. This URL is used for your encoder to send data to"
+        },
+        "input_type": {
+          "$ref": "#/definitions/v1InputType"
+        },
+        "output_type": {
+          "$ref": "#/definitions/v1OutputType"
         }
       },
       "description": "Streams are representations of video to be worked on by miners on the VideoCoin Network and output consumable video based on the transcoding profile given at creation. Streams currently only support video input over RTMP. Support for input video over RTSP and HLS will be considered in future releases."

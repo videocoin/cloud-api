@@ -23,6 +23,7 @@ protoc: protoc-rpc \
 	protoc-v1-transfers \
 	protoc-v1-validator \
 	protoc-v1-syncer \
+	protoc-v1-splitter \
 	protoc-v1-notifications \
 	protoc-v1-emitter \
 	protoc-v1-dispatcher \
@@ -41,6 +42,7 @@ docker-protoc: docker-protoc-rpc \
 	docker-protoc-v1-transfers \
 	docker-protoc-v1-validator \
 	docker-protoc-v1-syncer \
+	docker-protoc-v1-splitter \
 	docker-protoc-v1-notifications \
 	docker-protoc-v1-emitter \
 	docker-protoc-v1-dispatcher \
