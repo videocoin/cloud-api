@@ -31,6 +31,7 @@ message Profile {
 message Spec {
   string version = 1;
   repeated Component components = 2;
+  string machine_type = 3;
 }
 
 enum ComponentType {
