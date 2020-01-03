@@ -76,6 +76,9 @@
         "is_enabled": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "machine_type": {
+          "type": "string"
         }
       }
     },
