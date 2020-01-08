@@ -96,6 +96,39 @@
         ]
       }
     },
+    "/api/v1/miners/all": {
+      "get": {
+        "operationId": "All",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1MinerListResponse"
+            }
+          },
+          "401": {
+            "description": "Returned when the user is not logged in.",
+            "schema": {}
+          },
+          "403": {
+            "description": "Returned when the user does not have permission to access the resource.",
+            "schema": {}
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "example": {
+                "message": "Not found",
+                "fields": null
+              }
+            }
+          }
+        },
+        "tags": [
+          "MinersService"
+        ]
+      }
+    },
     "/api/v1/miners/{id}": {
       "get": {
         "operationId": "Get",
@@ -377,6 +410,14 @@
           "format": "double"
         },
         "mem_total": {
+          "type": "number",
+          "format": "double"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
           "type": "number",
           "format": "double"
         }
