@@ -318,6 +318,22 @@
         }
       }
     },
+    "v1CryptoInfo": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "string",
+          "format": "byte"
+        },
+        "self_stake": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
     "v1ForceTaskListResponse": {
       "type": "object",
       "properties": {
@@ -360,6 +376,9 @@
         },
         "system_info": {
           "$ref": "#/definitions/v1SystemInfo"
+        },
+        "crypto_info": {
+          "$ref": "#/definitions/v1CryptoInfo"
         }
       }
     },
