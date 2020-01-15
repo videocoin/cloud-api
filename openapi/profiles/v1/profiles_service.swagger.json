@@ -50,6 +50,62 @@
     }
   },
   "definitions": {
+    "v1Component": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1ComponentType"
+        },
+        "params": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Param"
+          }
+        }
+      }
+    },
+    "v1ComponentType": {
+      "type": "string",
+      "enum": [
+        "FILTER",
+        "ENCODER",
+        "MUXER",
+        "DEMUXER"
+      ],
+      "default": "FILTER"
+    },
+    "v1GetProfileResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "is_enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "machine_type": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Param": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
     "v1ProfileListResponse": {
       "type": "object",
       "properties": {
@@ -76,9 +132,6 @@
         "is_enabled": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "machine_type": {
-          "type": "string"
         }
       }
     },
