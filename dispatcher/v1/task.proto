@@ -60,4 +60,7 @@ message Task {
     ];
     string stream_contract_address = 11;
     string machine_type = 12;
+    string stream_id = 13 [
+        (gogoproto.customname) = "StreamID"
+    ];
 }
