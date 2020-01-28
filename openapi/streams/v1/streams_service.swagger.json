@@ -374,7 +374,8 @@
       "type": "string",
       "enum": [
         "INPUT_TYPE_RTMP",
-        "INPUT_TYPE_WEBRTC"
+        "INPUT_TYPE_WEBRTC",
+        "INPUT_TYPE_FILE"
       ],
       "default": "INPUT_TYPE_RTMP"
     },
@@ -390,7 +391,6 @@
       "example": {
         "id": "4a1c3973-8cf6-49af-4a56-7a1d49c2bac6",
         "name": "Live",
-        "input_url": "http://rtmp.studio.videocoin.network/hls/4a1c3973-8cf6-49af-4a56-7a1d49c2bac6/index.m3u8",
         "output_url": "https://streams.videocoin.network/4a1c3973-8cf6-49af-4a56-7a1d49c2bac6/index.m3u8",
         "stream_contract_id": "2758350251200610030",
         "stream_contract_address": "",
@@ -417,7 +417,6 @@
       "example": {
         "id": "4a1c3973-8cf6-49af-4a56-7a1d49c2bac6",
         "name": "Live",
-        "input_url": "http://rtmp.studio.videocoin.network/hls/4a1c3973-8cf6-49af-4a56-7a1d49c2bac6/index.m3u8",
         "output_url": "https://streams.videocoin.network/4a1c3973-8cf6-49af-4a56-7a1d49c2bac6/index.m3u8",
         "stream_contract_id": "2758350251200610030",
         "stream_contract_address": "",
@@ -437,10 +436,6 @@
         "name": {
           "type": "string",
           "description": "Name of the stream"
-        },
-        "input_url": {
-          "type": "string",
-          "description": "Input URL of transcoded video"
         },
         "output_url": {
           "type": "string",
