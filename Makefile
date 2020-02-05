@@ -27,6 +27,7 @@ protoc: protoc-rpc \
 	protoc-v1-notifications \
 	protoc-v1-emitter \
 	protoc-v1-dispatcher \
+	protoc-v1-iam \
 	protoc-private-v1-streams
 
 docker-pull-image:
@@ -46,6 +47,7 @@ docker-protoc: docker-protoc-rpc \
 	docker-protoc-v1-notifications \
 	docker-protoc-v1-emitter \
 	docker-protoc-v1-dispatcher \
+	docker-protoc-v1-iam \
 	docker-protoc-private-v1-streams \
 	docker-protoc-manager-v1-profiles
 
