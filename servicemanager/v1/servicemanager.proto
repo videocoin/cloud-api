@@ -4,7 +4,8 @@ package cloud.api.servicemanager.v1;
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import "google/protobuf/empty.proto";
-import "videocoin/admin/api/servicemanagement/v1/resources.proto";
+
+import "servicemanager/v1/resources.proto";
 
 option go_package = "v1";
 option (gogoproto.marshaler_all) = false;
