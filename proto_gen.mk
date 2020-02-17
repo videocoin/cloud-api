@@ -41,6 +41,7 @@ protoc-v1-%:
 		-I${GOPATH}/src \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+		-I${GOPATH}/src/github.com/googleapis/api-common-protos \
 		-I${GOPATH}/src/github.com \
 		-I. \
 		--gogofast_out=plugins=grpc,\

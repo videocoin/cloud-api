@@ -325,12 +325,10 @@
           "type": "string"
         },
         "balance": {
-          "type": "string",
-          "format": "byte"
+          "type": "string"
         },
         "self_stake": {
-          "type": "string",
-          "format": "byte"
+          "type": "string"
         }
       }
     },
@@ -391,6 +389,28 @@
         "BUSY"
       ],
       "default": "NEW"
+    },
+    "v1MinerWithForceTaskResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "task_id": {
+          "type": "string"
+        }
+      }
+    },
+    "v1MinersWithForceTaskResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1MinerWithForceTaskResponse"
+          }
+        }
+      }
     },
     "v1PingResponse": {
       "type": "object"

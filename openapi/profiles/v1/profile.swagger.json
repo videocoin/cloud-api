@@ -4,10 +4,6 @@
     "title": "profiles/v1/profile.proto",
     "version": "version not set"
   },
-  "schemes": [
-    "http",
-    "https"
-  ],
   "consumes": [
     "application/json"
   ],
