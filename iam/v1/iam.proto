@@ -201,9 +201,8 @@ message ServiceAccountKey {
     pattern : "serviceAccounts/{service_account}/keys/{key}"
   };
 
-  // The resource name of the service account key in the following format
-  // `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_EMAIL}/keys/{key}`.
-  string name = 1;
+  // The resource id.
+  string id = 1;
 
   // The private key data. Only provided in `GetServiceAccountKey`
   // responses. Make sure to keep the private key data secure because it
