@@ -341,30 +341,6 @@ message GetIamPolicyRequest {
 
 // A role in the Identity and Access Management API.
 message Role {
-  // A stage representing a role's lifecycle phase.
-  enum RoleLaunchStage {
-    // The user has indicated this role is currently in an Alpha phase. If this
-    // launch stage is selected, the `stage` field will not be included when
-    // requesting the definition for a given role.
-    ALPHA = 0;
-
-    // The user has indicated this role is currently in a Beta phase.
-    BETA = 1;
-
-    // The user has indicated this role is generally available.
-    GA = 2;
-
-    // The user has indicated this role is being deprecated.
-    DEPRECATED = 4;
-
-    // This role is disabled and will not contribute permissions to any members
-    // it is granted to in policies.
-    DISABLED = 5;
-
-    // The user has indicated this role is currently in an EAP phase.
-    EAP = 6;
-  }
-
   // The name of the role.
   //
   // When Role is used in CreateRole, the role name must not be set.
@@ -382,11 +358,6 @@ message Role {
 
   // The names of the permissions this role grants when bound in an IAM policy.
   repeated string included_permissions = 4;
-
-  // The current launch stage of the role. If the `ALPHA` launch stage has been
-  // selected for a role, the `stage` field will not be included in the
-  // returned definition for the role.
-  RoleLaunchStage stage = 5;
 }
 
 // A view for Role objects.
