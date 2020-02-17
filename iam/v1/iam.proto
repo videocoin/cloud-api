@@ -28,45 +28,44 @@ service IAM {
   rpc ListServiceAccounts(ListServiceAccountsRequest)
       returns (ListServiceAccountsResponse) {
     option (google.api.http) = {
-      get : "/v1/{name=projects/*}/serviceAccounts"
+      get : "/v1/serviceAccounts"
     };
-    option (google.api.method_signature) = "name";
   }
 
   // Gets a [ServiceAccount][cloud.api.iam.v1.ServiceAccount].
   rpc GetServiceAccount(GetServiceAccountRequest) returns (ServiceAccount) {
     option (google.api.http) = {
-      get : "/v1/{name=projects/*/serviceAccounts/*}"
+      get : "/v1/serviceAccounts/{email=*}"
     };
-    option (google.api.method_signature) = "name";
+    option (google.api.method_signature) = "email";
   }
 
   // Creates a [ServiceAccount][cloud.api.iam.v1.ServiceAccount]
   rpc CreateServiceAccount(CreateServiceAccountRequest)
       returns (ServiceAccount) {
     option (google.api.http) = {
-      post : "/v1/{name=projects/*}/serviceAccounts"
+      post : "/v1/serviceAccounts"
       body : "*"
     };
-    option (google.api.method_signature) = "name,account_id,service_account";
+    option (google.api.method_signature) = "account_id,service_account";
   }
 
   // Deletes a [ServiceAccount][cloud.api.iam.v1.ServiceAccount].
   rpc DeleteServiceAccount(DeleteServiceAccountRequest)
       returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete : "/v1/{name=projects/*/serviceAccounts/*}"
+      delete : "/v1/serviceAccounts/{email=*}"
     };
-    option (google.api.method_signature) = "name";
+    option (google.api.method_signature) = "email";
   }
 
   // Lists [ServiceAccountKeys][cloud.api.iam.v1.ServiceAccountKey].
   rpc ListServiceAccountKeys(ListServiceAccountKeysRequest)
       returns (ListServiceAccountKeysResponse) {
     option (google.api.http) = {
-      get : "/v1/{name=projects/*/serviceAccounts/*}/keys"
+      get : "/v1/serviceAccounts/{service_account_email=*}/keys"
     };
-    option (google.api.method_signature) = "name";
+    option (google.api.method_signature) = "service_account_email";
   }
 
   // Gets the [ServiceAccountKey][cloud.api.iam.v1.ServiceAccountKey]
@@ -74,9 +73,9 @@ service IAM {
   rpc GetServiceAccountKey(GetServiceAccountKeyRequest)
       returns (ServiceAccountKey) {
     option (google.api.http) = {
-      get : "/v1/{name=projects/*/serviceAccounts/*/keys/*}"
+      get : "/v1/serviceAccounts/{service_account_email=*}/keys/{key_id=*}"
     };
-    option (google.api.method_signature) = "name";
+    option (google.api.method_signature) = "service_account_email,key_id";
   }
 
   // Creates a [ServiceAccountKey][cloud.api.iam.v1.ServiceAccountKey]
@@ -84,19 +83,19 @@ service IAM {
   rpc CreateServiceAccountKey(CreateServiceAccountKeyRequest)
       returns (ServiceAccountKey) {
     option (google.api.http) = {
-      post : "/v1/{name=projects/*/serviceAccounts/*}/keys"
+      post : "/v1/serviceAccounts/{service_account_email=*}/keys"
       body : "*"
     };
-    option (google.api.method_signature) = "name";
+    option (google.api.method_signature) = "service_account_email";
   }
 
   // Deletes a [ServiceAccountKey][cloud.api.iam.v1.ServiceAccountKey].
   rpc DeleteServiceAccountKey(DeleteServiceAccountKeyRequest)
       returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete : "/v1/{name=projects/*/serviceAccounts/*/keys/*}"
+      delete : "/v1/serviceAccounts/{service_account_email=*}/keys/{key_id=*}"
     };
-    option (google.api.method_signature) = "name";
+    option (google.api.method_signature) = "service_account_email,key_id";
   }
 
   // Returns the Cloud IAM access control policy for a
@@ -137,36 +136,22 @@ service IAM {
 message ServiceAccount {
   option (google.api.resource) = {
     type : "iam.videocoin.network/ServiceAccount"
-    pattern : "projects/{project}/serviceAccounts/{service_account}"
+    pattern : "serviceAccounts/{email}"
   };
 
-  // The resource name of the service account in the following format:
-  // `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_EMAIL}`.
-  //
-  // Requests using `-` as a wildcard for the `PROJECT_ID` will infer the
-  // project from the `ACCOUNT_EMAIL`.
-  string name = 1;
-
-  // @OutputOnly The id of the project that owns the service account.
-  string project_id = 2;
+  // @OutputOnly The email address of the service account.
+  string email = 1;
 
   // @OutputOnly The unique and stable id of the service account.
-  string unique_id = 3;
-
-  // @OutputOnly The email address of the service account.
-  string email = 4;
+  string unique_id = 2;
 
   // Optional. A user-specified name for the service account.
   // Must be less than or equal to 100 UTF-8 bytes.
-  string display_name = 5;
+  string display_name = 3;
 }
 
 // The service account list request.
 message ListServiceAccountsRequest {
-  // Required. The resource name of the user associated with the service
-  // accounts, such as `projects/my-project-123`.
-  string name = 1 [ (google.api.field_behavior) = REQUIRED ];
-
   // Optional limit on the number of service accounts to include in the
   // response. Further accounts can subsequently be obtained by including the
   // [ListServiceAccountsResponse.next_page_token][cloud.api.iam.v1.ListServiceAccountsResponse.next_page_token]
@@ -191,40 +176,29 @@ message ListServiceAccountsResponse {
 
 // The service account get request.
 message GetServiceAccountRequest {
-  // Required. The resource name of the service account in the following format:
-  // `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_EMAIL}`.
-  // Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
-  // the `ACCOUNT_EMAIL`.
-  string name = 1 [ (google.api.field_behavior) = REQUIRED ];
+  // Required. The service account email.
+  string email = 1 [ (google.api.field_behavior) = REQUIRED ];
 }
 
 // The service account create request.
 message CreateServiceAccountRequest {
-  // Required. The resource name of the project associated with the service
-  // accounts, such as `projects/my-project-123`.
-  // TODO(rgeraldes): add projects reference
-  string name = 1 [ (google.api.field_behavior) = REQUIRED ];
-
   // Required. The account id that is used to generate the service account
   // email address and a stable unique id. It is unique within a project,
   // must be 6-30 characters long, and match the regular expression
   // `[a-z]([-a-z0-9]*[a-z0-9])` to comply with RFC1035.
-  string account_id = 2 [ (google.api.field_behavior) = REQUIRED ];
+  string account_id = 1 [ (google.api.field_behavior) = REQUIRED ];
 }
 
 // The service account delete request.
 message DeleteServiceAccountRequest {
-  // Required. The resource name of the service account in the following
-  // format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_EMAIL}`. Using `-`
-  // as a wildcard for the `PROJECT_ID` will infer the project from the
-  // `ACCOUNT_EMAIL`.
-  string name = 1 [ (google.api.field_behavior) = REQUIRED ];
+  // Required. The service account email.
+  string email = 1 [ (google.api.field_behavior) = REQUIRED ];
 }
 
 message ServiceAccountKey {
   option (google.api.resource) = {
     type : "iam.videocoin.network/Key"
-    pattern : "projects/{project}/serviceAccounts/{service_account}/keys/{key}"
+    pattern : "serviceAccounts/{service_account}/keys/{key}"
   };
 
   // The resource name of the service account key in the following format
@@ -251,12 +225,8 @@ message ServiceAccountKey {
 
 // The service account keys list request.
 message ListServiceAccountKeysRequest {
-  // Required. The resource name of the service account in the following
-  // format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_EMAIL}`.
-  //
-  // Using `-` as a wildcard for the `PROJECT_ID`, will infer the project from
-  // the `ACCOUNT_EMAIL`.
-  string name = 1 [ (google.api.field_behavior) = REQUIRED ];
+  // Required. The service account email.
+  string service_account_email = 1 [ (google.api.field_behavior) = REQUIRED ];
 }
 
 // The service account keys list response.
@@ -279,39 +249,26 @@ enum ServiceAccountPublicKeyType {
 
 // The service account key get by id request.
 message GetServiceAccountKeyRequest {
-  // Required. The resource name of the service account key in the following
-  // format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_EMAIL}/keys/{key}`.
-  //
-  // Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
-  // the `ACCOUNT_EMAIL`.
-  string name = 1 [ (google.api.field_behavior) = REQUIRED ];
+  // The service account email
+  string service_account_email = 1;
+
+  // Required. The key id.
+  string key_id = 2 [ (google.api.field_behavior) = REQUIRED ];
 }
 
 // The service account key create request.
 message CreateServiceAccountKeyRequest {
-  // Required. The resource name of the service account in the following
-  // format: `project/{PROJECT_ID}/serviceAccounts/{ACCOUNT_EMAIL}`. Using `-`
-  // as a wildcard for the `PROJECT_ID` will infer the project from the
-  // `ACCOUNT_EMAIL`.
-  string name = 1 [
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      type : "iam.videocoin.network/ServiceAccount"
-    }
-  ];
+  // Required. The service account name.
+  string service_account_email = 1 [ (google.api.field_behavior) = REQUIRED ];
 }
 
 // The service account key delete request.
 message DeleteServiceAccountKeyRequest {
-  // Required. The resource name of the service account key in the following
-  // format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_EMAIL}/keys/{key}`.
-  // Using
-  // `-` as a wildcard for the `PROJECT_ID` will infer the project from the
-  // `ACCOUNT_EMAIL`.
-  string name = 1 [
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {type : "iam.videocoin.network/Key"}
-  ];
+  // The service account email.
+  string service_account_email = 1;
+
+  // Required. The service account email.
+  string key_id = 2 [ (google.api.field_behavior) = REQUIRED ];
 }
 
 message SetIamPolicyRequest {
@@ -342,11 +299,6 @@ message GetIamPolicyRequest {
 // A role in the Identity and Access Management API.
 message Role {
   // The name of the role.
-  //
-  // When Role is used in CreateRole, the role name must not be set.
-  //
-  // When Role is used in output and other input such as UpdateRole, the role
-  // name is the complete path, e.g., logging.viewer for predefined roles.
   string name = 1;
 
   // Optional. A human-readable title for the role.  Typically this
@@ -383,14 +335,11 @@ message ListRolesRequest {
   // permissions in the role. The default value is `BASIC`, which does not
   // return the `includedPermissions` field.
   RoleView view = 3;
-
-  // Include Roles that have been deleted.
-  bool show_deleted = 4;
 }
 
 // The response containing the roles defined under a resource.
 message ListRolesResponse {
-  // The Roles defined on this resource.
+  // The list of predefined roles.
   repeated Role roles = 1;
 
   // To retrieve the next page of results, set
@@ -399,13 +348,11 @@ message ListRolesResponse {
 }
 
 message GetRoleRequest {
-  // The resource type's `name` value format is described below:
-  //
-  // * `roles.get()`: `{ROLE_NAME}`.
-  //   This method returns results from all predefined roles.
-  //   Example request URL:
-  //   `https://iam.videocoin.network/v1/roles/{ROLE_NAME}`
-  string name = 1 [ (google.api.resource_reference).type = "*" ];
+  // The name of the role.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference).type = "*"
+  ];
 }
 
 // A permission which can be included by a role.
