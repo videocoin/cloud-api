@@ -131,14 +131,6 @@ service IAM {
       get : "/v1/{name=roles/*}"
     };
   }
-
-  // Creates a new Role.
-  rpc CreateRole(CreateRoleRequest) returns (Role) {
-    option (google.api.http) = {
-      post : "/v1/{parent=organizations/*}/roles"
-      body : "*"
-    };
-  }
 }
 
 // A service account in the Identity and Access Management API.
@@ -443,15 +435,6 @@ message GetRoleRequest {
   //   Example request URL:
   //   `https://iam.videocoin.network/v1/roles/{ROLE_NAME}`
   string name = 1 [ (google.api.resource_reference).type = "*" ];
-}
-
-// The request to create a new role.
-message CreateRoleRequest {
-  // The role ID to use for this role.
-  string role_id = 1;
-
-  // The Role resource to create.
-  Role role = 2;
 }
 
 // A permission which can be included by a role.
