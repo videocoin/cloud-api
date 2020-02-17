@@ -89,5 +89,5 @@ message Binding {
   //    account. For example, `my-other-app@appspot.gserviceaccount.com`.
   //
   //
-  repeated string members = 2;
+  string member = 2;
 }
