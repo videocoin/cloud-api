@@ -26,6 +26,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1MakePaymentRequest"
+            }
+          }
+        ],
         "tags": [
           "BillingService"
         ]
@@ -49,6 +59,15 @@
     }
   },
   "definitions": {
+    "v1MakePaymentRequest": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "v1MakePaymentResponse": {
       "type": "object",
       "properties": {
