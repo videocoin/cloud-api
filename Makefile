@@ -28,7 +28,9 @@ protoc: protoc-rpc \
 	protoc-v1-dispatcher \
 	protoc-v1-iam \
 	protoc-v1-servicemanager \
-	protoc-private-v1-streams
+	protoc-private-v1-streams \
+	protoc-v1-billing \
+	protoc-gateway-v1-billing
 
 docker-pull-image:
 	docker pull $(REPOSITORY):latest
@@ -49,7 +51,9 @@ docker-protoc: docker-protoc-rpc \
 	docker-protoc-v1-iam \
 	docker-protoc-v1-servicemanager \
 	docker-protoc-private-v1-streams \
-	docker-protoc-manager-v1-profiles
+	docker-protoc-manager-v1-profiles \
+	docker-protoc-v1-billing \
+	docker-protoc-gateway-v1-billing
 
 docker-protoc-rpc:
 	${DOCKER_BUILD_COMMAND} --target protoc-rpc

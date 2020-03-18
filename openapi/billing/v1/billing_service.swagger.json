@@ -1,0 +1,75 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "billing/v1/billing_service.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/billing/payment": {
+      "post": {
+        "operationId": "MakePayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1MakePaymentResponse"
+            }
+          }
+        },
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/api/v1/billing/transactions": {
+      "get": {
+        "operationId": "GetTransactions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1TransactionListResponse"
+            }
+          }
+        },
+        "tags": [
+          "BillingService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "v1MakePaymentResponse": {
+      "type": "object",
+      "properties": {
+        "session_id": {
+          "type": "string"
+        }
+      }
+    },
+    "v1TransactionListResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TransactionResponse"
+          }
+        }
+      }
+    },
+    "v1TransactionResponse": {
+      "type": "object"
+    }
+  }
+}
