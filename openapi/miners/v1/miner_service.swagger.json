@@ -318,6 +318,15 @@
         }
       }
     },
+    "v1CapacityInfo": {
+      "type": "object",
+      "properties": {
+        "encode": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "v1CryptoInfo": {
       "type": "object",
       "properties": {
@@ -325,12 +334,10 @@
           "type": "string"
         },
         "balance": {
-          "type": "string",
-          "format": "byte"
+          "type": "string"
         },
         "self_stake": {
-          "type": "string",
-          "format": "byte"
+          "type": "string"
         }
       }
     },
@@ -379,6 +386,9 @@
         },
         "crypto_info": {
           "$ref": "#/definitions/v1CryptoInfo"
+        },
+        "capacity_info": {
+          "$ref": "#/definitions/v1CapacityInfo"
         }
       }
     },
@@ -391,6 +401,28 @@
         "BUSY"
       ],
       "default": "NEW"
+    },
+    "v1MinerWithForceTaskResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "task_id": {
+          "type": "string"
+        }
+      }
+    },
+    "v1MinersWithForceTaskResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1MinerWithForceTaskResponse"
+          }
+        }
+      }
     },
     "v1PingResponse": {
       "type": "object"
@@ -439,6 +471,9 @@
         "longitude": {
           "type": "number",
           "format": "double"
+        },
+        "hw": {
+          "type": "string"
         }
       }
     },
