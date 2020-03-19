@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/billing/payment": {
+    "/api/v1/billing/pay": {
       "post": {
         "operationId": "MakePayment",
         "responses": {
@@ -34,6 +34,46 @@
             "schema": {
               "$ref": "#/definitions/v1MakePaymentRequest"
             }
+          }
+        ],
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/api/v1/billing/stripe/cancel": {
+      "get": {
+        "operationId": "CancelStripeCallback",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
+    "/api/v1/billing/stripe/{session_id}/success": {
+      "get": {
+        "operationId": "SuccessStripeCallback",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
