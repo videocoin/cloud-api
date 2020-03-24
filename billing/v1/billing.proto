@@ -15,7 +15,7 @@ enum TransactionType {
     option (gogoproto.goproto_enum_prefix) = false;
     option (gogoproto.enum_customname) = "TransactionType";
 
-    UNKNOWN = 0 [(gogoproto.enumvalue_customname) = "TransactionTypeDebit"];
+    UNKNOWN = 0 [(gogoproto.enumvalue_customname) = "TransactionTypeUnknown"];
     DEBIT = 1 [(gogoproto.enumvalue_customname) = "TransactionTypeDebit"];
     CREDIT = 2 [(gogoproto.enumvalue_customname) = "TransactionTypeCredit"];
 }
