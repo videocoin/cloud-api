@@ -362,18 +362,11 @@
         "id": {
           "type": "string"
         },
-        "name": {
-          "type": "string"
-        },
         "encodeCapacity": {
           "type": "integer",
           "format": "int32"
         },
-        "totalStake": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "currentCPU": {
+        "cpuCapacity": {
           "type": "integer",
           "format": "int32"
         }
