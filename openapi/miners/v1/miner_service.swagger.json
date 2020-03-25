@@ -356,6 +356,29 @@
         }
       }
     },
+    "v1MinerCandidateResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "encodeCapacity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalStake": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "currentCPU": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "v1MinerListResponse": {
       "type": "object",
       "properties": {
@@ -414,6 +437,17 @@
         },
         "task_id": {
           "type": "string"
+        }
+      }
+    },
+    "v1MinersCandidatesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1MinerCandidateResponse"
+          }
         }
       }
     },
