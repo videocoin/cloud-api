@@ -14,38 +14,7 @@
   "produces": [
     "application/json"
   ],
-  "paths": {
-    "/api/v1/accounts/{id}": {
-      "get": {
-        "operationId": "Get",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1AccountProfile"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "owner_id",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "AccountService"
-        ]
-      }
-    }
-  },
+  "paths": {},
   "definitions": {
     "v1AccountKey": {
       "type": "object",
@@ -61,17 +30,6 @@
         }
       }
     },
-    "v1AccountKeys": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1AccountKey"
-          }
-        }
-      }
-    },
     "v1AccountProfile": {
       "type": "object",
       "properties": {
@@ -80,43 +38,6 @@
         },
         "balance": {
           "type": "string"
-        },
-        "is_locked": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      }
-    },
-    "v1ListResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1AccountProfile"
-          }
-        }
-      }
-    },
-    "v1TransferResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "to_address": {
-          "type": "string"
-        },
-        "pin": {
-          "type": "string"
-        },
-        "amount": {
-          "type": "string",
-          "format": "byte"
-        },
-        "expires_at": {
-          "type": "string",
-          "format": "date-time"
         }
       }
     }

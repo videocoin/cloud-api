@@ -20,7 +20,6 @@ protoc: protoc-rpc \
 	protoc-gateway-v1-profiles \
 	protoc-gateway-v1-miners \
 	protoc-v1-accounts \
-	protoc-v1-transfers \
 	protoc-v1-validator \
 	protoc-v1-syncer \
 	protoc-v1-splitter \
@@ -41,7 +40,6 @@ docker-protoc: docker-protoc-rpc \
 	docker-protoc-gateway-v1-profiles \
 	docker-protoc-gateway-v1-miners \
 	docker-protoc-v1-accounts \
-	docker-protoc-v1-transfers \
 	docker-protoc-v1-validator \
 	docker-protoc-v1-syncer \
 	docker-protoc-v1-splitter \

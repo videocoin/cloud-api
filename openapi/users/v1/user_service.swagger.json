@@ -15,30 +15,6 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/address/{address}": {
-      "get": {
-        "operationId": "LookupByAddress",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "properties": {}
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "address",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "UserService"
-        ]
-      }
-    },
     "/api/v1/auth": {
       "delete": {
         "operationId": "Logout",
@@ -100,22 +76,6 @@
             }
           }
         ],
-        "tags": [
-          "UserService"
-        ]
-      }
-    },
-    "/api/v1/keys": {
-      "get": {
-        "operationId": "Keys",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1KeysResponse"
-            }
-          }
-        },
         "tags": [
           "UserService"
         ]
@@ -311,30 +271,6 @@
         ]
       }
     },
-    "/api/v1/user/{id}/key": {
-      "get": {
-        "operationId": "Key",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1KeyResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "UserService"
-        ]
-      }
-    },
     "/api/v1/users": {
       "post": {
         "operationId": "Create",
@@ -360,74 +296,6 @@
           "UserService"
         ]
       }
-    },
-    "/api/v1/whitelist": {
-      "get": {
-        "operationId": "Whitelist",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1WhitelistResponse"
-            }
-          }
-        },
-        "tags": [
-          "UserService"
-        ]
-      }
-    },
-    "/api/v1/withdraw": {
-      "post": {
-        "operationId": "Withdraw",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "properties": {}
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1WithdrawRequest"
-            }
-          }
-        ],
-        "tags": [
-          "UserService"
-        ]
-      }
-    },
-    "/api/v1/withdraw/start": {
-      "post": {
-        "operationId": "StartWithdraw",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1WithdrawResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1StartWithdrawRequest"
-            }
-          }
-        ],
-        "tags": [
-          "UserService"
-        ]
-      }
     }
   },
   "definitions": {
@@ -439,10 +307,6 @@
         },
         "balance": {
           "type": "string"
-        },
-        "is_locked": {
-          "type": "boolean",
-          "format": "boolean"
         }
       }
     },
@@ -482,25 +346,6 @@
         },
         "confirm_password": {
           "type": "string"
-        }
-      }
-    },
-    "v1KeyResponse": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        }
-      }
-    },
-    "v1KeysResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1KeyResponse"
-          }
         }
       }
     },
@@ -544,17 +389,6 @@
       "type": "object",
       "properties": {
         "email": {
-          "type": "string"
-        }
-      }
-    },
-    "v1StartWithdrawRequest": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string"
-        },
-        "amount": {
           "type": "string"
         }
       }
@@ -634,36 +468,6 @@
         "USER_ROLE_SUPER"
       ],
       "default": "USER_ROLE_REGULAR"
-    },
-    "v1WhitelistResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "v1WithdrawRequest": {
-      "type": "object",
-      "properties": {
-        "transfer_id": {
-          "type": "string"
-        },
-        "pin": {
-          "type": "string"
-        }
-      }
-    },
-    "v1WithdrawResponse": {
-      "type": "object",
-      "properties": {
-        "transfer_id": {
-          "type": "string"
-        }
-      }
     }
   }
 }
