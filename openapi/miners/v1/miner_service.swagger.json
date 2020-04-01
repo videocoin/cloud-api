@@ -340,7 +340,7 @@
         "balance": {
           "type": "string"
         },
-        "self_stake": {
+        "stake": {
           "type": "string"
         }
       }
@@ -362,11 +362,7 @@
         "id": {
           "type": "string"
         },
-        "encodeCapacity": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "cpuCapacity": {
+        "stake": {
           "type": "integer",
           "format": "int32"
         }
