@@ -40,62 +40,6 @@
           "BillingService"
         ]
       }
-    },
-    "/api/v1/billing/stripe/cancel": {
-      "get": {
-        "operationId": "CancelStripeCallback",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "properties": {}
-            }
-          }
-        },
-        "tags": [
-          "BillingService"
-        ]
-      }
-    },
-    "/api/v1/billing/stripe/{session_id}/success": {
-      "get": {
-        "operationId": "SuccessStripeCallback",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "properties": {}
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "BillingService"
-        ]
-      }
-    },
-    "/api/v1/billing/transactions": {
-      "get": {
-        "operationId": "GetTransactions",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1TransactionListResponse"
-            }
-          }
-        },
-        "tags": [
-          "BillingService"
-        ]
-      }
     }
   },
   "definitions": {
@@ -111,24 +55,10 @@
     "v1MakePaymentResponse": {
       "type": "object",
       "properties": {
-        "session_id": {
+        "client_secret": {
           "type": "string"
         }
       }
-    },
-    "v1TransactionListResponse": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1TransactionResponse"
-          }
-        }
-      }
-    },
-    "v1TransactionResponse": {
-      "type": "object"
     }
   }
 }
