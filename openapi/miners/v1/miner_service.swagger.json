@@ -405,6 +405,9 @@
         },
         "capacity_info": {
           "$ref": "#/definitions/v1CapacityInfo"
+        },
+        "user_id": {
+          "type": "string"
         }
       }
     },
