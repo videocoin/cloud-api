@@ -177,13 +177,11 @@
         "status": {
           "$ref": "#/definitions/v1TransactionStatus"
         },
-        "stream_id": {
-          "type": "string"
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
         },
-        "stream_name": {
-          "type": "string"
-        },
-        "total_cost": {
+        "amount": {
           "type": "number",
           "format": "double"
         }
