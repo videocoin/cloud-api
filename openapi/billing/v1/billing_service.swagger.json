@@ -15,6 +15,22 @@
     "application/json"
   ],
   "paths": {
+    "/api/v1/billing/charges": {
+      "get": {
+        "operationId": "GetCharges",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ChargesResponse"
+            }
+          }
+        },
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/api/v1/billing/pay": {
       "post": {
         "operationId": "MakePayment",
@@ -56,9 +72,73 @@
           "BillingService"
         ]
       }
+    },
+    "/api/v1/billing/transactions": {
+      "get": {
+        "operationId": "GetTransactions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1TransactionsResponse"
+            }
+          }
+        },
+        "tags": [
+          "BillingService"
+        ]
+      }
     }
   },
   "definitions": {
+    "v1ChargeResponse": {
+      "type": "object",
+      "properties": {
+        "stream_id": {
+          "type": "string"
+        },
+        "stream_name": {
+          "type": "string"
+        },
+        "stream_is_live": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "stream_profile_id": {
+          "type": "string"
+        },
+        "stream_profile_name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "duration": {
+          "type": "number",
+          "format": "double"
+        },
+        "cost": {
+          "type": "number",
+          "format": "double"
+        },
+        "total_cost": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "v1ChargesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ChargeResponse"
+          }
+        }
+      }
+    },
     "v1MakePaymentRequest": {
       "type": "object",
       "properties": {
@@ -82,6 +162,61 @@
         "balance": {
           "type": "number",
           "format": "double"
+        }
+      }
+    },
+    "v1TransactionResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/v1TransactionType"
+        },
+        "status": {
+          "$ref": "#/definitions/v1TransactionStatus"
+        },
+        "stream_id": {
+          "type": "string"
+        },
+        "stream_name": {
+          "type": "string"
+        },
+        "total_cost": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "v1TransactionStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "PROCESSING",
+        "SUCCESS",
+        "FAILED",
+        "CANCELED"
+      ],
+      "default": "PENDING"
+    },
+    "v1TransactionType": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN_TYPE",
+        "DEPOSIT",
+        "PAYMENT"
+      ],
+      "default": "UNKNOWN_TYPE"
+    },
+    "v1TransactionsResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TransactionResponse"
+          }
         }
       }
     }
