@@ -31,6 +31,22 @@
         ]
       }
     },
+    "/api/v1/billing/charts/charges": {
+      "get": {
+        "operationId": "GetChartCharges",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ChartChargesResponse"
+            }
+          }
+        },
+        "tags": [
+          "BillingService"
+        ]
+      }
+    },
     "/api/v1/billing/pay": {
       "post": {
         "operationId": "MakePayment",
@@ -135,6 +151,33 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/v1ChargeResponse"
+          }
+        }
+      }
+    },
+    "v1ChartChargeResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "live": {
+          "type": "number",
+          "format": "double"
+        },
+        "vod": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "v1ChartChargesResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ChartChargeResponse"
           }
         }
       }
