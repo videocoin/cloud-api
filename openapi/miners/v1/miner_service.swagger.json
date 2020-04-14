@@ -408,6 +408,9 @@
         },
         "user_id": {
           "type": "string"
+        },
+        "address": {
+          "type": "string"
         }
       }
     },
