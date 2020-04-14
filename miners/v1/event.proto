@@ -17,6 +17,7 @@ enum EventType {
 
     EVENT_TYPE_UNKNOWN = 0 [(gogoproto.enumvalue_customname) = "EventTypeUnknown"];
     EVENT_TYPE_MINER_CREATED = 1 [(gogoproto.enumvalue_customname) = "EventTypeMinerCreated"];
+    EVENT_TYPE_MINER_ASSIGN_ADDRESS = 2 [(gogoproto.enumvalue_customname) = "EventTypeAssignMinerAddress"];
 }
 
 message Event {
