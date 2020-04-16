@@ -78,6 +78,19 @@ docker-mock: docker-mock-accounts \
 	docker-mock-users \
 	docker-mock-validator
 
+docker-mock: docker-mock-accounts \
+	docker-mock-billing \
+	docker-mock-dispatcher \
+	docker-mock-emitter \
+	docker-mock-miners \
+	docker-mock-notifications \
+	docker-mock-profiles \
+	docker-mock-splitter \
+	docker-mock-streams \
+	docker-mock-syncer \
+	docker-mock-users \
+	docker-mock-validator
+
 docker-protoc-rpc:
 	${DOCKER_BUILD_COMMAND} --target protoc-rpc
 
