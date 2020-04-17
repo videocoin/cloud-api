@@ -1,4 +1,5 @@
 include proto_gen.mk
+include mock_gen.mk
 
 
 DOCKER_IMAGE_NAME = protobuf-build-env
@@ -10,6 +11,13 @@ DOCKER_BUILD_COMMAND=docker run \
     -v $(shell pwd)/proto_gen.mk:/app/proto_gen.mk \
     -w /go_workspace/src/github.com/videocoin/cloud-api \
 	gcr.io/videocoin-network/protobuf-build-env
+
+DOCKER_MOCK_COMMAND=docker run \
+    -v $(shell pwd):/go_workspace/src/github.com/videocoin/cloud-api \
+    -w /go_workspace/src/github.com/videocoin/cloud-api \
+    --entrypoint "mockgen" \
+	gcr.io/videocoin-network/protobuf-build-env
+
 
 default: protoc
 
@@ -56,6 +64,19 @@ docker-protoc: docker-protoc-rpc \
 	docker-protoc-v1-billing \
 	docker-protoc-gateway-v1-billing \
 	docker-protoc-private-v1-billing
+
+docker-mock: docker-mock-accounts \
+	docker-mock-billing \
+	docker-mock-dispatcher \
+	docker-mock-emitter \
+	docker-mock-miners \
+	docker-mock-notifications \
+	docker-mock-profiles \
+	docker-mock-splitter \
+	docker-mock-streams \
+	docker-mock-syncer \
+	docker-mock-users \
+	docker-mock-validator
 
 docker-protoc-rpc:
 	${DOCKER_BUILD_COMMAND} --target protoc-rpc
