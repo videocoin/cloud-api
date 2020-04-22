@@ -54,12 +54,12 @@
       "type": "object",
       "properties": {
         "encode": {
-          "type": "integer",
-          "format": "int32"
+          "type": "number",
+          "format": "double"
         },
         "cpu": {
-          "type": "integer",
-          "format": "int32"
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -108,7 +108,7 @@
         },
         "cost": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         },
         "components": {
           "type": "array",

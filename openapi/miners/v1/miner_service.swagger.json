@@ -331,20 +331,6 @@
         }
       }
     },
-    "v1CryptoInfo": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string"
-        },
-        "balance": {
-          "type": "string"
-        },
-        "stake": {
-          "type": "string"
-        }
-      }
-    },
     "v1ForceTaskListResponse": {
       "type": "object",
       "properties": {
@@ -353,6 +339,14 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "v1KeyResponse": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
         }
       }
     },
@@ -399,9 +393,6 @@
         },
         "system_info": {
           "$ref": "#/definitions/v1SystemInfo"
-        },
-        "crypto_info": {
-          "$ref": "#/definitions/v1CryptoInfo"
         },
         "capacity_info": {
           "$ref": "#/definitions/v1CapacityInfo"

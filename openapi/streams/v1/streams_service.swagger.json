@@ -487,6 +487,10 @@
         },
         "output_type": {
           "$ref": "#/definitions/v1OutputType"
+        },
+        "total_cost": {
+          "type": "number",
+          "format": "double"
         }
       },
       "description": "Streams are representations of video to be worked on by miners on the VideoCoin Network and output consumable video based on the transcoding profile given at creation. Streams currently only support video input over RTMP. Support for input video over RTSP and HLS will be considered in future releases."

@@ -40,6 +40,17 @@
           "type": "string"
         }
       }
+    },
+    "v1Accounts": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1AccountProfile"
+          }
+        }
+      }
     }
   }
 }
