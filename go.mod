@@ -5,6 +5,7 @@ go 1.12
 require (
 	github.com/gogo/googleapis v1.3.0
 	github.com/gogo/protobuf v1.3.1
+	github.com/golang/mock v1.1.1
 	github.com/golang/protobuf v1.3.1
 	github.com/grpc-ecosystem/go-grpc-middleware v1.0.0
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
