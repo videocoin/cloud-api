@@ -342,6 +342,23 @@
         }
       }
     },
+    "v1InternalMinerResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        },
+        "task_id": {
+          "type": "string"
+        }
+      }
+    },
     "v1KeyResponse": {
       "type": "object",
       "properties": {
@@ -402,6 +419,22 @@
         },
         "address": {
           "type": "string"
+        },
+        "reward": {
+          "type": "number",
+          "format": "double"
+        },
+        "total_stake": {
+          "type": "number",
+          "format": "double"
+        },
+        "self_stake": {
+          "type": "number",
+          "format": "double"
+        },
+        "delegated_stake": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
