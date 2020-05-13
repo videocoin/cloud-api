@@ -4,10 +4,6 @@
     "title": "billing/v1/billing_service.proto",
     "version": "version not set"
   },
-  "schemes": [
-    "http",
-    "https"
-  ],
   "consumes": [
     "application/json"
   ],
