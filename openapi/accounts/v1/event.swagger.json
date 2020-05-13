@@ -4,10 +4,6 @@
     "title": "accounts/v1/event.proto",
     "version": "version not set"
   },
-  "schemes": [
-    "http",
-    "https"
-  ],
   "consumes": [
     "application/json"
   ],

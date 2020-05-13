@@ -4,10 +4,6 @@
     "title": "users/v1/user_service.proto",
     "version": "version not set"
   },
-  "schemes": [
-    "http",
-    "https"
-  ],
   "consumes": [
     "application/json"
   ],
