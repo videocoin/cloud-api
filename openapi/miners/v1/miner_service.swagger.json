@@ -87,7 +87,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "properties": {}
+              "$ref": "#/definitions/v1CreateMinerRequest"
             }
           }
         ],
@@ -328,6 +328,17 @@
         "cpu": {
           "type": "number",
           "format": "double"
+        }
+      }
+    },
+    "v1CreateMinerRequest": {
+      "type": "object",
+      "properties": {
+        "k": {
+          "type": "string"
+        },
+        "s": {
+          "type": "string"
         }
       }
     },
