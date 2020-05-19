@@ -385,8 +385,12 @@
           "type": "string"
         },
         "stake": {
-          "type": "integer",
-          "format": "int32"
+          "type": "number",
+          "format": "double"
+        },
+        "is_internal": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
