@@ -450,6 +450,10 @@
         "delegated_stake": {
           "type": "number",
           "format": "double"
+        },
+        "is_block": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
