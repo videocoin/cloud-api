@@ -4,6 +4,10 @@
     "title": "billing/v1/billing.proto",
     "version": "version not set"
   },
+  "schemes": [
+    "http",
+    "https"
+  ],
   "consumes": [
     "application/json"
   ],

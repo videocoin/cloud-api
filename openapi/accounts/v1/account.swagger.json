@@ -4,6 +4,10 @@
     "title": "accounts/v1/account.proto",
     "version": "version not set"
   },
+  "schemes": [
+    "http",
+    "https"
+  ],
   "consumes": [
     "application/json"
   ],

@@ -4,6 +4,10 @@
     "title": "users/v1/user_service.proto",
     "version": "version not set"
   },
+  "schemes": [
+    "http",
+    "https"
+  ],
   "consumes": [
     "application/json"
   ],
@@ -292,20 +296,67 @@
           "UserService"
         ]
       }
+    },
+    "/api/v1/users/validate": {
+      "post": {
+        "operationId": "Validate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ValidateUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/api/v1/users/{id}": {
+      "put": {
+        "operationId": "Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UserProfile"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
     }
   },
   "definitions": {
-    "v1AccountProfile": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string"
-        },
-        "balance": {
-          "type": "string"
-        }
-      }
-    },
     "v1ConfirmUserRequest": {
       "type": "object",
       "properties": {
@@ -337,11 +388,35 @@
         "password": {
           "type": "string"
         },
-        "name": {
-          "type": "string"
-        },
         "confirm_password": {
           "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        },
+        "address_1": {
+          "type": "string"
+        },
+        "address_2": {
+          "type": "string"
+        },
+        "ui_role": {
+          "$ref": "#/definitions/v1UserUIRole"
         }
       }
     },
@@ -397,6 +472,17 @@
         }
       }
     },
+    "v1UpdateUserRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "ui_role": {
+          "$ref": "#/definitions/v1UserUIRole"
+        }
+      }
+    },
     "v1UserApiListResponse": {
       "type": "object",
       "properties": {
@@ -439,18 +525,39 @@
         "email": {
           "type": "string"
         },
-        "name": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
           "type": "string"
         },
         "is_active": {
           "type": "boolean",
           "format": "boolean"
         },
-        "account": {
-          "$ref": "#/definitions/v1AccountProfile"
-        },
         "role": {
           "$ref": "#/definitions/v1UserRole"
+        },
+        "ui_role": {
+          "$ref": "#/definitions/v1UserUIRole"
+        },
+        "country": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        },
+        "address_1": {
+          "type": "string"
+        },
+        "address_2": {
+          "type": "string"
         }
       }
     },
@@ -464,6 +571,29 @@
         "USER_ROLE_SUPER"
       ],
       "default": "USER_ROLE_REGULAR"
+    },
+    "v1UserUIRole": {
+      "type": "string",
+      "enum": [
+        "USER_ROLE_UI_BOTH",
+        "USER_ROLE_UI_MINER",
+        "USER_ROLE_UI_PUBLISHER"
+      ],
+      "default": "USER_ROLE_UI_BOTH"
+    },
+    "v1ValidateUserRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "confirm_password": {
+          "type": "string"
+        }
+      }
     }
   }
 }
