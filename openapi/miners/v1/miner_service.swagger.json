@@ -454,6 +454,10 @@
         "is_block": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "is_internal": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
