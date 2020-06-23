@@ -458,6 +458,9 @@
         "is_internal": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "worker_state": {
+          "$ref": "#/definitions/v1WorkerState"
         }
       }
     },
@@ -567,6 +570,17 @@
           "type": "string"
         }
       }
+    },
+    "v1WorkerState": {
+      "type": "string",
+      "enum": [
+        "BONDING",
+        "BONDED",
+        "UNBONDED",
+        "UNBONDING",
+        "UNREGISTERED"
+      ],
+      "default": "BONDING"
     }
   },
   "securityDefinitions": {
