@@ -27,6 +27,7 @@ protoc: protoc-rpc \
 	protoc-gateway-v1-streams \
 	protoc-gateway-v1-profiles \
 	protoc-gateway-v1-miners \
+	protoc-gateway-v1-dispatcher \
 	protoc-v1-accounts \
 	protoc-v1-validator \
 	protoc-v1-syncer \
@@ -50,6 +51,7 @@ docker-protoc: docker-protoc-rpc \
 	docker-protoc-gateway-v1-streams \
 	docker-protoc-gateway-v1-profiles \
 	docker-protoc-gateway-v1-miners \
+	docker-protoc-gateway-v1-dispatcher \
 	docker-protoc-v1-accounts \
 	docker-protoc-v1-validator \
 	docker-protoc-v1-syncer \
@@ -64,19 +66,6 @@ docker-protoc: docker-protoc-rpc \
 	docker-protoc-v1-billing \
 	docker-protoc-gateway-v1-billing \
 	docker-protoc-private-v1-billing
-
-docker-mock: docker-mock-accounts \
-	docker-mock-billing \
-	docker-mock-dispatcher \
-	docker-mock-emitter \
-	docker-mock-miners \
-	docker-mock-notifications \
-	docker-mock-profiles \
-	docker-mock-splitter \
-	docker-mock-streams \
-	docker-mock-syncer \
-	docker-mock-users \
-	docker-mock-validator
 
 docker-mock: docker-mock-accounts \
 	docker-mock-billing \
