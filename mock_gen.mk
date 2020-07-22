@@ -19,7 +19,6 @@ docker-mock-streams:
 	 -source /go_workspace/src/github.com/videocoin/cloud-api/streams/private/v1/streams_service.pb.go \
 	 -destination /go_workspace/src/github.com/videocoin/cloud-api/mock/streams.go
 
-
 docker-mock-%:
 	${DOCKER_MOCK_COMMAND} -package mock \
 	 -source /go_workspace/src/github.com/videocoin/cloud-api/$*/v1/$*_service.pb.go \

@@ -25,7 +25,6 @@ protoc: protoc-rpc \
 	protoc-gateway-v1-users \
 	protoc-gateway-v1-accounts \
 	protoc-gateway-v1-streams \
-	protoc-gateway-v1-profiles \
 	protoc-gateway-v1-miners \
 	protoc-gateway-v1-dispatcher \
 	protoc-v1-accounts \
@@ -49,7 +48,6 @@ docker-protoc: docker-protoc-rpc \
 	docker-protoc-gateway-v1-users \
 	docker-protoc-gateway-v1-accounts \
 	docker-protoc-gateway-v1-streams \
-	docker-protoc-gateway-v1-profiles \
 	docker-protoc-gateway-v1-miners \
 	docker-protoc-gateway-v1-dispatcher \
 	docker-protoc-v1-accounts \
@@ -62,7 +60,6 @@ docker-protoc: docker-protoc-rpc \
 	docker-protoc-v1-iam \
 	docker-protoc-v1-servicemanager \
 	docker-protoc-private-v1-streams \
-	docker-protoc-manager-v1-profiles \
 	docker-protoc-v1-billing \
 	docker-protoc-gateway-v1-billing \
 	docker-protoc-private-v1-billing
@@ -73,7 +70,6 @@ docker-mock: docker-mock-accounts \
 	docker-mock-emitter \
 	docker-mock-miners \
 	docker-mock-notifications \
-	docker-mock-profiles \
 	docker-mock-splitter \
 	docker-mock-streams \
 	docker-mock-syncer \
