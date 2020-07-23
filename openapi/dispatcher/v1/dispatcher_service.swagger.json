@@ -14,24 +14,7 @@
   "produces": [
     "application/json"
   ],
-  "paths": {
-    "/api/v1/delegator/config": {
-      "get": {
-        "operationId": "GetDelegatorConfigV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1DelegatorConfigResponse"
-            }
-          }
-        },
-        "tags": [
-          "DispatcherService"
-        ]
-      }
-    }
-  },
+  "paths": {},
   "definitions": {
     "apidispatcherv1AddInputChunkResponse": {
       "type": "object",
@@ -74,17 +57,6 @@
           "type": "string"
         },
         "staking_manager_address": {
-          "type": "string"
-        }
-      }
-    },
-    "v1DelegatorConfigResponse": {
-      "type": "object",
-      "properties": {
-        "rpc_node_url": {
-          "type": "string"
-        },
-        "access_key": {
           "type": "string"
         }
       }
