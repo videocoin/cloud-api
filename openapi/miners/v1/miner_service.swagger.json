@@ -461,6 +461,22 @@
         },
         "worker_state": {
           "$ref": "#/definitions/v1WorkerState"
+        },
+        "org_name": {
+          "type": "string"
+        },
+        "org_email": {
+          "type": "string"
+        },
+        "org_desc": {
+          "type": "string"
+        },
+        "allow_thirdparty_delegates": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delegate_policy": {
+          "type": "string"
         }
       }
     },
@@ -567,6 +583,22 @@
           "type": "string"
         },
         "name": {
+          "type": "string"
+        },
+        "org_name": {
+          "type": "string"
+        },
+        "org_email": {
+          "type": "string"
+        },
+        "org_desc": {
+          "type": "string"
+        },
+        "allow_thirdparty_delegates": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delegate_policy": {
           "type": "string"
         }
       }
