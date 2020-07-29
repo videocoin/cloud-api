@@ -31,6 +31,12 @@ service DispatcherService {
   rpc MarkSegmentAsTranscoded(TaskSegmentRequest) returns (google.protobuf.Empty) {}
   rpc ValidateProof(cloud.api.validator.v1.ValidateProofRequest) returns (cloud.api.validator.v1.ValidateProofResponse) {}
   rpc AddInputChunk(AddInputChunkRequest) returns (AddInputChunkResponse) {}
+
+  rpc GetDelegatorConfigV2(ConfigRequest) returns (DelegatorConfigResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/delegator/config"
+    };
+  }
 }
 
 message TaskPendingRequest {
@@ -79,4 +85,9 @@ message AddInputChunkRequest {
 message AddInputChunkResponse {
   string tx = 1;
   cloud.api.emitter.v1.ReceiptStatus status = 2;
+}
+
+message DelegatorConfigResponse {
+  string rpc_node_url = 1 [(gogoproto.customname) = "RPCNodeURL"];
+  string access_key = 2;
 }
