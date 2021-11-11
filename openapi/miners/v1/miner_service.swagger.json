@@ -124,6 +124,22 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
         "tags": [
           "MinersService"
         ]
@@ -443,6 +459,22 @@
           "items": {
             "$ref": "#/definitions/v1MinerResponse"
           }
+        },
+        "total_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "has_next": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "has_prev": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
