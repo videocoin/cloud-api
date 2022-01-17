@@ -399,6 +399,9 @@
           "required": [
             "output_type"
           ]
+        },
+        "drm_xml": {
+          "type": "string"
         }
       },
       "required": [
@@ -430,7 +433,9 @@
       "type": "string",
       "enum": [
         "OUTPUT_TYPE_HLS",
-        "OUTPUT_TYPE_FILE"
+        "OUTPUT_TYPE_FILE",
+        "OUTPUT_TYPE_DASH",
+        "OUTPUT_TYPE_DASH_DRM"
       ],
       "default": "OUTPUT_TYPE_HLS"
     },
@@ -571,6 +576,10 @@
         "total_cost": {
           "type": "number",
           "format": "double"
+        },
+        "output_mpd_url": {
+          "type": "string",
+          "description": "Unique output MPEG-DASH URL of transcoded video"
         }
       },
       "description": "Streams are representations of video to be worked on by miners on the VideoCoin Network and output consumable video based on the transcoding profile given at creation. Streams currently only support video input over RTMP. Support for input video over RTSP and HLS will be considered in future releases."
